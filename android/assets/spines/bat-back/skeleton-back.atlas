@@ -1,0 +1,181 @@
+
+skeleton-back.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+alader
+  rotate: false
+  xy: 219, 206
+  size: 112, 88
+  orig: 112, 88
+  offset: 0, 0
+  index: -1
+alaizq
+  rotate: false
+  xy: 333, 206
+  size: 108, 88
+  orig: 108, 88
+  offset: 0, 0
+  index: -1
+brazoder
+  rotate: false
+  xy: 993, 967
+  size: 22, 54
+  orig: 22, 54
+  offset: 0, 0
+  index: -1
+brazoizq
+  rotate: false
+  xy: 0, 0
+  size: 21, 54
+  orig: 21, 54
+  offset: 0, 0
+  index: -1
+brillito
+  rotate: false
+  xy: 0, 296
+  size: 716, 725
+  orig: 716, 725
+  offset: 0, 0
+  index: -1
+chaquetader
+  rotate: false
+  xy: 899, 744
+  size: 76, 120
+  orig: 76, 120
+  offset: 0, 0
+  index: -1
+chaquetaizq
+  rotate: false
+  xy: 899, 637
+  size: 84, 105
+  orig: 84, 105
+  offset: 0, 0
+  index: -1
+cuerdalampara
+  rotate: false
+  xy: 796, 524
+  size: 9, 80
+  orig: 9, 80
+  offset: 0, 0
+  index: -1
+face
+  rotate: false
+  xy: 0, 128
+  size: 217, 166
+  orig: 217, 166
+  offset: 0, 0
+  index: -1
+hombroder
+  rotate: false
+  xy: 219, 130
+  size: 108, 74
+  orig: 108, 74
+  offset: 0, 0
+  index: -1
+hombroizq
+  rotate: false
+  xy: 443, 220
+  size: 104, 74
+  orig: 104, 74
+  offset: 0, 0
+  index: -1
+lampara
+  rotate: false
+  xy: 329, 121
+  size: 77, 83
+  orig: 77, 83
+  offset: 0, 0
+  index: -1
+manoder
+  rotate: false
+  xy: 408, 175
+  size: 27, 29
+  orig: 27, 29
+  offset: 0, 0
+  index: -1
+manoizq
+  rotate: false
+  xy: 737, 320
+  size: 26, 29
+  orig: 26, 29
+  offset: 0, 0
+  index: -1
+mochila
+  rotate: false
+  xy: 821, 866
+  size: 170, 155
+  orig: 170, 155
+  offset: 0, 0
+  index: -1
+musloder
+  rotate: false
+  xy: 718, 299
+  size: 17, 50
+  orig: 17, 50
+  offset: 0, 0
+  index: -1
+musloizq
+  rotate: false
+  xy: 549, 244
+  size: 17, 50
+  orig: 17, 50
+  offset: 0, 0
+  index: -1
+orejader
+  rotate: false
+  xy: 718, 351
+  size: 76, 253
+  orig: 76, 253
+  offset: 0, 0
+  index: -1
+orejaizq
+  rotate: false
+  xy: 821, 631
+  size: 76, 233
+  orig: 76, 233
+  offset: 0, 0
+  index: -1
+palo
+  rotate: false
+  xy: 718, 606
+  size: 101, 415
+  orig: 101, 415
+  offset: 0, 0
+  index: -1
+panueleta
+  rotate: false
+  xy: 0, 56
+  size: 180, 70
+  orig: 180, 70
+  offset: 0, 0
+  index: -1
+pieder
+  rotate: false
+  xy: 821, 611
+  size: 40, 18
+  orig: 40, 18
+  offset: 0, 0
+  index: -1
+pieizq
+  rotate: false
+  xy: 23, 36
+  size: 39, 18
+  orig: 39, 18
+  offset: 0, 0
+  index: -1
+piernader
+  rotate: false
+  xy: 977, 817
+  size: 10, 47
+  orig: 10, 47
+  offset: 0, 0
+  index: -1
+piernaizq
+  rotate: false
+  xy: 182, 79
+  size: 10, 47
+  orig: 10, 47
+  offset: 0, 0
+  index: -1

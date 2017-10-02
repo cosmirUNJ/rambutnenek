@@ -1,0 +1,202 @@
+
+skeleton.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Lateral/alader
+  rotate: false
+  xy: 321, 196
+  size: 108, 88
+  orig: 108, 88
+  offset: 0, 0
+  index: -1
+Lateral/alaizq
+  rotate: false
+  xy: 321, 196
+  size: 108, 88
+  orig: 108, 88
+  offset: 0, 0
+  index: -1
+Lateral/brazoder
+  rotate: false
+  xy: 821, 596
+  size: 21, 54
+  orig: 21, 54
+  offset: 0, 0
+  index: -1
+Lateral/brazoizq
+  rotate: false
+  xy: 821, 596
+  size: 21, 54
+  orig: 21, 54
+  offset: 0, 0
+  index: -1
+Lateral/brillito
+  rotate: false
+  xy: 0, 286
+  size: 716, 725
+  orig: 716, 725
+  offset: 0, 0
+  index: -1
+Lateral/chaquetaizq
+  rotate: false
+  xy: 192, 157
+  size: 127, 127
+  orig: 127, 127
+  offset: 0, 0
+  index: -1
+Lateral/cuerdalampara
+  rotate: false
+  xy: 176, 39
+  size: 9, 80
+  orig: 9, 80
+  offset: 0, 0
+  index: -1
+Lateral/face
+  rotate: false
+  xy: 0, 121
+  size: 190, 163
+  orig: 190, 163
+  offset: 0, 0
+  index: -1
+Lateral/hombroder
+  rotate: false
+  xy: 431, 210
+  size: 108, 74
+  orig: 108, 74
+  offset: 0, 0
+  index: -1
+Lateral/hombroizq
+  rotate: false
+  xy: 431, 210
+  size: 108, 74
+  orig: 108, 74
+  offset: 0, 0
+  index: -1
+Lateral/lampara
+  rotate: false
+  xy: 941, 928
+  size: 77, 83
+  orig: 77, 83
+  offset: 0, 0
+  index: -1
+Lateral/manoder
+  rotate: false
+  xy: 910, 759
+  size: 26, 29
+  orig: 26, 29
+  offset: 0, 0
+  index: -1
+Lateral/manoizq
+  rotate: false
+  xy: 910, 759
+  size: 26, 29
+  orig: 26, 29
+  offset: 0, 0
+  index: -1
+Lateral/mochila
+  rotate: false
+  xy: 821, 652
+  size: 87, 136
+  orig: 87, 136
+  offset: 0, 0
+  index: -1
+Lateral/musloder
+  rotate: false
+  xy: 796, 536
+  size: 21, 58
+  orig: 21, 58
+  offset: 0, 0
+  index: -1
+Lateral/musloizq
+  rotate: false
+  xy: 796, 536
+  size: 21, 58
+  orig: 21, 58
+  offset: 0, 0
+  index: -1
+Lateral/ojo
+  rotate: false
+  xy: 718, 354
+  size: 38, 58
+  orig: 38, 58
+  offset: 0, 0
+  index: -1
+Lateral/ojoscerradosder
+  rotate: false
+  xy: 192, 141
+  size: 49, 14
+  orig: 49, 14
+  offset: 0, 0
+  index: -1
+Lateral/orejader
+  rotate: false
+  xy: 718, 414
+  size: 76, 180
+  orig: 76, 180
+  offset: 0, 0
+  index: -1
+Lateral/orejaizq
+  rotate: false
+  xy: 821, 790
+  size: 118, 221
+  orig: 118, 221
+  offset: 0, 0
+  index: -1
+Lateral/palo
+  rotate: false
+  xy: 718, 596
+  size: 101, 415
+  orig: 101, 415
+  offset: 0, 0
+  index: -1
+Lateral/panueleta
+  rotate: false
+  xy: 0, 32
+  size: 174, 87
+  orig: 174, 87
+  offset: 0, 0
+  index: -1
+Lateral/parpado
+  rotate: false
+  xy: 0, 0
+  size: 57, 30
+  orig: 57, 30
+  offset: 0, 0
+  index: -1
+Lateral/pieder
+  rotate: false
+  xy: 321, 174
+  size: 39, 20
+  orig: 39, 20
+  offset: 0, 0
+  index: -1
+Lateral/pieizq
+  rotate: false
+  xy: 321, 174
+  size: 39, 20
+  orig: 39, 20
+  offset: 0, 0
+  index: -1
+Lateral/piernader
+  rotate: false
+  xy: 541, 244
+  size: 15, 40
+  orig: 15, 40
+  offset: 0, 0
+  index: -1
+Lateral/piernaizq
+  rotate: false
+  xy: 541, 244
+  size: 15, 40
+  orig: 15, 40
+  offset: 0, 0
+  index: -1
+Lateral/pupilader
+  rotate: false
+  xy: 941, 897
+  size: 8, 29
+  orig: 8, 29
+  offset: 0, 0
+  index: -1
