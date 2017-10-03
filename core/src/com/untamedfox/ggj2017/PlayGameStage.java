@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
@@ -49,14 +51,17 @@ public class PlayGameStage extends Stage {
     private HashSet<Integer> targetsFound;
     private WaveActor mainWave;
 
-    private float initialPitch, initialRoll;
+    private float touchpadXnya, touchpadYnya;
     private ArrayList<TargetActor> collectedTargets;
 
     private Image damage1, damage2;
     private float damageTime;
     private boolean doDamage;
 
-    public PlayGameStage(Viewport viewport, GGJ2017 ggj2017, PlayHUDStage playHUDStage, float initialPitch, float initialRoll) {
+    private Touchpad touchpad;
+
+    //public PlayGameStage(Viewport viewport, GGJ2017 ggj2017, PlayHUDStage playHUDStage, float initialPitch, float initialRoll) {
+    public PlayGameStage(Viewport viewport, GGJ2017 ggj2017, PlayHUDStage playHUDStage, float touchpadXnya, float touchpadYnya, Touchpad touchpad) {
         super(viewport, ggj2017.batch);
         this.playHUDStage = playHUDStage;
         this.ggj2017 = ggj2017;
@@ -65,8 +70,10 @@ public class PlayGameStage extends Stage {
 
         shapeRenderer = new ShapeRenderer();
 
-        this.initialPitch = initialPitch;
-        this.initialRoll = initialRoll;
+        //tambahan
+        this.touchpadXnya = touchpadXnya;
+        this.touchpadYnya = touchpadYnya;
+        this.touchpad = touchpad;
 
         cameraPosition = getViewport().getCamera().position;
 
@@ -152,7 +159,10 @@ public class PlayGameStage extends Stage {
         PlayHUDStage.RUN runX = PlayHUDStage.RUN.STOP;
         PlayHUDStage.RUN runY = PlayHUDStage.RUN.STOP;
         DIRECTION direction;
+
         if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+
+            /*
             if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.UP)) {
                 direction = DIRECTION.RIGHT_UP;
             } else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
@@ -172,11 +182,111 @@ public class PlayGameStage extends Stage {
             } else {
                 direction = DIRECTION.NONE;
             }
+            */
+
+            float touchpadXnya = touchpad.getKnobPercentX();
+            float touchpadYnya = touchpad.getKnobPercentY();
+
+            int align = 0;
+            if(touchpadXnya < -.25f){
+                align = Align.left;
+            }
+            else if(touchpadXnya > .25f){
+                align = Align.right;
+            }
+            if(touchpadYnya < -.25f){
+                align += Align.bottom;
+            } else if (touchpadYnya > .25f){
+                align += Align.top;
+            }
+
+            switch (align){
+                case Align.left:
+                    direction = DIRECTION.LEFT;
+                    break;
+                case Align.right:
+                    direction = DIRECTION.RIGHT;
+                    break;
+                case Align.top:
+                    direction = DIRECTION.UP;
+                    break;
+                case Align.bottom:
+                    direction = DIRECTION.DOWN;
+                    break;
+                case Align.topRight:
+                    direction = DIRECTION.RIGHT_UP;
+                    break;
+                case Align.topLeft:
+                    direction = DIRECTION.LEFT_UP;
+                    break;
+                case Align.bottomRight:
+                    direction = DIRECTION.RIGHT_DOWN;
+                    break;
+                case Align.bottomLeft:
+                    direction = DIRECTION.LEFT_DOWN;
+                    break;
+                default:
+                    direction = DIRECTION.NONE;
+                    break;
+            }
+            //selesai tambah
 
             if(Gdx.input.isKeyJustPressed(Input.Keys.W)) {
                 sendMainWave();
             }
-        } else {
+
+        } else { //kalo android
+            /*
+            harus baca lagi di https://stackoverflow.com/questions/42057796/move-the-player-only-in-45-steps-with-touchpad-in-libgdx
+            dan di http://www.badlogicgames.com/forum/viewtopic.php?f=11&t=25734
+             */
+
+            float touchpadXnya = touchpad.getKnobPercentX();
+            float touchpadYnya = touchpad.getKnobPercentY();
+
+            int align = 0;
+            if(touchpadXnya < -.25f){
+                align = Align.left;
+            }
+            else if(touchpadXnya > .25f){
+                align = Align.right;
+            }
+            if(touchpadYnya < -.25f){
+                align += Align.bottom;
+            } else if (touchpadYnya > .25f){
+                align += Align.top;
+            }
+
+            switch (align){
+                case Align.left:
+                    direction = DIRECTION.LEFT;
+                    break;
+                case Align.right:
+                    direction = DIRECTION.RIGHT;
+                    break;
+                case Align.top:
+                    direction = DIRECTION.UP;
+                    break;
+                case Align.bottom:
+                    direction = DIRECTION.DOWN;
+                    break;
+                case Align.topRight:
+                    direction = DIRECTION.RIGHT_UP;
+                    break;
+                case Align.topLeft:
+                    direction = DIRECTION.LEFT_UP;
+                    break;
+                case Align.bottomRight:
+                    direction = DIRECTION.RIGHT_DOWN;
+                    break;
+                case Align.bottomLeft:
+                    direction = DIRECTION.LEFT_DOWN;
+                    break;
+                default:
+                    direction = DIRECTION.NONE;
+                    break;
+            }
+            /*
             pitch = Gdx.input.getPitch() - initialPitch;
             roll = Gdx.input.getRoll() - initialRoll;
 
@@ -205,6 +315,7 @@ public class PlayGameStage extends Stage {
             } else {
                 direction = DIRECTION.NONE;
             }
+            */
         }
 
         float sq = (float)Math.sqrt(2);

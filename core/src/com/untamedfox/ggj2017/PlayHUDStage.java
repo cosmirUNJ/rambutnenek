@@ -3,13 +3,17 @@ package com.untamedfox.ggj2017;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -35,6 +39,7 @@ public class PlayHUDStage extends Stage {
     private Image bar;
     private int lives;
     private GGJ2017 ggj2017;
+
 
     public PlayHUDStage(final PlayScreen playScreen, Viewport viewport, GGJ2017 ggj2017) {
         super(viewport, ggj2017.batch);
@@ -106,6 +111,8 @@ public class PlayHUDStage extends Stage {
         bar = new Image(ggj2017.assets.getTexture(Assets.bar1));
         bar.setPosition(60, 1350);
         addActor(bar);
+
+
     }
 
     void enableSonarButton() {

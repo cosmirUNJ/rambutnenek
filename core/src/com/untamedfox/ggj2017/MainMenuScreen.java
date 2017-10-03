@@ -39,9 +39,11 @@ public class MainMenuScreen implements Screen {
         viewport.apply();
         stage.draw();
         if(Gdx.input.justTouched()) {
-            float pitch = Gdx.input.getPitch();
-            float roll = Gdx.input.getRoll();
-            ggj2017.setScreen(new PlayScreen(ggj2017, pitch, roll));
+            //float pitch = Gdx.input.getPitch();
+            //float roll = Gdx.input.getRoll();
+            //ketika dipencet, pindah ke class playscreen
+            ggj2017.setScreen(new PlayScreen(ggj2017));
+            //ggj2017.setScreen(new PlayScreen(ggj2017, pitch, roll));
         }
     }
 
@@ -70,7 +72,9 @@ public class MainMenuScreen implements Screen {
     }
 
     private class MainMenuStage extends Stage {
+        //cek https://gist.github.com/Leejjon/7fb8aa3ea2e4024a9eba31fa4f3339fb
         public MainMenuStage(Viewport viewport, final GGJ2017 ggj2017) {
+            //super();
             super(viewport, ggj2017.batch);
             addActor(new Image(ggj2017.assets.getTexture(Assets.menu)));
             if(Gdx.app.getType() == Application.ApplicationType.Desktop) {

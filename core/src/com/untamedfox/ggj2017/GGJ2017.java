@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import java.util.Random;
 
 public class GGJ2017 extends Game {
-
+    //class awal
     private final String TAG = "GGJ2017";
 
     public final static int WIDTH = 2560;
