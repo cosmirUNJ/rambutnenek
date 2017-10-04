@@ -379,6 +379,8 @@ public class PlayGameStage extends Stage {
                 }
             }
             playHUDStage.setTargetsFound(TOTAL_TARGETS - targets.size());
+			//tambah-wandi
+			time += 30;
             collectedTargets.clear();
             if(targets.size() == 0) {
                 ggj2017.setScreen(new FinishedScreen(ggj2017, true));
@@ -407,7 +409,11 @@ public class PlayGameStage extends Stage {
             }
             fixedEnemies.get(k).remove(enemyHit);
             enemyHit.remove();
-            playHUDStage.gotHit();
+			
+			//tambah-wandi
+			time -=30;
+            
+			playHUDStage.gotHit();
             damage();
         } else {
             for(EnemyCowActor enemy : freeEnemies) {
@@ -424,6 +430,10 @@ public class PlayGameStage extends Stage {
                 }
                 freeEnemies.remove(enemyHit);
                 enemyHit.remove();
+				
+				//tambah-wandi
+				time -=30;
+				
                 playHUDStage.gotHit();
                 damage();
             }
