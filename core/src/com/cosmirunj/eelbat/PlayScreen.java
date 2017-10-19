@@ -1,4 +1,4 @@
-package com.untamedfox.ggj2017;
+package com.cosmirunj.eelbat;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -6,26 +6,24 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class PlayScreen implements Screen {
+/**
+ * Created by Inovatif on 10/18/2017.
+ */
 
-    private final String TAG = "PlayScreen";
-
+class PlayScreen implements Screen {
     private Viewport hudViewport;
-    private PlayHUDStage playHudStage;
+    private PlayHUDStage playHUD;
 
     private Viewport gameViewport;
     private PlayGameStage gameStage;
 
-    //tambahan
     private Viewport viewport;
     private OrthographicCamera camera;
     private Skin touchpadSkin;
@@ -35,12 +33,10 @@ public class PlayScreen implements Screen {
     public Touchpad touchpad;
     private Stage stage;
     private SpriteBatch batch;
-    private final GGJ2017 ggj2017;
-    //public PlayScreen(GGJ2017 ggj2017, float initialPitch, float initialRoll) {
+    private final EelbatCosmir eelbatCosmir;
 
-    public PlayScreen(GGJ2017 ggj2017) {
-        //tambahan
-        this.ggj2017 = ggj2017;
+    public PlayScreen(EelbatCosmir eelbatCosmir) {
+        this.eelbatCosmir = eelbatCosmir;
         touchpadSkin = new Skin();
         touchpadSkin.add("touchBackground", new Texture("cont/touchBackground.png"));
         touchpadSkin.add("touchKnob", new Texture("cont/touchKnob.png"));
@@ -54,41 +50,25 @@ public class PlayScreen implements Screen {
         touchpad.setPosition(15,100);
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
-        viewport = new FillViewport(GGJ2017.WIDTH, GGJ2017.HEIGHT, camera);
+        viewport = new FillViewport(eelbatCosmir.WIDTH, eelbatCosmir.HEIGHT, camera);
         stage = new Stage(viewport, batch); //cek batch nya
         stage.addActor(touchpad);
         float touchpadXnya = touchpad.getKnobPercentX();
         float touchpadYnya = touchpad.getKnobPercentY();
-        //tambahanlagi
-        /*
-        touchpad.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                float touchpadXnya = touchpad.getKnobPercentX();
-                float touchpadYnya = touchpad.getKnobPercentY();
-                //gameStage = new PlayGameStage(gameViewport, ggj2017, playHudStage, touchpadXnya, touchpadYnya);
-            }
-        });
-        */
 
-        Assets.music1.setVolume(1.0f);
-        Assets.music1.setLooping(true);
-        Assets.music1.play();
+
+        //Assets.playmusic.setLooping(false);
+        //Assets.playmusic.play();
+
         OrthographicCamera hudCamera = new OrthographicCamera();
-        hudViewport = new FillViewport(GGJ2017.WIDTH, GGJ2017.HEIGHT, hudCamera);
-        playHudStage = new PlayHUDStage(this, hudViewport, ggj2017);
+        hudViewport = new FillViewport(eelbatCosmir.WIDTH, eelbatCosmir.HEIGHT, hudCamera);
+        playHUD = new PlayHUDStage(this, hudViewport, eelbatCosmir);
 
         OrthographicCamera gameCamera = new OrthographicCamera();
-        gameViewport = new FillViewport(GGJ2017.WIDTH, GGJ2017.HEIGHT, gameCamera);
-        gameStage = new PlayGameStage(gameViewport, ggj2017, playHudStage, touchpadXnya, touchpadYnya, touchpad);
-
-
-
-
+        gameViewport = new FillViewport(eelbatCosmir.WIDTH,eelbatCosmir.HEIGHT, gameCamera);
+        gameStage = new PlayGameStage(gameViewport, eelbatCosmir, playHUD, touchpadXnya, touchpadYnya, touchpad);
 
         Gdx.input.setInputProcessor(stage);
-
-        //Gdx.input.setInputProcessor(playHudStage);
     }
 
     boolean sendMainWave() {
@@ -112,9 +92,10 @@ public class PlayScreen implements Screen {
         gameViewport.apply();
         gameStage.draw();
 
-        playHudStage.act(delta);
+
+        playHUD.act(delta);
         hudViewport.apply();
-        playHudStage.draw();
+        playHUD.draw();
 
         //tambahan juga
         //batch.end();
@@ -124,8 +105,8 @@ public class PlayScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        hudViewport.update(width, height);
-        gameViewport.update(width, height);
+        hudViewport.update(width,height);
+        gameViewport.update(width,height);
     }
 
     @Override

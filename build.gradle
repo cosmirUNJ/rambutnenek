@@ -1,4 +1,6 @@
 buildscript {
+    
+
     repositories {
         mavenLocal()
         mavenCentral()
@@ -7,6 +9,8 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
+        
+
     }
 }
 
@@ -14,11 +18,11 @@ allprojects {
     apply plugin: "eclipse"
     apply plugin: "idea"
 
-    version = '0.1.8'
+    version = '1.0'
     ext {
-        appName = "ggj-2017"
-        gdxVersion = '1.9.5'
-        roboVMVersion = '2.3.0'
+        appName = "EelbatCosmir"
+        gdxVersion = '1.9.6'
+        roboVMVersion = '2.3.1'
         box2DLightsVersion = '1.4'
         ashleyVersion = '1.7.0'
         aiVersion = '1.8.0'
@@ -40,8 +44,7 @@ project(":desktop") {
         compile project(":core")
         compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
-        compile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
-        //compile "de.tomgrill.gdxdialogs:gdx-dialogs-desktop:1.2.0"
+        
     }
 }
 
@@ -58,13 +61,7 @@ project(":android") {
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-arm64-v8a"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86_64"
-        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
-        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi"
-        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi-v7a"
-        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-arm64-v8a"
-        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86"
-        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86_64"
-        //compile "de.tomgrill.gdxdialogs:gdx-dialogs-android:1.2.0"
+        
     }
 }
 
@@ -74,10 +71,7 @@ project(":core") {
 
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
-        compile "com.esotericsoftware.spine:spine-libgdx:3.5.51.1"
-        //compile "com.kotcrab.vis:vis-ui:1.2.4"
-        //compile "de.tomgrill.gdxdialogs:gdx-dialogs-core:1.2.0"
+        
     }
 }
 

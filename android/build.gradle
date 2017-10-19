@@ -1,6 +1,6 @@
 android {
-    buildToolsVersion "25.0.1"
-    compileSdkVersion 25
+    buildToolsVersion '25.0.0'
+    compileSdkVersion 26
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -18,9 +18,17 @@ android {
         exclude 'META-INF/robovm/ios/robovm.xml'
     }
     defaultConfig {
-        applicationId "com.untamedfox.ggj2017"
-        minSdkVersion 8
-        targetSdkVersion 25
+        applicationId "com.cosmirunj.eelbat"
+        minSdkVersion 9
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
 }
 
@@ -71,7 +79,7 @@ task run(type: Exec) {
     }
 
     def adb = path + "/platform-tools/adb"
-    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.untamedfox.ggj2017/com.untamedfox.ggj2017.AndroidLauncher'
+    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.cosmirunj.eelbat/com.cosmirunj.eelbat.AndroidLauncher'
 }
 
 // sets up the Android Eclipse project, using the old Ant based build.
