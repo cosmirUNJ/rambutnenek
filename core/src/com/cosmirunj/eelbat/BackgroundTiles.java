@@ -13,8 +13,8 @@ public class BackgroundTiles extends Actor {
     final static int TILE_WIDTH = 164;
     final static int TILE_HEIGHT = 164;
 
-    private final int W = EelbatCosmir.WIDTH/TILE_WIDTH+6;
-    private final int H = EelbatCosmir.HEIGHT/TILE_HEIGHT+6;
+    private final int W = EelbatCosmir.WIDTH/TILE_WIDTH + 18; //defaultnya 6
+    private final int H = EelbatCosmir.HEIGHT/TILE_HEIGHT + 15; //defaultnya 6
 
     private EelbatCosmir eelbatCosmir;
 
