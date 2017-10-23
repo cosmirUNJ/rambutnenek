@@ -5,4 +5,5 @@ package com.cosmirunj.eelbat;
  */
 
 public class EnemyList {
+
 }

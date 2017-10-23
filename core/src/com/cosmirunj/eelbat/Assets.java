@@ -16,12 +16,17 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
 public class Assets {
 
-    public static AssetDescriptor<Texture> shadow, eelbatpic;
+
 
     AssetManager manager;
 
+    public static AssetDescriptor<Texture> shadow, eelbatpic;
+
     static AssetDescriptor<Texture> menu;
+    static AssetDescriptor<Texture> enemyJelly,shadowEnemy;
     static AssetDescriptor<BitmapFont> bitmapFontSmall;
+
+    static AssetDescriptor<Texture> buttonPlay;
 
     static AssetDescriptor<Texture>[] textureBawah;
     static AssetDescriptor<Texture>[] textureAtas;
@@ -40,6 +45,11 @@ public class Assets {
         menu = new AssetDescriptor<Texture>("menu.png", Texture.class, textureParameter);
         shadow = new AssetDescriptor<Texture>("shadow-batcat.png", Texture.class, textureParameter);
         eelbatpic = new AssetDescriptor<Texture>("eelbat/eelbatpic.png", Texture.class, textureParameter);
+        enemyJelly = new AssetDescriptor<Texture>("enemygo/jellyfish.png", Texture.class, textureParameter);
+        shadowEnemy = new AssetDescriptor<Texture>("shadow-skull.png",Texture.class,textureParameter);
+
+        //button
+        buttonPlay = new AssetDescriptor<Texture>("buttons/sonar-active.png", Texture.class, textureParameter);
 
         //texture atas dan bawah ground nya
         textureAtas = new AssetDescriptor[15];

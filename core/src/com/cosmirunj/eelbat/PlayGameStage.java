@@ -45,6 +45,7 @@ class PlayGameStage extends Stage {
 
         //backgroundTiles.update(x,y);
 
+
     }
 
     public boolean sendMainWave() {
