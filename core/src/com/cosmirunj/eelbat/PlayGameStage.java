@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 class PlayGameStage extends Stage {
     private PlayHUDStage playHUDStage;
     private EelbatCosmir eelbatCosmir;
-    ShapeRenderer shapeRenderer;
+    private ShapeRenderer shapeRenderer;
     private float touchpadXnya;
     private float touchpadYnya;
     private Touchpad touchpad;
@@ -22,12 +22,23 @@ class PlayGameStage extends Stage {
     private float x = 0;
     private float y = 0;
 
+    private float time;
+    private final int TOTAL_TIME = 3*60;
+
+    private float score;
+    private final int TOTAL_SCORE = 200;
+
+
     private CharacterEelBat characterEelBat;
 
     public PlayGameStage(Viewport gameViewport, EelbatCosmir eelbatCosmir, PlayHUDStage playHUDStage, float touchpadXnya, float touchpadYnya, Touchpad touchpad) {
         super(gameViewport, eelbatCosmir.batch);
         this.playHUDStage = playHUDStage;
         this.eelbatCosmir = eelbatCosmir;
+
+        time = TOTAL_TIME;
+        score = TOTAL_SCORE;
+
 
         shapeRenderer = new ShapeRenderer();
 
@@ -50,6 +61,18 @@ class PlayGameStage extends Stage {
     public boolean sendMainWave() {
         return true;
     }
+
+    @Override
+    public void act(float delta) {
+        updateLocation(delta);
+        time -= delta;
+    }
+
+    private void updateLocation(float delta){
+        playHUDStage.update(time);
+
+    }
+
 
     enum DIRECTION{RIGHT, LEFT, UP, DOWN, RIGHT_UP, RIGHT_DOWN, LEFT_UP, LEFT_DOWN, NONE}
 }

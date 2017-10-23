@@ -81,8 +81,8 @@ class MainMenu implements Screen {
             addActor(new Image(eelbatCosmir.assets.getTexture(Assets.menu)));
             Label.LabelStyle labelStyleSmall = new Label.LabelStyle();
             labelStyleSmall.font = eelbatCosmir.assets.getBitmapFont(Assets.bitmapFontSmall);
-            Label labelSmall = new Label("Eelbat",labelStyleSmall);
-            labelSmall.setPosition(1500,100);
+            Label labelSmall = new Label("Tap to Play",labelStyleSmall);
+            labelSmall.setPosition(1150,300);
             addActor(labelSmall);
         }
     }

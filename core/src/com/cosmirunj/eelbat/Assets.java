@@ -21,7 +21,8 @@ public class Assets {
     AssetManager manager;
 
     static AssetDescriptor<Texture> menu;
-    static AssetDescriptor<BitmapFont> bitmapFontSmall;
+    static AssetDescriptor<BitmapFont> bitmapFontSmall, bitmapFontMedium, bitmapFontLarge;
+    static AssetDescriptor<Texture> bar1, bar2, bar3, bar4;
 
     static AssetDescriptor<Texture>[] textureBawah;
     static AssetDescriptor<Texture>[] textureAtas;
@@ -56,22 +57,31 @@ public class Assets {
 
 
 
-
-
         //font
         BitmapFontLoader.BitmapFontParameter parameter = new BitmapFontLoader.BitmapFontParameter();
         parameter.magFilter = Texture.TextureFilter.Linear;
         parameter.minFilter = Texture.TextureFilter.Linear;
 
         bitmapFontSmall = new AssetDescriptor<BitmapFont>("fonts/bangers-small.fnt", BitmapFont.class, parameter);
+        bitmapFontMedium = new AssetDescriptor<BitmapFont>("fonts/bangers-medium.fnt", BitmapFont.class, parameter);
+        bitmapFontLarge = new AssetDescriptor<BitmapFont>("fonts/bangers-large.fnt", BitmapFont.class, parameter);
+
 
         //music
         mainmenumusic = Gdx.audio.newMusic(Gdx.files.internal("music/mainmenu.wav"));
         //playmusic = Gdx.audio.newSound(Gdx.files.internal("music/playing_music.wav"));
         //playmusic = Gdx.audio.newMusic(Gdx.files.internal("music/playing_music.wav"));
 
+        //bar
+        bar1 = new AssetDescriptor<Texture>("bar/heart1.png", Texture.class, textureParameter);
+        bar2 = new AssetDescriptor<Texture>("bar/heart2.png", Texture.class, textureParameter);
+        bar3 = new AssetDescriptor<Texture>("bar/heart3.png", Texture.class, textureParameter);
+        bar4 = new AssetDescriptor<Texture>("bar/heart4.png", Texture.class, textureParameter);
+
         //load font nya
         manager.load(bitmapFontSmall);
+        manager.load(bitmapFontMedium);
+        manager.load(bitmapFontLarge);
 
         //load gambar
         manager.load(menu);
@@ -85,6 +95,12 @@ public class Assets {
         for (int i=0;i<textureAtas.length;i++){
             manager.load(textureAtas[i]);
         }
+
+        //load bar
+        manager.load(bar1);
+        manager.load(bar2);
+        manager.load(bar3);
+        manager.load(bar4);
 
     }
     BitmapFont getBitmapFont(AssetDescriptor<BitmapFont> bitmapFontAssetDescriptor){
