@@ -3,14 +3,32 @@ package com.cosmirunj.eelbat;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Inovatif on 10/18/2017.
  */
 
 class PlayGameStage extends Stage {
+
+    private final int ATTACK_RANGE = 200;
+    private final int COLLECT_RANGE = 150;
+
+    private final int TOTAL_TIME = 3*60;
+
+    private EnemyList enemyList;
+    private float time;
+
+
+
     private PlayHUDStage playHUDStage;
     private EelbatCosmir eelbatCosmir;
     ShapeRenderer shapeRenderer;
@@ -29,6 +47,7 @@ class PlayGameStage extends Stage {
         this.playHUDStage = playHUDStage;
         this.eelbatCosmir = eelbatCosmir;
 
+
         shapeRenderer = new ShapeRenderer();
 
         this.touchpadXnya = touchpadXnya;
@@ -42,6 +61,9 @@ class PlayGameStage extends Stage {
 
         characterEelBat = new CharacterEelBat(eelbatCosmir);
         characterEelBat.updatePosition(x,y,DIRECTION.NONE);
+
+        enemyList = new EnemyList(eelbatCosmir);
+        enemyList.addEnemies();
 
         //backgroundTiles.update(x,y);
 

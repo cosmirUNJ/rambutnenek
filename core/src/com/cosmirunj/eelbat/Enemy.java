@@ -40,7 +40,34 @@ public class Enemy extends Actor {
 
     @Override
     public void act(float delta){
+        if(!fixed || Math.pow(x - TARGET_X, 2) + Math.pow(y - TARGET_Y, 2) <= Math.pow(CLOSE_RADIUS, 2)) {
+            currentAngle += delta*(EelbatCosmir.random.nextFloat()*2*MAX_ANGLE_CHANGE - MAX_ANGLE_CHANGE);
+        } else {
+            if((x - TARGET_X)*Math.sin(currentAngle/180*Math.PI) - (y - TARGET_Y)*Math.cos(currentAngle/180*Math.PI) >= 0) {
+                currentAngle += delta*EelbatCosmir.random.nextFloat()*MAX_ANGLE_CHANGE;
+            } else {
+                currentAngle -= delta*EelbatCosmir.random.nextFloat()*MAX_ANGLE_CHANGE;
+            }
+        }
+        while(currentAngle > 360) {
+            currentAngle -= 360;
+        }
+        while(currentAngle < 0) {
+            currentAngle += 360;
+        }
+        x += delta*Math.cos(currentAngle/180*Math.PI)*SPEED_ENEMY;
+        y += delta*Math.sin(currentAngle/180*Math.PI)*SPEED_ENEMY;
 
+    }
+
+    public float getPositionX(){
+        return  x;
+    }
+    public float floatgetPositionY(){
+        return y;
+    }
+    void unfix(){
+        fixed = false;
     }
 
 }

@@ -45,7 +45,7 @@ public class Assets {
         menu = new AssetDescriptor<Texture>("menu.png", Texture.class, textureParameter);
         shadow = new AssetDescriptor<Texture>("shadow-batcat.png", Texture.class, textureParameter);
         eelbatpic = new AssetDescriptor<Texture>("eelbat/eelbatpic.png", Texture.class, textureParameter);
-        enemyJelly = new AssetDescriptor<Texture>("enemygo/jellyfish.png", Texture.class, textureParameter);
+        enemyJelly = new AssetDescriptor<Texture>("enemigo/jellyfish.png", Texture.class, textureParameter);
         shadowEnemy = new AssetDescriptor<Texture>("shadow-skull.png",Texture.class,textureParameter);
 
         //button
@@ -87,6 +87,8 @@ public class Assets {
         manager.load(menu);
         manager.load(shadow);
         manager.load(eelbatpic);
+        manager.load(enemyJelly);
+        manager.load(shadowEnemy);
 
         //load texture tile atas dan bawh
         for (int i=0;i<textureBawah.length;i++){
