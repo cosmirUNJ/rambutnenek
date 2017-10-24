@@ -22,7 +22,7 @@ public class Assets {
 
     static AssetDescriptor<Texture> menu;
     static AssetDescriptor<BitmapFont> bitmapFontSmall, bitmapFontMedium, bitmapFontLarge;
-    static AssetDescriptor<Texture> bar1, bar2, bar3, bar4;
+    static AssetDescriptor<Texture> bar1, bar2, bar3, bar4, bar5;
 
     static AssetDescriptor<Texture>[] textureBawah;
     static AssetDescriptor<Texture>[] textureAtas;
@@ -73,10 +73,11 @@ public class Assets {
         //playmusic = Gdx.audio.newMusic(Gdx.files.internal("music/playing_music.wav"));
 
         //bar
-        bar1 = new AssetDescriptor<Texture>("bar/heart1.png", Texture.class, textureParameter);
-        bar2 = new AssetDescriptor<Texture>("bar/heart2.png", Texture.class, textureParameter);
-        bar3 = new AssetDescriptor<Texture>("bar/heart3.png", Texture.class, textureParameter);
-        bar4 = new AssetDescriptor<Texture>("bar/heart4.png", Texture.class, textureParameter);
+        bar1 = new AssetDescriptor<Texture>("bar/healthbar1.png", Texture.class, textureParameter);
+        bar2 = new AssetDescriptor<Texture>("bar/healthbar2.png", Texture.class, textureParameter);
+        bar3 = new AssetDescriptor<Texture>("bar/healthbar3.png", Texture.class, textureParameter);
+        bar4 = new AssetDescriptor<Texture>("bar/healthbar4.png", Texture.class, textureParameter);
+        bar5 = new AssetDescriptor<Texture>("bar/healthbar5.png", Texture.class, textureParameter);
 
         //load font nya
         manager.load(bitmapFontSmall);
@@ -101,6 +102,7 @@ public class Assets {
         manager.load(bar2);
         manager.load(bar3);
         manager.load(bar4);
+        manager.load(bar5);
 
     }
     BitmapFont getBitmapFont(AssetDescriptor<BitmapFont> bitmapFontAssetDescriptor){

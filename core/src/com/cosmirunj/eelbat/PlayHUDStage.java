@@ -41,13 +41,13 @@ class PlayHUDStage extends Stage {
         scoreLabelStyle = new Label.LabelStyle();
         scoreLabelStyle.font = eelbatCosmir.assets.getBitmapFont(Assets.bitmapFontMedium);
         scoreLabel = new Label("Score: ", scoreLabelStyle);
-        scoreLabel.setPosition(1900, 1440);
+        scoreLabel.setPosition(1950, 1440);
 
         addActor(scoreLabel);
         Score = 0;
 
         bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar1));
-        bar.setPosition(1000, 1350);
+        bar.setPosition(900, 1250);
         addActor(bar);
     }
 
