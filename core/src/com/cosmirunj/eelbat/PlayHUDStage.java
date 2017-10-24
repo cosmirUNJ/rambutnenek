@@ -69,8 +69,6 @@ class PlayHUDStage extends Stage {
         scoreLabel.setText("Score : "+String.format("200"));
     }
 
-
-
-
+    enum RUN{STOP, SLOW, FAST}
 
 }

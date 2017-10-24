@@ -17,6 +17,8 @@ public class EelbatCosmir extends Game {
 	public final static int WIDTH = 2560;
 	public final static int HEIGHT = 1600;
 
+	final static int RUN_SPEED = 800;
+
 	PolygonSpriteBatch batch;
 
 	static Random random;
