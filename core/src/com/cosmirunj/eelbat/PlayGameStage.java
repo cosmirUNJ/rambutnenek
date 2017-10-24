@@ -220,5 +220,6 @@ class PlayGameStage extends Stage {
     }
 
 
+
     enum DIRECTION{RIGHT, LEFT, UP, DOWN, RIGHT_UP, RIGHT_DOWN, LEFT_UP, LEFT_DOWN, NONE}
 }

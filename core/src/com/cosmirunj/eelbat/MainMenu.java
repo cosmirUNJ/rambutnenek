@@ -32,7 +32,7 @@ class MainMenu implements Screen {
 
     private Button.ButtonStyle buttonStyle;
     private TextureRegionDrawable playButton;
-    private ImageButton ButtonPlay, ButtonEasy, ButtonMedium, ButtonHard;
+    private ImageButton ButtonPlay, ButtonEasy, ButtonMedium, ButtonHard, ButtonSoundActive;
     private Stage ButtonStage;
     boolean btnPlay;
 
@@ -112,6 +112,31 @@ class MainMenu implements Screen {
         float widthScreen = Gdx.graphics.getWidth();
         float heightScreen = Gdx.graphics.getHeight();
 
+        //Button Sound
+        Texture BtnSoundActive = eelbatCosmir.assets.getTexture(Assets.btnSoundActive);
+        TextureRegionDrawable BtnImageSound = new TextureRegionDrawable(new TextureRegion(BtnSoundActive));
+        ButtonSoundActive = new ImageButton(BtnImageSound);
+        ButtonSoundActive.setSize(BtnSoundActive.getWidth()-100,BtnSoundActive.getHeight()-100);
+        ButtonSoundActive.setPosition(875, 530);
+        ButtonSoundActive.addListener(new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                ButtonSoundActive.getImage().setColor(Color.BROWN);
+                btnPlay=true;
+                Assets.mainmenumusic.stop();
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                ButtonSoundActive.getImage().setColor(Color.WHITE);
+                super.touchUp(event, x, y, pointer, button);
+            }
+        });
+
+        ButtonStage.addActor(ButtonSoundActive);
+
+        //Button Easy
         Texture BtnEasy = eelbatCosmir.assets.getTexture(Assets.btnEasy);
         TextureRegionDrawable BtnImageEasy = new TextureRegionDrawable(new TextureRegion(BtnEasy));
         ButtonEasy = new ImageButton(BtnImageEasy);
@@ -120,7 +145,7 @@ class MainMenu implements Screen {
         ButtonEasy.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                ButtonEasy.getImage().setColor(Color.BROWN);
+                ButtonEasy.getImage().setColor(Color.BLACK);
                 Assets.mainmenumusic.stop();
                 eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir));
                 return true;
@@ -136,6 +161,7 @@ class MainMenu implements Screen {
         ButtonStage.addActor(ButtonEasy);
         ButtonEasy.setVisible(false);
 
+        //Button Medium
         Texture BtnMedium = eelbatCosmir.assets.getTexture(Assets.btnMedium);
         TextureRegionDrawable BtnImageMedium = new TextureRegionDrawable(new TextureRegion(BtnMedium));
         ButtonMedium = new ImageButton(BtnImageMedium);
@@ -144,7 +170,7 @@ class MainMenu implements Screen {
         ButtonMedium.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                ButtonMedium.getImage().setColor(Color.ORANGE);
+                ButtonMedium.getImage().setColor(Color.BLACK);
                 return true;
             }
 
@@ -158,6 +184,7 @@ class MainMenu implements Screen {
         ButtonStage.addActor(ButtonMedium);
         ButtonMedium.setVisible(false);
 
+        //Button Hard
         Texture BtnHard = eelbatCosmir.assets.getTexture(Assets.btnHard);
         TextureRegionDrawable BtnImageHard = new TextureRegionDrawable(new TextureRegion(BtnHard));
         ButtonHard = new ImageButton(BtnImageHard);
@@ -180,6 +207,7 @@ class MainMenu implements Screen {
         ButtonStage.addActor(ButtonHard);
         ButtonHard.setVisible(false);
 
+        //Button Play
         Texture Btn = eelbatCosmir.assets.getTexture(Assets.btnPlay);
         TextureRegionDrawable BtnImage = new TextureRegionDrawable(new TextureRegion(Btn));
         ButtonPlay = new ImageButton(BtnImage);
@@ -189,11 +217,11 @@ class MainMenu implements Screen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 ButtonPlay.getImage().setColor(Color.BROWN);
-                System.out.println("bisa");
                 btnPlay=true;
                 ButtonEasy.setVisible(true);
                 ButtonMedium.setVisible(true);
                 ButtonHard.setVisible(true);
+                ButtonSound.setVisible(true);
                 return true;
             }
 
@@ -205,8 +233,6 @@ class MainMenu implements Screen {
         });
 
         ButtonStage.addActor(ButtonPlay);
-
-
         Gdx.input.setInputProcessor(ButtonStage);
     }
 }

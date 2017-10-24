@@ -23,7 +23,7 @@ class PlayHUDStage extends Stage {
     private int lastSeconds;
     private float Score;
 
-    private Image bar;
+    private Image bar, home;
 
     public PlayHUDStage(PlayScreen playScreen, Viewport hudViewport, EelbatCosmir eelbatCosmir) {
         super(hudViewport, eelbatCosmir.batch);
@@ -49,6 +49,10 @@ class PlayHUDStage extends Stage {
         bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar1));
         bar.setPosition(900, 1460);
         addActor(bar);
+
+        home = new Image(eelbatCosmir.assets.getTexture(Assets.btnHome));
+        home.setPosition(2300, 50);
+        addActor(home);
     }
 
 

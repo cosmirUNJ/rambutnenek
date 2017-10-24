@@ -26,11 +26,12 @@ public class Assets {
 
     static AssetDescriptor<BitmapFont> bitmapFontSmall, bitmapFontMedium, bitmapFontLarge;
     static AssetDescriptor<Texture> bar1, bar2, bar3, bar4, bar5;
+    static AssetDescriptor<Texture> btnHome;
 
     static AssetDescriptor<Texture> enemyJelly,shadowEnemy;
 
 
-    static AssetDescriptor<Texture> btnPlay, btnEasy, btnMedium, btnHard;
+    static AssetDescriptor<Texture> btnPlay, btnEasy, btnMedium, btnHard, btnSoundActive, btnSoundMute;
 
     static AssetDescriptor<Texture>[] textureBawah;
     static AssetDescriptor<Texture>[] textureAtas;
@@ -84,16 +85,22 @@ public class Assets {
 
         //bar
         bar1 = new AssetDescriptor<Texture>("bar/bb1.png", Texture.class, textureParameter);
-        bar2 = new AssetDescriptor<Texture>("bar/healthbar2.png", Texture.class, textureParameter);
-        bar3 = new AssetDescriptor<Texture>("bar/healthbar3.png", Texture.class, textureParameter);
-        bar4 = new AssetDescriptor<Texture>("bar/healthbar4.png", Texture.class, textureParameter);
-        bar5 = new AssetDescriptor<Texture>("bar/healthbar5.png", Texture.class, textureParameter);
+        bar2 = new AssetDescriptor<Texture>("bar/bb2.png", Texture.class, textureParameter);
+        bar3 = new AssetDescriptor<Texture>("bar/bb3.png", Texture.class, textureParameter);
+        bar4 = new AssetDescriptor<Texture>("bar/bb4.png", Texture.class, textureParameter);
+        bar5 = new AssetDescriptor<Texture>("bar/bb5.png", Texture.class, textureParameter);
+
+        //home
+        btnHome = new AssetDescriptor<Texture>("buttons/Home.png", Texture.class, textureParameter);
 
         //button Button Stage
         btnPlay = new AssetDescriptor<Texture>("buttons/PlayButton.png", Texture.class, textureParameter);
         btnEasy = new AssetDescriptor<Texture>("buttons/easy.png", Texture.class, textureParameter);
         btnMedium = new AssetDescriptor<Texture>("buttons/Medium.png", Texture.class, textureParameter);
         btnHard = new AssetDescriptor<Texture>("buttons/Hard.png", Texture.class, textureParameter);
+        btnSoundActive = new AssetDescriptor<Texture>("buttons/Sound.png", Texture.class, textureParameter);
+        btnSoundMute = new AssetDescriptor<Texture>("buttons/Mute.png", Texture.class, textureParameter);
+
 
         //load font nya
         manager.load(bitmapFontSmall);
@@ -122,11 +129,16 @@ public class Assets {
         manager.load(bar4);
         manager.load(bar5);
 
-        //load button
+        //load home
+        manager.load(btnHome);
+
+        //load button stage
         manager.load(btnPlay);
         manager.load(btnEasy);
         manager.load(btnMedium);
         manager.load(btnHard);
+        manager.load(btnSoundActive);
+        manager.load(btnSoundMute);
 
     }
     BitmapFont getBitmapFont(AssetDescriptor<BitmapFont> bitmapFontAssetDescriptor){
