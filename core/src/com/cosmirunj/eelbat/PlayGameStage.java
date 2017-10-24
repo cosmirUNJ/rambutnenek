@@ -25,11 +25,7 @@ class PlayGameStage extends Stage {
     private final int ATTACK_RANGE = 200;
     private final int COLLECT_RANGE = 150;
 
-    private final int TOTAL_TIME = 3*60;
-
     private EnemyList enemyList;
-    private float time;
-
 
     private Map<Integer, Set<Enemy>> fixedEnemies;
     private Set<Enemy> freeEnemies;
@@ -116,12 +112,6 @@ class PlayGameStage extends Stage {
 
     }
 
-    @Override
-    public void act(float delta){
-        updateLocation(delta);
-        super.act(delta);
-    }
-
     private void updateLocation(float delta) {
         DIRECTION direction;
 
@@ -173,69 +163,6 @@ class PlayGameStage extends Stage {
 
         float sq = (float)Math.sqrt(2);
         if(direction == DIRECTION.RIGHT_UP || direction == DIRECTION.RIGHT_DOWN) {
-            x += delta*EelbatCosmir.RUN_SPEED/sq;
-        } else if(direction == DIRECTION.RIGHT) {
-            x += delta*EelbatCosmir.RUN_SPEED;
-        } else if(direction == DIRECTION.LEFT_UP || direction == DIRECTION.LEFT_DOWN) {
-            x -= delta*EelbatCosmir.RUN_SPEED/sq;
-        } else if(direction == DIRECTION.LEFT) {
-            x -= delta*EelbatCosmir.RUN_SPEED;
-        }
-
-        if(direction == DIRECTION.RIGHT_UP || direction == DIRECTION.LEFT_UP) {
-            y += delta*EelbatCosmir.RUN_SPEED/sq;
-        } else if(direction == DIRECTION.UP) {
-            y += delta*EelbatCosmir.RUN_SPEED;
-        } else if(direction == DIRECTION.RIGHT_DOWN || direction == DIRECTION.LEFT_DOWN) {
-            y -= delta*EelbatCosmir.RUN_SPEED/sq;
-        } else if(direction == DIRECTION.DOWN) {
-            y -= delta*EelbatCosmir.RUN_SPEED;
-        }
-        cameraPosition.x = x;
-        cameraPosition.y = y;
-
-        //mainCharacter.updatePosition(x, y, direction);
-
-        backgroundTiles.update(x, y);
-
-        //playHUDStage.update(time);
-
-    }
-
-    @Override
-    public void act(float delta) {
-        updateLocation(delta);
-        super.act(delta);
-    }
-
-    private void updateLocation(float delta) {
-        DIRECTION direction;
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            direction = DIRECTION.RIGHT_UP;
-        } else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            direction = DIRECTION.RIGHT_DOWN;
-        } else if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            direction = DIRECTION.LEFT_UP;
-        } else if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            direction = DIRECTION.LEFT_DOWN;
-        } else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            direction = DIRECTION.RIGHT;
-        } else if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            direction = DIRECTION.LEFT;
-        } else if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            direction = DIRECTION.UP;
-        } else if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            direction = DIRECTION.DOWN;
-        } else {
-            direction = DIRECTION.NONE;
-        }
-
-        if(Gdx.input.isKeyJustPressed(Input.Keys.W)) {
-            sendMainWave();
-        }
-
-        float sq = (float)Math.sqrt(2);
-        if(direction == DIRECTION.RIGHT_UP || direction == DIRECTION.RIGHT_DOWN) {
             //x += delta*GGJ2017.RUN_SPEED/sq;
             //x ++;
             x += delta*800/sq;
@@ -269,10 +196,15 @@ class PlayGameStage extends Stage {
             //y --;
             y -= delta*800;
         }
+
         cameraPosition.x = x;
         cameraPosition.y = y;
 
         characterEelBat.updatePosition(x, y, direction);
+
+        backgroundTiles.update(x, y);
+
+        playHUDStage.update(time);
 
     }
 
@@ -284,11 +216,7 @@ class PlayGameStage extends Stage {
     public void act(float delta) {
         updateLocation(delta);
         time -= delta;
-    }
-
-    private void updateLocation(float delta){
-        playHUDStage.update(time);
-
+        super.act(delta);
     }
 
 

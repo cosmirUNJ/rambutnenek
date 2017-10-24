@@ -28,7 +28,6 @@ public class Assets {
     static AssetDescriptor<Texture> bar1, bar2, bar3, bar4, bar5;
 
     static AssetDescriptor<Texture> enemyJelly,shadowEnemy;
-    static AssetDescriptor<BitmapFont> bitmapFontSmall;
 
 
     static AssetDescriptor<Texture> buttonPlay;
@@ -37,7 +36,7 @@ public class Assets {
     static AssetDescriptor<Texture>[] textureAtas;
 
     static Music mainmenumusic;
-    static Sound playmusic;
+    static Music playmusic;
 
     public void load() {
         manager = new AssetManager();
@@ -84,7 +83,7 @@ public class Assets {
         //music
         mainmenumusic = Gdx.audio.newMusic(Gdx.files.internal("music/mainmenu.wav"));
         //playmusic = Gdx.audio.newSound(Gdx.files.internal("music/playing_music.wav"));
-        //playmusic = Gdx.audio.newMusic(Gdx.files.internal("music/playing_music.wav"));
+        //playmusic = Gdx.audio.newMusic(Gdx.files.internal("music/playingmusic.wav"));
 
         //bar
         bar1 = new AssetDescriptor<Texture>("bar/healthbar1.png", Texture.class, textureParameter);
