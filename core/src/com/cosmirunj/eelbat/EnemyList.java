@@ -26,10 +26,6 @@ public class EnemyList extends Stage{
 
     public EnemyList(EelbatCosmir eelbatCosmir) {
         this.eelbatCosmir = eelbatCosmir;
-    }
-
-
-    public void addEnemies() {
         targetsFound = new HashSet<Integer>();
         fixedEnemies = new HashMap<Integer, Set<Enemy>>();
         freeEnemies = new HashSet<Enemy>();
@@ -50,11 +46,17 @@ public class EnemyList extends Stage{
         }
 
         for(int i = 0; i < 50; i++) {
-            float x = EelbatCosmir.random.nextInt(2*MAX_RADIUS_X) - MAX_RADIUS_X;
-            float y = EelbatCosmir.random.nextInt(2*MAX_RADIUS_Y) - MAX_RADIUS_Y;
+            float x = EelbatCosmir.random.nextInt(2 * MAX_RADIUS_X) - MAX_RADIUS_X;
+            float y = EelbatCosmir.random.nextInt(2 * MAX_RADIUS_Y) - MAX_RADIUS_Y;
             Enemy enemy = new Enemy(eelbatCosmir.assets, x, y, false);
             freeEnemies.add(enemy);
             addActor(enemy);
         }
     }
+
+
+    public void addEnemies() {
+
+        }
+
 }

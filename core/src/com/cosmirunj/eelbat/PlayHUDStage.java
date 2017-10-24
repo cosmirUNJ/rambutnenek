@@ -17,4 +17,6 @@ class PlayHUDStage extends Stage {
 
     }
 
+    enum RUN{STOP, SLOW, FAST}
+
 }
