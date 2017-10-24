@@ -47,7 +47,7 @@ class PlayHUDStage extends Stage {
         Score = 0;
 
         bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar1));
-        bar.setPosition(900, 1250);
+        bar.setPosition(900, 1460);
         addActor(bar);
     }
 
