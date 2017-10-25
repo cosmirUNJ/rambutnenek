@@ -221,7 +221,6 @@ class MainMenu implements Screen {
                 ButtonEasy.setVisible(true);
                 ButtonMedium.setVisible(true);
                 ButtonHard.setVisible(true);
-                ButtonSound.setVisible(true);
                 return true;
             }
 
