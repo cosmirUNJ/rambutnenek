@@ -35,17 +35,20 @@ class MainMenu implements Screen {
     private ImageButton ButtonPlay, ButtonEasy, ButtonMedium, ButtonHard, ButtonSoundActive;
     private Stage ButtonStage;
     boolean btnPlay;
+    boolean playMusic;
 
     public MainMenu(EelbatCosmir eelbatCosmir) {
         this.eelbatCosmir = eelbatCosmir;
 
-        Assets.mainmenumusic.setLooping(false);
+        Assets.mainmenumusic.setLooping(true);
         Assets.mainmenumusic.play();
 
         OrthographicCamera camera = new OrthographicCamera();
         viewport = new FillViewport(eelbatCosmir.WIDTH, eelbatCosmir.HEIGHT, camera);
         stage = new MainMenuStage(viewport, eelbatCosmir);
         Gdx.input.setInputProcessor(stage);
+
+        playMusic = true;
 
         ButtonStage=new Stage();
         ButtonPlay();
@@ -122,9 +125,16 @@ class MainMenu implements Screen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 ButtonSoundActive.getImage().setColor(Color.BROWN);
-                btnPlay=true;
-                Assets.mainmenumusic.stop();
-                return true;
+                playMusic = !playMusic;
+
+                if (playMusic){
+                    Assets.mainmenumusic.play();
+                } else {
+                    Assets.mainmenumusic.stop();
+                }
+                //btnPlay ? Assets.mainmenumusic.stop() :  Assets.mainmenumusic.play() ;
+                //Assets.mainmenumusic.stop();
+                return playMusic;
             }
 
             @Override
