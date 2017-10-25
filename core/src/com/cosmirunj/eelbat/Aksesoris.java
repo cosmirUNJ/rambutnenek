@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  * Created by Inovatif on 10/18/2017.
  */
 
-public class Enemy extends Actor {
+public class Aksesoris extends Actor {
     private final int SPEED_ENEMY= 100;
     private final int MAX_ANGLE_CHANGE = 300;
     private final int CLOSE_RADIUS = 800;
@@ -21,7 +21,7 @@ public class Enemy extends Actor {
     private final int SHADOW_OFFSET = 150;
     private boolean fixed;
 
-    public Enemy(Assets assets, float x, float y, boolean fixed){
+    public Aksesoris(Assets assets, float x, float y, boolean fixed){
         this.fixed = fixed;
         TARGET_X = x;
         TARGET_Y = y;
