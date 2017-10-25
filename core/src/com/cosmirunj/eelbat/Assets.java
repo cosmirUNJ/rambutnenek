@@ -26,7 +26,7 @@ public class Assets {
 
     static AssetDescriptor<BitmapFont> bitmapFontSmall, bitmapFontMedium, bitmapFontLarge;
     static AssetDescriptor<Texture> bar1, bar2, bar3, bar4, bar5;
-    static AssetDescriptor<Texture> btnHome;
+    static AssetDescriptor<Texture> btnHome, btnAlas, btnResume, btnReplay, btnSetting, btnExit;
 
     static AssetDescriptor<Texture> enemyJelly,shadowEnemy;
 
@@ -92,6 +92,11 @@ public class Assets {
 
         //home
         btnHome = new AssetDescriptor<Texture>("buttons/Home.png", Texture.class, textureParameter);
+        btnAlas = new AssetDescriptor<Texture>("buttons/Alas.png", Texture.class, textureParameter);
+        btnResume = new AssetDescriptor<Texture>("buttons/ResumeButton.png", Texture.class, textureParameter);
+        btnReplay = new AssetDescriptor<Texture>("buttons/ReplayButton.png", Texture.class, textureParameter);
+        btnSetting = new AssetDescriptor<Texture>("buttons/SettingButton.png", Texture.class, textureParameter);
+        btnExit = new AssetDescriptor<Texture>("buttons/ExitButton.png", Texture.class, textureParameter);
 
         //button Button Stage
         btnPlay = new AssetDescriptor<Texture>("buttons/PlayButton.png", Texture.class, textureParameter);
@@ -131,6 +136,11 @@ public class Assets {
 
         //load home
         manager.load(btnHome);
+        manager.load(btnAlas);
+        manager.load(btnResume);
+        manager.load(btnReplay);
+        manager.load(btnSetting);
+        manager.load(btnExit);
 
         //load button stage
         manager.load(btnPlay);

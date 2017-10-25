@@ -32,7 +32,7 @@ class PlayHUDStage extends Stage {
 
     private Image bar;
 
-    private ImageButton ButtonHome;
+    private ImageButton ButtonHome, ButtonAlas;
     private Stage ButtonStage;
     boolean btnPause;
 
@@ -71,20 +71,33 @@ class PlayHUDStage extends Stage {
         float widthScreen = Gdx.graphics.getWidth();
         float heightScreen = Gdx.graphics.getHeight();
 
+        //deee?
+        //Button Alas
+        Texture BtnAlas = eelbatCosmir.assets.getTexture(Assets.btnAlas);
+        TextureRegionDrawable BtnImageAlas = new TextureRegionDrawable(new TextureRegion(BtnAlas));
+        ButtonAlas = new ImageButton(BtnImageAlas);
+        ButtonAlas.setSize(BtnAlas.getWidth(),BtnAlas.getHeight());
+        ButtonAlas.setPosition(widthScreen/2, heightScreen/2);
+
+        ButtonStage.addActor(ButtonAlas);
+        ButtonAlas.setVisible(false);
+
         //Button Home
         Texture BtnHome = eelbatCosmir.assets.getTexture(Assets.btnHome);
         TextureRegionDrawable BtnImageHome = new TextureRegionDrawable(new TextureRegion(BtnHome));
         ButtonHome = new ImageButton(BtnImageHome);
-        ButtonHome.setSize(BtnHome.getWidth(),BtnHome.getHeight());
-        ButtonHome.setPosition(1600, 50);
+        ButtonHome.setSize(BtnHome.getWidth()-100,BtnHome.getHeight()-100);
+        ButtonHome.setPosition(widthScreen-80, 25);
         ButtonHome.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 ButtonHome.getImage().setColor(Color.BROWN);
                 btnPause=true;
-//                ButtonEasy.setVisible(true);
+                ButtonAlas.setVisible(true);
+                System.out.print("bisa");
 //                ButtonMedium.setVisible(true);
 //                ButtonHard.setVisible(true);
+
                 return true;
             }
 
@@ -95,16 +108,17 @@ class PlayHUDStage extends Stage {
             }
         });
 
+
         ButtonStage.addActor(ButtonHome);
         Gdx.input.setInputProcessor(ButtonStage);
 
     }
 
-    void update(float time) {
+    public void update(float time) {
         int timeInt = (int)Math.ceil(time);
         if(timeInt < lastSeconds) {
             if(lastSeconds == 5) {
-                timeLabelStyle.fontColor = Color.RED;
+                timeLabelStyle.fontColor = Color.WHITE;
             }
             lastSeconds--;
         }
@@ -114,10 +128,11 @@ class PlayHUDStage extends Stage {
         timeLabel.setText(String.format("%d:%02d", m, s));
 
         scoreLabel.setText("Score : "+String.format("200"));
-
+        ButtonStage.act(Gdx.graphics.getDeltaTime());
         ButtonStage.draw();
 
     }
+
 
     enum RUN{STOP, SLOW, FAST}
 

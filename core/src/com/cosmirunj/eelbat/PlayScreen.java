@@ -97,10 +97,13 @@ class PlayScreen implements Screen {
         hudViewport.apply();
         playHUD.draw();
 
+
         //tambahan juga
         //batch.end();
         stage.act(delta);
         stage.draw();
+
+        playHUD.update(delta);
     }
 
     @Override
