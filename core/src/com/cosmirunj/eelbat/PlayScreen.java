@@ -2,14 +2,20 @@ package com.cosmirunj.eelbat;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -34,6 +40,11 @@ class PlayScreen implements Screen {
     private Stage stage;
     private SpriteBatch batch;
     private final EelbatCosmir eelbatCosmir;
+
+    private PlayScreenStage stage2;
+    private ImageButton ButtonHome, ButtonAlas;
+    private Stage ButtonStage;
+    boolean btnPause;
 
     public PlayScreen(EelbatCosmir eelbatCosmir) {
         this.eelbatCosmir = eelbatCosmir;
@@ -69,6 +80,14 @@ class PlayScreen implements Screen {
         gameStage = new PlayGameStage(gameViewport, eelbatCosmir, playHUD, touchpadXnya, touchpadYnya, touchpad);
 
         Gdx.input.setInputProcessor(stage);
+
+        OrthographicCamera camera = new OrthographicCamera();
+        viewport = new FillViewport(eelbatCosmir.WIDTH, eelbatCosmir.HEIGHT, camera);
+        stage2 = new PlayScreenStage(viewport, eelbatCosmir);
+        Gdx.input.setInputProcessor(stage2);
+
+        ButtonStage=new Stage();
+        ButtonPause();
     }
 
     boolean sendMainWave() {
@@ -103,6 +122,9 @@ class PlayScreen implements Screen {
         stage.act(delta);
         stage.draw();
 
+        ButtonStage.act(Gdx.graphics.getDeltaTime());
+        ButtonStage.draw();
+
         playHUD.update(delta);
     }
 
@@ -129,6 +151,59 @@ class PlayScreen implements Screen {
 
     @Override
     public void dispose() {
+
+    }
+
+    private class PlayScreenStage extends Stage {
+        public PlayScreenStage(Viewport viewport, EelbatCosmir eelbatCosmir) {
+
+        }
+    }
+
+    public void ButtonPause(){
+        float widthScreen = Gdx.graphics.getWidth();
+        float heightScreen = Gdx.graphics.getHeight();
+
+        //deee?
+        //Button Alas
+        Texture BtnAlas = eelbatCosmir.assets.getTexture(Assets.btnAlas);
+        TextureRegionDrawable BtnImageAlas = new TextureRegionDrawable(new TextureRegion(BtnAlas));
+        ButtonAlas = new ImageButton(BtnImageAlas);
+        ButtonAlas.setSize(BtnAlas.getWidth(),BtnAlas.getHeight());
+        ButtonAlas.setPosition(widthScreen/2, heightScreen/2);
+
+        ButtonStage.addActor(ButtonAlas);
+        ButtonAlas.setVisible(false);
+
+        //Button Home
+        Texture BtnHome = eelbatCosmir.assets.getTexture(Assets.btnHome);
+        TextureRegionDrawable BtnImageHome = new TextureRegionDrawable(new TextureRegion(BtnHome));
+        ButtonHome = new ImageButton(BtnImageHome);
+        ButtonHome.setSize(BtnHome.getWidth()-100,BtnHome.getHeight()-100);
+        ButtonHome.setPosition(widthScreen-80, 25);
+        ButtonHome.addListener(new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                ButtonHome.getImage().setColor(Color.BROWN);
+                btnPause=true;
+                ButtonAlas.setVisible(true);
+                //System.out.print("bisa");
+//                ButtonMedium.setVisible(true);
+//                ButtonHard.setVisible(true);
+
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                ButtonHome.getImage().setColor(Color.WHITE);
+                super.touchUp(event, x, y, pointer, button);
+            }
+        });
+
+
+        ButtonStage.addActor(ButtonHome);
+        Gdx.input.setInputProcessor(ButtonStage);
 
     }
 }
