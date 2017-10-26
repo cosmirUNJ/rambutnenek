@@ -38,6 +38,8 @@ public class Assets {
     static AssetDescriptor<Texture>[] textureBawah;
     static AssetDescriptor<Texture>[] textureAtas;
 
+    static AssetDescriptor<Texture> mapTest;
+
     static Music mainmenumusic;
     static Music playmusic;
 
@@ -57,8 +59,8 @@ public class Assets {
         targetIdle = new AssetDescriptor<Texture>("target/target-closed-idle.png", Texture.class, textureParameter);
 
         //texture atas dan bawah ground nya
-        textureAtas = new AssetDescriptor[15];
-        for (int i=0;i<15;i++){
+        textureAtas = new AssetDescriptor[20];
+        for (int i=0;i<20;i++){
             String namatexturenya = String.format("tilesAtas/%d.png",(i+1));
             textureAtas[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
         }
@@ -69,6 +71,7 @@ public class Assets {
             textureBawah[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
         }
 
+        mapTest = new AssetDescriptor<Texture>("tilesBawah/maptes.png", Texture.class, textureParameter);
 
 
         //font
@@ -130,6 +133,7 @@ public class Assets {
         for (int i=0;i<textureAtas.length;i++){
             manager.load(textureAtas[i]);
         }
+        manager.load(mapTest);
 
         //load bar
         manager.load(bar1);
