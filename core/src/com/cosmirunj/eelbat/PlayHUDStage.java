@@ -30,6 +30,9 @@ class PlayHUDStage extends Stage {
     private int lastSeconds;
     private float Score;
 
+    private boolean sonarButtonActive;
+
+    private Image sonarImageDesktop;
     private Image bar;
 
 
@@ -58,9 +61,34 @@ class PlayHUDStage extends Stage {
         bar.setPosition(900, 1460);
         addActor(bar);
 
-        //ButtonStage=new Stage();
-        //ButtonPause();
+        sonarButtonActive = true;
 
+//        sonarButtonAndroid.addListener(new ChangeListener() {
+//            @Override
+//            public void changed(ChangeEvent event, Actor actor) {
+//                if(sonarButtonActive) {
+//                    if(playScreen.sendMainWave()) {
+//                        buttonStyle.up = sonarCooldown;
+//                        buttonStyle.down = sonarCooldown;
+//                        sonarButtonActive = false;
+//                    }
+//                }
+//            }
+//        });
+    }
+
+    void enableSonarButton() {
+//        if(Gdx.app.getType() == Application.ApplicationType.Android) {
+//            buttonStyle.up = sonarIdle;
+//            buttonStyle.down = sonarActive;
+//        } else {
+//            sonarImageDesktop.setVisible(false);
+//        }
+        sonarButtonActive = true;
+    }
+
+    void showSonarImage() {
+        sonarImageDesktop.setVisible(true);
     }
 
 

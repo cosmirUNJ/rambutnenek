@@ -27,6 +27,7 @@ class PlayGameStage extends Stage {
 
     private EnemyList enemyList;
 
+    private ArrayList<Fruits> targets;
     private Map<Integer, Set<Enemy>> fixedEnemies;
     private Set<Enemy> freeEnemies;
     private HashSet<Integer> targetsFound;
@@ -37,7 +38,8 @@ class PlayGameStage extends Stage {
 
     private PlayHUDStage playHUDStage;
     private EelbatCosmir eelbatCosmir;
-    private ShapeRenderer shapeRenderer;
+    ShapeRenderer shapeRenderer;
+    private Sonar mainWave;
     private float touchpadXnya;
     private float touchpadYnya;
     private Touchpad touchpad;
@@ -80,12 +82,16 @@ class PlayGameStage extends Stage {
 
         //enemyList = new EnemyList(eelbatCosmir);
         //enemyList.addEnemies();
+        targets = new ArrayList<Fruits>();
         targetsFound = new HashSet<Integer>();
         fixedEnemies = new HashMap<Integer, Set<Enemy>>();
         freeEnemies = new HashSet<Enemy>();
         for(int i = 0; i < TOTAL_TARGETS; i++) {
             float x = EelbatCosmir.random.nextInt(2*MAX_RADIUS_X) - MAX_RADIUS_X;
             float y = EelbatCosmir.random.nextInt(2*MAX_RADIUS_Y) - MAX_RADIUS_Y;
+            Fruits fruit = new Fruits(eelbatCosmir.assets, x, y, i);
+            targets.add(fruit);
+            addActor(fruit);
             //TargetActor target = new TargetActor(ggj2017.assets, x, y, i);
             //targets.add(target);
             //addActor(target);
@@ -161,6 +167,10 @@ class PlayGameStage extends Stage {
                 break;
         }
 
+        if(Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+            sendMainWave();
+        }
+
         float sq = (float)Math.sqrt(2);
         if(direction == DIRECTION.RIGHT_UP || direction == DIRECTION.RIGHT_DOWN) {
             //x += delta*GGJ2017.RUN_SPEED/sq;
@@ -208,8 +218,15 @@ class PlayGameStage extends Stage {
 
     }
 
-    public boolean sendMainWave() {
-        return true;
+    public boolean sendMainWave(){
+        boolean canSend = mainWave == null;
+        if(canSend) {
+            //Assets.waveOut.play(1.0f);
+            mainWave = new Sonar(this, cameraPosition.x, cameraPosition.y, true);
+            addActor(mainWave);
+            //playHUDStage.showSonarImage();
+        }
+        return canSend;
     }
 
     @Override
@@ -217,6 +234,44 @@ class PlayGameStage extends Stage {
         updateLocation(delta);
         time -= delta;
         super.act(delta);
+    }
+
+    void checkHitsWithOtherObjects(float centerX, float centerY, float radiusX, float radiusY) {
+        for(Fruits fruit : targets) {
+            if(!targetsFound.contains(fruit.getId())) {
+                float x = fruit.getPositionX();
+                float y = fruit.getPositionY();
+                if(Math.pow((x - centerX)/radiusX, 2) + Math.pow((y - centerY)/radiusY, 2) <= 1) {
+                    targetsFound.add(fruit.getId());
+                    //Assets.waveIn.play();
+                    addActor(new Sonar(this, x, y, false));
+                }
+            }
+        }
+        if(targetsFound.size() == targets.size()) {
+            targetsFound.clear();
+            mainWave.setAlive(false);
+            mainWave = null;
+            playHUDStage.enableSonarButton();
+        }
+    }
+
+    void checkHitsWithMainCharacter(Sonar sonar, float centerX, float centerY, float radiusX, float radiusY) {
+        float x1 = cameraPosition.x - EelbatCosmir.WIDTH;
+        float y1 = cameraPosition.y - EelbatCosmir.HEIGHT;
+        float x2 = cameraPosition.x - EelbatCosmir.WIDTH;
+        float y2 = cameraPosition.y + EelbatCosmir.HEIGHT;
+        float x3 = cameraPosition.x + EelbatCosmir.WIDTH;
+        float y3 = cameraPosition.y - EelbatCosmir.HEIGHT;
+        float x4 = cameraPosition.x + EelbatCosmir.WIDTH;
+        float y4 = cameraPosition.y + EelbatCosmir.HEIGHT;
+        if(Math.pow((x1 - centerX)/radiusX, 2) + Math.pow((y1 - centerY)/radiusY, 2) <= 1 &&
+                Math.pow((x2 - centerX)/radiusX, 2) + Math.pow((y2 - centerY)/radiusY, 2) <= 1 &&
+                Math.pow((x3 - centerX)/radiusX, 2) + Math.pow((y3 - centerY)/radiusY, 2) <= 1 &&
+                Math.pow((x4 - centerX)/radiusX, 2) + Math.pow((y4 - centerY)/radiusY, 2) <= 1) {
+            sonar.setAlive(false);
+            sonar.remove();
+        }
     }
 
 

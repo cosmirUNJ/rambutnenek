@@ -20,6 +20,8 @@ public class Assets {
 
     AssetManager manager;
 
+    static AssetDescriptor<Texture> targetIdle;
+
     public static AssetDescriptor<Texture> shadow, eelbatpic;
 
     static AssetDescriptor<Texture> menu;
@@ -52,6 +54,7 @@ public class Assets {
         eelbatpic = new AssetDescriptor<Texture>("eelbat/eelbatpic.png", Texture.class, textureParameter);
         enemyJelly = new AssetDescriptor<Texture>("enemigo/jellyfish.png", Texture.class, textureParameter);
         shadowEnemy = new AssetDescriptor<Texture>("shadow-skull.png",Texture.class,textureParameter);
+        targetIdle = new AssetDescriptor<Texture>("target/target-closed-idle.png", Texture.class, textureParameter);
 
         //texture atas dan bawah ground nya
         textureAtas = new AssetDescriptor[15];
@@ -118,6 +121,7 @@ public class Assets {
         manager.load(eelbatpic);
         manager.load(enemyJelly);
         manager.load(shadowEnemy);
+        manager.load(targetIdle);
 
         //load texture tile atas dan bawh
         for (int i=0;i<textureBawah.length;i++){
