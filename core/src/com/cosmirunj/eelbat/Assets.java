@@ -97,20 +97,20 @@ public class Assets {
         bar5 = new AssetDescriptor<Texture>("bar/bb5.png", Texture.class, textureParameter);
 
         //home
-        btnHome = new AssetDescriptor<Texture>("buttons/Home.png", Texture.class, textureParameter);
-        btnAlas = new AssetDescriptor<Texture>("buttons/Alas.png", Texture.class, textureParameter);
-        btnResume = new AssetDescriptor<Texture>("buttons/ResumeButton.png", Texture.class, textureParameter);
-        btnReplay = new AssetDescriptor<Texture>("buttons/ReplayButton.png", Texture.class, textureParameter);
-        btnSetting = new AssetDescriptor<Texture>("buttons/SettingButton.png", Texture.class, textureParameter);
-        btnExit = new AssetDescriptor<Texture>("buttons/ExitButton.png", Texture.class, textureParameter);
+        btnHome = new AssetDescriptor<Texture>("buttons/home-btn.png", Texture.class, textureParameter);
+        btnAlas = new AssetDescriptor<Texture>("buttons/alas-btn.png", Texture.class, textureParameter);
+        btnResume = new AssetDescriptor<Texture>("buttons/resume-button.png", Texture.class, textureParameter);
+        btnReplay = new AssetDescriptor<Texture>("buttons/replay-button.png", Texture.class, textureParameter);
+        btnSetting = new AssetDescriptor<Texture>("buttons/setting-button.png", Texture.class, textureParameter);
+        btnExit = new AssetDescriptor<Texture>("buttons/exit-button.png", Texture.class, textureParameter);
 
         //button Button Stage
-        btnPlay = new AssetDescriptor<Texture>("buttons/PlayButton.png", Texture.class, textureParameter);
-        btnEasy = new AssetDescriptor<Texture>("buttons/easy.png", Texture.class, textureParameter);
-        btnMedium = new AssetDescriptor<Texture>("buttons/Medium.png", Texture.class, textureParameter);
-        btnHard = new AssetDescriptor<Texture>("buttons/Hard.png", Texture.class, textureParameter);
-        btnSoundActive = new AssetDescriptor<Texture>("buttons/Sound.png", Texture.class, textureParameter);
-        btnSoundMute = new AssetDescriptor<Texture>("buttons/Mute.png", Texture.class, textureParameter);
+        btnPlay = new AssetDescriptor<Texture>("buttons/play-button.png", Texture.class, textureParameter);
+        btnEasy = new AssetDescriptor<Texture>("buttons/easy-btn.png", Texture.class, textureParameter);
+        btnMedium = new AssetDescriptor<Texture>("buttons/medium-btn.png", Texture.class, textureParameter);
+        btnHard = new AssetDescriptor<Texture>("buttons/hard-btn.png", Texture.class, textureParameter);
+        btnSoundActive = new AssetDescriptor<Texture>("buttons/sound-btn.png", Texture.class, textureParameter);
+        btnSoundMute = new AssetDescriptor<Texture>("buttons/mute-btn.png", Texture.class, textureParameter);
 
 
         //load font nya
@@ -145,10 +145,10 @@ public class Assets {
         //load home
         manager.load(btnHome);
         manager.load(btnAlas);
-        manager.load(btnResume);
-        manager.load(btnReplay);
-        manager.load(btnSetting);
-        manager.load(btnExit);
+        //manager.load(btnResume);
+        //manager.load(btnReplay);
+        //manager.load(btnSetting);
+        //manager.load(btnExit);
 
         //load button stage
         manager.load(btnPlay);
