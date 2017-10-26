@@ -48,22 +48,36 @@ class PlayScreen implements Screen {
 
     public PlayScreen(EelbatCosmir eelbatCosmir) {
         this.eelbatCosmir = eelbatCosmir;
+
+        ButtonStage=new Stage();
+
         touchpadSkin = new Skin();
         touchpadSkin.add("touchBackground", new Texture("cont/touchBackground.png"));
         touchpadSkin.add("touchKnob", new Texture("cont/touchKnob.png"));
+
         touchpadStyle = new Touchpad.TouchpadStyle();
         touchBackground = touchpadSkin.getDrawable("touchBackground");
         touchKnob = touchpadSkin.getDrawable("touchKnob");
+
+        //ukuran knob
+        touchKnob.setMinHeight(25);
+        touchKnob.setMinWidth(25);
+
         touchpadStyle.background = touchBackground;
         touchpadStyle.knob = touchKnob;
+
+
         touchpad = new Touchpad(10, touchpadStyle);
-        touchpad.setBounds(15,15,200,200);
-        touchpad.setPosition(15,100);
+        //bound, bound, width dan height background
+        touchpad.setBounds(15,15,75,75);
+        //lokasi
+        touchpad.setPosition(15,75);
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         viewport = new FillViewport(eelbatCosmir.WIDTH, eelbatCosmir.HEIGHT, camera);
         stage = new Stage(viewport, batch); //cek batch nya
-        stage.addActor(touchpad);
+        ButtonStage.addActor(touchpad);
+        //stage.addActor(touchpad);
         float touchpadXnya = touchpad.getKnobPercentX();
         float touchpadYnya = touchpad.getKnobPercentY();
 
@@ -84,9 +98,8 @@ class PlayScreen implements Screen {
         OrthographicCamera camera = new OrthographicCamera();
         viewport = new FillViewport(eelbatCosmir.WIDTH, eelbatCosmir.HEIGHT, camera);
         stage2 = new PlayScreenStage(viewport, eelbatCosmir);
-        Gdx.input.setInputProcessor(stage2);
+        //Gdx.input.setInputProcessor(stage2);
 
-        ButtonStage=new Stage();
         ButtonPause();
     }
 
