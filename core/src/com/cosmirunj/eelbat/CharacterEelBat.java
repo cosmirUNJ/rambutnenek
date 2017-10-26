@@ -57,7 +57,7 @@ public class CharacterEelBat extends Actor {
         int indexBawah = 0;
 
         for (int i = 0; i < 3; i++){
-            animationFramesAtas[indexAtas++] = hero[0][i];
+            animationFramesAtas[indexAtas++] = hero[2][i];
         }
 
         for (int i = 0; i < 3; i++){
@@ -69,7 +69,7 @@ public class CharacterEelBat extends Actor {
         }
 
         for (int i = 0; i < 3; i++){
-            animationFramesBawah[indexBawah++] = hero[2][i];
+            animationFramesBawah[indexBawah++] = hero[0][i];
         }
 
         animationAtas = new Animation(1f/8f,animationFramesAtas);
