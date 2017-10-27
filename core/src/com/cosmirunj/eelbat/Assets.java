@@ -145,10 +145,10 @@ public class Assets {
         //load home
         manager.load(btnHome);
         manager.load(btnAlas);
-        //manager.load(btnResume);
-        //manager.load(btnReplay);
-        //manager.load(btnSetting);
-        //manager.load(btnExit);
+        manager.load(btnResume);
+        manager.load(btnReplay);
+        manager.load(btnSetting);
+        manager.load(btnExit);
 
         //load button stage
         manager.load(btnPlay);

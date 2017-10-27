@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
@@ -42,7 +43,9 @@ class PlayScreen implements Screen {
     private final EelbatCosmir eelbatCosmir;
 
     private PlayScreenStage stage2;
-    private ImageButton ButtonHome, ButtonAlas;
+    private Label pauseLabel;
+    private Label.LabelStyle pauseLabelStyle;
+    private ImageButton ButtonHome, ButtonAlas, ButtonResume, ButtonReplay, ButtonSetting, ButtonExit;
     private Stage ButtonStage;
     boolean btnPause;
 
@@ -177,16 +180,111 @@ class PlayScreen implements Screen {
         float widthScreen = Gdx.graphics.getWidth();
         float heightScreen = Gdx.graphics.getHeight();
 
-        //deee?
+//        //Pause Label
+//        pauseLabelStyle = new Label.LabelStyle();
+//        pauseLabelStyle.font = eelbatCosmir.assets.getBitmapFont(Assets.bitmapFontSmall);
+//        pauseLabel = new Label("", pauseLabelStyle);
+//        pauseLabel.setPosition(250, 380);
+//        ButtonStage.addActor(pauseLabel);
+//        pauseLabel.setVisible(false);
+
         //Button Alas
         Texture BtnAlas = eelbatCosmir.assets.getTexture(Assets.btnAlas);
         TextureRegionDrawable BtnImageAlas = new TextureRegionDrawable(new TextureRegion(BtnAlas));
         ButtonAlas = new ImageButton(BtnImageAlas);
-        ButtonAlas.setSize(BtnAlas.getWidth(),BtnAlas.getHeight());
-        ButtonAlas.setPosition(widthScreen/2, heightScreen/2);
+        ButtonAlas.setSize(BtnAlas.getWidth()+50,BtnAlas.getHeight()+50);
+        ButtonAlas.setPosition((widthScreen/2)-80, (heightScreen/2)-80);
 
         ButtonStage.addActor(ButtonAlas);
         ButtonAlas.setVisible(false);
+
+        //Button Resume
+        Texture BtnResume = eelbatCosmir.assets.getTexture(Assets.btnResume);
+        TextureRegionDrawable BtnImageResume = new TextureRegionDrawable(new TextureRegion(BtnResume));
+        ButtonResume = new ImageButton(BtnImageResume);
+        ButtonResume.setSize(BtnResume.getWidth()-25,BtnResume.getHeight()-25);
+        ButtonResume.setPosition(595, 420);
+        ButtonResume.addListener(new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                ButtonResume.getImage().setColor(Color.BLACK);
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                ButtonResume.getImage().setColor(Color.WHITE);
+            }
+        });
+
+        ButtonStage.addActor(ButtonResume);
+        ButtonResume.setVisible(false);
+
+        //Button Replay
+        Texture BtnReplay = eelbatCosmir.assets.getTexture(Assets.btnReplay);
+        TextureRegionDrawable BtnImageReplay = new TextureRegionDrawable(new TextureRegion(BtnReplay));
+        ButtonReplay = new ImageButton(BtnImageReplay);
+        ButtonReplay.setSize(BtnReplay.getWidth()-25,BtnReplay.getHeight()-25);
+        ButtonReplay.setPosition(595,380);
+        ButtonReplay.addListener(new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                ButtonReplay.getImage().setColor(Color.BLACK);
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                ButtonReplay.getImage().setColor(Color.WHITE);
+            }
+        });
+
+        ButtonStage.addActor(ButtonReplay);
+        ButtonReplay.setVisible(false);
+
+        //Button Setting
+        Texture BtnSetting = eelbatCosmir.assets.getTexture(Assets.btnSetting);
+        TextureRegionDrawable BtnImageSetting = new TextureRegionDrawable(new TextureRegion(BtnSetting));
+        ButtonSetting = new ImageButton(BtnImageSetting);
+        ButtonSetting.setSize(BtnSetting.getWidth()-25,BtnSetting.getHeight()-25);
+        ButtonSetting.setPosition(595,340);
+        ButtonSetting.addListener(new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                ButtonSetting.getImage().setColor(Color.BLACK);
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                ButtonSetting.getImage().setColor(Color.WHITE);
+            }
+        });
+
+        ButtonStage.addActor(ButtonSetting);
+        ButtonSetting.setVisible(false);
+
+        //Button Exit
+        Texture BtnExit = eelbatCosmir.assets.getTexture(Assets.btnExit);
+        TextureRegionDrawable BtnImageExit = new TextureRegionDrawable(new TextureRegion(BtnExit));
+        ButtonExit = new ImageButton(BtnImageExit);
+        ButtonExit.setSize(BtnExit.getWidth()-25,BtnExit.getHeight()-25);
+        ButtonExit.setPosition(595,300);
+        ButtonExit.addListener(new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                ButtonExit.getImage().setColor(Color.BLACK);
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                ButtonExit.getImage().setColor(Color.WHITE);
+            }
+        });
+
+        ButtonStage.addActor(ButtonExit);
+        ButtonExit.setVisible(false);
 
         //Button Home
         Texture BtnHome = eelbatCosmir.assets.getTexture(Assets.btnHome);
@@ -200,9 +298,11 @@ class PlayScreen implements Screen {
                 ButtonHome.getImage().setColor(Color.BROWN);
                 btnPause=true;
                 ButtonAlas.setVisible(true);
-                //System.out.print("bisa");
-//                ButtonMedium.setVisible(true);
-//                ButtonHard.setVisible(true);
+                ButtonResume.setVisible(true);
+                ButtonReplay.setVisible(true);
+                ButtonSetting.setVisible(true);
+                ButtonExit.setVisible(true);
+                //pauseLabel.setVisible(true);
 
                 return true;
             }
