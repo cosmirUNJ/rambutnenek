@@ -2,22 +2,29 @@ package com.cosmirunj.eelbat;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ai.steer.behaviors.FollowPath;
+import com.badlogic.gdx.ai.steer.utils.paths.LinePath;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.cosmirunj.eelbat.AI.EnemySteeringActor;
 
 /**
  * Created by Inovatif on 10/18/2017.
@@ -45,6 +52,18 @@ class PlayScreen implements Screen {
     private ImageButton ButtonHome, ButtonAlas;
     private Stage ButtonStage;
     boolean btnPause;
+
+    ShapeRenderer shapeRenderer;
+    boolean drawDebug;
+
+    EnemySteeringActor character;
+
+    Array<Vector2> wayPoints;
+    LinePath<Vector2> linePath;
+    FollowPath<Vector2, LinePath.LinePathParam> followPathSB;
+
+    final boolean openPath = false;
+    Slider pathOffset;
 
     public PlayScreen(EelbatCosmir eelbatCosmir) {
         this.eelbatCosmir = eelbatCosmir;
@@ -94,6 +113,7 @@ class PlayScreen implements Screen {
         gameViewport = new FillViewport(eelbatCosmir.WIDTH,eelbatCosmir.HEIGHT, gameCamera);
         gameStage = new PlayGameStage(gameViewport, eelbatCosmir, playHUD, touchpadXnya, touchpadYnya, touchpad);
 
+
         Gdx.input.setInputProcessor(stage);
 
         OrthographicCamera camera = new OrthographicCamera();
@@ -107,6 +127,7 @@ class PlayScreen implements Screen {
     boolean sendMainWave() {
         return gameStage.sendMainWave();
     }
+
 
     @Override
     public void show() {
