@@ -19,11 +19,29 @@ public class Fruits extends Actor {
 //    private int animatingIndex;
 //    private float time;
 
-    public Fruits(Assets assets, float x, float y, int id) {
+    public Fruits(Assets assets, float x, float y, int id, int mf) {
         this.id = id;
         this.x = x;
         this.y = y;
-        idle = assets.getTexture(Assets.targetIdle);
+        if(mf == 0){
+            idle = assets.getTexture(Assets.mf1);
+        }else if(mf == 1){
+            idle = assets.getTexture(Assets.mf2);
+        }else if(mf == 2){
+            idle = assets.getTexture(Assets.mf3);
+        }else if(mf == 3){
+            idle = assets.getTexture(Assets.fruit1);
+        }else if(mf == 4){
+            idle = assets.getTexture(Assets.fruit2);
+        }else if(mf == 5){
+            idle = assets.getTexture(Assets.fruit3);
+        }else if(mf == 6){
+            idle = assets.getTexture(Assets.fruit4);
+        }else if(mf == 7){
+            idle = assets.getTexture(Assets.fruit5);
+        }else if(mf == 8){
+            idle = assets.getTexture(Assets.fruit6);
+        }
 //        animate1 = assets.getTexture(Assets.targetAnim1);
 //        animate2 = assets.getTexture(Assets.targetAnim2);
 //        vanish = assets.getTexture(Assets.targetVanish);
