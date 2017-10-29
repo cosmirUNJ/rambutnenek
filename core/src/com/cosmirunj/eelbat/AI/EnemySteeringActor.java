@@ -200,8 +200,6 @@ public class EnemySteeringActor extends Actor implements Steerable<Vector2>{
         super.act(delta);
     }
 
-    // the display area is considered to wrap around from top to bottom
-    // and from left to right
     protected static void wrapAround (Vector2 pos, float maxX, float maxY) {
         if (pos.x > maxX) pos.x = 0.0f;
 

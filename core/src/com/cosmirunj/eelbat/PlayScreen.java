@@ -51,6 +51,7 @@ class PlayScreen implements Screen {
 
         ButtonStage=new Stage();
 
+
         touchpadSkin = new Skin();
         touchpadSkin.add("touchBackground", new Texture("cont/touchBackground.png"));
         touchpadSkin.add("touchKnob", new Texture("cont/touchKnob.png"));
