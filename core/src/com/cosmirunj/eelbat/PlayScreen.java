@@ -214,8 +214,10 @@ class PlayScreen implements Screen {
         Texture BtnAlas = eelbatCosmir.assets.getTexture(Assets.btnAlas);
         TextureRegionDrawable BtnImageAlas = new TextureRegionDrawable(new TextureRegion(BtnAlas));
         ButtonAlas = new ImageButton(BtnImageAlas);
-        ButtonAlas.setSize(BtnAlas.getWidth()+50,BtnAlas.getHeight()+50);
-        ButtonAlas.setPosition((widthScreen/2)-80, (heightScreen/2)-80);
+        int buttonAlasWidth = BtnAlas.getWidth()+50;
+        int buttonAlasHeight = BtnAlas.getHeight()+50;
+        ButtonAlas.setSize(buttonAlasWidth, buttonAlasHeight);
+        ButtonAlas.setPosition((widthScreen/2)-(buttonAlasWidth/2), (heightScreen/2)-(buttonAlasHeight/2));
 
         ButtonStage.addActor(ButtonAlas);
         ButtonAlas.setVisible(false);
@@ -224,8 +226,11 @@ class PlayScreen implements Screen {
         Texture BtnResume = eelbatCosmir.assets.getTexture(Assets.btnResume);
         TextureRegionDrawable BtnImageResume = new TextureRegionDrawable(new TextureRegion(BtnResume));
         ButtonResume = new ImageButton(BtnImageResume);
-        ButtonResume.setSize(BtnResume.getWidth()-25,BtnResume.getHeight()-25);
-        ButtonResume.setPosition(595, 420);
+        int buttonResumeWidth = BtnResume.getWidth()-25;
+        int buttonResumeHeight = BtnResume.getHeight()-25;//jarak antar button 40
+        int spaceAntarButton = (buttonAlasHeight - (buttonResumeHeight*4))/125;//jangan tanya 125 darimana
+        ButtonResume.setSize(buttonResumeWidth,buttonResumeHeight);
+        ButtonResume.setPosition((widthScreen/2)-(buttonResumeWidth/2), (heightScreen/2)+(spaceAntarButton*3/2)+buttonResumeHeight);
         ButtonResume.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -246,8 +251,10 @@ class PlayScreen implements Screen {
         Texture BtnReplay = eelbatCosmir.assets.getTexture(Assets.btnReplay);
         TextureRegionDrawable BtnImageReplay = new TextureRegionDrawable(new TextureRegion(BtnReplay));
         ButtonReplay = new ImageButton(BtnImageReplay);
-        ButtonReplay.setSize(BtnReplay.getWidth()-25,BtnReplay.getHeight()-25);
-        ButtonReplay.setPosition(595,380);
+        int buttonReplayWidth = BtnReplay.getWidth()-25;
+        int buttonReplayHeight = BtnReplay.getHeight()-25;
+        ButtonReplay.setSize(buttonReplayWidth,buttonReplayHeight);
+        ButtonReplay.setPosition((widthScreen/2)-(buttonResumeWidth/2), (heightScreen/2)+(spaceAntarButton*1/2));
         ButtonReplay.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -268,8 +275,10 @@ class PlayScreen implements Screen {
         Texture BtnSetting = eelbatCosmir.assets.getTexture(Assets.btnSetting);
         TextureRegionDrawable BtnImageSetting = new TextureRegionDrawable(new TextureRegion(BtnSetting));
         ButtonSetting = new ImageButton(BtnImageSetting);
-        ButtonSetting.setSize(BtnSetting.getWidth()-25,BtnSetting.getHeight()-25);
-        ButtonSetting.setPosition(595,340);
+        int buttonSettingWidth = BtnSetting.getWidth()-25;
+        int buttonSettingHeight = BtnSetting.getHeight()-25;
+        ButtonSetting.setSize(buttonSettingWidth,buttonSettingHeight);
+        ButtonSetting.setPosition((widthScreen/2)-(buttonResumeWidth/2), (heightScreen/2)-(spaceAntarButton*1/2)-buttonResumeHeight);
         ButtonSetting.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -290,8 +299,10 @@ class PlayScreen implements Screen {
         Texture BtnExit = eelbatCosmir.assets.getTexture(Assets.btnExit);
         TextureRegionDrawable BtnImageExit = new TextureRegionDrawable(new TextureRegion(BtnExit));
         ButtonExit = new ImageButton(BtnImageExit);
-        ButtonExit.setSize(BtnExit.getWidth()-25,BtnExit.getHeight()-25);
-        ButtonExit.setPosition(595,300);
+        int buttonExitWidth = BtnExit.getWidth()-25;
+        int buttonExitHeight = BtnExit.getHeight()-25;
+        ButtonExit.setSize(buttonExitWidth,buttonExitHeight);
+        ButtonExit.setPosition((widthScreen/2)-(buttonResumeWidth/2), (heightScreen/2)-(spaceAntarButton*3/2)-(buttonResumeHeight*2));
         ButtonExit.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
