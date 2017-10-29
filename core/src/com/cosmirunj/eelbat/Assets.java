@@ -127,7 +127,7 @@ public class Assets {
 
         //music
         mainmenumusic = Gdx.audio.newMusic(Gdx.files.internal("music/mainmenu.wav"));
-        //playmusic = Gdx.audio.newSound(Gdx.files.internal("music/playing_music.wav"));
+        playmusic = Gdx.audio.newMusic(Gdx.files.internal("music/playingfix.wav"));
         //playmusic = Gdx.audio.newMusic(Gdx.files.internal("music/playingmusic.wav"));
 
         //bar

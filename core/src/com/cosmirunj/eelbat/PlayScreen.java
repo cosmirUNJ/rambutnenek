@@ -105,8 +105,8 @@ class PlayScreen implements Screen {
         float touchpadYnya = touchpad.getKnobPercentY();
 
 
-        //Assets.playmusic.setLooping(true);
-        //Assets.playmusic.play();
+        Assets.playmusic.setLooping(true);
+        Assets.playmusic.play();
 
         OrthographicCamera hudCamera = new OrthographicCamera();
         hudViewport = new FillViewport(eelbatCosmir.WIDTH, eelbatCosmir.HEIGHT, hudCamera);

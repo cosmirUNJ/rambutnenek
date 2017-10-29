@@ -181,6 +181,7 @@ class MainMenu implements Screen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 ButtonMedium.getImage().setColor(Color.BLACK);
+                Assets.mainmenumusic.stop();
                 return true;
             }
 
@@ -205,6 +206,7 @@ class MainMenu implements Screen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 ButtonHard.getImage().setColor(Color.BLACK);
+                Assets.mainmenumusic.stop();
                 return true;
             }
 
