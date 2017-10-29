@@ -37,6 +37,8 @@ public class Assets {
 
     static AssetDescriptor<Texture>[] textureBawah;
     static AssetDescriptor<Texture>[] textureAtas;
+    static AssetDescriptor<Texture>[] gelembung;
+    static AssetDescriptor<Texture>[] rumput;
 
     static AssetDescriptor<Texture> mapTest;
 
@@ -69,6 +71,18 @@ public class Assets {
         for (int i=0;i<8;i++){
             String namatexturenya = String.format("tilesBawah/%d.png",(i+1));//karena angkanya dimulai dari 1 bukan 0, jd i+1
             textureBawah[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
+        }
+
+        gelembung = new AssetDescriptor[4];
+        for (int i=0;i<4;i++){
+            String namatexturenya = String.format("tilesAtas/gelembung/bubbleeffect-%d.png",(i));
+            gelembung[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
+        }
+
+        rumput = new AssetDescriptor[3];
+        for (int i=0;i<3;i++){
+            String namatexturenya = String.format("tilesAtas/rumput/watergrass-%d.png",(i));
+            rumput[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
         }
 
         mapTest = new AssetDescriptor<Texture>("tilesBawah/maptes.png", Texture.class, textureParameter);
@@ -133,6 +147,15 @@ public class Assets {
         for (int i=0;i<textureAtas.length;i++){
             manager.load(textureAtas[i]);
         }
+
+        //rumput dan gelembung
+        for (int i=0;i<gelembung.length;i++){
+            manager.load(gelembung[i]);
+        }
+        for (int i=0;i<rumput.length;i++){
+            manager.load(rumput[i]);
+        }
+
         manager.load(mapTest);
 
         //load bar
