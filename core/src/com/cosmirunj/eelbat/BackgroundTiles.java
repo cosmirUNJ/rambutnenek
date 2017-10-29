@@ -1,7 +1,12 @@
 package com.cosmirunj.eelbat;
 
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**
@@ -30,13 +35,40 @@ public class BackgroundTiles extends Actor {
     private int tilesLowerLeftX, tilesLowerLeftY;
     //private int tilesLowerLeftXX,tilesLowerLeftYY ;
 
+    private SpriteBatch batch;
+    private Texture[] imgGelombang;
+    private Animation animasiGelombang;
+    private float elapsedTime;
+    private float posisix,posisiy;
+    int WIDTH, HEIGHT;
+
     public BackgroundTiles(EelbatCosmir eelbatCosmir){
         this.eelbatCosmir = eelbatCosmir;
+
         texturesBawah = new Texture[W][H];
         texturesAtas = new Texture[W][H];
 
         tilesLowerLeftX = -(W/2+1)*TILE_WIDTH;
         tilesLowerLeftY = -(H/2+1)*TILE_HEIGHT;
+
+        batch = new SpriteBatch();
+        imgGelombang = new Texture[3];
+
+        if(Gdx.app.getType() == Application.ApplicationType.Android){
+            WIDTH = Gdx.graphics.getWidth();
+            HEIGHT = Gdx.graphics.getHeight();
+        } else {
+            WIDTH = EelbatCosmir.WIDTH;
+            HEIGHT = EelbatCosmir.HEIGHT;
+        }
+        //tes = eelbatCosmir.assets.getTexture(Assets.tilesGelombang[1]);
+
+        for(int i=0;i<3;i++){
+            imgGelombang[i] = eelbatCosmir.assets.getTexture(Assets.tilesGelombang[i]);
+            //eelbatCosmir.assets.getTexture(Assets.textureBawah[EelbatCosmir.random.nextInt(Assets.textureBawah.length)]);
+        }
+
+        animasiGelombang = new Animation(1f, imgGelombang);
 
         //tilesLowerLeftXX = -(WB/2+1)*TILE_BAWAH_WIDTH;
         //tilesLowerLeftYY = -(HB/2+1)*TILE_BAWAH_HEIGHT;
@@ -208,6 +240,11 @@ public class BackgroundTiles extends Actor {
     public void update(float x, float y) {
         int centerXTile = (int)x;
 
+        posisix = x-WIDTH/2;
+        posisiy = y-HEIGHT/2;
+
+
+
         centerXTile -= (centerXTile % TILE_WIDTH);
 
         int centerYTile = (int)y;
@@ -296,6 +333,7 @@ public class BackgroundTiles extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha){
 
+        elapsedTime += Gdx.graphics.getDeltaTime();
         for(int i = 0; i < W; i++) {
             for(int j = 0; j < H; j++) {
                 float x = tilesLowerLeftX + i*TILE_WIDTH;
@@ -304,6 +342,9 @@ public class BackgroundTiles extends Actor {
                 batch.draw(texturesAtas[i][j], x, y);
             }
         }
+
+        //batch.draw(tes,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        batch.draw((Texture)animasiGelombang.getKeyFrame(elapsedTime, true),posisix, posisiy,WIDTH,HEIGHT);
 
 
         /*

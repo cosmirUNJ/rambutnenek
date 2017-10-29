@@ -145,7 +145,7 @@ class PlayGameStage extends Stage {
         buffPicked = false;
         buffPickedCount = 0;
 
-        backgroundTiles.update(x,y);
+        //backgroundTiles.update(x,y);
 
 
     }

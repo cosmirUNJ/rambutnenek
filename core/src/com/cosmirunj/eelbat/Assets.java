@@ -48,6 +48,7 @@ public class Assets {
     static AssetDescriptor<Texture>[] textureAtas;
     static AssetDescriptor<Texture>[] gelembung;
     static AssetDescriptor<Texture>[] rumput;
+    static AssetDescriptor<Texture>[] tilesGelombang;
 
     static AssetDescriptor<Texture> mapTest;
 
@@ -62,6 +63,7 @@ public class Assets {
     int jumlahTextureAtas = 20;
     int jumlahGelembung = 4;
     int jumlahRumput = 3;
+    int jumlahTilesGelombang = 3;
 
     public void load() {
         manager = new AssetManager();
@@ -112,6 +114,11 @@ public class Assets {
             rumput[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
         }
 
+        tilesGelombang = new AssetDescriptor[jumlahTilesGelombang];
+        for (int i=0;i<3;i++){
+            String namatexturenya = String.format("tilesGelombang/watereffect%d.png",(i+1));
+            tilesGelombang[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
+        }
         mapTest = new AssetDescriptor<Texture>("tilesBawah/maptes.png", Texture.class, textureParameter);
 
 
@@ -195,6 +202,10 @@ public class Assets {
         }
         for (int i=0;i<jumlahRumput;i++){
             manager.load(rumput[i]);
+        }
+
+        for (int i=0;i<jumlahTilesGelombang;i++){
+            manager.load(tilesGelombang[i]);
         }
 
         manager.load(mapTest);
