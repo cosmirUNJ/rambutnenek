@@ -45,6 +45,11 @@ public class Assets {
     static Music mainmenumusic;
     static Music playmusic;
 
+    int jumlahTextureBawah = 10;
+    int jumlahTextureAtas = 20;
+    int jumlahGelembung = 4;
+    int jumlahRumput = 3;
+
     public void load() {
         manager = new AssetManager();
 
@@ -61,25 +66,25 @@ public class Assets {
         targetIdle = new AssetDescriptor<Texture>("target/target-closed-idle.png", Texture.class, textureParameter);
 
         //texture atas dan bawah ground nya
-        textureAtas = new AssetDescriptor[20];
+        textureAtas = new AssetDescriptor[jumlahTextureAtas];
         for (int i=0;i<20;i++){
-            String namatexturenya = String.format("tilesAtas/%d.png",(i+1));
+            String namatexturenya = String.format("tilesAtas/%d.png",(i+1));//karena angkanya dimulai dari 1 bukan 0, jd i+1
             textureAtas[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
         }
 
-        textureBawah = new AssetDescriptor[8];
-        for (int i=0;i<8;i++){
-            String namatexturenya = String.format("tilesBawah/%d.png",(i+1));//karena angkanya dimulai dari 1 bukan 0, jd i+1
+        textureBawah = new AssetDescriptor[jumlahTextureBawah];
+        for (int i=0;i<jumlahTextureBawah;i++){
+            String namatexturenya = String.format("tilesBawah/tile0%d.png",(i));
             textureBawah[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
         }
 
-        gelembung = new AssetDescriptor[4];
+        gelembung = new AssetDescriptor[jumlahGelembung];
         for (int i=0;i<4;i++){
             String namatexturenya = String.format("tilesAtas/gelembung/bubbleeffect-%d.png",(i));
             gelembung[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
         }
 
-        rumput = new AssetDescriptor[3];
+        rumput = new AssetDescriptor[jumlahRumput];
         for (int i=0;i<3;i++){
             String namatexturenya = String.format("tilesAtas/rumput/watergrass-%d.png",(i));
             rumput[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
@@ -141,18 +146,18 @@ public class Assets {
         manager.load(targetIdle);
 
         //load texture tile atas dan bawh
-        for (int i=0;i<textureBawah.length;i++){
+        for (int i=0;i<jumlahTextureBawah;i++){
             manager.load(textureBawah[i]);
         }
-        for (int i=0;i<textureAtas.length;i++){
+        for (int i=0;i<jumlahTextureAtas;i++){
             manager.load(textureAtas[i]);
         }
 
         //rumput dan gelembung
-        for (int i=0;i<gelembung.length;i++){
+        for (int i=0;i<jumlahGelembung;i++){
             manager.load(gelembung[i]);
         }
-        for (int i=0;i<rumput.length;i++){
+        for (int i=0;i<jumlahRumput;i++){
             manager.load(rumput[i]);
         }
 
