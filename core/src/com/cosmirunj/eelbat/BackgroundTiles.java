@@ -37,7 +37,9 @@ public class BackgroundTiles extends Actor {
 
     private SpriteBatch batch;
     private Texture[] imgGelombang;
-    private Animation animasiGelombang;
+    private Texture[] imgRumput;
+    private Texture[] imgGelembung;
+    private Animation animasiGelombang, animasiRumput, animasiGeloembung;
     private float elapsedTime;
     private float posisix,posisiy;
     int WIDTH, HEIGHT;
@@ -53,6 +55,8 @@ public class BackgroundTiles extends Actor {
 
         batch = new SpriteBatch();
         imgGelombang = new Texture[3];
+        imgGelembung = new Texture[4];
+        imgRumput = new Texture[3];
 
         if(Gdx.app.getType() == Application.ApplicationType.Android){
             WIDTH = Gdx.graphics.getWidth();
@@ -68,7 +72,17 @@ public class BackgroundTiles extends Actor {
             //eelbatCosmir.assets.getTexture(Assets.textureBawah[EelbatCosmir.random.nextInt(Assets.textureBawah.length)]);
         }
 
+        for (int i=0;i<4;i++){
+            imgGelembung[i] = eelbatCosmir.assets.getTexture(Assets.gelembung[i]);
+        }
+
+        for (int i=0;i<3;i++){
+            imgRumput[i] = eelbatCosmir.assets.getTexture(Assets.rumput[i]);
+        }
+
         animasiGelombang = new Animation(1f, imgGelombang);
+        animasiGeloembung = new Animation(1f/5f, imgGelembung);
+        animasiRumput = new Animation(1f/5f, imgRumput);
 
         //tilesLowerLeftXX = -(WB/2+1)*TILE_BAWAH_WIDTH;
         //tilesLowerLeftYY = -(HB/2+1)*TILE_BAWAH_HEIGHT;
@@ -322,7 +336,18 @@ public class BackgroundTiles extends Actor {
     }
 
     private Texture getRaTextureAtas() {
-        return eelbatCosmir.assets.getTexture(Assets.textureAtas[EelbatCosmir.random.nextInt(Assets.textureAtas.length)]);
+        int randomnya = EelbatCosmir.random.nextInt(Assets.textureAtas.length);
+        //elapsedTime += Gdx.graphics.getDeltaTime();
+        /*
+        if (randomnya == 5){
+            return (Texture)animasiGeloembung.getKeyFrame(elapsedTime, true);
+        } else if(randomnya == 6){
+            return (Texture)animasiRumput.getKeyFrame(elapsedTime, true);
+        }
+            return eelbatCosmir.assets.getTexture(Assets.textureAtas[randomnya]);
+        */
+
+        return eelbatCosmir.assets.getTexture(Assets.textureAtas[randomnya]);
     }
 
     private Texture getRTextureBawah() {
@@ -333,13 +358,21 @@ public class BackgroundTiles extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha){
 
-        elapsedTime += Gdx.graphics.getDeltaTime();
+        this.elapsedTime += Gdx.graphics.getDeltaTime();
+
         for(int i = 0; i < W; i++) {
             for(int j = 0; j < H; j++) {
                 float x = tilesLowerLeftX + i*TILE_WIDTH;
                 float y = tilesLowerLeftY + j*TILE_HEIGHT;
                 batch.draw(texturesBawah[i][j], x, y);
-                batch.draw(texturesAtas[i][j], x, y);
+
+                if(texturesAtas[i][j] == eelbatCosmir.assets.getTexture(Assets.textureAtas[5])){
+                    batch.draw((Texture)animasiGeloembung.getKeyFrame(elapsedTime, true),x,y);
+                } else if(texturesAtas[i][j]== eelbatCosmir.assets.getTexture(Assets.textureAtas[6])){
+                    batch.draw((Texture)animasiRumput.getKeyFrame(elapsedTime, true),x,y);
+                } else {
+                batch.draw(texturesAtas[i][j], x, y); }
+
             }
         }
 
