@@ -27,11 +27,14 @@ class PlayGameStage extends Stage {
     private EnemyList enemyList;
 
 
-    private ArrayList<Fruits> targets;
-    private Map<Integer, Set<Aksesoris>> fixedEnemies;
+    private ArrayList<Fruits> targets, mapBuff;
+    private Map<Integer, Set<Enemy>> fixedEnemies;
     private Set<Aksesoris> freeEnemies;
     private HashSet<Integer> targetsFound;
-    static final int TOTAL_TARGETS = 5;
+    private ArrayList<Fruits> collectedTargets, collectedBuffs;
+    static final int TOTAL_MF1 = 1;
+    static final int TOTAL_MF2 = 1;
+    static final int TOTAL_MF3 = 1;
     private final int MAX_RADIUS_X = 5*EelbatCosmir.WIDTH;
     private final int MAX_RADIUS_Y = 5*EelbatCosmir.HEIGHT;
 
@@ -48,14 +51,22 @@ class PlayGameStage extends Stage {
     private float x = 0;
     private float y = 0;
 
+    private int remainingmf = TOTAL_MF1 + TOTAL_MF2 + TOTAL_MF3;
+
     private float time;
+    private float respawningTime;
     private final int TOTAL_TIME = 3*60;
 
     private float score;
     private final int TOTAL_SCORE = 200;
 
-
     private CharacterEelBat characterEelBat;
+
+    private Fruits buff;
+    private boolean buffPicked;
+    private int buffPickedCount;
+
+    FORM form;
 
     public PlayGameStage(Viewport gameViewport, EelbatCosmir eelbatCosmir, PlayHUDStage playHUDStage, float touchpadXnya, float touchpadYnya, Touchpad touchpad) {
         super(gameViewport, eelbatCosmir.batch);
@@ -64,6 +75,8 @@ class PlayGameStage extends Stage {
 
         time = TOTAL_TIME;
         score = TOTAL_SCORE;
+
+        respawningTime = 10;
 
         shapeRenderer = new ShapeRenderer();
 
@@ -76,33 +89,41 @@ class PlayGameStage extends Stage {
         backgroundTiles = new BackgroundTiles(eelbatCosmir);
         addActor(backgroundTiles);
 
+        form = FORM.EEL;
+
         characterEelBat = new CharacterEelBat(eelbatCosmir);
-        characterEelBat.updatePosition(x,y,DIRECTION.NONE);
+        //characterEelBat.updatePosition(x,y,DIRECTION.NONE);
+        characterEelBat.updatePosition(x,y,DIRECTION.NONE, form);
         addActor(characterEelBat);
+
+        collectedTargets = new ArrayList<Fruits>();
+        collectedBuffs = new ArrayList<Fruits>();
 
         //enemyList = new EnemyList(eelbatCosmir);
         //enemyList.addEnemies();
+        mapBuff = new ArrayList<Fruits>();
         targets = new ArrayList<Fruits>();
         targetsFound = new HashSet<Integer>();
-        fixedEnemies = new HashMap<Integer, Set<Aksesoris>>();
+        fixedEnemies = new HashMap<Integer, Set<Enemy>>();
         freeEnemies = new HashSet<Aksesoris>();
-        for(int i = 0; i < TOTAL_TARGETS; i++) {
+        for(int i = 0; i < TOTAL_MF1; i++) {
             float x = EelbatCosmir.random.nextInt(2*MAX_RADIUS_X) - MAX_RADIUS_X;
             float y = EelbatCosmir.random.nextInt(2*MAX_RADIUS_Y) - MAX_RADIUS_Y;
-            Fruits fruit = new Fruits(eelbatCosmir.assets, x, y, i);
+            int mf = 0;
+            Fruits fruit = new Fruits(eelbatCosmir.assets, x, y, i, mf);
             targets.add(fruit);
             addActor(fruit);
             //TargetActor target = new TargetActor(ggj2017.assets, x, y, i);
             //targets.add(target);
             //addActor(target);
-            Set<Aksesoris> aksesorisGroup = new HashSet<Aksesoris>();
+            Set<Enemy> enemyGroup = new HashSet<Enemy>();
             int k = 7 + EelbatCosmir.random.nextInt(8);
             for(int j = 0; j < k; j++) {
-                Aksesoris aksesoris = new Aksesoris(eelbatCosmir.assets, x, y, true);
-                aksesorisGroup.add(aksesoris);
-                addActor(aksesoris);
+                Enemy enemy = new Enemy(eelbatCosmir.assets, x, y, true);
+                enemyGroup.add(enemy);
+                addActor(enemy);
             }
-            fixedEnemies.put(i, aksesorisGroup);
+            fixedEnemies.put(i, enemyGroup);
         }
 
         for(int i = 0; i < 50; i++) {
@@ -112,6 +133,17 @@ class PlayGameStage extends Stage {
             freeEnemies.add(aksesoris);
             addActor(aksesoris);
         }
+
+        float a = EelbatCosmir.random.nextInt(2*MAX_RADIUS_X) - MAX_RADIUS_X;
+        float b = EelbatCosmir.random.nextInt(2*MAX_RADIUS_Y) - MAX_RADIUS_Y;
+        int c = -1;
+        int d = 3 + EelbatCosmir.random.nextInt(5);
+        buff = new Fruits(eelbatCosmir.assets, a, b, c, d);
+        mapBuff.add(buff);
+        addActor(buff);
+
+        buffPicked = false;
+        buffPickedCount = 0;
 
         backgroundTiles.update(x,y);
 
@@ -210,18 +242,68 @@ class PlayGameStage extends Stage {
         cameraPosition.x = x;
         cameraPosition.y = y;
 
-        characterEelBat.updatePosition(x, y, direction);
+        //characterEelBat.updatePosition(x, y, direction);
+        characterEelBat.updatePosition(x, y, direction, form);
 
         backgroundTiles.update(x, y);
 
         playHUDStage.update(time);
+        if(respawningTime < 0){
+            respawningBuff();
+            buffPicked = false;
+            respawningTime = 10*(buffPickedCount+1);
+        }
 
+        checkCollisions();
+
+    }
+
+    private void checkTarget() {
+        if(remainingmf == TOTAL_MF2+TOTAL_MF3){
+            form = FORM.EELBAT;
+            for(int i = 0; i < TOTAL_MF2; i++) {
+                float x = EelbatCosmir.random.nextInt(2*MAX_RADIUS_X) - MAX_RADIUS_X;
+                float y = EelbatCosmir.random.nextInt(2*MAX_RADIUS_Y) - MAX_RADIUS_Y;
+                int mf = 1;
+                Fruits fruit = new Fruits(eelbatCosmir.assets, x, y, i, mf);
+                targets.add(fruit);
+                addActor(fruit);
+                Set<Enemy> enemyGroup = new HashSet<Enemy>();
+                int k = 7 + EelbatCosmir.random.nextInt(8);
+                for(int j = 0; j < k; j++) {
+                    Enemy enemy = new Enemy(eelbatCosmir.assets, x, y, true);
+                    enemyGroup.add(enemy);
+                    addActor(enemy);
+                }
+                fixedEnemies.put(TOTAL_MF1+i, enemyGroup);
+            }
+        }
+
+        if(remainingmf == TOTAL_MF3){
+            form = FORM.WINGED_EELBAT;
+            for(int i = 0; i < TOTAL_MF3; i++) {
+                float x = EelbatCosmir.random.nextInt(2*MAX_RADIUS_X) - MAX_RADIUS_X;
+                float y = EelbatCosmir.random.nextInt(2*MAX_RADIUS_Y) - MAX_RADIUS_Y;
+                int mf = 2;
+                Fruits fruit = new Fruits(eelbatCosmir.assets, x, y, i, mf);
+                targets.add(fruit);
+                addActor(fruit);
+                Set<Enemy> enemyGroup = new HashSet<Enemy>();
+                int k = 7 + EelbatCosmir.random.nextInt(8);
+                for(int j = 0; j < k; j++) {
+                    Enemy enemy = new Enemy(eelbatCosmir.assets, x, y, true);
+                    enemyGroup.add(enemy);
+                    addActor(enemy);
+                }
+                fixedEnemies.put(TOTAL_MF1+TOTAL_MF2+i, enemyGroup);
+            }
+        }
     }
 
     public boolean sendMainWave(){
         boolean canSend = mainWave == null;
         if(canSend) {
-            //Assets.waveOut.play(1.0f);
+            Assets.waveOut.play(1.0f);
             mainWave = new Sonar(this, cameraPosition.x, cameraPosition.y, true);
             addActor(mainWave);
             //playHUDStage.showSonarImage();
@@ -233,7 +315,96 @@ class PlayGameStage extends Stage {
     public void act(float delta) {
         updateLocation(delta);
         time -= delta;
+        if(buffPicked){
+            respawningTime -= delta;
+        }
         super.act(delta);
+    }
+
+    private void checkCollisions() {
+        //COLLISION BUAH AJAIB
+        for(Fruits fruit : targets) {
+            float x = fruit.getPositionX();
+            float y = fruit.getPositionY();
+            if(Math.pow(x - cameraPosition.x, 2) + Math.pow(y - cameraPosition.y, 2) <= Math.pow(COLLECT_RANGE, 2)) {
+                collectedTargets.add(fruit);
+            }
+        }
+
+        if(collectedTargets.size() > 0) {
+            for(Fruits fruit : collectedTargets) {
+                Assets.pick.play();
+                fruit.deactivate();
+                targets.remove(fruit);
+                for(Enemy enemy : fixedEnemies.get(fruit.getId())) {
+                    enemy.unfix();
+                }
+            }
+            //playHUDStage.setTargetsFound(TOTAL_MF1 - targets.size());
+            time += 30;
+            remainingmf -= 1;
+            checkTarget();
+            collectedTargets.clear();
+            playHUDStage.updateScore(500);
+            playHUDStage.healthRestored();
+            if(targets.size() == 0) {
+                //ggj2017.setScreen(new FinishedScreen(ggj2017, true));
+            }
+        }
+
+        //COLLISION MUSUH
+        int k = -1;
+        Enemy enemyHit = null;
+        for(int i : fixedEnemies.keySet()) {
+            if(enemyHit != null) {
+                break;
+            }
+            for(Enemy enemy : fixedEnemies.get(i)) {
+                float x = enemy.getPositionX();
+                float y = enemy.floatgetPositionY();
+                if(Math.pow(x - cameraPosition.x, 2) + Math.pow(y - cameraPosition.y, 2) <= Math.pow(COLLECT_RANGE, 2)) {
+                    enemyHit = enemy;
+                    k = i;
+                    break;
+                }
+            }
+        }
+
+        if(enemyHit != null) {
+            if(playHUDStage.getLives() > 0) {
+                Assets.hit.play();
+            }
+            fixedEnemies.get(k).remove(enemyHit);
+            enemyHit.remove();
+            time -= 30;
+            playHUDStage.gotHit();
+            //damage();
+        }
+
+        //COLLISION BUAH LAUT
+        for(Fruits buff : mapBuff) {
+            float x = buff.getPositionX();
+            float y = buff.getPositionY();
+            if(Math.pow(x - cameraPosition.x, 2) + Math.pow(y - cameraPosition.y, 2) <= Math.pow(COLLECT_RANGE, 2)) {
+                collectedBuffs.add(buff);
+            }
+        }
+
+        if(collectedBuffs.size() > 0) {
+            for(Fruits buff : collectedBuffs) {
+                Assets.pick2.play();
+                buff.deactivate();
+                mapBuff.remove(buff);
+            }
+            time += 10;
+            collectedBuffs.clear();
+            buffPicked = true;
+            buffPickedCount += 1;
+            playHUDStage.updateScore(200);
+            playHUDStage.healthRestored();
+        }
+
+
     }
 
     void checkHitsWithOtherObjects(float centerX, float centerY, float radiusX, float radiusY) {
@@ -274,7 +445,17 @@ class PlayGameStage extends Stage {
         }
     }
 
-
+    private void respawningBuff() {
+        float a = EelbatCosmir.random.nextInt(2*MAX_RADIUS_X) - MAX_RADIUS_X;
+        float b = EelbatCosmir.random.nextInt(2*MAX_RADIUS_Y) - MAX_RADIUS_Y;
+        int c = -1;
+        int d = 3 + EelbatCosmir.random.nextInt(5);
+        buff = new Fruits(eelbatCosmir.assets, a, b, c, d);
+        mapBuff.add(buff);
+        addActor(buff);
+    }
 
     enum DIRECTION{RIGHT, LEFT, UP, DOWN, RIGHT_UP, RIGHT_DOWN, LEFT_UP, LEFT_DOWN, NONE}
+
+    enum FORM{EEL, EELBAT, WINGED_EELBAT}
 }

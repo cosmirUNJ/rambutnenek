@@ -20,7 +20,16 @@ public class Assets {
 
     AssetManager manager;
 
-    static AssetDescriptor<Texture> targetIdle;
+    static AssetDescriptor<Texture> mf1;
+    static AssetDescriptor<Texture> mf2;
+    static AssetDescriptor<Texture> mf3;
+
+    static AssetDescriptor<Texture> fruit1;
+    static AssetDescriptor<Texture> fruit2;
+    static AssetDescriptor<Texture> fruit3;
+    static AssetDescriptor<Texture> fruit4;
+    static AssetDescriptor<Texture> fruit5;
+    static AssetDescriptor<Texture> fruit6;
 
     public static AssetDescriptor<Texture> shadow, eelbatpic;
 
@@ -30,7 +39,7 @@ public class Assets {
     static AssetDescriptor<Texture> bar1, bar2, bar3, bar4, bar5;
     static AssetDescriptor<Texture> btnHome, btnAlas, btnResume, btnReplay, btnSetting, btnExit;
 
-    static AssetDescriptor<Texture> enemyJelly,shadowEnemy;
+    static AssetDescriptor<Texture> enemyJelly,enemyFish,shadowEnemy;
 
 
     static AssetDescriptor<Texture> btnPlay, btnEasy, btnMedium, btnHard, btnSoundActive, btnSoundMute;
@@ -42,6 +51,10 @@ public class Assets {
 
     static Music mainmenumusic;
     static Music playmusic;
+    static Sound waveOut;
+    static Sound pick;
+    static Sound pick2;
+    static Sound hit;
 
     public void load() {
         manager = new AssetManager();
@@ -55,8 +68,17 @@ public class Assets {
         shadow = new AssetDescriptor<Texture>("shadow-batcat.png", Texture.class, textureParameter);
         eelbatpic = new AssetDescriptor<Texture>("eelbat/eelbatpic.png", Texture.class, textureParameter);
         enemyJelly = new AssetDescriptor<Texture>("enemigo/jellyfish.png", Texture.class, textureParameter);
+        enemyFish = new AssetDescriptor<Texture>("enemigo/anglerfish.png", Texture.class, textureParameter);
         shadowEnemy = new AssetDescriptor<Texture>("shadow-skull.png",Texture.class,textureParameter);
-        targetIdle = new AssetDescriptor<Texture>("target/target-closed-idle.png", Texture.class, textureParameter);
+        mf1 = new AssetDescriptor<Texture>("target/mfapple.png", Texture.class, textureParameter);
+        mf2 = new AssetDescriptor<Texture>("target/mforange.png", Texture.class, textureParameter);
+        mf3 = new AssetDescriptor<Texture>("target/mfstrawberry.png", Texture.class, textureParameter);
+        fruit1 = new AssetDescriptor<Texture>("target/apple.png", Texture.class, textureParameter);
+        fruit2 = new AssetDescriptor<Texture>("target/cherry.png", Texture.class, textureParameter);
+        fruit3 = new AssetDescriptor<Texture>("target/mango.png", Texture.class, textureParameter);
+        fruit4 = new AssetDescriptor<Texture>("target/orange.png", Texture.class, textureParameter);
+        fruit5 = new AssetDescriptor<Texture>("target/strawberry.png", Texture.class, textureParameter);
+        fruit6 = new AssetDescriptor<Texture>("target/watermelon.png", Texture.class, textureParameter);
 
         //texture atas dan bawah ground nya
         textureAtas = new AssetDescriptor[20];
@@ -96,6 +118,11 @@ public class Assets {
         bar4 = new AssetDescriptor<Texture>("bar/bb4.png", Texture.class, textureParameter);
         bar5 = new AssetDescriptor<Texture>("bar/bb5.png", Texture.class, textureParameter);
 
+        waveOut = Gdx.audio.newSound(Gdx.files.internal("sfx/ultrasonic.wav"));
+        pick = Gdx.audio.newSound(Gdx.files.internal("sfx/eatbuahajaib.wav"));
+        pick2 = Gdx.audio.newSound(Gdx.files.internal("sfx/eatbuahlaut.wav"));
+        hit = Gdx.audio.newSound(Gdx.files.internal("sfx/die1.wav"));
+
         //home
         btnHome = new AssetDescriptor<Texture>("buttons/home-btn.png", Texture.class, textureParameter);
         btnAlas = new AssetDescriptor<Texture>("buttons/alas-btn.png", Texture.class, textureParameter);
@@ -123,8 +150,17 @@ public class Assets {
         manager.load(shadow);
         manager.load(eelbatpic);
         manager.load(enemyJelly);
+        manager.load(enemyFish);
         manager.load(shadowEnemy);
-        manager.load(targetIdle);
+        manager.load(mf1);
+        manager.load(mf2);
+        manager.load(mf3);
+        manager.load(fruit1);
+        manager.load(fruit2);
+        manager.load(fruit3);
+        manager.load(fruit4);
+        manager.load(fruit5);
+        manager.load(fruit6);
 
         //load texture tile atas dan bawh
         for (int i=0;i<textureBawah.length;i++){

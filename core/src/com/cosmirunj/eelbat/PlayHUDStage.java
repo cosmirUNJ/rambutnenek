@@ -28,12 +28,13 @@ class PlayHUDStage extends Stage {
     private Label.LabelStyle scoreLabelStyle;
 
     private int lastSeconds;
-    private float Score;
+    private int score;
 
     private boolean sonarButtonActive;
 
     private Image sonarImageDesktop;
     private Image bar;
+    private int lives;
 
 
     public PlayHUDStage(PlayScreen playScreen, Viewport hudViewport, EelbatCosmir eelbatCosmir) {
@@ -48,14 +49,16 @@ class PlayHUDStage extends Stage {
         addActor(timeLabel);
 
         lastSeconds = 5;
+        lives = 4;
+        score = 0;
 
         scoreLabelStyle = new Label.LabelStyle();
         scoreLabelStyle.font = eelbatCosmir.assets.getBitmapFont(Assets.bitmapFontMedium);
         scoreLabel = new Label("Score: ", scoreLabelStyle);
+        scoreLabel.setText("Score : "+String.format("%d", score));
         scoreLabel.setPosition(1950, 1440);
 
         addActor(scoreLabel);
-        Score = 0;
 
         bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar1));
         bar.setPosition(900, 1460);
@@ -106,9 +109,55 @@ class PlayHUDStage extends Stage {
         int s = timeInt % 60;
         timeLabel.setText(String.format("%d:%02d", m, s));
 
-        scoreLabel.setText("Score : "+String.format("200"));
+
+    }
+
+    public void updateScore(int skor) {
+        score = score+skor;
+        scoreLabel.setText("Score : "+String.format("%d", score));
 
 
+    }
+
+    public void healthRestored() {
+        lives++;
+        bar.remove();
+        if(lives == 3) {
+            bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar2));
+        } else if(lives == 2) {
+            bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar3));
+        } else if(lives == 1) {
+            bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar4));
+        } else if(lives == 4) {
+            bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar1));
+        }
+        bar.setPosition(900, 1460);
+        addActor(bar);
+
+
+    }
+
+    void gotHit() {
+        if(lives == 0) {
+            //ggj2017.setScreen(new FinishedScreen(ggj2017, false));
+        }
+        lives--;
+        bar.remove();
+        if(lives == 3) {
+            bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar2));
+        } else if(lives == 2) {
+            bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar3));
+        } else if(lives == 1) {
+            bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar4));
+        } else if(lives == 0) {
+            bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar5));
+        }
+        bar.setPosition(900, 1460);
+        addActor(bar);
+    }
+
+    int getLives() {
+        return lives;
     }
 
 
