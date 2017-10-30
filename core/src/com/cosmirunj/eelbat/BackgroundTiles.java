@@ -57,7 +57,7 @@ public class BackgroundTiles extends Actor {
         imgGelombang = new Texture[3];
         imgGelembung = new Texture[4];
         imgRumput = new Texture[3];
-
+        /*
         if(Gdx.app.getType() == Application.ApplicationType.Android){
             WIDTH = Gdx.graphics.getWidth();
             HEIGHT = Gdx.graphics.getHeight();
@@ -65,6 +65,9 @@ public class BackgroundTiles extends Actor {
             WIDTH = EelbatCosmir.WIDTH;
             HEIGHT = EelbatCosmir.HEIGHT;
         }
+        */
+        WIDTH = EelbatCosmir.WIDTH;
+        HEIGHT = EelbatCosmir.HEIGHT;
         //tes = eelbatCosmir.assets.getTexture(Assets.tilesGelombang[1]);
 
         for(int i=0;i<3;i++){

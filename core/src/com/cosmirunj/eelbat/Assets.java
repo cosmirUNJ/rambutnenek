@@ -74,11 +74,11 @@ public class Assets {
         textureParameter.minFilter = Texture.TextureFilter.Linear;
 
         menu = new AssetDescriptor<Texture>("menu.png", Texture.class, textureParameter);
-        shadow = new AssetDescriptor<Texture>("shadow-batcat.png", Texture.class, textureParameter);
+        shadow = new AssetDescriptor<Texture>("shadow-eelbat.png", Texture.class, textureParameter);
         eelbatpic = new AssetDescriptor<Texture>("eelbat/eelbatpic.png", Texture.class, textureParameter);
         enemyJelly = new AssetDescriptor<Texture>("enemigo/jellyfish.png", Texture.class, textureParameter);
         enemyFish = new AssetDescriptor<Texture>("enemigo/anglerfish.png", Texture.class, textureParameter);
-        shadowEnemy = new AssetDescriptor<Texture>("shadow-skull.png",Texture.class,textureParameter);
+        shadowEnemy = new AssetDescriptor<Texture>("shadow-enemy.png",Texture.class,textureParameter);
         mf1 = new AssetDescriptor<Texture>("target/mfapple.png", Texture.class, textureParameter);
         mf2 = new AssetDescriptor<Texture>("target/mforange.png", Texture.class, textureParameter);
         mf3 = new AssetDescriptor<Texture>("target/mfstrawberry.png", Texture.class, textureParameter);
