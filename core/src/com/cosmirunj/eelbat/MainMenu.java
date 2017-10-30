@@ -120,7 +120,7 @@ class MainMenu implements Screen {
         TextureRegionDrawable BtnImageSound = new TextureRegionDrawable(new TextureRegion(BtnSoundActive));
         ButtonSoundActive = new ImageButton(BtnImageSound);
         ButtonSoundActive.setSize(BtnSoundActive.getWidth()-100,BtnSoundActive.getHeight()-100);
-        ButtonSoundActive.setPosition(widthScreen-((BtnSoundActive.getWidth()-100)/2), heightScreen-((BtnSoundActive.getHeight()-100)/2));
+        ButtonSoundActive.setPosition(widthScreen-((BtnSoundActive.getWidth())/2), heightScreen-((BtnSoundActive.getHeight())/2));
         //(widthScreen/2)-(buttonAlasWidth/2), (heightScreen/2)-(buttonAlasHeight/2)
         ButtonSoundActive.addListener(new InputListener(){
             @Override
