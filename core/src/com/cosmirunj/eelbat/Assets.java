@@ -42,7 +42,7 @@ public class Assets {
     static AssetDescriptor<Texture> enemyJelly,enemyFish,shadowEnemy;
 
 
-    static AssetDescriptor<Texture> btnPlay, btnEasy, btnMedium, btnHard, btnSoundActive, btnSoundMute;
+    static AssetDescriptor<Texture> btnPlay, btnEasy, btnMedium, btnHard, btnSoundActive, btnSoundMute, btnReplayPlayScreen;
 
     static AssetDescriptor<Texture>[] textureBawah;
     static AssetDescriptor<Texture>[] textureAtas;
@@ -156,13 +156,14 @@ public class Assets {
         btnReplay = new AssetDescriptor<Texture>("buttons/replay-button.png", Texture.class, textureParameter);
         btnSetting = new AssetDescriptor<Texture>("buttons/setting-button.png", Texture.class, textureParameter);
         btnExit = new AssetDescriptor<Texture>("buttons/exit-button.png", Texture.class, textureParameter);
+        btnReplayPlayScreen = new AssetDescriptor<Texture>("buttons/replayicon.png", Texture.class, textureParameter);
 
         //button Button Stage
         btnPlay = new AssetDescriptor<Texture>("buttons/play-button.png", Texture.class, textureParameter);
         btnEasy = new AssetDescriptor<Texture>("buttons/easy-btn.png", Texture.class, textureParameter);
         btnMedium = new AssetDescriptor<Texture>("buttons/medium-btn.png", Texture.class, textureParameter);
         btnHard = new AssetDescriptor<Texture>("buttons/hard-btn.png", Texture.class, textureParameter);
-        btnSoundActive = new AssetDescriptor<Texture>("buttons/sound-btn.png", Texture.class, textureParameter);
+        btnSoundActive = new AssetDescriptor<Texture>("buttons/musicon.png", Texture.class, textureParameter);
         btnSoundMute = new AssetDescriptor<Texture>("buttons/mute-btn.png", Texture.class, textureParameter);
 
 
@@ -232,6 +233,8 @@ public class Assets {
         manager.load(btnHard);
         manager.load(btnSoundActive);
         manager.load(btnSoundMute);
+
+        manager.load(btnReplayPlayScreen);
 
     }
     BitmapFont getBitmapFont(AssetDescriptor<BitmapFont> bitmapFontAssetDescriptor){

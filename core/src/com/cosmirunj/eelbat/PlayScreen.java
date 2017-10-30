@@ -1,5 +1,6 @@
 package com.cosmirunj.eelbat;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ai.steer.behaviors.FollowPath;
@@ -55,6 +56,7 @@ class PlayScreen implements Screen {
     private ImageButton ButtonHome, ButtonAlas, ButtonResume, ButtonReplay, ButtonSetting, ButtonExit;
     private Stage ButtonStage;
     boolean btnPause;
+    //boolean btnResume;
 
     ShapeRenderer shapeRenderer;
     boolean drawDebug;
@@ -199,6 +201,15 @@ class PlayScreen implements Screen {
     }
 
     public void ButtonPause(){
+        /*
+        if(Gdx.app.getType() == Application.ApplicationType.Android){
+            float widthScreen = Gdx.graphics.getWidth();
+            float heightScreen = Gdx.graphics.getHeight();
+        } else {
+            float widthScreen = EelbatCosmir.WIDTH;
+            float heightScreen = EelbatCosmir.HEIGHT;
+        }
+        */
         float widthScreen = Gdx.graphics.getWidth();
         float heightScreen = Gdx.graphics.getHeight();
 
@@ -235,7 +246,15 @@ class PlayScreen implements Screen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 ButtonResume.getImage().setColor(Color.BLACK);
-                return true;
+                btnPause=!btnPause;
+                ButtonAlas.setVisible(!btnPause);
+                ButtonResume.setVisible(!btnPause);
+                ButtonReplay.setVisible(!btnPause);
+                ButtonSetting.setVisible(!btnPause);
+                ButtonExit.setVisible(!btnPause);
+                //pauseLabel.setVisible(true);
+
+                return btnPause;
             }
 
             @Override
@@ -320,7 +339,7 @@ class PlayScreen implements Screen {
         ButtonExit.setVisible(false);
 
         //Button Home
-        Texture BtnHome = eelbatCosmir.assets.getTexture(Assets.btnHome);
+        Texture BtnHome = eelbatCosmir.assets.getTexture(Assets.btnReplayPlayScreen);
         TextureRegionDrawable BtnImageHome = new TextureRegionDrawable(new TextureRegion(BtnHome));
         ButtonHome = new ImageButton(BtnImageHome);
         ButtonHome.setSize(BtnHome.getWidth()-100,BtnHome.getHeight()-100);
@@ -329,15 +348,15 @@ class PlayScreen implements Screen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 ButtonHome.getImage().setColor(Color.BROWN);
-                btnPause=true;
-                ButtonAlas.setVisible(true);
-                ButtonResume.setVisible(true);
-                ButtonReplay.setVisible(true);
-                ButtonSetting.setVisible(true);
-                ButtonExit.setVisible(true);
+                btnPause=!btnPause;
+                ButtonAlas.setVisible(!btnPause);
+                ButtonResume.setVisible(!btnPause);
+                ButtonReplay.setVisible(!btnPause);
+                ButtonSetting.setVisible(!btnPause);
+                ButtonExit.setVisible(!btnPause);
                 //pauseLabel.setVisible(true);
 
-                return true;
+                return btnPause;
             }
 
             @Override
