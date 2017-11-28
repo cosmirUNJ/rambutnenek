@@ -49,6 +49,7 @@ class PlayScreen implements Screen {
     private Stage stage;
     private SpriteBatch batch;
     private final EelbatCosmir eelbatCosmir;
+    private Aksesoris aksesoris;
 
     private PlayScreenStage stage2;
     private Label pauseLabel;
@@ -56,6 +57,9 @@ class PlayScreen implements Screen {
     private ImageButton ButtonHome, ButtonAlas, ButtonResume, ButtonReplay, ButtonSetting, ButtonExit;
     private Stage ButtonStage;
     boolean btnPause;
+    private MODE_GAME mode_game;
+    public int enemySpeed;
+    int aksesorisSpeed;
     //boolean btnResume;
 
     ShapeRenderer shapeRenderer;
@@ -74,6 +78,9 @@ class PlayScreen implements Screen {
         this.eelbatCosmir = eelbatCosmir;
 
         ButtonStage=new Stage();
+        mode_game = MODE_GAME.MULAI;
+
+        btnPause = true;
 
 
         touchpadSkin = new Skin();
@@ -146,6 +153,16 @@ class PlayScreen implements Screen {
 
         //tambahan
         //batch.begin();
+        switch (mode_game){
+            case MULAI:
+
+                break;
+            case PAUSEE:
+
+                break;
+            default:
+                break;
+        }
 
         gameStage.act(delta);
         gameViewport.apply();
@@ -166,6 +183,24 @@ class PlayScreen implements Screen {
         ButtonStage.draw();
 
         playHUD.update(delta);
+    }
+
+    public void setSpeedPause() {
+        enemySpeed = 0;
+        aksesorisSpeed = 0;
+    }
+
+    public void setSpeedMulai() {
+        enemySpeed = 100;
+        aksesorisSpeed = 100;
+    }
+    public void getSpeedPause(){
+        enemySpeed = 0;
+        aksesorisSpeed = 0;
+    }
+    public void getSpeedMulai(){
+        enemySpeed = 100;
+        aksesorisSpeed = 100;
     }
 
     @Override
@@ -191,7 +226,7 @@ class PlayScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        playHUD.dispose();
     }
 
     private class PlayScreenStage extends Stage {
@@ -253,6 +288,7 @@ class PlayScreen implements Screen {
                 ButtonSetting.setVisible(!btnPause);
                 ButtonExit.setVisible(!btnPause);
                 //pauseLabel.setVisible(true);
+                mode_game = MODE_GAME.MULAI;
 
                 return btnPause;
             }
@@ -347,7 +383,9 @@ class PlayScreen implements Screen {
         ButtonHome.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                ButtonHome.getImage().setColor(Color.BROWN);
+                if(!btnPause){
+                    ButtonHome.getImage().setColor(Color.BROWN);
+                }
                 btnPause=!btnPause;
                 ButtonAlas.setVisible(!btnPause);
                 ButtonResume.setVisible(!btnPause);
@@ -355,7 +393,8 @@ class PlayScreen implements Screen {
                 ButtonSetting.setVisible(!btnPause);
                 ButtonExit.setVisible(!btnPause);
                 //pauseLabel.setVisible(true);
-
+                mode_game = MODE_GAME.PAUSEE;
+                //Gdx.app.getApplicationListener().dispose();
                 return btnPause;
             }
 
@@ -371,4 +410,6 @@ class PlayScreen implements Screen {
         Gdx.input.setInputProcessor(ButtonStage);
 
     }
+
+    public enum MODE_GAME{MULAI, PAUSEE}
 }
