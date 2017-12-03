@@ -23,7 +23,7 @@ class PlayGameStage extends Stage {
 
     private final int ATTACK_RANGE = 200;
     private final int COLLECT_RANGE = 150;
-
+    private final int CLOSE_RADIUS = 500;
     private EnemyList enemyList;
 
 
@@ -255,7 +255,78 @@ class PlayGameStage extends Stage {
         }
 
         checkCollisions();
+        checkRadiusEnemy();
 
+    }
+
+    public float getCameraPositionX(){
+        return cameraPosition.x;
+    }
+    public float getCameraPositionY(){
+        return cameraPosition.y;
+    }
+
+    public boolean checkRadiusEnemy() {
+        /*
+        if(Math.pow(x,2)+Math.pow(y,2) <= Math.pow(CLOSE_RADIUS,2)){
+            return true;
+        } else {
+            return false;
+        }
+        */
+        int zz = -1;
+        Enemy enemyRadius = null;
+        for (int i: fixedEnemies.keySet()){
+            if(enemyRadius != null){
+                break;
+            }
+            for (Enemy enemy : fixedEnemies.get(i)){
+                float x = enemy.getPositionX();
+                float y = enemy.floatgetPositionY();
+                if(Math.pow(x-cameraPosition.x,2)+Math.pow(y-cameraPosition.y,2) <= Math.pow(CLOSE_RADIUS,2)){
+                    enemyRadius = enemy;
+                    zz = i;
+                    Gdx.app.log("myTag","kenakenaknea");
+                    break;
+                }
+            }
+        }
+        if(enemyRadius != null){
+            return true;
+        } else {
+            return false;
+        }
+
+        /*
+        int k = -1;
+        Enemy enemyHit = null;
+        for(int i : fixedEnemies.keySet()) {
+            if(enemyHit != null) {
+                break;
+            }
+            for(Enemy enemy : fixedEnemies.get(i)) {
+                float x = enemy.getPositionX();
+                float y = enemy.floatgetPositionY();
+                if(Math.pow(x - cameraPosition.x, 2) + Math.pow(y - cameraPosition.y, 2) <= Math.pow(COLLECT_RANGE, 2)) {
+                    enemyHit = enemy;
+                    k = i;
+                    break;
+                }
+            }
+        }
+
+        if(enemyHit != null) {
+            if(playHUDStage.getLives() > 0) {
+                Assets.hit.play();
+            }
+            fixedEnemies.get(k).remove(enemyHit);
+            enemyHit.remove();
+            time -= 30;
+            playHUDStage.gotHit();
+            //damage();
+        }
+
+         */
     }
 
     private void checkTarget() {
