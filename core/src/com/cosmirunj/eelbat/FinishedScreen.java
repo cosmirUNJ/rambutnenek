@@ -19,14 +19,17 @@ public class FinishedScreen implements Screen {
     private GameOverStage stage;
     private Viewport viewport;
     private EelbatCosmir eelbatCosmir;
+    private int level;
+    //String message;
 
-    public FinishedScreen(EelbatCosmir eelbatCosmir, boolean completed) {
+    public FinishedScreen(EelbatCosmir eelbatCosmir, boolean completed, int level) {
         //Assets.music1.stop();
         //Assets.steps.stop();
         this.eelbatCosmir = eelbatCosmir;
+        this.level = level;
         OrthographicCamera camera = new OrthographicCamera();
         viewport = new FillViewport(EelbatCosmir.WIDTH, EelbatCosmir.HEIGHT, camera);
-        stage = new GameOverStage(viewport, eelbatCosmir, completed);
+        stage = new GameOverStage(viewport, eelbatCosmir, completed, level);
         if(!completed){
             //Assets.death.play();
         }
@@ -48,7 +51,7 @@ public class FinishedScreen implements Screen {
         viewport.apply();
         stage.draw();
         if(Gdx.input.justTouched()) {
-            eelbatCosmir.setScreen(new MainMenu(eelbatCosmir));
+            eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir, level));
         }
     }
 
@@ -78,13 +81,18 @@ public class FinishedScreen implements Screen {
     }
 
     private class GameOverStage extends Stage {
-        public GameOverStage(Viewport viewport, final EelbatCosmir eelbatCosmir, boolean completed) {
+        public GameOverStage(Viewport viewport, final EelbatCosmir eelbatCosmir, boolean completed, int level) {
             super(viewport, eelbatCosmir.batch);
             Texture backgroundTexture = eelbatCosmir.assets.getTexture(completed ? Assets.levelComplete : Assets.gameOver);
             addActor(new Image(backgroundTexture));
             Label.LabelStyle labelStyle = new Label.LabelStyle();
             labelStyle.font = eelbatCosmir.assets.getBitmapFont(Assets.bitmapFontLarge);
-            String message = completed ? "Level n complete!" : "Game Over :(";
+//            if(completed){
+//                String message = String.format("Level n complete!");
+//            }else{
+//                String message = String.format("Game level %d Over :(",(level+1));
+//            }
+            String message = completed ? "Level n complete!" : "Game level Over :(";
             Label label = new Label(message, labelStyle);
             label.setPosition(
                     300,

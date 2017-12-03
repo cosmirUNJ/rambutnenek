@@ -139,7 +139,7 @@ class PlayHUDStage extends Stage {
 
     void gotHit() {
         if(lives == 0) {
-            eelbatCosmir.setScreen(new FinishedScreen(eelbatCosmir, false));
+            eelbatCosmir.setScreen(new FinishedScreen(eelbatCosmir, false, 1));
         }
         lives--;
         bar.remove();
