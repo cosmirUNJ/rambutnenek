@@ -1,9 +1,7 @@
 package com.cosmirunj.eelbat;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**
@@ -11,9 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  */
 
 public class Enemy extends Actor {
-    private final int SPEED_ENEMY= 0;
+    private final int SPEED_ENEMY= 100;
     private final int MAX_ANGLE_CHANGE = 300;
     private final int CLOSE_RADIUS = 800;
+
     private final float TARGET_X;
     private final float TARGET_Y;
     private float x,y;
@@ -21,12 +20,9 @@ public class Enemy extends Actor {
     private Texture enemyFish, shadowEnemy;
     private final int SHADOW_OFFSET = 150;
     private boolean fixed;
-    private PlayGameStage playGameStage;
 
     public Enemy(Assets assets, float x, float y, boolean fixed){
         this.fixed = fixed;
-
-        //getViewport().getCamera().position;
         TARGET_X = x;
         TARGET_Y = y;
         this.x = x + (EelbatCosmir.random.nextInt(2*CLOSE_RADIUS)-CLOSE_RADIUS);
@@ -38,36 +34,9 @@ public class Enemy extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha){
-        /*
-        float cameraPositionX = playGameStage.getCameraPositionX();
-        float cameraPositionY = playGameStage.getCameraPositionY();
-
-        if(Math.pow(x-cameraPositionX,2)+Math.pow(y-cameraPositionY,2) <= Math.pow(CLOSE_RADIUS,2)){
-            Gdx.app.log("myTag","kenakenaknea");
-            batch.draw(shadowEnemy, x-shadowEnemy.getWidth()/2,y-SHADOW_OFFSET);
-            batch.draw(enemyFish,x-enemyFish.getWidth()/2,y-enemyFish.getHeight()/2);
-            //System.out.print("kenakenakena");
-        }
-        */
-            batch.draw(shadowEnemy, x-shadowEnemy.getWidth()/2,y-SHADOW_OFFSET);
-            batch.draw(enemyFish,x-enemyFish.getWidth()/2,y-enemyFish.getHeight()/2);
+        batch.draw(shadowEnemy, x-shadowEnemy.getWidth()/2,y-SHADOW_OFFSET);
+        batch.draw(enemyFish,x-enemyFish.getWidth()/2,y-enemyFish.getHeight()/2);
     }
-
-    /*
-    //check radius, untuk ngecek di radius tsb ada eelbat/gk? kalo ada return true
-    private boolean checkRadius() {
-        if(Math.pow(x,2)+Math.pow(y,2) <= Math.pow(CLOSE_RADIUS,2)){
-            return true;
-        } else {
-            return false;
-        }
-
-        //float x = enemy.getPositionX();
-        //float y = enemy.floatgetPositionY();
-        //if(Math.pow(x - cameraPosition.x, 2) + Math.pow(y - cameraPosition.y, 2) <= Math.pow(COLLECT_RANGE, 2))
-
-    }
-    */
 
     @Override
     public void act(float delta){
