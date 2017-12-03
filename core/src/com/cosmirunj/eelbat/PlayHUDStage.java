@@ -36,6 +36,8 @@ class PlayHUDStage extends Stage {
     private Image bar;
     private int lives;
 
+    private float widthScreen = Gdx.graphics.getWidth();
+    private float heightScreen = Gdx.graphics.getHeight();
 
     public PlayHUDStage(PlayScreen playScreen, Viewport hudViewport, EelbatCosmir eelbatCosmir) {
         super(hudViewport, eelbatCosmir.batch);

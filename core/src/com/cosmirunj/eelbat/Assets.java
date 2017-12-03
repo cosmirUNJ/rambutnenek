@@ -43,6 +43,7 @@ public class Assets {
 
 
     static AssetDescriptor<Texture> btnPlay, btnEasy, btnMedium, btnHard, btnSoundActive, btnSoundMute, btnReplayPlayScreen;
+    static AssetDescriptor<Texture> btnSkill, btnWave;
 
     static AssetDescriptor<Texture>[] textureBawah;
     static AssetDescriptor<Texture>[] textureAtas;
@@ -166,6 +167,9 @@ public class Assets {
         btnSoundActive = new AssetDescriptor<Texture>("buttons/musicon.png", Texture.class, textureParameter);
         btnSoundMute = new AssetDescriptor<Texture>("buttons/mute-btn.png", Texture.class, textureParameter);
 
+        //button Skill & Wave
+        btnSkill = new AssetDescriptor<Texture>("buttons/skill-button.png", Texture.class, textureParameter);
+        btnWave = new AssetDescriptor<Texture>("buttons/wave-button.png", Texture.class, textureParameter);
 
         //load font nya
         manager.load(bitmapFontSmall);
@@ -235,6 +239,10 @@ public class Assets {
         manager.load(btnSoundMute);
 
         manager.load(btnReplayPlayScreen);
+
+        //load button skill & wave
+        manager.load(btnSkill);
+        manager.load(btnWave);
 
     }
     BitmapFont getBitmapFont(AssetDescriptor<BitmapFont> bitmapFontAssetDescriptor){

@@ -56,6 +56,7 @@ class PlayScreen implements Screen {
     private Label pauseLabel;
     private Label.LabelStyle pauseLabelStyle;
     private ImageButton ButtonHome, ButtonAlas, ButtonResume, ButtonReplay, ButtonSetting, ButtonExit;
+    private ImageButton ButtonSkill, ButtonWave;
     private Stage ButtonStage;
     boolean btnPause;
     private MODE_GAME mode_game;
@@ -107,7 +108,7 @@ class PlayScreen implements Screen {
         //bound, bound, width dan height background
         touchpad.setBounds(15,15,75,75);
         //lokasi
-        touchpad.setPosition(15,75);
+        touchpad.setPosition(25,25);
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         viewport = new FillViewport(eelbatCosmir.WIDTH, eelbatCosmir.HEIGHT, camera);
@@ -138,6 +139,8 @@ class PlayScreen implements Screen {
         //Gdx.input.setInputProcessor(stage2);
 
         ButtonPause();
+        ButtonSkill();
+        ButtonWave();
     }
 
     boolean sendMainWave() {
@@ -419,6 +422,52 @@ class PlayScreen implements Screen {
         ButtonStage.addActor(ButtonHome);
         Gdx.input.setInputProcessor(ButtonStage);
 
+    }
+
+    public void ButtonSkill(){
+        Texture BtnSkill = eelbatCosmir.assets.getTexture(Assets.btnSkill);
+        TextureRegionDrawable BtnImageSkill = new TextureRegionDrawable(new TextureRegion(BtnSkill));
+        ButtonSkill = new ImageButton(BtnImageSkill);
+        ButtonSkill.setSize(BtnSkill.getWidth(),BtnSkill.getHeight());
+        ButtonSkill.setPosition(725, 25);
+        ButtonSkill.addListener(new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+
+            }
+        });
+
+        ButtonStage.addActor(ButtonSkill);
+        Gdx.input.setInputProcessor(ButtonStage);
+
+    }
+
+    public void ButtonWave(){
+        Texture BtnWave = eelbatCosmir.assets.getTexture(Assets.btnWave);
+        TextureRegionDrawable BtnImageWave = new TextureRegionDrawable(new TextureRegion(BtnWave));
+        ButtonWave = new ImageButton(BtnImageWave);
+        ButtonWave.setSize(BtnWave.getWidth(),BtnWave.getHeight());
+        ButtonWave.setPosition(800, 75);
+        ButtonWave.addListener(new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return sendMainWave();
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+
+            }
+        });
+
+        ButtonStage.addActor(ButtonWave);
+        Gdx.input.setInputProcessor(ButtonStage);
     }
 
     public enum MODE_GAME{MULAI, PAUSEE}
