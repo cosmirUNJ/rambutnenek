@@ -49,6 +49,7 @@ class PlayScreen implements Screen {
     private Stage stage;
     private SpriteBatch batch;
     private final EelbatCosmir eelbatCosmir;
+    private int level;
     private Aksesoris aksesoris;
 
     private PlayScreenStage stage2;
@@ -61,6 +62,7 @@ class PlayScreen implements Screen {
     public int enemySpeed;
     int aksesorisSpeed;
     //boolean btnResume;
+    public boolean isPaused;
 
     ShapeRenderer shapeRenderer;
     boolean drawDebug;
@@ -74,8 +76,10 @@ class PlayScreen implements Screen {
     final boolean openPath = false;
     Slider pathOffset;
 
-    public PlayScreen(EelbatCosmir eelbatCosmir) {
+    public PlayScreen(EelbatCosmir eelbatCosmir, int level) {
         this.eelbatCosmir = eelbatCosmir;
+        this.level = level;
+        isPaused = false;
 
         ButtonStage=new Stage();
         mode_game = MODE_GAME.MULAI;
@@ -183,6 +187,10 @@ class PlayScreen implements Screen {
         ButtonStage.draw();
 
         playHUD.update(delta);
+
+        if(!isPaused){
+            Gdx.graphics.requestRendering();
+        }
     }
 
     public void setSpeedPause() {
@@ -394,6 +402,8 @@ class PlayScreen implements Screen {
                 ButtonExit.setVisible(!btnPause);
                 //pauseLabel.setVisible(true);
                 mode_game = MODE_GAME.PAUSEE;
+                Gdx.graphics.setContinuousRendering(true);
+                //Gdx.graphics.requestRendering();
                 //Gdx.app.getApplicationListener().dispose();
                 return btnPause;
             }

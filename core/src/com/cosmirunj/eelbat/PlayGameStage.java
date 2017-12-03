@@ -121,7 +121,7 @@ class PlayGameStage extends Stage {
             for(int j = 0; j < k; j++) {
                 Enemy enemy = new Enemy(eelbatCosmir.assets, x, y, true);
                 enemyGroup.add(enemy);
-                addActor(enemy);
+                addActor(enemy);//1
             }
             fixedEnemies.put(i, enemyGroup);
         }
@@ -259,6 +259,7 @@ class PlayGameStage extends Stage {
     }
 
     private void checkTarget() {
+        //kalo buahnya == 2, nambah buah baru dan nambah enemny
         if(remainingmf == TOTAL_MF2+TOTAL_MF3){
             form = FORM.EELBAT;
             for(int i = 0; i < TOTAL_MF2; i++) {
@@ -273,7 +274,7 @@ class PlayGameStage extends Stage {
                 for(int j = 0; j < k; j++) {
                     Enemy enemy = new Enemy(eelbatCosmir.assets, x, y, true);
                     enemyGroup.add(enemy);
-                    addActor(enemy);
+                    addActor(enemy);//2
                 }
                 fixedEnemies.put(TOTAL_MF1+i, enemyGroup);
             }
@@ -293,7 +294,7 @@ class PlayGameStage extends Stage {
                 for(int j = 0; j < k; j++) {
                     Enemy enemy = new Enemy(eelbatCosmir.assets, x, y, true);
                     enemyGroup.add(enemy);
-                    addActor(enemy);
+                    addActor(enemy);//3
                 }
                 fixedEnemies.put(TOTAL_MF1+TOTAL_MF2+i, enemyGroup);
             }
