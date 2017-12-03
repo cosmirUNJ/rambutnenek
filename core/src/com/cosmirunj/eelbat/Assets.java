@@ -34,6 +34,7 @@ public class Assets {
     public static AssetDescriptor<Texture> shadow, eelbatpic;
 
     static AssetDescriptor<Texture> menu;
+    static AssetDescriptor<Texture> levelComplete, gameOver;
 
     static AssetDescriptor<BitmapFont> bitmapFontSmall, bitmapFontMedium, bitmapFontLarge;
     static AssetDescriptor<Texture> bar1, bar2, bar3, bar4, bar5;
@@ -144,6 +145,9 @@ public class Assets {
         bar4 = new AssetDescriptor<Texture>("bar/bb4.png", Texture.class, textureParameter);
         bar5 = new AssetDescriptor<Texture>("bar/bb5.png", Texture.class, textureParameter);
 
+        levelComplete = new AssetDescriptor<Texture>("level-complete.png", Texture.class, textureParameter);
+        gameOver = new AssetDescriptor<Texture>("gameover.png", Texture.class, textureParameter);
+
         waveOut = Gdx.audio.newSound(Gdx.files.internal("sfx/ultrasonic.wav"));
         pick = Gdx.audio.newSound(Gdx.files.internal("sfx/eatbuahajaib.wav"));
         pick2 = Gdx.audio.newSound(Gdx.files.internal("sfx/eatbuahlaut.wav"));
@@ -235,6 +239,9 @@ public class Assets {
         manager.load(btnSoundMute);
 
         manager.load(btnReplayPlayScreen);
+
+        manager.load(levelComplete);
+        manager.load(gameOver);
 
     }
     BitmapFont getBitmapFont(AssetDescriptor<BitmapFont> bitmapFontAssetDescriptor){
