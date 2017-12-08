@@ -23,7 +23,7 @@ class PlayGameStage extends Stage {
 
     private final int ATTACK_RANGE = 200;
     private final int COLLECT_RANGE = 150;
-    private final int CLOSE_RADIUS = 500;
+    private final int CLOSE_RADIUS = 800;
     private EnemyList enemyList;
 
 
@@ -284,13 +284,18 @@ class PlayGameStage extends Stage {
                 break;
             }
             for (Enemy enemy : fixedEnemies.get(i)){
-                float x = enemy.getPositionX();
-                float y = enemy.floatgetPositionY();
+                float x = enemy.getEnemyPositionX();
+                float y = enemy.getEnemyPositionY();
                 if(Math.pow(x-cameraPosition.x,2)+Math.pow(y-cameraPosition.y,2) <= Math.pow(CLOSE_RADIUS,2)){
-                    enemyRadius = enemy;
+                    //enemyRadius = enemy;
                     zz = i;
-                    Gdx.app.log("myTag","kenakenaknea");
+                    double radiusnya = Math.sqrt(Math.pow(x-cameraPosition.x,2)+Math.pow(y-cameraPosition.y,2));
+                    enemy.setStateEnemy(Enemy.KEJARGAK.KEJAR, cameraPosition.x, cameraPosition.y, (float) radiusnya);
+                    //fixedEnemies.get(zz).
+                    //Gdx.app.log("myTag","kenakenaknea"+fixedEnemies.get(i));
                     break;
+                } else {
+                    enemy.setStateEnemy(Enemy.KEJARGAK.GAK, 0, 0, 0);
                 }
             }
         }
@@ -439,8 +444,8 @@ class PlayGameStage extends Stage {
                 break;
             }
             for(Enemy enemy : fixedEnemies.get(i)) {
-                float x = enemy.getPositionX();
-                float y = enemy.floatgetPositionY();
+                float x = enemy.getEnemyPositionX();
+                float y = enemy.getEnemyPositionY();
                 if(Math.pow(x - cameraPosition.x, 2) + Math.pow(y - cameraPosition.y, 2) <= Math.pow(COLLECT_RANGE, 2)) {
                     enemyHit = enemy;
                     k = i;
@@ -453,7 +458,7 @@ class PlayGameStage extends Stage {
             if(playHUDStage.getLives() > 0) {
                 Assets.hit.play();
             }
-            fixedEnemies.get(k).remove(enemyHit);
+            //fixedEnemies.get(k).remove(enemyHit);
             enemyHit.remove();
             time -= 30;
             playHUDStage.gotHit();

@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  */
 
 public class Enemy extends Actor {
-    private final int SPEED_ENEMY= 0;
+    private int SPEED_ENEMY = 100;
     private final int MAX_ANGLE_CHANGE = 300;
     private final int CLOSE_RADIUS = 800;
     private final float TARGET_X;
@@ -21,11 +21,14 @@ public class Enemy extends Actor {
     private Texture enemyFish, shadowEnemy;
     private final int SHADOW_OFFSET = 150;
     private boolean fixed;
-    private PlayGameStage playGameStage;
+    KEJARGAK kejargak;
+    float eelbatPositionX, eelbatPositionY, eelbatPositionRadius;
 
     public Enemy(Assets assets, float x, float y, boolean fixed){
         this.fixed = fixed;
-
+        eelbatPositionX = 0;
+        eelbatPositionY = 0;
+        //SPEED_ENEMY = 0;
         //getViewport().getCamera().position;
         TARGET_X = x;
         TARGET_Y = y;
@@ -34,8 +37,20 @@ public class Enemy extends Actor {
 
         enemyFish = assets.getTexture(Assets.enemyFish);
         shadowEnemy = assets.getTexture(Assets.shadowEnemy);
+
+        kejargak = KEJARGAK.GAK;
     }
 
+    public void setStateEnemy(KEJARGAK kejargak, float x, float y, float r){
+        this.kejargak = kejargak;
+
+        if (kejargak == KEJARGAK.KEJAR){
+            Gdx.app.log("myTag","kenakenaknea");
+        }
+        eelbatPositionRadius = r;
+        eelbatPositionX = x;
+        eelbatPositionY = y;
+    }
     @Override
     public void draw(Batch batch, float parentAlpha){
         /*
@@ -71,33 +86,49 @@ public class Enemy extends Actor {
 
     @Override
     public void act(float delta){
-        if(!fixed || Math.pow(x - TARGET_X, 2) + Math.pow(y - TARGET_Y, 2) <= Math.pow(CLOSE_RADIUS, 2)) {
-            currentAngle += delta*(EelbatCosmir.random.nextFloat()*2*MAX_ANGLE_CHANGE - MAX_ANGLE_CHANGE);
-        } else {
-            if((x - TARGET_X)*Math.sin(currentAngle/180*Math.PI) - (y - TARGET_Y)*Math.cos(currentAngle/180*Math.PI) >= 0) {
-                currentAngle += delta*EelbatCosmir.random.nextFloat()*MAX_ANGLE_CHANGE;
-            } else {
-                currentAngle -= delta*EelbatCosmir.random.nextFloat()*MAX_ANGLE_CHANGE;
-            }
+        switch (kejargak){
+            case KEJAR:
+                //currentAngle = (float) Math.cos(eelbatPositionX/eelbatPositionRadius);
+                x = (float) Math.cos(eelbatPositionX-x/eelbatPositionRadius)*SPEED_ENEMY;
+                y = (float) Math.sin(eelbatPositionY-y/eelbatPositionRadius)*SPEED_ENEMY;
+
+                break;
+            case GAK:
+                if(!fixed || Math.pow(x - TARGET_X, 2) + Math.pow(y - TARGET_Y, 2) <= Math.pow(CLOSE_RADIUS, 2)) {
+                    currentAngle += delta*(EelbatCosmir.random.nextFloat()*2*MAX_ANGLE_CHANGE - MAX_ANGLE_CHANGE);
+                } else {
+                    if((x - TARGET_X)*Math.sin(currentAngle/180*Math.PI) - (y - TARGET_Y)*Math.cos(currentAngle/180*Math.PI) >= 0) {
+                        currentAngle += delta*EelbatCosmir.random.nextFloat()*MAX_ANGLE_CHANGE;
+                    } else {
+                        currentAngle -= delta*EelbatCosmir.random.nextFloat()*MAX_ANGLE_CHANGE;
+                    }
+                }
+                while(currentAngle > 360) {
+                    currentAngle -= 360;
+                }
+                while(currentAngle < 0) {
+                    currentAngle += 360;
+                }
+                x += delta*Math.cos(currentAngle/180*Math.PI)*SPEED_ENEMY;
+                y += delta*Math.sin(currentAngle/180*Math.PI)*SPEED_ENEMY;
+                break;
         }
-        while(currentAngle > 360) {
-            currentAngle -= 360;
-        }
-        while(currentAngle < 0) {
-            currentAngle += 360;
-        }
-        x += delta*Math.cos(currentAngle/180*Math.PI)*SPEED_ENEMY;
-        y += delta*Math.sin(currentAngle/180*Math.PI)*SPEED_ENEMY;
+
 
     }
 
-    public float getPositionX(){
+    public float getEnemyPositionX(){
         return  x;
     }
-    public float floatgetPositionY(){
+    public float getEnemyPositionY(){
         return y;
     }
+
     void unfix(){
         fixed = false;
+    }
+
+    enum KEJARGAK{
+        GAK, KEJAR
     }
 }
