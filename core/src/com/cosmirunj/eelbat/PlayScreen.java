@@ -127,7 +127,7 @@ class PlayScreen implements Screen {
 
         OrthographicCamera gameCamera = new OrthographicCamera();
         gameViewport = new FillViewport(eelbatCosmir.WIDTH,eelbatCosmir.HEIGHT, gameCamera);
-        gameStage = new PlayGameStage(gameViewport, eelbatCosmir, playHUD, touchpadXnya, touchpadYnya, touchpad);
+        gameStage = new PlayGameStage(gameViewport, eelbatCosmir, playHUD, touchpadXnya, touchpadYnya, touchpad, level);
 
 
         Gdx.input.setInputProcessor(stage);
