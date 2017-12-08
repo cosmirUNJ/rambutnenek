@@ -34,6 +34,7 @@ public class Assets {
     public static AssetDescriptor<Texture> shadow, eelbatpic;
 
     static AssetDescriptor<Texture> menu;
+    static AssetDescriptor<Texture> levelComplete, gameOver;
 
     static AssetDescriptor<BitmapFont> bitmapFontSmall, bitmapFontMedium, bitmapFontLarge;
     static AssetDescriptor<Texture> bar1, bar2, bar3, bar4, bar5;
@@ -59,6 +60,8 @@ public class Assets {
     static Sound pick;
     static Sound pick2;
     static Sound hit;
+    static Sound fail;
+    static Sound success;
 
     int jumlahTextureBawah = 10;
     int jumlahTextureAtas = 20;
@@ -145,10 +148,15 @@ public class Assets {
         bar4 = new AssetDescriptor<Texture>("bar/bb4.png", Texture.class, textureParameter);
         bar5 = new AssetDescriptor<Texture>("bar/bb5.png", Texture.class, textureParameter);
 
+        levelComplete = new AssetDescriptor<Texture>("level-complete.png", Texture.class, textureParameter);
+        gameOver = new AssetDescriptor<Texture>("gameover.png", Texture.class, textureParameter);
+
         waveOut = Gdx.audio.newSound(Gdx.files.internal("sfx/ultrasonic.wav"));
         pick = Gdx.audio.newSound(Gdx.files.internal("sfx/eatbuahajaib.wav"));
         pick2 = Gdx.audio.newSound(Gdx.files.internal("sfx/eatbuahlaut.wav"));
         hit = Gdx.audio.newSound(Gdx.files.internal("sfx/die1.wav"));
+        fail = Gdx.audio.newSound(Gdx.files.internal("sfx/death.wav"));
+        success = Gdx.audio.newSound(Gdx.files.internal("sfx/wincry.wav"));
 
         //home
         btnHome = new AssetDescriptor<Texture>("buttons/home-btn.png", Texture.class, textureParameter);
@@ -240,9 +248,14 @@ public class Assets {
 
         manager.load(btnReplayPlayScreen);
 
+
         //load button skill & wave
         manager.load(btnSkill);
         manager.load(btnWave);
+
+        manager.load(levelComplete);
+        manager.load(gameOver);
+
 
     }
     BitmapFont getBitmapFont(AssetDescriptor<BitmapFont> bitmapFontAssetDescriptor){
