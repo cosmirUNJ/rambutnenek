@@ -121,6 +121,9 @@ class PlayHUDStage extends Stage {
 
     public void healthRestored() {
         lives++;
+        if(lives > 4) {
+            lives = 4;
+        }
         bar.remove();
         if(lives == 3) {
             bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar2));
