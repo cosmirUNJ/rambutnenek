@@ -305,10 +305,10 @@ public class CharacterEelBat extends Actor {
     public void act(float delta) {
 
     }
-    public float getPositionX(){
+    public float getPositionEelbatX(){
         return  x;
     }
-    public float getPositionY(){
+    public float getPositionEelbatY(){
         return y;
     }
 

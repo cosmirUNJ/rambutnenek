@@ -45,7 +45,7 @@ public class Enemy extends Actor {
         this.kejargak = kejargak;
 
         if (kejargak == KEJARGAK.KEJAR){
-            Gdx.app.log("myTag","kenakenaknea");
+            Gdx.app.log("kenaTag","kenakenaknea");
         }
         eelbatPositionRadius = r;
         eelbatPositionX = x;
@@ -53,45 +53,19 @@ public class Enemy extends Actor {
     }
     @Override
     public void draw(Batch batch, float parentAlpha){
-        /*
-        float cameraPositionX = playGameStage.getCameraPositionX();
-        float cameraPositionY = playGameStage.getCameraPositionY();
-
-        if(Math.pow(x-cameraPositionX,2)+Math.pow(y-cameraPositionY,2) <= Math.pow(CLOSE_RADIUS,2)){
-            Gdx.app.log("myTag","kenakenaknea");
-            batch.draw(shadowEnemy, x-shadowEnemy.getWidth()/2,y-SHADOW_OFFSET);
-            batch.draw(enemyFish,x-enemyFish.getWidth()/2,y-enemyFish.getHeight()/2);
-            //System.out.print("kenakenakena");
-        }
-        */
             batch.draw(shadowEnemy, x-shadowEnemy.getWidth()/2,y-SHADOW_OFFSET);
             batch.draw(enemyFish,x-enemyFish.getWidth()/2,y-enemyFish.getHeight()/2);
     }
-
-    /*
-    //check radius, untuk ngecek di radius tsb ada eelbat/gk? kalo ada return true
-    private boolean checkRadius() {
-        if(Math.pow(x,2)+Math.pow(y,2) <= Math.pow(CLOSE_RADIUS,2)){
-            return true;
-        } else {
-            return false;
-        }
-
-        //float x = enemy.getPositionX();
-        //float y = enemy.floatgetPositionY();
-        //if(Math.pow(x - cameraPosition.x, 2) + Math.pow(y - cameraPosition.y, 2) <= Math.pow(COLLECT_RANGE, 2))
-
-    }
-    */
 
     @Override
     public void act(float delta){
         switch (kejargak){
             case KEJAR:
                 //currentAngle = (float) Math.cos(eelbatPositionX/eelbatPositionRadius);
-                x = (float) Math.cos(eelbatPositionX-x/eelbatPositionRadius)*SPEED_ENEMY;
-                y = (float) Math.sin(eelbatPositionY-y/eelbatPositionRadius)*SPEED_ENEMY;
-
+                x += Math.cos(eelbatPositionX-x/eelbatPositionRadius)*SPEED_ENEMY*delta;
+                y += Math.sin(eelbatPositionY-y/eelbatPositionRadius)*SPEED_ENEMY*delta;
+                Gdx.app.log("kejarTag","delta: "+delta+" x: "+x+" y: "+y);
+                Gdx.app.log("eelbaTag","delta: "+delta+" a: "+eelbatPositionX+" b: "+eelbatPositionY);
                 break;
             case GAK:
                 if(!fixed || Math.pow(x - TARGET_X, 2) + Math.pow(y - TARGET_Y, 2) <= Math.pow(CLOSE_RADIUS, 2)) {
@@ -111,10 +85,9 @@ public class Enemy extends Actor {
                 }
                 x += delta*Math.cos(currentAngle/180*Math.PI)*SPEED_ENEMY;
                 y += delta*Math.sin(currentAngle/180*Math.PI)*SPEED_ENEMY;
+
                 break;
         }
-
-
     }
 
     public float getEnemyPositionX(){
