@@ -59,6 +59,8 @@ public class Assets {
     static Sound pick;
     static Sound pick2;
     static Sound hit;
+    static Sound fail;
+    static Sound success;
 
     int jumlahTextureBawah = 10;
     int jumlahTextureAtas = 20;
@@ -152,6 +154,8 @@ public class Assets {
         pick = Gdx.audio.newSound(Gdx.files.internal("sfx/eatbuahajaib.wav"));
         pick2 = Gdx.audio.newSound(Gdx.files.internal("sfx/eatbuahlaut.wav"));
         hit = Gdx.audio.newSound(Gdx.files.internal("sfx/die1.wav"));
+        fail = Gdx.audio.newSound(Gdx.files.internal("sfx/death.wav"));
+        success = Gdx.audio.newSound(Gdx.files.internal("sfx/wincry.wav"));
 
         //home
         btnHome = new AssetDescriptor<Texture>("buttons/home-btn.png", Texture.class, textureParameter);

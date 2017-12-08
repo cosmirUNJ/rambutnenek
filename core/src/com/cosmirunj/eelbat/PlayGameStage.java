@@ -33,8 +33,8 @@ class PlayGameStage extends Stage {
     private HashSet<Integer> targetsFound;
     private ArrayList<Fruits> collectedTargets, collectedBuffs;
     static final int TOTAL_MF1 = 1;
-    static final int TOTAL_MF2 = 1;
-    static final int TOTAL_MF3 = 1;
+    static final int TOTAL_MF2 = 0;
+    static final int TOTAL_MF3 = 0;
     private final int MAX_RADIUS_X = 5*EelbatCosmir.WIDTH;
     private final int MAX_RADIUS_Y = 5*EelbatCosmir.HEIGHT;
 
@@ -46,6 +46,7 @@ class PlayGameStage extends Stage {
     private float touchpadXnya;
     private float touchpadYnya;
     private Touchpad touchpad;
+    private int level;
     private Vector3 cameraPosition;
     private BackgroundTiles backgroundTiles;
     private float x = 0;
@@ -68,7 +69,7 @@ class PlayGameStage extends Stage {
 
     FORM form;
 
-    public PlayGameStage(Viewport gameViewport, EelbatCosmir eelbatCosmir, PlayHUDStage playHUDStage, float touchpadXnya, float touchpadYnya, Touchpad touchpad) {
+    public PlayGameStage(Viewport gameViewport, EelbatCosmir eelbatCosmir, PlayHUDStage playHUDStage, float touchpadXnya, float touchpadYnya, Touchpad touchpad, int level) {
         super(gameViewport, eelbatCosmir.batch);
         this.playHUDStage = playHUDStage;
         this.eelbatCosmir = eelbatCosmir;
@@ -83,6 +84,8 @@ class PlayGameStage extends Stage {
         this.touchpadXnya = touchpadXnya;
         this.touchpadYnya = touchpadYnya;
         this.touchpad = touchpad;
+
+        this.level = level;
 
         cameraPosition = getViewport().getCamera().position;
 
@@ -316,6 +319,9 @@ class PlayGameStage extends Stage {
     public void act(float delta) {
         updateLocation(delta);
         time -= delta;
+        if(time < 0) {
+            eelbatCosmir.setScreen(new FinishedScreen(eelbatCosmir, false, level));
+        }
         if(buffPicked){
             respawningTime -= delta;
         }
@@ -350,6 +356,7 @@ class PlayGameStage extends Stage {
             playHUDStage.healthRestored();
             if(targets.size() == 0) {
                 //ggj2017.setScreen(new FinishedScreen(ggj2017, true));
+                eelbatCosmir.setScreen(new FinishedScreen(eelbatCosmir, true, level));
             }
         }
 
