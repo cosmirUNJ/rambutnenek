@@ -121,6 +121,9 @@ class PlayHUDStage extends Stage {
 
     public void healthRestored() {
         lives++;
+        if(lives > 4) {
+            lives = 4;
+        }
         bar.remove();
         if(lives == 3) {
             bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar2));
@@ -139,7 +142,7 @@ class PlayHUDStage extends Stage {
 
     void gotHit() {
         if(lives == 0) {
-            //ggj2017.setScreen(new FinishedScreen(ggj2017, false));
+            eelbatCosmir.setScreen(new FinishedScreen(eelbatCosmir, false, 1));
         }
         lives--;
         bar.remove();
