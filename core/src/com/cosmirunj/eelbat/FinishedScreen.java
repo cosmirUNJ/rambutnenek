@@ -34,10 +34,10 @@ public class FinishedScreen implements Screen {
         viewport = new FillViewport(EelbatCosmir.WIDTH, EelbatCosmir.HEIGHT, camera);
         stage = new GameOverStage(viewport, eelbatCosmir, completed, level);
         if(!completed){
-            //Assets.death.play();
+            Assets.fail.play();
         }
         else{
-            //Assets.wincry.play();
+            Assets.success.play();
         }
         Gdx.input.setInputProcessor(stage);
     }
