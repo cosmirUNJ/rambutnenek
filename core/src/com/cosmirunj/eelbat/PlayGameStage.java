@@ -427,7 +427,7 @@ class PlayGameStage extends Stage {
             if(playHUDStage.getLives() > 0) {
                 Assets.hit.play();
             }
-            //fixedEnemies.get(k).remove(enemyHit);
+            fixedEnemies.get(k).remove(enemyHit);
             enemyHit.remove();
             time -= 30;
             playHUDStage.gotHit();
