@@ -78,6 +78,9 @@ class PlayScreen implements Screen {
     Slider pathOffset;
 
     public PlayScreen(EelbatCosmir eelbatCosmir, int level) {
+        float widthScreen = Gdx.graphics.getWidth();
+        float heightScreen = Gdx.graphics.getHeight();
+
         this.eelbatCosmir = eelbatCosmir;
         this.level = level;
         isPaused = false;
@@ -108,7 +111,7 @@ class PlayScreen implements Screen {
         //bound, bound, width dan height background
         touchpad.setBounds(15,15,75,75);
         //lokasi
-        touchpad.setPosition(25,25);
+        touchpad.setPosition(widthScreen*0.05F, heightScreen*0.05F);
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         viewport = new FillViewport(eelbatCosmir.WIDTH, eelbatCosmir.HEIGHT, camera);
@@ -425,11 +428,15 @@ class PlayScreen implements Screen {
     }
 
     public void ButtonSkill(){
+
+        float widthScreen = Gdx.graphics.getWidth();
+        float heightScreen = Gdx.graphics.getHeight();
+
         Texture BtnSkill = eelbatCosmir.assets.getTexture(Assets.btnSkill);
         TextureRegionDrawable BtnImageSkill = new TextureRegionDrawable(new TextureRegion(BtnSkill));
         ButtonSkill = new ImageButton(BtnImageSkill);
         ButtonSkill.setSize(BtnSkill.getWidth(),BtnSkill.getHeight());
-        ButtonSkill.setPosition(725, 25);
+        ButtonSkill.setPosition(widthScreen*0.75F, heightScreen*0.05F);
         ButtonSkill.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -449,11 +456,14 @@ class PlayScreen implements Screen {
     }
 
     public void ButtonWave(){
+        float widthScreen = Gdx.graphics.getWidth();
+        float heightScreen = Gdx.graphics.getHeight();
+
         Texture BtnWave = eelbatCosmir.assets.getTexture(Assets.btnWave);
         TextureRegionDrawable BtnImageWave = new TextureRegionDrawable(new TextureRegion(BtnWave));
         ButtonWave = new ImageButton(BtnImageWave);
         ButtonWave.setSize(BtnWave.getWidth(),BtnWave.getHeight());
-        ButtonWave.setPosition(800, 75);
+        ButtonWave.setPosition(widthScreen*0.83F, heightScreen*0.15F);
         ButtonWave.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
