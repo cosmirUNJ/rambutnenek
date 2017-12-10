@@ -19,10 +19,10 @@ public class Aksesoris extends Actor {
     private float currentAngle;
     private Texture enemyJelly, shadowEnemy;
     private final int SHADOW_OFFSET = 150;
-    private boolean fixed;
+    //private boolean fixed;
 
-    public Aksesoris(Assets assets, float x, float y, boolean fixed){
-        this.fixed = fixed;
+    public Aksesoris(Assets assets, float x, float y){
+        //this.fixed = fixed;
         TARGET_X = x;
         TARGET_Y = y;
         this.x = x + (EelbatCosmir.random.nextInt(2*CLOSE_RADIUS)-CLOSE_RADIUS);
@@ -40,7 +40,7 @@ public class Aksesoris extends Actor {
 
     @Override
     public void act(float delta){
-        if(!fixed || Math.pow(x - TARGET_X, 2) + Math.pow(y - TARGET_Y, 2) <= Math.pow(CLOSE_RADIUS, 2)) {
+        if(Math.pow(x - TARGET_X, 2) + Math.pow(y - TARGET_Y, 2) <= Math.pow(CLOSE_RADIUS, 2)) {
             currentAngle += delta*(EelbatCosmir.random.nextFloat()*2*MAX_ANGLE_CHANGE - MAX_ANGLE_CHANGE);
         } else {
             if((x - TARGET_X)*Math.sin(currentAngle/180*Math.PI) - (y - TARGET_Y)*Math.cos(currentAngle/180*Math.PI) >= 0) {
@@ -66,8 +66,4 @@ public class Aksesoris extends Actor {
     public float floatgetPositionY(){
         return y;
     }
-    void unfix(){
-        fixed = false;
-    }
-
 }

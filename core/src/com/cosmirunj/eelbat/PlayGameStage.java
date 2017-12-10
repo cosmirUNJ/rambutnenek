@@ -3,6 +3,7 @@ package com.cosmirunj.eelbat;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
@@ -24,7 +25,7 @@ class PlayGameStage extends Stage {
     private final int ATTACK_RANGE = 200;
     private final int COLLECT_RANGE = 150;
     private final int CLOSE_RADIUS = 800;
-    private EnemyList enemyList;
+    //private EnemyList enemyList;
 
 
     private ArrayList<Fruits> targets, mapBuff;
@@ -122,7 +123,7 @@ class PlayGameStage extends Stage {
             Set<Enemy> enemyGroup = new HashSet<Enemy>();
             int k = 7 + EelbatCosmir.random.nextInt(8);
             for(int j = 0; j < k; j++) {
-                Enemy enemy = new Enemy(eelbatCosmir.assets, x, y, true);
+                Enemy enemy = new Enemy(eelbatCosmir.assets, x, y);
                 enemyGroup.add(enemy);
                 addActor(enemy);//1
             }
@@ -132,7 +133,7 @@ class PlayGameStage extends Stage {
         for(int i = 0; i < 50; i++) {
             float x = EelbatCosmir.random.nextInt(2 * MAX_RADIUS_X) - MAX_RADIUS_X;
             float y = EelbatCosmir.random.nextInt(2 * MAX_RADIUS_Y) - MAX_RADIUS_Y;
-            Aksesoris aksesoris = new Aksesoris(eelbatCosmir.assets, x, y, false);
+            Aksesoris aksesoris = new Aksesoris(eelbatCosmir.assets, x, y);
             freeEnemies.add(aksesoris);
             addActor(aksesoris);
         }
@@ -258,7 +259,7 @@ class PlayGameStage extends Stage {
         }
 
         checkCollisions();
-        checkRadiusEnemy();
+        checkRadiusEnemy(delta);
 
     }
 
@@ -269,7 +270,7 @@ class PlayGameStage extends Stage {
         return cameraPosition.y;
     }
 
-    public boolean checkRadiusEnemy() {
+    public boolean checkRadiusEnemy(float delta) {
         /*
         if(Math.pow(x,2)+Math.pow(y,2) <= Math.pow(CLOSE_RADIUS,2)){
             return true;
@@ -287,15 +288,37 @@ class PlayGameStage extends Stage {
                 float x = enemy.getEnemyPositionX();
                 float y = enemy.getEnemyPositionY();
                 if(Math.pow(x-cameraPosition.x,2)+Math.pow(y-cameraPosition.y,2) <= Math.pow(CLOSE_RADIUS,2)){
+
+//                    Vector2 awal = new Vector2();
+//                    Vector2 akhir = new Vector2();
+//                    Vector2 velocity = new Vector2();
+//                    Vector2 movemnt = new Vector2();
+//                    Vector2 arah = new Vector2();
+//
+//                    akhir.set(cameraPosition.x,cameraPosition.y);
+//                    awal.set(enemy.getEnemyPositionX(),enemy.getEnemyPositionY());
+//                    arah.set(akhir).sub(awal).nor();
+//                    velocity.set(arah).scl(enemy.getSpeedEnemy());
+//                    movemnt.set(velocity).scl(delta);
+//                    if(awal.dst2(akhir) > movemnt.len2()){
+//                        awal.add(movemnt);
+//                    } else {
+//                        awal.set(akhir);
+//                    }
+//                    x = awal.x;
+//                    y = awal.y;
+
                     //enemyRadius = enemy;
                     //zz = i;
-                    double radiusnya = Math.sqrt(Math.pow(x-characterEelBat.getPositionEelbatX(),2)+Math.pow(y-characterEelBat.getPositionEelbatY(),2));
-                    enemy.setStateEnemy(Enemy.KEJARGAK.KEJAR, characterEelBat.getPositionEelbatX(), characterEelBat.getPositionEelbatY(), (float) radiusnya);
+                    //double radiusnya = Math.sqrt(Math.pow(x-characterEelBat.getPositionEelbatX(),2)+Math.pow(y-characterEelBat.getPositionEelbatY(),2));
+                    //double fixAngle = Math.atan2(y-cameraPosition.y,x-cameraPosition.x);
+                    //enemy.setStateEnemy(Enemy.KEJARGAK.KEJAR, characterEelBat.getPositionEelbatX(), characterEelBat.getPositionEelbatY(), (float) radiusnya, fixAngle);
+                    enemy.setStateEnemy(Enemy.KEJARGAK.KEJAR, cameraPosition.x, cameraPosition.y);
                     //fixedEnemies.get(zz).
                     //Gdx.app.log("myTag","kenakenaknea"+fixedEnemies.get(i));
-                    break;
+                    //break;
                 } else {
-                    enemy.setStateEnemy(Enemy.KEJARGAK.GAK, 0, 0, 0);
+                    enemy.setStateEnemy(Enemy.KEJARGAK.GAK, 0, 0);
                 }
             }
         }
@@ -320,7 +343,7 @@ class PlayGameStage extends Stage {
                 Set<Enemy> enemyGroup = new HashSet<Enemy>();
                 int k = 7 + EelbatCosmir.random.nextInt(8);
                 for(int j = 0; j < k; j++) {
-                    Enemy enemy = new Enemy(eelbatCosmir.assets, x, y, true);
+                    Enemy enemy = new Enemy(eelbatCosmir.assets, x, y);
                     enemyGroup.add(enemy);
                     addActor(enemy);//2
                 }
@@ -340,7 +363,7 @@ class PlayGameStage extends Stage {
                 Set<Enemy> enemyGroup = new HashSet<Enemy>();
                 int k = 7 + EelbatCosmir.random.nextInt(8);
                 for(int j = 0; j < k; j++) {
-                    Enemy enemy = new Enemy(eelbatCosmir.assets, x, y, true);
+                    Enemy enemy = new Enemy(eelbatCosmir.assets, x, y);
                     enemyGroup.add(enemy);
                     addActor(enemy);//3
                 }
@@ -388,9 +411,6 @@ class PlayGameStage extends Stage {
                 Assets.pick.play();
                 fruit.deactivate();
                 targets.remove(fruit);
-                for(Enemy enemy : fixedEnemies.get(fruit.getId())) {
-                    enemy.unfix();
-                }
             }
             //playHUDStage.setTargetsFound(TOTAL_MF1 - targets.size());
             time += 30;
