@@ -19,7 +19,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
@@ -464,7 +466,7 @@ class PlayScreen implements Screen {
         float widthScreen = Gdx.graphics.getWidth();
         float heightScreen = Gdx.graphics.getHeight();
 
-        Texture BtnSonar = eelbatCosmir.assets.getTexture(Assets.btnSonar);
+        final Texture BtnSonar = eelbatCosmir.assets.getTexture(Assets.btnSonar);
         TextureRegionDrawable BtnImageSonar = new TextureRegionDrawable(new TextureRegion(BtnSonar));
         ButtonSonar = new ImageButton(BtnImageSonar);
         ButtonSonar.setSize(BtnSonar.getWidth(),BtnSonar.getHeight());
@@ -472,7 +474,9 @@ class PlayScreen implements Screen {
         ButtonSonar.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                //di sini isi apa?
+                ButtonSonar.remove();
+
+
                 return sendMainWave();
             }
 
