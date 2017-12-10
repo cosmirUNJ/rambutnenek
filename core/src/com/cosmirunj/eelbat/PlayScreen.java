@@ -50,6 +50,7 @@ class PlayScreen implements Screen {
     private SpriteBatch batch;
     private final EelbatCosmir eelbatCosmir;
     private int level;
+    private int difficulty;
     private Aksesoris aksesoris;
 
     private PlayScreenStage stage2;
@@ -76,9 +77,10 @@ class PlayScreen implements Screen {
     final boolean openPath = false;
     Slider pathOffset;
 
-    public PlayScreen(EelbatCosmir eelbatCosmir, int level) {
+    public PlayScreen(EelbatCosmir eelbatCosmir, int level, int difficulty) {
         this.eelbatCosmir = eelbatCosmir;
         this.level = level;
+        this.difficulty = difficulty;
         isPaused = false;
 
         ButtonStage=new Stage();
@@ -123,11 +125,11 @@ class PlayScreen implements Screen {
 
         OrthographicCamera hudCamera = new OrthographicCamera();
         hudViewport = new FillViewport(eelbatCosmir.WIDTH, eelbatCosmir.HEIGHT, hudCamera);
-        playHUD = new PlayHUDStage(this, hudViewport, eelbatCosmir);
+        playHUD = new PlayHUDStage(this, hudViewport, eelbatCosmir, level, difficulty);
 
         OrthographicCamera gameCamera = new OrthographicCamera();
         gameViewport = new FillViewport(eelbatCosmir.WIDTH,eelbatCosmir.HEIGHT, gameCamera);
-        gameStage = new PlayGameStage(gameViewport, eelbatCosmir, playHUD, touchpadXnya, touchpadYnya, touchpad, level);
+        gameStage = new PlayGameStage(gameViewport, eelbatCosmir, playHUD, touchpadXnya, touchpadYnya, touchpad, level, difficulty);
 
 
         Gdx.input.setInputProcessor(stage);

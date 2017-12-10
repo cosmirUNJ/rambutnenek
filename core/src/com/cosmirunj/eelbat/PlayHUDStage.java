@@ -21,6 +21,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 class PlayHUDStage extends Stage {
     private EelbatCosmir eelbatCosmir;
     private PlayScreen playScreen;
+    private int level;
+    private int difficulty;
     private Label timeLabel;
     private Label.LabelStyle timeLabelStyle;
 
@@ -37,10 +39,12 @@ class PlayHUDStage extends Stage {
     private int lives;
 
 
-    public PlayHUDStage(PlayScreen playScreen, Viewport hudViewport, EelbatCosmir eelbatCosmir) {
+    public PlayHUDStage(PlayScreen playScreen, Viewport hudViewport, EelbatCosmir eelbatCosmir, int level, int difficulty) {
         super(hudViewport, eelbatCosmir.batch);
         this.playScreen = playScreen;
         this.eelbatCosmir = eelbatCosmir;
+        this.level = level;
+        this.difficulty = difficulty;
 
         timeLabelStyle = new Label.LabelStyle();
         timeLabelStyle.font = eelbatCosmir.assets.getBitmapFont(Assets.bitmapFontMedium);
@@ -142,7 +146,7 @@ class PlayHUDStage extends Stage {
 
     void gotHit() {
         if(lives == 0) {
-            eelbatCosmir.setScreen(new FinishedScreen(eelbatCosmir, false, 1));
+            eelbatCosmir.setScreen(new FinishedScreen(eelbatCosmir, false, level, difficulty));
         }
         lives--;
         bar.remove();

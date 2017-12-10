@@ -26,6 +26,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 class MainMenu implements Screen {
     private final String TAG = "MainMenuScreen";
     private int initial_level = 1;
+    private int easy = 1;
+    private int medium = 2;
+    private int hard = 3;
     private MainMenuStage stage;
     private Viewport viewport;
     private EelbatCosmir eelbatCosmir;
@@ -165,7 +168,7 @@ class MainMenu implements Screen {
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 ButtonEasy.getImage().setColor(Color.WHITE);
                 super.touchUp(event, x, y, pointer, button);
-                eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir, initial_level));
+                eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir, initial_level, easy));
             }
         });
 
@@ -190,7 +193,7 @@ class MainMenu implements Screen {
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 ButtonMedium.getImage().setColor(Color.WHITE);
                 super.touchUp(event, x, y, pointer, button);
-                eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir, initial_level));
+                eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir, initial_level, medium));
             }
         });
 
@@ -215,7 +218,7 @@ class MainMenu implements Screen {
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 ButtonHard.getImage().setColor(Color.WHITE);
                 super.touchUp(event, x, y, pointer, button);
-                eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir, initial_level));
+                eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir, initial_level, hard));
             }
         });
 

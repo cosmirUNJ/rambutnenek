@@ -47,6 +47,7 @@ class PlayGameStage extends Stage {
     private float touchpadYnya;
     private Touchpad touchpad;
     private int level;
+    private int difficulty;
     private Vector3 cameraPosition;
     private BackgroundTiles backgroundTiles;
     private float x = 0;
@@ -69,7 +70,7 @@ class PlayGameStage extends Stage {
 
     FORM form;
 
-    public PlayGameStage(Viewport gameViewport, EelbatCosmir eelbatCosmir, PlayHUDStage playHUDStage, float touchpadXnya, float touchpadYnya, Touchpad touchpad, int level) {
+    public PlayGameStage(Viewport gameViewport, EelbatCosmir eelbatCosmir, PlayHUDStage playHUDStage, float touchpadXnya, float touchpadYnya, Touchpad touchpad, int level, int difficulty) {
         super(gameViewport, eelbatCosmir.batch);
         this.playHUDStage = playHUDStage;
         this.eelbatCosmir = eelbatCosmir;
@@ -86,6 +87,7 @@ class PlayGameStage extends Stage {
         this.touchpad = touchpad;
 
         this.level = level;
+        this.difficulty = difficulty;
 
         cameraPosition = getViewport().getCamera().position;
 
@@ -320,7 +322,7 @@ class PlayGameStage extends Stage {
         updateLocation(delta);
         time -= delta;
         if(time < 0) {
-            eelbatCosmir.setScreen(new FinishedScreen(eelbatCosmir, false, level));
+            eelbatCosmir.setScreen(new FinishedScreen(eelbatCosmir, false, level, difficulty));
         }
         if(buffPicked){
             respawningTime -= delta;
@@ -356,7 +358,7 @@ class PlayGameStage extends Stage {
             playHUDStage.healthRestored();
             if(targets.size() == 0) {
                 //ggj2017.setScreen(new FinishedScreen(ggj2017, true));
-                eelbatCosmir.setScreen(new FinishedScreen(eelbatCosmir, true, level));
+                eelbatCosmir.setScreen(new FinishedScreen(eelbatCosmir, true, level, difficulty));
             }
         }
 

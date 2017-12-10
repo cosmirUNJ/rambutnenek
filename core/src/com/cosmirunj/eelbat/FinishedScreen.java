@@ -20,19 +20,21 @@ public class FinishedScreen implements Screen {
     private Viewport viewport;
     private EelbatCosmir eelbatCosmir;
     private int level;
+    private int difficulty;
     boolean completed;
     String message;
     String message2;
 
-    public FinishedScreen(EelbatCosmir eelbatCosmir, boolean completed, int level) {
+    public FinishedScreen(EelbatCosmir eelbatCosmir, boolean completed, int level, int difficulty) {
         Assets.playmusic.stop();
         //Assets.steps.stop();
         this.eelbatCosmir = eelbatCosmir;
         this.level = level;
+        this.difficulty = difficulty;
         this.completed = completed;
         OrthographicCamera camera = new OrthographicCamera();
         viewport = new FillViewport(EelbatCosmir.WIDTH, EelbatCosmir.HEIGHT, camera);
-        stage = new GameOverStage(viewport, eelbatCosmir, completed, level);
+        stage = new GameOverStage(viewport, eelbatCosmir, completed, level, difficulty);
         if(!completed){
             Assets.fail.play();
         }
@@ -55,9 +57,9 @@ public class FinishedScreen implements Screen {
         stage.draw();
         if(Gdx.input.justTouched()) {
             if(completed){
-                eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir, (level+1)));
+                eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir, (level+1), difficulty));
             }else{
-                eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir, level));
+                eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir, level, difficulty));
             }
         }
     }
@@ -88,7 +90,7 @@ public class FinishedScreen implements Screen {
     }
 
     private class GameOverStage extends Stage {
-        public GameOverStage(Viewport viewport, final EelbatCosmir eelbatCosmir, boolean completed, int level) {
+        public GameOverStage(Viewport viewport, final EelbatCosmir eelbatCosmir, boolean completed, int level, int difficulty) {
             super(viewport, eelbatCosmir.batch);
             Texture backgroundTexture = eelbatCosmir.assets.getTexture(completed ? Assets.levelComplete : Assets.gameOver);
             addActor(new Image(backgroundTexture));
