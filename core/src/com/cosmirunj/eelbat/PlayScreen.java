@@ -5,6 +5,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ai.steer.behaviors.FollowPath;
 import com.badlogic.gdx.ai.steer.utils.paths.LinePath;
+import com.badlogic.gdx.assets.AssetDescriptor;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -16,6 +18,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -27,6 +30,8 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cosmirunj.eelbat.AI.EnemySteeringActor;
+
+import static com.cosmirunj.eelbat.Assets.btnSkillActive;
 
 /**
  * Created by Inovatif on 10/18/2017.
@@ -56,7 +61,7 @@ class PlayScreen implements Screen {
     private Label pauseLabel;
     private Label.LabelStyle pauseLabelStyle;
     private ImageButton ButtonHome, ButtonAlas, ButtonResume, ButtonReplay, ButtonSetting, ButtonExit;
-    private ImageButton ButtonSkill, ButtonWave;
+    private ImageButton ButtonSkill, ButtonSonar;
     private Stage ButtonStage;
     boolean btnPause;
     private MODE_GAME mode_game;
@@ -459,14 +464,15 @@ class PlayScreen implements Screen {
         float widthScreen = Gdx.graphics.getWidth();
         float heightScreen = Gdx.graphics.getHeight();
 
-        Texture BtnWave = eelbatCosmir.assets.getTexture(Assets.btnWave);
-        TextureRegionDrawable BtnImageWave = new TextureRegionDrawable(new TextureRegion(BtnWave));
-        ButtonWave = new ImageButton(BtnImageWave);
-        ButtonWave.setSize(BtnWave.getWidth(),BtnWave.getHeight());
-        ButtonWave.setPosition(widthScreen*0.83F, heightScreen*0.15F);
-        ButtonWave.addListener(new InputListener(){
+        Texture BtnSonar = eelbatCosmir.assets.getTexture(Assets.btnSonar);
+        TextureRegionDrawable BtnImageSonar = new TextureRegionDrawable(new TextureRegion(BtnSonar));
+        ButtonSonar = new ImageButton(BtnImageSonar);
+        ButtonSonar.setSize(BtnSonar.getWidth(),BtnSonar.getHeight());
+        ButtonSonar.setPosition(widthScreen*0.83F, heightScreen*0.15F);
+        ButtonSonar.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                //di sini isi apa?
                 return sendMainWave();
             }
 
@@ -476,7 +482,7 @@ class PlayScreen implements Screen {
             }
         });
 
-        ButtonStage.addActor(ButtonWave);
+        ButtonStage.addActor(ButtonSonar);
         Gdx.input.setInputProcessor(ButtonStage);
     }
 
