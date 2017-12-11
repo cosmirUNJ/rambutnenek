@@ -127,7 +127,7 @@ public class Enemy extends Actor {
     public float getEnemyPositionY(){
         return y;
     }
-    public int getSpeedEnemy() { return SPEED_ENEMY; }
+    //public int getSpeedEnemy() { return SPEED_ENEMY; }
 
     enum KEJARGAK{
         GAK, KEJAR
