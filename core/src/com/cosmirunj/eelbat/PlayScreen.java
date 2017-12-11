@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -26,6 +27,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
@@ -64,6 +67,12 @@ class PlayScreen implements Screen {
     private Label.LabelStyle pauseLabelStyle;
     private ImageButton ButtonHome, ButtonAlas, ButtonResume, ButtonReplay, ButtonSetting, ButtonExit;
     private ImageButton ButtonSkill, ButtonSonar;
+    private TextureRegionDrawable sonarIdle, sonarActive, sonarCooldown;
+
+    private Button.ButtonStyle buttonStyle;
+    private Button sonarButtonAndroid;
+    private boolean sonarButtonActive;
+
     private Stage ButtonStage;
     boolean btnPause;
     private MODE_GAME mode_game;
@@ -83,6 +92,8 @@ class PlayScreen implements Screen {
 
     final boolean openPath = false;
     Slider pathOffset;
+
+
 
     public PlayScreen(EelbatCosmir eelbatCosmir, int level) {
         float widthScreen = Gdx.graphics.getWidth();
@@ -151,6 +162,7 @@ class PlayScreen implements Screen {
         ButtonPause();
         ButtonSkill();
         ButtonWave();
+        enableSonarButton();
     }
 
     boolean sendMainWave() {
@@ -466,28 +478,35 @@ class PlayScreen implements Screen {
         float widthScreen = Gdx.graphics.getWidth();
         float heightScreen = Gdx.graphics.getHeight();
 
-        final Texture BtnSonar = eelbatCosmir.assets.getTexture(Assets.btnSonar);
-        TextureRegionDrawable BtnImageSonar = new TextureRegionDrawable(new TextureRegion(BtnSonar));
-        ButtonSonar = new ImageButton(BtnImageSonar);
-        ButtonSonar.setSize(BtnSonar.getWidth(),BtnSonar.getHeight());
-        ButtonSonar.setPosition(widthScreen*0.83F, heightScreen*0.15F);
-        ButtonSonar.addListener(new InputListener(){
+        sonarIdle = new TextureRegionDrawable(new TextureRegion(eelbatCosmir.assets.getTexture(Assets.btnSonar)));
+        sonarActive = new TextureRegionDrawable(new TextureRegion(eelbatCosmir.assets.getTexture(Assets.btnSonarActive)));
+        sonarCooldown = new TextureRegionDrawable(new TextureRegion(eelbatCosmir.assets.getTexture(Assets.btnSonarCooldown)));
+
+        buttonStyle = new Button.ButtonStyle();
+        buttonStyle.up = sonarIdle;
+        buttonStyle.down = sonarActive;
+        sonarButtonAndroid = new Button(buttonStyle);
+        sonarButtonActive = true;
+
+        sonarButtonAndroid.addListener(new ChangeListener() {
             @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                ButtonSonar.remove();
-
-
-                return sendMainWave();
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-
+            public void changed(ChangeEvent event, Actor actor) {
+                sendMainWave();
             }
         });
 
-        ButtonStage.addActor(ButtonSonar);
+        sonarButtonAndroid.setPosition(widthScreen*0.83F, heightScreen*0.15F);
+        ButtonStage.addActor(sonarButtonAndroid);
         Gdx.input.setInputProcessor(ButtonStage);
+
+    }
+
+    void enableSonarButton() {
+        if(Gdx.app.getType() == Application.ApplicationType.Android) {
+            buttonStyle.up = sonarIdle;
+            buttonStyle.down = sonarActive;
+        }
+        sonarButtonActive = true;
     }
 
     public enum MODE_GAME{MULAI, PAUSEE}
