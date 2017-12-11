@@ -36,11 +36,22 @@ class PlayHUDStage extends Stage {
     private Image bar;
     private int lives;
 
+    private Image smallHole, bigHole;
+    private int smallHoleTime;
+
 
     public PlayHUDStage(PlayScreen playScreen, Viewport hudViewport, EelbatCosmir eelbatCosmir) {
         super(hudViewport, eelbatCosmir.batch);
         this.playScreen = playScreen;
         this.eelbatCosmir = eelbatCosmir;
+
+        smallHole = new Image(eelbatCosmir.assets.getTexture(Assets.smallHole));
+        smallHole.setOrigin(smallHole.getWidth()/2, smallHole.getHeight()/2);
+        addActor(smallHole);
+        //smallHoleTime = 0;
+
+        bigHole = new Image(eelbatCosmir.assets.getTexture(Assets.bigHole));
+        addActor(bigHole);
 
         timeLabelStyle = new Label.LabelStyle();
         timeLabelStyle.font = eelbatCosmir.assets.getBitmapFont(Assets.bitmapFontMedium);
@@ -94,7 +105,14 @@ class PlayHUDStage extends Stage {
         sonarImageDesktop.setVisible(true);
     }
 
-
+//    @Override
+//    public void act(float delta){
+//        smallHoleTime += 6*delta;
+//        if (smallHoleTime > 2*Math.PI)
+//            smallHoleTime -= 2*Math.PI;
+//        float scale = 1.01f + (float) Math.sin(smallHoleTime)*0.01f;
+//        smallHole.setScale(scale);
+//    }
 
     public void update(float time) {
         int timeInt = (int)Math.ceil(time);
@@ -162,7 +180,6 @@ class PlayHUDStage extends Stage {
     int getLives() {
         return lives;
     }
-
 
     enum RUN{STOP, SLOW, FAST}
 

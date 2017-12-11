@@ -56,7 +56,7 @@ public class Enemy extends Actor {
         this.kejargak = kejargak;
 
         if (kejargak == KEJARGAK.KEJAR){
-            Gdx.app.log("kenaTag","kenakenaknea");
+            //Gdx.app.log("kenaTag","kenakenaknea");
             //this.fixAngle = fixAngle;
             //eelbatPositionRadius = r;
             //eelbatPositionX = x;
@@ -74,21 +74,15 @@ public class Enemy extends Actor {
     public void act(float delta){
         switch (kejargak){
             case KEJAR:
+
                 awal.set(x,y);
-                arah.set(akhir).sub(awal).nor();
-                velocity.set(arah).scl(SPEED_ENEMY);
-                movemnt.set(velocity).scl(delta);
-                if(awal.dst2(akhir) > movemnt.len2()){
-                    awal.add(movemnt);
-                } else {
-                    awal.set(akhir);
-                }
-                x = awal.x;
-                y = awal.y;
+
+                dariXkeY(awal, akhir, delta);
+
                 //currentAngle = (float) Math.cos(eelbatPositionX/eelbatPositionRadius);
                 //x -= Math.cos(fixAngle/180*Math.PI)*SPEED_ENEMY*delta;
                 //y -= Math.sin(fixAngle/180*Math.PI)*SPEED_ENEMY*delta;
-                Gdx.app.log("kejarTag","delta: "+delta+" x: "+x+" y: "+y);
+                //Gdx.app.log("kejarTag","delta: "+delta+" x: "+x+" y: "+y);
                 //Gdx.app.log("eelbaTag","delta: "+delta+" a: "+eelbatPositionX+" b: "+eelbatPositionY);
                 break;
             case GAK:
@@ -112,6 +106,19 @@ public class Enemy extends Actor {
 
                 break;
         }
+    }
+
+    public void dariXkeY(Vector2 mulai, Vector2 finis, float delta ){
+        arah.set(finis).sub(awal).nor();
+        velocity.set(arah).scl(SPEED_ENEMY);
+        movemnt.set(velocity).scl(delta);
+        if(mulai.dst2(finis) > movemnt.len2()){
+            mulai.add(movemnt);
+        } else {
+            mulai.set(akhir);
+        }
+        x = mulai.x;
+        y = mulai.y;
     }
 
     public float getEnemyPositionX(){
