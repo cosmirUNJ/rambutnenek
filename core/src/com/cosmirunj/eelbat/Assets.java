@@ -45,6 +45,8 @@ public class Assets {
 
     static AssetDescriptor<Texture> btnPlay, btnEasy, btnMedium, btnHard, btnSoundActive, btnSoundMute, btnReplayPlayScreen;
     static AssetDescriptor<Texture> btnSkill, btnSonar, btnSkillActive, btnSonarActive, btnSonarCooldown;
+    static AssetDescriptor<Texture> smallHole, bigHole;
+
 
     static AssetDescriptor<Texture>[] textureBawah;
     static AssetDescriptor<Texture>[] textureAtas;
@@ -92,6 +94,9 @@ public class Assets {
         fruit4 = new AssetDescriptor<Texture>("target/orange.png", Texture.class, textureParameter);
         fruit5 = new AssetDescriptor<Texture>("target/strawberry.png", Texture.class, textureParameter);
         fruit6 = new AssetDescriptor<Texture>("target/watermelon.png", Texture.class, textureParameter);
+
+        smallHole = new AssetDescriptor<Texture>("small-hole.png", Texture.class, textureParameter);
+        bigHole = new AssetDescriptor<Texture>("big-hole.png", Texture.class, textureParameter);
 
         //texture atas dan bawah ground nya
         textureAtas = new AssetDescriptor[jumlahTextureAtas];
@@ -203,6 +208,8 @@ public class Assets {
         manager.load(fruit4);
         manager.load(fruit5);
         manager.load(fruit6);
+        manager.load(smallHole);
+        manager.load(bigHole);
 
         //load texture tile atas dan bawh
         for (int i=0;i<jumlahTextureBawah;i++){

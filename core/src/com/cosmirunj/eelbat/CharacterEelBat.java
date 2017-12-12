@@ -305,6 +305,12 @@ public class CharacterEelBat extends Actor {
     public void act(float delta) {
 
     }
+    public float getPositionEelbatX(){
+        return  x;
+    }
+    public float getPositionEelbatY(){
+        return y;
+    }
 
     @Override
     public void draw(Batch batch, float parentAlpha){

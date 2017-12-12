@@ -38,7 +38,7 @@ public class EnemyList extends Stage{
             Set<Aksesoris> aksesorisGroup = new HashSet<Aksesoris>();
             int k = 7 + EelbatCosmir.random.nextInt(8);
             for(int j = 0; j < k; j++) {
-                Aksesoris aksesoris = new Aksesoris(eelbatCosmir.assets, x, y, true);
+                Aksesoris aksesoris = new Aksesoris(eelbatCosmir.assets, x, y);
                 aksesorisGroup.add(aksesoris);
                 addActor(aksesoris);
             }
@@ -48,7 +48,7 @@ public class EnemyList extends Stage{
         for(int i = 0; i < 50; i++) {
             float x = EelbatCosmir.random.nextInt(2 * MAX_RADIUS_X) - MAX_RADIUS_X;
             float y = EelbatCosmir.random.nextInt(2 * MAX_RADIUS_Y) - MAX_RADIUS_Y;
-            Aksesoris aksesoris = new Aksesoris(eelbatCosmir.assets, x, y, false);
+            Aksesoris aksesoris = new Aksesoris(eelbatCosmir.assets, x, y);
             freeEnemies.add(aksesoris);
             addActor(aksesoris);
         }
