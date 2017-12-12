@@ -64,7 +64,7 @@ class PlayHUDStage extends Stage {
 
         bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar1));
         bar.setSize(bar.getWidth(),bar.getHeight());
-        bar.setPosition((widthScreen/2)-(bar.getWidth()/2), heightScreen*0.92F);
+        bar.setPosition((widthScreen/2)-(bar.getWidth()/2), heightScreen-(bar.getHeight())-50);
         addActor(bar);
 
         sonarButtonActive = true;
