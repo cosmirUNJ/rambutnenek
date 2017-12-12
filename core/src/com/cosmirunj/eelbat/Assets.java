@@ -37,7 +37,7 @@ public class Assets {
     static AssetDescriptor<Texture> levelComplete, gameOver;
 
     static AssetDescriptor<BitmapFont> bitmapFontSmall, bitmapFontMedium, bitmapFontLarge;
-    static AssetDescriptor<Texture> bar1, bar2, bar3, bar4, bar5;
+    static AssetDescriptor<Texture> bar1, bar2, bar3, bar4, bar5, ability, damage;
     static AssetDescriptor<Texture> btnHome, btnAlas, btnResume, btnReplay, btnSetting, btnExit;
 
     static AssetDescriptor<Texture> enemyJelly,enemyFish,shadowEnemy;
@@ -153,6 +153,10 @@ public class Assets {
         bar4 = new AssetDescriptor<Texture>("bar/bb4.png", Texture.class, textureParameter);
         bar5 = new AssetDescriptor<Texture>("bar/bb5.png", Texture.class, textureParameter);
 
+        ability = new AssetDescriptor<Texture>("ability.png", Texture.class, textureParameter);
+        damage = new AssetDescriptor<Texture>("damage.png", Texture.class, textureParameter);
+
+
         levelComplete = new AssetDescriptor<Texture>("level-complete.png", Texture.class, textureParameter);
         gameOver = new AssetDescriptor<Texture>("gameover.png", Texture.class, textureParameter);
 
@@ -255,6 +259,9 @@ public class Assets {
         manager.load(btnHard);
         manager.load(btnSoundActive);
         manager.load(btnSoundMute);
+
+        manager.load(ability);
+        manager.load(damage);
 
         manager.load(btnReplayPlayScreen);
 
