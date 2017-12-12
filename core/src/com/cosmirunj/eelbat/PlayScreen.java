@@ -169,6 +169,9 @@ class PlayScreen implements Screen {
     boolean sendMainWave() {
         return gameStage.sendMainWave();
     }
+    void useAbility() {
+        gameStage.useAbility();
+    }
 
 
     @Override
@@ -454,19 +457,20 @@ class PlayScreen implements Screen {
 
         Texture BtnSkill = eelbatCosmir.assets.getTexture(Assets.btnSkill);
         TextureRegionDrawable BtnImageSkill = new TextureRegionDrawable(new TextureRegion(BtnSkill));
+
         ButtonSkill = new ImageButton(BtnImageSkill);
         ButtonSkill.setSize(BtnSkill.getWidth(),BtnSkill.getHeight());
         ButtonSkill.setPosition(widthScreen*0.75F, heightScreen*0.05F);
         ButtonSkill.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-
+                    useAbility();
                 return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-
+                super.touchUp(event, x, y, pointer, button);
             }
         });
 
