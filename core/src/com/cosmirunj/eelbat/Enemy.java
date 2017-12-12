@@ -33,9 +33,9 @@ public class Enemy extends Actor {
     Vector2 movemnt = new Vector2();
     Vector2 arah = new Vector2();
 
-    Vector2[] titikRute;
-    int JUMLAH_TITIK_RUTE = 4;
-    int nextX, nextY;
+//    Vector2[] titikRute;
+//    int JUMLAH_TITIK_RUTE = 4;
+//    int nextX, nextY;
 
     boolean punyaRute;
     public Enemy(Assets assets, float x, float y){
@@ -45,28 +45,28 @@ public class Enemy extends Actor {
         //SPEED_ENEMY = 0;
         //getViewport().getCamera().position;
 
-        punyaRute = EelbatCosmir.random.nextBoolean();
+
         TARGET_X = x;
         TARGET_Y = y;
         this.x = x + (EelbatCosmir.random.nextInt(2*CLOSE_RADIUS)-CLOSE_RADIUS);
         this.y = y + (EelbatCosmir.random.nextInt(2*CLOSE_RADIUS)-CLOSE_RADIUS);
-
-        titikRute = new Vector2[JUMLAH_TITIK_RUTE];
-        titikRute[0].set(x,y);
-        double nextAngle = Math.atan2(y-TARGET_Y,x-TARGET_X)+EelbatCosmir.random.nextInt(100);
-
-        for (int i=1;i<titikRute.length;i++){
-
-            while (nextAngle>360){
-                nextAngle-=360;
-            }
-            while (nextAngle<0){
-                nextAngle+=360;
-            }
-            nextX = (int) Math.cos(nextAngle/180*Math.PI*(EelbatCosmir.random.nextInt(2*CLOSE_RADIUS)-CLOSE_RADIUS));
-            nextY = (int) Math.sin(nextAngle/180*Math.PI)*(EelbatCosmir.random.nextInt(2*CLOSE_RADIUS)-CLOSE_RADIUS);
-            titikRute[i].set(nextX,nextY);
-        }
+//        punyaRute = EelbatCosmir.random.nextBoolean();
+//        titikRute = new Vector2[JUMLAH_TITIK_RUTE];
+//        titikRute[0].set(x,y);
+//        double nextAngle = Math.atan2(y-TARGET_Y,x-TARGET_X)+EelbatCosmir.random.nextInt(100);
+//
+//        for (int i=1;i<titikRute.length;i++){
+//
+//            while (nextAngle>360){
+//                nextAngle-=360;
+//            }
+//            while (nextAngle<0){
+//                nextAngle+=360;
+//            }
+//            nextX = (int) Math.cos(nextAngle/180*Math.PI*(EelbatCosmir.random.nextInt(2*CLOSE_RADIUS)-CLOSE_RADIUS));
+//            nextY = (int) Math.sin(nextAngle/180*Math.PI)*(EelbatCosmir.random.nextInt(2*CLOSE_RADIUS)-CLOSE_RADIUS);
+//            titikRute[i].set(nextX,nextY);
+//        }
 
         enemyFish = assets.getTexture(Assets.enemyFish);
         shadowEnemy = assets.getTexture(Assets.shadowEnemy);
