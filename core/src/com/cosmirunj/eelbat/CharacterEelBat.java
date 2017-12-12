@@ -309,9 +309,9 @@ public class CharacterEelBat extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha){
         elapsedTime += Gdx.graphics.getDeltaTime();
-        batch.draw(shadow, x-shadow.getWidth()/2,y-SHADOW_VERTICAL_OFFSET+100);
+        batch.draw(shadow, x-shadow.getWidth()/2,y-shadow.getHeight()/2);
         //batch.draw(eelbatchar,x,y);
-        batch.draw((TextureRegion)animation.getKeyFrame(elapsedTime,true),x-150,y);
+        batch.draw((TextureRegion)animation.getKeyFrame(elapsedTime,true),x-150,y-150);
     }
 
     private enum STATE{

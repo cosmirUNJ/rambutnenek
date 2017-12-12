@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -33,8 +34,8 @@ class PlayGameStage extends Stage {
     private HashSet<Integer> targetsFound;
     private ArrayList<Fruits> collectedTargets, collectedBuffs;
     static final int TOTAL_MF1 = 1;
-    static final int TOTAL_MF2 = 0;
-    static final int TOTAL_MF3 = 0;
+    static final int TOTAL_MF2 = 1;
+    static final int TOTAL_MF3 = 1;
     private final int MAX_RADIUS_X = 5*EelbatCosmir.WIDTH;
     private final int MAX_RADIUS_Y = 5*EelbatCosmir.HEIGHT;
 
@@ -57,6 +58,8 @@ class PlayGameStage extends Stage {
     private float time;
     private float respawningTime;
     private final int TOTAL_TIME = 3*60;
+    private float abilityDuration;
+    private float damageDuration;
 
     private float score;
     private final int TOTAL_SCORE = 200;
@@ -66,6 +69,12 @@ class PlayGameStage extends Stage {
     private Fruits buff;
     private boolean buffPicked;
     private int buffPickedCount;
+
+    private Image ability;
+    private Image damage;
+
+    private boolean abilityUsed;
+    private boolean doDamage;
 
     FORM form;
 
@@ -78,6 +87,8 @@ class PlayGameStage extends Stage {
         score = TOTAL_SCORE;
 
         respawningTime = 10;
+        abilityDuration = 1;
+        damageDuration = 1;
 
         shapeRenderer = new ShapeRenderer();
 
@@ -146,7 +157,17 @@ class PlayGameStage extends Stage {
         addActor(buff);
 
         buffPicked = false;
+        abilityUsed = false;
+        doDamage = false;
         buffPickedCount = 0;
+
+        ability = new Image(eelbatCosmir.assets.getTexture(Assets.ability));
+        ability.setVisible(false);
+        addActor(ability);
+
+        damage = new Image(eelbatCosmir.assets.getTexture(Assets.damage));
+        damage.setVisible(false);
+        addActor(damage);
 
         //backgroundTiles.update(x,y);
 
@@ -206,6 +227,10 @@ class PlayGameStage extends Stage {
             sendMainWave();
         }
 
+        if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+            useAbility();
+        }
+
         float sq = (float)Math.sqrt(2);
         if(direction == DIRECTION.RIGHT_UP || direction == DIRECTION.RIGHT_DOWN) {
             //x += delta*GGJ2017.RUN_SPEED/sq;
@@ -255,6 +280,18 @@ class PlayGameStage extends Stage {
             respawningBuff();
             buffPicked = false;
             respawningTime = 10*(buffPickedCount+1);
+        }
+
+        if(abilityDuration < 0){
+            abilityUsed = false;
+            abilityDuration = 1;
+            ability.setVisible(false);
+        }
+
+        if(damageDuration < 0){
+            doDamage = false;
+            damageDuration = 1;
+            damage.setVisible(false);
         }
 
         checkCollisions();
@@ -315,6 +352,20 @@ class PlayGameStage extends Stage {
         return canSend;
     }
 
+    void useAbility(){
+//        boolean canSend = mainWave == null;
+//        if(canSend) {
+//            Assets.waveOut.play(1.0f);
+//            ability = new Ability(this, cameraPosition.x, cameraPosition.y, true);
+//            addActor(mainWave);
+//        }
+//        return canSend;
+        Assets.waveOut.play(1.0f);
+        //Ability ability = new Ability(this, cameraPosition.x, cameraPosition.y);
+        //addActor(ability);
+        abilityUsed = true;
+    }
+
     @Override
     public void act(float delta) {
         updateLocation(delta);
@@ -324,6 +375,16 @@ class PlayGameStage extends Stage {
         }
         if(buffPicked){
             respawningTime -= delta;
+        }
+        if(abilityUsed){
+            abilityDuration -= delta;
+            ability.setVisible(true);
+            ability.setPosition(x - ability.getWidth()/2, y - ability.getHeight()/2);
+        }
+        if(doDamage){
+            damageDuration -= delta;
+            damage.setVisible(true);
+            damage.setPosition(x - damage.getWidth()/2, y - damage.getHeight()/2);
         }
         super.act(delta);
     }
@@ -384,8 +445,11 @@ class PlayGameStage extends Stage {
             }
             fixedEnemies.get(k).remove(enemyHit);
             enemyHit.remove();
-            time -= 30;
-            playHUDStage.gotHit();
+            if(!abilityUsed){
+                time -= 30;
+                playHUDStage.gotHit();
+                doDamage = true;
+            }
             //damage();
         }
 
