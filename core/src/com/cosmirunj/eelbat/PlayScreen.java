@@ -5,6 +5,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ai.steer.behaviors.FollowPath;
 import com.badlogic.gdx.ai.steer.utils.paths.LinePath;
+import com.badlogic.gdx.assets.AssetDescriptor;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -13,20 +15,28 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cosmirunj.eelbat.AI.EnemySteeringActor;
+
+import static com.cosmirunj.eelbat.Assets.btnSkillActive;
 
 /**
  * Created by Inovatif on 10/18/2017.
@@ -57,6 +67,13 @@ class PlayScreen implements Screen {
     private Label pauseLabel;
     private Label.LabelStyle pauseLabelStyle;
     private ImageButton ButtonHome, ButtonAlas, ButtonResume, ButtonReplay, ButtonSetting, ButtonExit;
+    private ImageButton ButtonSkill, ButtonSonar;
+    private TextureRegionDrawable sonarIdle, sonarActive, sonarCooldown;
+
+    private Button.ButtonStyle buttonStyle;
+    private Button sonarButtonAndroid;
+    private boolean sonarButtonActive;
+
     private Stage ButtonStage;
     boolean btnPause;
     private MODE_GAME mode_game;
@@ -78,6 +95,10 @@ class PlayScreen implements Screen {
     Slider pathOffset;
 
     public PlayScreen(EelbatCosmir eelbatCosmir, int level, int difficulty) {
+
+        float widthScreen = Gdx.graphics.getWidth();
+        float heightScreen = Gdx.graphics.getHeight();
+
         this.eelbatCosmir = eelbatCosmir;
         this.level = level;
         this.difficulty = difficulty;
@@ -109,7 +130,7 @@ class PlayScreen implements Screen {
         //bound, bound, width dan height background
         touchpad.setBounds(15,15,75,75);
         //lokasi
-        touchpad.setPosition(15,75);
+        touchpad.setPosition(widthScreen*0.05F, heightScreen*0.05F);
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         viewport = new FillViewport(eelbatCosmir.WIDTH, eelbatCosmir.HEIGHT, camera);
@@ -140,6 +161,9 @@ class PlayScreen implements Screen {
         //Gdx.input.setInputProcessor(stage2);
 
         ButtonPause();
+        ButtonSkill();
+        ButtonWave();
+        enableSonarButton();
     }
 
     boolean sendMainWave() {
@@ -421,6 +445,69 @@ class PlayScreen implements Screen {
         ButtonStage.addActor(ButtonHome);
         Gdx.input.setInputProcessor(ButtonStage);
 
+    }
+
+    public void ButtonSkill(){
+
+        float widthScreen = Gdx.graphics.getWidth();
+        float heightScreen = Gdx.graphics.getHeight();
+
+        Texture BtnSkill = eelbatCosmir.assets.getTexture(Assets.btnSkill);
+        TextureRegionDrawable BtnImageSkill = new TextureRegionDrawable(new TextureRegion(BtnSkill));
+        ButtonSkill = new ImageButton(BtnImageSkill);
+        ButtonSkill.setSize(BtnSkill.getWidth(),BtnSkill.getHeight());
+        ButtonSkill.setPosition(widthScreen*0.75F, heightScreen*0.05F);
+        ButtonSkill.addListener(new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+
+            }
+        });
+
+        ButtonStage.addActor(ButtonSkill);
+        Gdx.input.setInputProcessor(ButtonStage);
+
+    }
+
+    public void ButtonWave(){
+        float widthScreen = Gdx.graphics.getWidth();
+        float heightScreen = Gdx.graphics.getHeight();
+
+        sonarIdle = new TextureRegionDrawable(new TextureRegion(eelbatCosmir.assets.getTexture(Assets.btnSonar)));
+        sonarActive = new TextureRegionDrawable(new TextureRegion(eelbatCosmir.assets.getTexture(Assets.btnSonarActive)));
+        sonarCooldown = new TextureRegionDrawable(new TextureRegion(eelbatCosmir.assets.getTexture(Assets.btnSonarCooldown)));
+
+        buttonStyle = new Button.ButtonStyle();
+        buttonStyle.up = sonarIdle;
+        buttonStyle.down = sonarActive;
+        sonarButtonAndroid = new Button(buttonStyle);
+        sonarButtonActive = true;
+
+        sonarButtonAndroid.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                sendMainWave();
+            }
+        });
+
+        sonarButtonAndroid.setPosition(widthScreen*0.83F, heightScreen*0.15F);
+        ButtonStage.addActor(sonarButtonAndroid);
+        Gdx.input.setInputProcessor(ButtonStage);
+
+    }
+
+    void enableSonarButton() {
+        if(Gdx.app.getType() == Application.ApplicationType.Android) {
+            buttonStyle.up = sonarIdle;
+            buttonStyle.down = sonarActive;
+        }
+        sonarButtonActive = true;
     }
 
     public enum MODE_GAME{MULAI, PAUSEE}

@@ -44,6 +44,7 @@ public class Assets {
 
 
     static AssetDescriptor<Texture> btnPlay, btnEasy, btnMedium, btnHard, btnSoundActive, btnSoundMute, btnReplayPlayScreen;
+    static AssetDescriptor<Texture> btnSkill, btnSonar, btnSkillActive, btnSonarActive, btnSonarCooldown;
 
     static AssetDescriptor<Texture>[] textureBawah;
     static AssetDescriptor<Texture>[] textureAtas;
@@ -174,6 +175,12 @@ public class Assets {
         btnSoundActive = new AssetDescriptor<Texture>("buttons/musicon.png", Texture.class, textureParameter);
         btnSoundMute = new AssetDescriptor<Texture>("buttons/mute-btn.png", Texture.class, textureParameter);
 
+        //button Skill & Wave
+        btnSkill = new AssetDescriptor<Texture>("buttons/skill-button.png", Texture.class, textureParameter);
+        btnSkillActive = new AssetDescriptor<Texture>("buttons/skill-active.png", Texture.class, textureParameter);
+        btnSonar = new AssetDescriptor<Texture>("buttons/sonar-button.png", Texture.class, textureParameter);
+        btnSonarActive = new AssetDescriptor<Texture>("buttons/sonar-active.png", Texture.class, textureParameter);
+        btnSonarCooldown = new AssetDescriptor<Texture>("buttons/sonar-cooldown.png", Texture.class, textureParameter);
 
         //load font nya
         manager.load(bitmapFontSmall);
@@ -244,8 +251,17 @@ public class Assets {
 
         manager.load(btnReplayPlayScreen);
 
+
+        //load button skill & wave
+        manager.load(btnSkill);
+        manager.load(btnSonar);
+        manager.load(btnSkillActive);
+        manager.load(btnSonarActive);
+        manager.load(btnSonarCooldown);
+
         manager.load(levelComplete);
         manager.load(gameOver);
+
 
     }
     BitmapFont getBitmapFont(AssetDescriptor<BitmapFont> bitmapFontAssetDescriptor){
