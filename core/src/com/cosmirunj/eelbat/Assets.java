@@ -40,7 +40,7 @@ public class Assets {
     static AssetDescriptor<Texture> bar1, bar2, bar3, bar4, bar5, ability, damage;
     static AssetDescriptor<Texture> btnHome, btnAlas, btnResume, btnReplay, btnSetting, btnExit;
 
-    static AssetDescriptor<Texture> enemyJelly,enemyFish,shadowEnemy;
+    static AssetDescriptor<Texture> enemyJelly,enemyFish,shadowEnemy,manyherringfish;
 
 
     static AssetDescriptor<Texture> btnPlay, btnEasy, btnMedium, btnHard, btnSoundActive, btnSoundMute, btnReplayPlayScreen;
@@ -94,6 +94,7 @@ public class Assets {
         fruit4 = new AssetDescriptor<Texture>("target/orange.png", Texture.class, textureParameter);
         fruit5 = new AssetDescriptor<Texture>("target/strawberry.png", Texture.class, textureParameter);
         fruit6 = new AssetDescriptor<Texture>("target/watermelon.png", Texture.class, textureParameter);
+        manyherringfish = new AssetDescriptor<Texture>("enemigo/manyherringfish.png", Texture.class, textureParameter);
 
         smallHole = new AssetDescriptor<Texture>("small-hole.png", Texture.class, textureParameter);
         bigHole = new AssetDescriptor<Texture>("big-hole.png", Texture.class, textureParameter);
@@ -214,6 +215,7 @@ public class Assets {
         manager.load(fruit6);
         manager.load(smallHole);
         manager.load(bigHole);
+        manager.load(manyherringfish);
 
         //load texture tile atas dan bawh
         for (int i=0;i<jumlahTextureBawah;i++){

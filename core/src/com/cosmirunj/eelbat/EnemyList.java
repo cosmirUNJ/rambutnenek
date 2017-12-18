@@ -24,39 +24,33 @@ public class EnemyList extends Stage{
 
     private EelbatCosmir eelbatCosmir;
 
-    public EnemyList(EelbatCosmir eelbatCosmir) {
-        this.eelbatCosmir = eelbatCosmir;
-        targetsFound = new HashSet<Integer>();
-        fixedEnemies = new HashMap<Integer, Set<Aksesoris>>();
-        freeEnemies = new HashSet<Aksesoris>();
-        for(int i = 0; i < TOTAL_TARGETS; i++) {
-            float x = EelbatCosmir.random.nextInt(2*MAX_RADIUS_X) - MAX_RADIUS_X;
-            float y = EelbatCosmir.random.nextInt(2*MAX_RADIUS_Y) - MAX_RADIUS_Y;
-            //TargetActor target = new TargetActor(ggj2017.assets, x, y, i);
-            //targets.add(target);
-            //addActor(target);
-            Set<Aksesoris> aksesorisGroup = new HashSet<Aksesoris>();
-            int k = 7 + EelbatCosmir.random.nextInt(8);
-            for(int j = 0; j < k; j++) {
-                Aksesoris aksesoris = new Aksesoris(eelbatCosmir.assets, x, y);
-                aksesorisGroup.add(aksesoris);
-                addActor(aksesoris);
-            }
-            fixedEnemies.put(i, aksesorisGroup);
-        }
-
-        for(int i = 0; i < 50; i++) {
-            float x = EelbatCosmir.random.nextInt(2 * MAX_RADIUS_X) - MAX_RADIUS_X;
-            float y = EelbatCosmir.random.nextInt(2 * MAX_RADIUS_Y) - MAX_RADIUS_Y;
-            Aksesoris aksesoris = new Aksesoris(eelbatCosmir.assets, x, y);
-            freeEnemies.add(aksesoris);
-            addActor(aksesoris);
-        }
-    }
-
-
-    public void addEnemies() {
-
-        }
-
+//    public EnemyList(EelbatCosmir eelbatCosmir) {
+//        this.eelbatCosmir = eelbatCosmir;
+//        targetsFound = new HashSet<Integer>();
+//        fixedEnemies = new HashMap<Integer, Set<Aksesoris>>();
+//        freeEnemies = new HashSet<Aksesoris>();
+//        for(int i = 0; i < TOTAL_TARGETS; i++) {
+//            float x = EelbatCosmir.random.nextInt(2*MAX_RADIUS_X) - MAX_RADIUS_X;
+//            float y = EelbatCosmir.random.nextInt(2*MAX_RADIUS_Y) - MAX_RADIUS_Y;
+//            //TargetActor target = new TargetActor(ggj2017.assets, x, y, i);
+//            //targets.add(target);
+//            //addActor(target);
+//            Set<Aksesoris> aksesorisGroup = new HashSet<Aksesoris>();
+//            int k = 7 + EelbatCosmir.random.nextInt(8);
+//            for(int j = 0; j < k; j++) {
+//                Aksesoris aksesoris = new Aksesoris(eelbatCosmir.assets, x, y, );
+//                aksesorisGroup.add(aksesoris);
+//                addActor(aksesoris);
+//            }
+//            fixedEnemies.put(i, aksesorisGroup);
+//        }
+//
+//        for(int i = 0; i < 50; i++) {
+//            float x = EelbatCosmir.random.nextInt(2 * MAX_RADIUS_X) - MAX_RADIUS_X;
+//            float y = EelbatCosmir.random.nextInt(2 * MAX_RADIUS_Y) - MAX_RADIUS_Y;
+//            Aksesoris aksesoris = new Aksesoris(eelbatCosmir.assets, x, y);
+//            freeEnemies.add(aksesoris);
+//            addActor(aksesoris);
+//        }
+//    }
 }
