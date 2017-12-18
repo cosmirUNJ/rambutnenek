@@ -62,6 +62,7 @@ class PlayGameStage extends Stage {
     private final int TOTAL_TIME = 3*60;
     private float abilityDuration;
     private float damageDuration;
+    private float coolDown;
 
     private float score;
     private final int TOTAL_SCORE = 200;
@@ -76,6 +77,7 @@ class PlayGameStage extends Stage {
     private Image damage;
 
     private boolean abilityUsed;
+    private boolean isCoolDown;
     private boolean doDamage;
 
     FORM form;
@@ -85,6 +87,9 @@ class PlayGameStage extends Stage {
         this.playHUDStage = playHUDStage;
         this.eelbatCosmir = eelbatCosmir;
 
+        this.level = level;
+        this.difficulty = difficulty;
+
         time = TOTAL_TIME;
         score = TOTAL_SCORE;
 
@@ -92,18 +97,23 @@ class PlayGameStage extends Stage {
         abilityDuration = 1;
         damageDuration = 1;
 
+        if (difficulty == 1){
+            coolDown = 3;
+        }else if (difficulty == 2){
+            coolDown = 5;
+        }else if (difficulty == 3){
+            coolDown = 7;
+        }
+
         shapeRenderer = new ShapeRenderer();
 
         this.touchpadXnya = touchpadXnya;
         this.touchpadYnya = touchpadYnya;
         this.touchpad = touchpad;
 
-        this.level = level;
-        this.difficulty = difficulty;
-
         cameraPosition = getViewport().getCamera().position;
 
-        backgroundTiles = new BackgroundTiles(eelbatCosmir);
+        backgroundTiles = new BackgroundTiles(eelbatCosmir, level);
         addActor(backgroundTiles);
 
         form = FORM.EEL;
@@ -136,7 +146,7 @@ class PlayGameStage extends Stage {
             Set<Enemy> enemyGroup = new HashSet<Enemy>();
             int k = 7 + EelbatCosmir.random.nextInt(8);
             for(int j = 0; j < k; j++) {
-                Enemy enemy = new Enemy(eelbatCosmir.assets, x, y);
+                Enemy enemy = new Enemy(eelbatCosmir.assets, x, y, difficulty);
                 enemyGroup.add(enemy);
                 addActor(enemy);//1
             }
@@ -161,6 +171,7 @@ class PlayGameStage extends Stage {
 
         buffPicked = false;
         abilityUsed = false;
+        isCoolDown = false;
         doDamage = false;
         buffPickedCount = 0;
 
@@ -291,6 +302,17 @@ class PlayGameStage extends Stage {
             ability.setVisible(false);
         }
 
+        if(coolDown < 0){
+            isCoolDown = false;
+            if (difficulty == 1){
+                coolDown = 3;
+            }else if (difficulty == 2){
+                coolDown = 5;
+            }else if (difficulty == 3){
+                coolDown = 7;
+            }
+        }
+
         if(damageDuration < 0){
             doDamage = false;
             damageDuration = 1;
@@ -382,7 +404,7 @@ class PlayGameStage extends Stage {
                 Set<Enemy> enemyGroup = new HashSet<Enemy>();
                 int k = 7 + EelbatCosmir.random.nextInt(8);
                 for(int j = 0; j < k; j++) {
-                    Enemy enemy = new Enemy(eelbatCosmir.assets, x, y);
+                    Enemy enemy = new Enemy(eelbatCosmir.assets, x, y, difficulty);
                     enemyGroup.add(enemy);
                     addActor(enemy);//2
                 }
@@ -402,7 +424,7 @@ class PlayGameStage extends Stage {
                 Set<Enemy> enemyGroup = new HashSet<Enemy>();
                 int k = 7 + EelbatCosmir.random.nextInt(8);
                 for(int j = 0; j < k; j++) {
-                    Enemy enemy = new Enemy(eelbatCosmir.assets, x, y);
+                    Enemy enemy = new Enemy(eelbatCosmir.assets, x, y, difficulty);
                     enemyGroup.add(enemy);
                     addActor(enemy);//3
                 }
@@ -419,6 +441,9 @@ class PlayGameStage extends Stage {
             addActor(mainWave);
             //playHUDStage.showSonarImage();
         }
+//        Assets.waveOut.play(1.0f);
+//        mainWave = new Sonar(this, cameraPosition.x, cameraPosition.y, true);
+//        addActor(mainWave);
         return canSend;
     }
 
@@ -430,10 +455,13 @@ class PlayGameStage extends Stage {
 //            addActor(mainWave);
 //        }
 //        return canSend;
-        Assets.waveOut.play(1.0f);
-        //Ability ability = new Ability(this, cameraPosition.x, cameraPosition.y);
-        //addActor(ability);
-        abilityUsed = true;
+        if(!isCoolDown){
+            Assets.waveOut.play(1.0f);
+            //Ability ability = new Ability(this, cameraPosition.x, cameraPosition.y);
+            //addActor(ability);
+            abilityUsed = true;
+            isCoolDown = true;
+        }
     }
 
     @Override
@@ -450,6 +478,9 @@ class PlayGameStage extends Stage {
             abilityDuration -= delta;
             ability.setVisible(true);
             ability.setPosition(x - ability.getWidth()/2, y - ability.getHeight()/2);
+        }
+        if(isCoolDown){
+            coolDown -= delta;
         }
         if(doDamage){
             damageDuration -= delta;
