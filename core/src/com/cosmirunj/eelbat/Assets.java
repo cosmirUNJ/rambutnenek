@@ -234,6 +234,7 @@ public class Assets {
         manager.load(bigHole);
         manager.load(manyherringfish);
 
+        //level1
         //load texture tile atas dan bawh
         for (int i=0;i<jumlahTextureBawah;i++){
             manager.load(textureBawah[i]);
@@ -241,6 +242,16 @@ public class Assets {
         for (int i=0;i<jumlahTextureAtas;i++){
             manager.load(textureAtas[i]);
         }
+
+        //level2
+        //load texture tile atas dan bawh
+        for (int i=0;i<jumlahTextureBawah;i++){
+            manager.load(textureBawah2[i]);
+        }
+        for (int i=0;i<jumlahTextureAtas;i++){
+            manager.load(textureAtas2[i]);
+        }
+
 
         //rumput dan gelembung
         for (int i=0;i<jumlahGelembung;i++){
