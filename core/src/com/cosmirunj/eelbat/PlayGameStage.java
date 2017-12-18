@@ -146,7 +146,7 @@ class PlayGameStage extends Stage {
             Set<Enemy> enemyGroup = new HashSet<Enemy>();
             int k = 7 + EelbatCosmir.random.nextInt(8);
             for(int j = 0; j < k; j++) {
-                Enemy enemy = new Enemy(eelbatCosmir.assets, x, y, difficulty);
+                Enemy enemy = new Enemy(eelbatCosmir.assets, x, y, difficulty, level);
                 enemyGroup.add(enemy);
                 addActor(enemy);//1
             }
@@ -404,7 +404,7 @@ class PlayGameStage extends Stage {
                 Set<Enemy> enemyGroup = new HashSet<Enemy>();
                 int k = 7 + EelbatCosmir.random.nextInt(8);
                 for(int j = 0; j < k; j++) {
-                    Enemy enemy = new Enemy(eelbatCosmir.assets, x, y, difficulty);
+                    Enemy enemy = new Enemy(eelbatCosmir.assets, x, y, difficulty, level);
                     enemyGroup.add(enemy);
                     addActor(enemy);//2
                 }
@@ -424,7 +424,7 @@ class PlayGameStage extends Stage {
                 Set<Enemy> enemyGroup = new HashSet<Enemy>();
                 int k = 7 + EelbatCosmir.random.nextInt(8);
                 for(int j = 0; j < k; j++) {
-                    Enemy enemy = new Enemy(eelbatCosmir.assets, x, y, difficulty);
+                    Enemy enemy = new Enemy(eelbatCosmir.assets, x, y, difficulty, level);
                     enemyGroup.add(enemy);
                     addActor(enemy);//3
                 }
