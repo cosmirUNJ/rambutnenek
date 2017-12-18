@@ -21,6 +21,7 @@ public class Enemy extends Actor {
     private float currentAngle;
     private Texture enemyFish, shadowEnemy;
     private final int SHADOW_OFFSET = 150;
+    private int difficulty;
     //private boolean fixed;
     KEJARGAK kejargak;
     //float eelbatPositionX, eelbatPositionY;
@@ -38,12 +39,19 @@ public class Enemy extends Actor {
 //    int nextX, nextY;
 
     boolean punyaRute;
-    public Enemy(Assets assets, float x, float y){
+    public Enemy(Assets assets, float x, float y, int difficulty){
         //this.fixed = fixed;
         //eelbatPositionX = 0;
         //eelbatPositionY = 0;
         //SPEED_ENEMY = 0;
         //getViewport().getCamera().position;
+        if (difficulty == 1){
+            SPEED_ENEMY = 100;
+        }else if (difficulty == 2){
+            SPEED_ENEMY = 250;
+        }else if (difficulty == 3){
+            SPEED_ENEMY = 400;
+        }
 
 
         TARGET_X = x;
