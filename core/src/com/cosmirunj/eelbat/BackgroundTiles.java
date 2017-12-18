@@ -59,15 +59,15 @@ public class BackgroundTiles extends Actor {
         imgGelombang = new Texture[3];
         imgGelembung = new Texture[4];
         imgRumput = new Texture[3];
-        /*
-        if(Gdx.app.getType() == Application.ApplicationType.Android){
-            WIDTH = Gdx.graphics.getWidth();
-            HEIGHT = Gdx.graphics.getHeight();
-        } else {
-            WIDTH = EelbatCosmir.WIDTH;
-            HEIGHT = EelbatCosmir.HEIGHT;
-        }
-        */
+
+//        if(Gdx.app.getType() == Application.ApplicationType.Android){
+//            WIDTH = Gdx.graphics.getWidth();
+//            HEIGHT = Gdx.graphics.getHeight();
+//        } else {
+//            WIDTH = EelbatCosmir.WIDTH;
+//            HEIGHT = EelbatCosmir.HEIGHT;
+//        }
+
         WIDTH = EelbatCosmir.WIDTH;
         HEIGHT = EelbatCosmir.HEIGHT;
         //tes = eelbatCosmir.assets.getTexture(Assets.tilesGelombang[1]);
@@ -81,14 +81,14 @@ public class BackgroundTiles extends Actor {
         //tilesLowerLeftXX = -(WB/2+1)*TILE_BAWAH_WIDTH;
         //tilesLowerLeftYY = -(HB/2+1)*TILE_BAWAH_HEIGHT;
 
-        /*
-        for(int i = 0; i < WB; i++) {
-            for(int j = 0; j < HB; j++) {
-                texturesBawah[i][j] = getRTextureBawah();
-                //texturesAtas[i][j] = getRaTextureAtas();
-            }
-        }
-        */
+//
+//        for(int i = 0; i < WB; i++) {
+//            for(int j = 0; j < HB; j++) {
+//                texturesBawah[i][j] = getRTextureBawah();
+//                //texturesAtas[i][j] = getRaTextureAtas();
+//            }
+//        }
+
 
         for(int i = 0; i < W; i++) {
             for(int j = 0; j < H; j++) {
@@ -145,152 +145,152 @@ public class BackgroundTiles extends Actor {
         }
     }
 
-    /*
-    public void update(float x, float y) {
-        int centerXTile = (int)x;
-        int centerXXTile = (int)x;
 
-        centerXXTile -= (centerXXTile % TILE_BAWAH_WIDTH);
-        centerXTile -= (centerXTile % TILE_WIDTH);
-
-        int centerYTile = (int)y;
-        int centerYYTile = (int) y;
-
-        centerYYTile -= (centerYYTile % TILE_BAWAH_HEIGHT);
-        centerYTile -= (centerYTile % TILE_HEIGHT);
-
-        int newTilesLowerLeftXX = centerXXTile - (WB/2 + 1)*TILE_BAWAH_WIDTH;
-        int newTilesLowerLeftYY = centerYYTile - (HB/2 + 1)*TILE_BAWAH_HEIGHT;
-
-        int newTilesLowerLeftX = centerXTile - (W/2 + 1)*TILE_WIDTH;
-        int newTilesLowerLeftY = centerYTile - (H/2 + 1)*TILE_HEIGHT;
-
-        if(Math.abs(newTilesLowerLeftXX - tilesLowerLeftXX) > 0 || Math.abs(newTilesLowerLeftYY - tilesLowerLeftYY) > 0) {
-            int k = (newTilesLowerLeftXX - tilesLowerLeftXX) / TILE_BAWAH_WIDTH;
-            int l = (newTilesLowerLeftYY - tilesLowerLeftYY) / TILE_BAWAH_HEIGHT;
-            if (k > 0) {
-                for (int i = k; i < WB; i++) {
-                    for (int j = 0; j < HB; j++) {
-                        texturesBawah[i - k][j] = texturesBawah[i][j];
-                        //texturesAtas[i - k][j] = texturesAtas[i][j];
-                    }
-                }
-                for (int i = WB - k; i < WB; i++) {
-                    for (int j = 0; j < HB; j++) {
-                        texturesBawah[i][j] = getRTextureBawah();
-                        //texturesAtas[i][j] = getRaTextureAtas();
-                    }
-                }
-            } else if (k < 0) {
-                for (int i = WB - 1 + k; i >= 0; i--) {
-                    for (int j = 0; j < HB; j++) {
-                        texturesBawah[i - k][j] = texturesBawah[i][j];
-                        //texturesAtas[i - k][j] = texturesAtas[i][j];
-                    }
-                }
-                for (int i = 0; i < -k; i++) {
-                    for (int j = 0; j < HB; j++) {
-                        texturesBawah[i][j] = getRTextureBawah();
-                        //texturesAtas[i][j] = getRaTextureAtas();
-                    }
-                }
-            }
-            if (l > 0) {
-                for (int i = 0; i < WB; i++) {
-                    for (int j = l; j < HB; j++) {
-                        texturesBawah[i][j - l] = texturesBawah[i][j];
-                        //texturesAtas[i][j - l] = texturesAtas[i][j];
-                    }
-                }
-                for (int i = 0; i < WB; i++) {
-                    for (int j = HB - l; j < HB; j++) {
-                        texturesBawah[i][j] = getRTextureBawah();
-                        //texturesAtas[i][j] = getRaTextureAtas();
-                    }
-                }
-            } else if (l < 0) {
-                for (int i = 0; i < WB; i++) {
-                    for (int j = HB - 1 + l; j >= 0; j--) {
-                        texturesBawah[i][j - l] = texturesBawah[i][j];
-                        //texturesAtas[i][j - l] = texturesAtas[i][j];
-                    }
-                }
-                for (int i = 0; i < WB; i++) {
-                    for (int j = 0; j < -l; j++) {
-                        texturesBawah[i][j] = getRTextureBawah();
-                        //texturesAtas[i][j] = getRaTextureAtas();
-                    }
-                }
-            }
-        }
-
-        if(Math.abs(newTilesLowerLeftX - tilesLowerLeftX) > 0 || Math.abs(newTilesLowerLeftY - tilesLowerLeftY) > 0) {
-            int m = (newTilesLowerLeftX - tilesLowerLeftX)/TILE_WIDTH;
-            int n = (newTilesLowerLeftY - tilesLowerLeftY)/TILE_HEIGHT;
-            if(m > 0) {
-                for(int i = m; i < W; i++) {
-                    for(int j = 0; j < H; j++) {
-                        //texturesBawah[i - m][j] = texturesBawah[i][j];
-                        texturesAtas[i - m][j] = texturesAtas[i][j];
-                    }
-                }
-                for(int i = W - m; i < W; i++) {
-                    for(int j = 0; j < H; j++) {
-                        //texturesBawah[i][j] = getRTextureBawah();
-                        texturesAtas[i][j] = getRaTextureAtas();
-                    }
-                }
-            } else if(m < 0) {
-                for(int i = W - 1 + m; i >= 0; i--) {
-                    for(int j = 0; j < H; j++) {
-                        //texturesBawah[i - m][j] = texturesBawah[i][j];
-                        texturesAtas[i - m][j] = texturesAtas[i][j];
-                    }
-                }
-                for(int i = 0; i < -m; i++) {
-                    for(int j = 0; j < H; j++) {
-                        //texturesBawah[i][j] = getRTextureBawah();
-                        texturesAtas[i][j] = getRaTextureAtas();
-                    }
-                }
-            }
-            if(n > 0) {
-                for(int i = 0; i < W; i++) {
-                    for(int j = n; j < H; j++) {
-                        //texturesBawah[i][j - n] = texturesBawah[i][j];
-                        texturesAtas[i][j - n] = texturesAtas[i][j];
-                    }
-                }
-                for(int i = 0; i < W; i++) {
-                    for(int j = H - n; j < H; j++) {
-                        //texturesBawah[i][j] = getRTextureBawah();
-                        texturesAtas[i][j] = getRaTextureAtas();
-                    }
-                }
-            } else if(n < 0) {
-                for(int i = 0; i < W; i++) {
-                    for(int j = H - 1 + n; j >= 0; j--) {
-                        //texturesBawah[i][j - n] = texturesBawah[i][j];
-                        texturesAtas[i][j - n] = texturesAtas[i][j];
-                    }
-                }
-                for(int i = 0; i < W; i++) {
-                    for(int j = 0; j < -n; j++) {
-                        //texturesBawah[i][j] = getRTextureBawah();
-                        texturesAtas[i][j] = getRaTextureAtas();
-                    }
-                }
-            }
-            tilesLowerLeftXX = newTilesLowerLeftXX;
-            tilesLowerLeftYY = newTilesLowerLeftYY;
-
-            tilesLowerLeftX = newTilesLowerLeftX;
-            tilesLowerLeftY = newTilesLowerLeftY;
-
-        }
-
-    }
-    */
+//    public void update(float x, float y) {
+//        int centerXTile = (int)x;
+//        int centerXXTile = (int)x;
+//
+//        centerXXTile -= (centerXXTile % TILE_BAWAH_WIDTH);
+//        centerXTile -= (centerXTile % TILE_WIDTH);
+//
+//        int centerYTile = (int)y;
+//        int centerYYTile = (int) y;
+//
+//        centerYYTile -= (centerYYTile % TILE_BAWAH_HEIGHT);
+//        centerYTile -= (centerYTile % TILE_HEIGHT);
+//
+//        int newTilesLowerLeftXX = centerXXTile - (WB/2 + 1)*TILE_BAWAH_WIDTH;
+//        int newTilesLowerLeftYY = centerYYTile - (HB/2 + 1)*TILE_BAWAH_HEIGHT;
+//
+//        int newTilesLowerLeftX = centerXTile - (W/2 + 1)*TILE_WIDTH;
+//        int newTilesLowerLeftY = centerYTile - (H/2 + 1)*TILE_HEIGHT;
+//
+//        if(Math.abs(newTilesLowerLeftXX - tilesLowerLeftXX) > 0 || Math.abs(newTilesLowerLeftYY - tilesLowerLeftYY) > 0) {
+//            int k = (newTilesLowerLeftXX - tilesLowerLeftXX) / TILE_BAWAH_WIDTH;
+//            int l = (newTilesLowerLeftYY - tilesLowerLeftYY) / TILE_BAWAH_HEIGHT;
+//            if (k > 0) {
+//                for (int i = k; i < WB; i++) {
+//                    for (int j = 0; j < HB; j++) {
+//                        texturesBawah[i - k][j] = texturesBawah[i][j];
+//                        //texturesAtas[i - k][j] = texturesAtas[i][j];
+//                    }
+//                }
+//                for (int i = WB - k; i < WB; i++) {
+//                    for (int j = 0; j < HB; j++) {
+//                        texturesBawah[i][j] = getRTextureBawah();
+//                        //texturesAtas[i][j] = getRaTextureAtas();
+//                    }
+//                }
+//            } else if (k < 0) {
+//                for (int i = WB - 1 + k; i >= 0; i--) {
+//                    for (int j = 0; j < HB; j++) {
+//                        texturesBawah[i - k][j] = texturesBawah[i][j];
+//                        //texturesAtas[i - k][j] = texturesAtas[i][j];
+//                    }
+//                }
+//                for (int i = 0; i < -k; i++) {
+//                    for (int j = 0; j < HB; j++) {
+//                        texturesBawah[i][j] = getRTextureBawah();
+//                        //texturesAtas[i][j] = getRaTextureAtas();
+//                    }
+//                }
+//            }
+//            if (l > 0) {
+//                for (int i = 0; i < WB; i++) {
+//                    for (int j = l; j < HB; j++) {
+//                        texturesBawah[i][j - l] = texturesBawah[i][j];
+//                        //texturesAtas[i][j - l] = texturesAtas[i][j];
+//                    }
+//                }
+//                for (int i = 0; i < WB; i++) {
+//                    for (int j = HB - l; j < HB; j++) {
+//                        texturesBawah[i][j] = getRTextureBawah();
+//                        //texturesAtas[i][j] = getRaTextureAtas();
+//                    }
+//                }
+//            } else if (l < 0) {
+//                for (int i = 0; i < WB; i++) {
+//                    for (int j = HB - 1 + l; j >= 0; j--) {
+//                        texturesBawah[i][j - l] = texturesBawah[i][j];
+//                        //texturesAtas[i][j - l] = texturesAtas[i][j];
+//                    }
+//                }
+//                for (int i = 0; i < WB; i++) {
+//                    for (int j = 0; j < -l; j++) {
+//                        texturesBawah[i][j] = getRTextureBawah();
+//                        //texturesAtas[i][j] = getRaTextureAtas();
+//                    }
+//                }
+//            }
+//        }
+//
+//        if(Math.abs(newTilesLowerLeftX - tilesLowerLeftX) > 0 || Math.abs(newTilesLowerLeftY - tilesLowerLeftY) > 0) {
+//            int m = (newTilesLowerLeftX - tilesLowerLeftX)/TILE_WIDTH;
+//            int n = (newTilesLowerLeftY - tilesLowerLeftY)/TILE_HEIGHT;
+//            if(m > 0) {
+//                for(int i = m; i < W; i++) {
+//                    for(int j = 0; j < H; j++) {
+//                        //texturesBawah[i - m][j] = texturesBawah[i][j];
+//                        texturesAtas[i - m][j] = texturesAtas[i][j];
+//                    }
+//                }
+//                for(int i = W - m; i < W; i++) {
+//                    for(int j = 0; j < H; j++) {
+//                        //texturesBawah[i][j] = getRTextureBawah();
+//                        texturesAtas[i][j] = getRaTextureAtas();
+//                    }
+//                }
+//            } else if(m < 0) {
+//                for(int i = W - 1 + m; i >= 0; i--) {
+//                    for(int j = 0; j < H; j++) {
+//                        //texturesBawah[i - m][j] = texturesBawah[i][j];
+//                        texturesAtas[i - m][j] = texturesAtas[i][j];
+//                    }
+//                }
+//                for(int i = 0; i < -m; i++) {
+//                    for(int j = 0; j < H; j++) {
+//                        //texturesBawah[i][j] = getRTextureBawah();
+//                        texturesAtas[i][j] = getRaTextureAtas();
+//                    }
+//                }
+//            }
+//            if(n > 0) {
+//                for(int i = 0; i < W; i++) {
+//                    for(int j = n; j < H; j++) {
+//                        //texturesBawah[i][j - n] = texturesBawah[i][j];
+//                        texturesAtas[i][j - n] = texturesAtas[i][j];
+//                    }
+//                }
+//                for(int i = 0; i < W; i++) {
+//                    for(int j = H - n; j < H; j++) {
+//                        //texturesBawah[i][j] = getRTextureBawah();
+//                        texturesAtas[i][j] = getRaTextureAtas();
+//                    }
+//                }
+//            } else if(n < 0) {
+//                for(int i = 0; i < W; i++) {
+//                    for(int j = H - 1 + n; j >= 0; j--) {
+//                        //texturesBawah[i][j - n] = texturesBawah[i][j];
+//                        texturesAtas[i][j - n] = texturesAtas[i][j];
+//                    }
+//                }
+//                for(int i = 0; i < W; i++) {
+//                    for(int j = 0; j < -n; j++) {
+//                        //texturesBawah[i][j] = getRTextureBawah();
+//                        texturesAtas[i][j] = getRaTextureAtas();
+//                    }
+//                }
+//            }
+//            tilesLowerLeftXX = newTilesLowerLeftXX;
+//            tilesLowerLeftYY = newTilesLowerLeftYY;
+//
+//            tilesLowerLeftX = newTilesLowerLeftX;
+//            tilesLowerLeftY = newTilesLowerLeftY;
+//
+//        }
+//
+//    }
+//
 
     public void update(float x, float y) {
         int centerXTile = (int)x;
@@ -378,22 +378,30 @@ public class BackgroundTiles extends Actor {
 
     private Texture getRaTextureAtas() {
         int randomnya = EelbatCosmir.random.nextInt(Assets.textureAtas.length);
-        //elapsedTime += Gdx.graphics.getDeltaTime();
-        /*
-        if (randomnya == 5){
-            return (Texture)animasiGeloembung.getKeyFrame(elapsedTime, true);
-        } else if(randomnya == 6){
-            return (Texture)animasiRumput.getKeyFrame(elapsedTime, true);
-        }
-            return eelbatCosmir.assets.getTexture(Assets.textureAtas[randomnya]);
-        */
+//        elapsedTime += Gdx.graphics.getDeltaTime();
+//
+//        if (randomnya == 5){
+//            return (Texture)animasiGeloembung.getKeyFrame(elapsedTime, true);
+//        } else if(randomnya == 6){
+//            return (Texture)animasiRumput.getKeyFrame(elapsedTime, true);
+//        }
+//            return eelbatCosmir.assets.getTexture(Assets.textureAtas[randomnya]);
+//
 
         return eelbatCosmir.assets.getTexture(Assets.textureAtas[randomnya]);
     }
 
     private Texture getRTextureBawah() {
         //return eelbatCosmir.assets.getTexture(Assets.mapTest);
-        return eelbatCosmir.assets.getTexture(Assets.textureBawah[EelbatCosmir.random.nextInt(Assets.textureBawah.length)]);
+        switch (level){
+            case 1:
+                return eelbatCosmir.assets.getTexture(Assets.textureBawah[EelbatCosmir.random.nextInt(Assets.textureBawah.length)]);
+            case 2:
+                return eelbatCosmir.assets.getTexture(Assets.textureBawah2[EelbatCosmir.random.nextInt(Assets.textureBawah2.length)]);
+            default:
+                return eelbatCosmir.assets.getTexture(Assets.textureBawah[EelbatCosmir.random.nextInt(Assets.textureBawah.length)]);
+        }
+
     }
 
     @Override
@@ -421,24 +429,24 @@ public class BackgroundTiles extends Actor {
         batch.draw((Texture)animasiGelombang.getKeyFrame(elapsedTime, true),posisix, posisiy,WIDTH,HEIGHT);
 
 
-        /*
-        for(int i = 0; i < WB; i++) {
-            for(int j = 0; j < HB; j++) {
-                float x = tilesLowerLeftXX + i*TILE_BAWAH_WIDTH;
-                float y = tilesLowerLeftYY + j*TILE_BAWAH_HEIGHT;
-                batch.draw(texturesBawah[i][j], x, y);
-                //batch.draw(texturesAtas[i][j], x, y);
-            }
-        }
 
-        for(int i = 0; i < W; i++) {
-            for(int j = 0; j < H; j++) {
-                float x = tilesLowerLeftX + i*TILE_WIDTH;
-                float y = tilesLowerLeftY + j*TILE_HEIGHT;
-                //batch.draw(texturesBawah[i][j], x, y);
-                batch.draw(texturesAtas[i][j], x, y);
-            }
-        }
-        */
+//        for(int i = 0; i < WB; i++) {
+//            for(int j = 0; j < HB; j++) {
+//                float x = tilesLowerLeftXX + i*TILE_BAWAH_WIDTH;
+//                float y = tilesLowerLeftYY + j*TILE_BAWAH_HEIGHT;
+//                batch.draw(texturesBawah[i][j], x, y);
+//                //batch.draw(texturesAtas[i][j], x, y);
+//            }
+//        }
+//
+//        for(int i = 0; i < W; i++) {
+//            for(int j = 0; j < H; j++) {
+//                float x = tilesLowerLeftX + i*TILE_WIDTH;
+//                float y = tilesLowerLeftY + j*TILE_HEIGHT;
+//                //batch.draw(texturesBawah[i][j], x, y);
+//                batch.draw(texturesAtas[i][j], x, y);
+//            }
+//        }
+//
     }
 }
