@@ -113,7 +113,7 @@ class PlayGameStage extends Stage {
 
         cameraPosition = getViewport().getCamera().position;
 
-        backgroundTiles = new BackgroundTiles(eelbatCosmir, level);
+        backgroundTiles = new BackgroundTiles(eelbatCosmir);
         addActor(backgroundTiles);
 
         form = FORM.EEL;
