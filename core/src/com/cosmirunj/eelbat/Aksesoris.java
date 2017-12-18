@@ -19,17 +19,36 @@ public class Aksesoris extends Actor {
     private float currentAngle;
     private Texture enemyJelly, shadowEnemy;
     private final int SHADOW_OFFSET = 150;
+    private int level;
+    private Assets assets;
     //private boolean fixed;
 
-    public Aksesoris(Assets assets, float x, float y){
+    public Aksesoris(Assets assets, float x, float y, int level){
         //this.fixed = fixed;
         TARGET_X = x;
         TARGET_Y = y;
+        this.assets = assets;
         this.x = x + (EelbatCosmir.random.nextInt(2*CLOSE_RADIUS)-CLOSE_RADIUS);
         this.y = y + (EelbatCosmir.random.nextInt(2*CLOSE_RADIUS)-CLOSE_RADIUS);
+        this.level = level;
 
-        enemyJelly = assets.getTexture(Assets.enemyJelly);
+
+        checkLevel();
         shadowEnemy = assets.getTexture(Assets.shadowEnemy);
+    }
+
+    private void checkLevel() {
+        switch (level){
+            case 1:
+                enemyJelly = assets.getTexture(Assets.enemyJelly);
+                break;
+            case 2:
+                enemyJelly = assets.getTexture(Assets.manyherringfish);
+                break;
+            default:
+                enemyJelly = assets.getTexture(Assets.manyherringfish);
+                break;
+        }
     }
 
     @Override

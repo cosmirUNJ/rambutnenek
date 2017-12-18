@@ -146,7 +146,7 @@ class PlayGameStage extends Stage {
         for(int i = 0; i < 50; i++) {
             float x = EelbatCosmir.random.nextInt(2 * MAX_RADIUS_X) - MAX_RADIUS_X;
             float y = EelbatCosmir.random.nextInt(2 * MAX_RADIUS_Y) - MAX_RADIUS_Y;
-            Aksesoris aksesoris = new Aksesoris(eelbatCosmir.assets, x, y);
+            Aksesoris aksesoris = new Aksesoris(eelbatCosmir.assets, x, y, level);
             freeEnemies.add(aksesoris);
             addActor(aksesoris);
         }
