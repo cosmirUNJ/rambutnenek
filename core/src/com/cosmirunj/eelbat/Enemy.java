@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  */
 
 public class Enemy extends Actor {
-    private int SPEED_ENEMY = 100;
+    private int SPEED_ENEMY;
     private final int MAX_ANGLE_CHANGE = 300;
     private final int CLOSE_RADIUS = 800;
     private final float TARGET_X;
@@ -22,8 +22,10 @@ public class Enemy extends Actor {
     private Texture enemyFish, shadowEnemy;
     private final int SHADOW_OFFSET = 150;
     private int difficulty;
+    private int level;
     //private boolean fixed;
     KEJARGAK kejargak;
+    private Assets assets;
     //float eelbatPositionX, eelbatPositionY;
     //float eelbatPositionRadius;
     //double fixAngle;
@@ -39,7 +41,7 @@ public class Enemy extends Actor {
 //    int nextX, nextY;
 
     boolean punyaRute;
-    public Enemy(Assets assets, float x, float y, int difficulty){
+    public Enemy(Assets assets, float x, float y, int difficulty, int level){
         //this.fixed = fixed;
         //eelbatPositionX = 0;
         //eelbatPositionY = 0;
@@ -76,10 +78,14 @@ public class Enemy extends Actor {
 //            titikRute[i].set(nextX,nextY);
 //        }
 
-        enemyFish = assets.getTexture(Assets.enemyFish);
+        //enemyFish = assets.getTexture(Assets.enemyFish);
         shadowEnemy = assets.getTexture(Assets.shadowEnemy);
 
         kejargak = KEJARGAK.GAK;
+        this.level = level;
+        this.assets = assets;
+
+        checkLevel();
     }
 
 
@@ -136,6 +142,20 @@ public class Enemy extends Actor {
                 x += delta*Math.cos(currentAngle/180*Math.PI)*SPEED_ENEMY;
                 y += delta*Math.sin(currentAngle/180*Math.PI)*SPEED_ENEMY;
 
+                break;
+        }
+    }
+
+    private void checkLevel() {
+        switch (level){
+            case 1:
+                enemyFish = assets.getTexture(Assets.enemyFish);
+                break;
+            case 2:
+                enemyFish = assets.getTexture(Assets.enemySeaHorse);
+                break;
+            default:
+                enemyFish = assets.getTexture(Assets.manyherringfish);
                 break;
         }
     }
