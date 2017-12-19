@@ -57,8 +57,14 @@ public class FinishedScreen implements Screen {
         stage.draw();
         if(Gdx.input.justTouched()) {
             if(completed){
-                eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir, (level+1), difficulty));
+                Assets.success.stop();
+                if(level == 3){
+                    eelbatCosmir.setScreen(new MainMenu(eelbatCosmir));
+                }else{
+                    eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir, (level+1), difficulty));
+                }
             }else{
+                Assets.fail.stop();
                 eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir, level, difficulty));
             }
         }
@@ -97,7 +103,11 @@ public class FinishedScreen implements Screen {
             Label.LabelStyle labelStyle = new Label.LabelStyle();
             labelStyle.font = eelbatCosmir.assets.getBitmapFont(Assets.bitmapFontLarge);
             if(completed){
-                message = String.format("Level %d complete!",(level));
+                if(level == 3){
+                    message = String.format("Congrats, You Win the Game!");
+                }else{
+                    message = String.format("Level %d complete!",(level));
+                }
             }else{
                 message = String.format("Game Over :(");
             }
@@ -110,7 +120,11 @@ public class FinishedScreen implements Screen {
             Label.LabelStyle labelStyle2 = new Label.LabelStyle();
             labelStyle2.font = eelbatCosmir.assets.getBitmapFont(Assets.bitmapFontSmall);
             if(completed){
-                message2 = String.format("Tap to go to level %d!",(level+1));
+                if(level == 3){
+                    message2 = String.format("Tap to go to main menu!");
+                }else{
+                    message2 = String.format("Tap to go to level %d!",(level+1));
+                }
             }else{
                 message2 = String.format("Tap to try again");
             }
