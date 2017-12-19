@@ -40,7 +40,7 @@ public class Assets {
     static AssetDescriptor<Texture> bar1, bar2, bar3, bar4, bar5, ability, damage;
     static AssetDescriptor<Texture> btnHome, btnAlas, btnResume, btnReplay, btnSetting, btnExit;
 
-    static AssetDescriptor<Texture> enemyJelly,enemyFish,shadowEnemy,manyherringfish, enemySeaHorse;
+    static AssetDescriptor<Texture> enemyJelly,enemyFish,shadowEnemy,manyherringfish, enemySeaHorse, activeJelly;
 
 
     static AssetDescriptor<Texture> btnPlay, btnEasy, btnMedium, btnHard, btnSoundActive, btnSoundMute, btnReplayPlayScreen;

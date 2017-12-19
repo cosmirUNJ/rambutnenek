@@ -34,13 +34,11 @@ class PlayGameStage extends Stage {
     private Set<Aksesoris> freeEnemies;
     private HashSet<Integer> targetsFound;
     private ArrayList<Fruits> collectedTargets, collectedBuffs;
-<<<<<<< HEAD
+    
     static final int TOTAL_MF1 = 1;
     static final int TOTAL_MF2 = 0;
     static final int TOTAL_MF3 = 0;
-=======
     static final int TOTAL_MF = 3;
->>>>>>> wandyyy
     private final int MAX_RADIUS_X = 5*EelbatCosmir.WIDTH;
     private final int MAX_RADIUS_Y = 5*EelbatCosmir.HEIGHT;
 
