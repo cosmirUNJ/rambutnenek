@@ -43,6 +43,9 @@ public class Aksesoris extends Actor {
                 enemyJelly = assets.getTexture(Assets.enemyJelly);
                 break;
             case 2:
+                enemyJelly = assets.getTexture(Assets.activeJelly);
+                break;
+            case 3:
                 enemyJelly = assets.getTexture(Assets.manyherringfish);
                 break;
             default:

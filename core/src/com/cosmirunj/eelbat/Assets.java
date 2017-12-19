@@ -40,7 +40,7 @@ public class Assets {
     static AssetDescriptor<Texture> bar1, bar2, bar3, bar4, bar5, ability, damage;
     static AssetDescriptor<Texture> btnHome, btnAlas, btnResume, btnReplay, btnSetting, btnExit;
 
-    static AssetDescriptor<Texture> enemyJelly,enemyFish,shadowEnemy,manyherringfish;
+    static AssetDescriptor<Texture> enemyJelly,enemyFish,shadowEnemy,manyherringfish,activeJelly;
 
 
     static AssetDescriptor<Texture> btnPlay, btnEasy, btnMedium, btnHard, btnSoundActive, btnSoundMute, btnReplayPlayScreen;
@@ -99,6 +99,7 @@ public class Assets {
         fruit5 = new AssetDescriptor<Texture>("target/strawberry.png", Texture.class, textureParameter);
         fruit6 = new AssetDescriptor<Texture>("target/watermelon.png", Texture.class, textureParameter);
         manyherringfish = new AssetDescriptor<Texture>("enemigo/manyherringfish.png", Texture.class, textureParameter);
+        activeJelly = new AssetDescriptor<Texture>("enemigo/jellyfishactive.png", Texture.class, textureParameter);
 
         smallHole = new AssetDescriptor<Texture>("small-hole.png", Texture.class, textureParameter);
         bigHole = new AssetDescriptor<Texture>("big-hole.png", Texture.class, textureParameter);
@@ -182,8 +183,8 @@ public class Assets {
         pick = Gdx.audio.newSound(Gdx.files.internal("sfx/eatbuahajaib.wav"));
         pick2 = Gdx.audio.newSound(Gdx.files.internal("sfx/eatbuahlaut.wav"));
         hit = Gdx.audio.newSound(Gdx.files.internal("sfx/die1.wav"));
-        fail = Gdx.audio.newSound(Gdx.files.internal("sfx/death.wav"));
-        success = Gdx.audio.newSound(Gdx.files.internal("sfx/wincry.wav"));
+        fail = Gdx.audio.newSound(Gdx.files.internal("sfx/gameover.wav"));
+        success = Gdx.audio.newSound(Gdx.files.internal("sfx/ending_game.wav"));
 
         //home
         btnHome = new AssetDescriptor<Texture>("buttons/home-btn.png", Texture.class, textureParameter);
@@ -233,6 +234,7 @@ public class Assets {
         manager.load(smallHole);
         manager.load(bigHole);
         manager.load(manyherringfish);
+        manager.load(activeJelly);
 
         //load texture tile atas dan bawh
         for (int i=0;i<jumlahTextureBawah;i++){

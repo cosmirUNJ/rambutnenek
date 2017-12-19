@@ -34,9 +34,7 @@ class PlayGameStage extends Stage {
     private Set<Aksesoris> freeEnemies;
     private HashSet<Integer> targetsFound;
     private ArrayList<Fruits> collectedTargets, collectedBuffs;
-    static final int TOTAL_MF1 = 1;
-    static final int TOTAL_MF2 = 1;
-    static final int TOTAL_MF3 = 1;
+    static final int TOTAL_MF = 3;
     private final int MAX_RADIUS_X = 5*EelbatCosmir.WIDTH;
     private final int MAX_RADIUS_Y = 5*EelbatCosmir.HEIGHT;
 
@@ -55,7 +53,7 @@ class PlayGameStage extends Stage {
     private float x = 0;
     private float y = 0;
 
-    private int remainingmf = TOTAL_MF1 + TOTAL_MF2 + TOTAL_MF3;
+    private int remainingmf = TOTAL_MF;
 
     private float time;
     private float respawningTime;
@@ -116,7 +114,13 @@ class PlayGameStage extends Stage {
         backgroundTiles = new BackgroundTiles(eelbatCosmir, level);
         addActor(backgroundTiles);
 
-        form = FORM.EEL;
+        if(level == 1){
+            form = FORM.EEL;
+        }else if(level == 2){
+            form = FORM.EELBAT;
+        }else if(level == 3){
+            form = FORM.WINGED_EELBAT;
+        }
 
         characterEelBat = new CharacterEelBat(eelbatCosmir);
         //characterEelBat.updatePosition(x,y,DIRECTION.NONE);
@@ -133,10 +137,10 @@ class PlayGameStage extends Stage {
         targetsFound = new HashSet<Integer>();
         fixedEnemies = new HashMap<Integer, Set<Enemy>>();
         freeEnemies = new HashSet<Aksesoris>();
-        for(int i = 0; i < TOTAL_MF1; i++) {
+        for(int i = 0; i < remainingmf; i++) {
             float x = EelbatCosmir.random.nextInt(2*MAX_RADIUS_X) - MAX_RADIUS_X;
             float y = EelbatCosmir.random.nextInt(2*MAX_RADIUS_Y) - MAX_RADIUS_Y;
-            int mf = 0;
+            int mf = EelbatCosmir.random.nextInt(2);;
             Fruits fruit = new Fruits(eelbatCosmir.assets, x, y, i, mf);
             targets.add(fruit);
             addActor(fruit);
@@ -390,7 +394,7 @@ class PlayGameStage extends Stage {
         }
     }
 
-    private void checkTarget() {
+    /*private void checkTarget() {
         //kalo buahnya == 2, nambah buah baru dan nambah enemny
         if(remainingmf == TOTAL_MF2+TOTAL_MF3){
             form = FORM.EELBAT;
@@ -431,7 +435,7 @@ class PlayGameStage extends Stage {
                 fixedEnemies.put(TOTAL_MF1+TOTAL_MF2+i, enemyGroup);
             }
         }
-    }
+    }*/
 
     public boolean sendMainWave(){
         boolean canSend = mainWave == null;
@@ -509,7 +513,7 @@ class PlayGameStage extends Stage {
             //playHUDStage.setTargetsFound(TOTAL_MF1 - targets.size());
             time += 30;
             remainingmf -= 1;
-            checkTarget();
+            //checkTarget();
             collectedTargets.clear();
             playHUDStage.updateScore(500);
             playHUDStage.healthRestored();
@@ -522,6 +526,7 @@ class PlayGameStage extends Stage {
         //COLLISION MUSUH
         int k = -1;
         Enemy enemyHit = null;
+        Aksesoris aksesorisHit = null;
         for(int i : fixedEnemies.keySet()) {
             if(enemyHit != null) {
                 break;
@@ -549,6 +554,29 @@ class PlayGameStage extends Stage {
                 doDamage = true;
             }
             //damage();
+        }else{
+            if(level == 2){
+                for(Aksesoris aksesoris : freeEnemies) {
+                    float x = aksesoris.getPositionX();
+                    float y = aksesoris.floatgetPositionY();
+                    if(Math.pow(x - cameraPosition.x, 2) + Math.pow(y - cameraPosition.y, 2) <= Math.pow(COLLECT_RANGE, 2)) {
+                        aksesorisHit = aksesoris;
+                        break;
+                    }
+                }
+                if(aksesorisHit != null) {
+                    if(playHUDStage.getLives() > 0) {
+                        Assets.hit.play();
+                    }
+                    freeEnemies.remove(aksesorisHit);
+                    aksesorisHit.remove();
+                    if(!abilityUsed){
+                        time -= 30;
+                        playHUDStage.gotHit();
+                        doDamage = true;
+                    }
+                }
+            }
         }
 
         //COLLISION BUAH LAUT
