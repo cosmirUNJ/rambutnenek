@@ -35,8 +35,8 @@ class PlayGameStage extends Stage {
     private HashSet<Integer> targetsFound;
     private ArrayList<Fruits> collectedTargets, collectedBuffs;
     static final int TOTAL_MF1 = 1;
-    static final int TOTAL_MF2 = 1;
-    static final int TOTAL_MF3 = 1;
+    static final int TOTAL_MF2 = 0;
+    static final int TOTAL_MF3 = 0;
     private final int MAX_RADIUS_X = 5*EelbatCosmir.WIDTH;
     private final int MAX_RADIUS_Y = 5*EelbatCosmir.HEIGHT;
 
@@ -113,7 +113,7 @@ class PlayGameStage extends Stage {
 
         cameraPosition = getViewport().getCamera().position;
 
-        backgroundTiles = new BackgroundTiles(eelbatCosmir);
+        backgroundTiles = new BackgroundTiles(eelbatCosmir, level);
         addActor(backgroundTiles);
 
         form = FORM.EEL;
