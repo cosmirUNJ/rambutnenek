@@ -377,7 +377,19 @@ public class BackgroundTiles extends Actor {
     }
 
     private Texture getRaTextureAtas() {
-        int randomnya = EelbatCosmir.random.nextInt(Assets.textureAtas.length);
+        int randomnya;
+        switch (level){
+            case 1:
+                randomnya = EelbatCosmir.random.nextInt(Assets.textureAtas.length);
+                return eelbatCosmir.assets.getTexture(Assets.textureAtas[randomnya]);
+            case 2:
+                randomnya = EelbatCosmir.random.nextInt(Assets.textureAtas.length);
+                return eelbatCosmir.assets.getTexture(Assets.textureAtas2[randomnya]);
+            default:
+                randomnya = EelbatCosmir.random.nextInt(Assets.textureAtas.length);
+                return eelbatCosmir.assets.getTexture(Assets.textureAtas[randomnya]);
+        }
+
 //        elapsedTime += Gdx.graphics.getDeltaTime();
 //
 //        if (randomnya == 5){
@@ -387,8 +399,6 @@ public class BackgroundTiles extends Actor {
 //        }
 //            return eelbatCosmir.assets.getTexture(Assets.textureAtas[randomnya]);
 //
-
-        return eelbatCosmir.assets.getTexture(Assets.textureAtas[randomnya]);
     }
 
     private Texture getRTextureBawah() {
