@@ -43,9 +43,11 @@ public class BackgroundTiles extends Actor {
     private float elapsedTime;
     private float posisix,posisiy;
     int WIDTH, HEIGHT;
+    private int level;
 
-    public BackgroundTiles(EelbatCosmir eelbatCosmir){
+    public BackgroundTiles(EelbatCosmir eelbatCosmir, int level){
         this.eelbatCosmir = eelbatCosmir;
+        this.level = level;
 
         texturesBawah = new Texture[W][H];
         texturesAtas = new Texture[W][H];
@@ -70,18 +72,7 @@ public class BackgroundTiles extends Actor {
         HEIGHT = EelbatCosmir.HEIGHT;
         //tes = eelbatCosmir.assets.getTexture(Assets.tilesGelombang[1]);
 
-        for(int i=0;i<3;i++){
-            imgGelombang[i] = eelbatCosmir.assets.getTexture(Assets.tilesGelombang[i]);
-            //eelbatCosmir.assets.getTexture(Assets.textureBawah[EelbatCosmir.random.nextInt(Assets.textureBawah.length)]);
-        }
-
-        for (int i=0;i<4;i++){
-            imgGelembung[i] = eelbatCosmir.assets.getTexture(Assets.gelembung[i]);
-        }
-
-        for (int i=0;i<3;i++){
-            imgRumput[i] = eelbatCosmir.assets.getTexture(Assets.rumput[i]);
-        }
+        checkLevel();
 
         animasiGelombang = new Animation(1f, imgGelombang);
         animasiGeloembung = new Animation(1f/5f, imgGelembung);
@@ -439,7 +430,7 @@ public class BackgroundTiles extends Actor {
                 } else if(texturesAtas[i][j]== eelbatCosmir.assets.getTexture(Assets.textureAtas[6])){
                     batch.draw((Texture)animasiRumput.getKeyFrame(elapsedTime, true),x,y);
                 } else {
-                batch.draw(texturesAtas[i][j], x, y); }
+                    batch.draw(texturesAtas[i][j], x, y); }
 
             }
         }
