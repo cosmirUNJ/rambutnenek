@@ -34,7 +34,7 @@ class PlayGameStage extends Stage {
     private Set<Aksesoris> freeEnemies;
     private HashSet<Integer> targetsFound;
     private ArrayList<Fruits> collectedTargets, collectedBuffs;
-    
+
     static final int TOTAL_MF1 = 1;
     static final int TOTAL_MF2 = 0;
     static final int TOTAL_MF3 = 0;
