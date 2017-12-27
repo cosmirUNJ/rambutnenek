@@ -130,7 +130,7 @@ class PlayScreen implements Screen {
         //bound, bound, width dan height background
         touchpad.setBounds(15,15,75,75);
         //lokasi
-        touchpad.setPosition(widthScreen*0.05F, heightScreen*0.05F);
+        touchpad.setPosition(widthScreen*0.05F, heightScreen*0.085F);
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         viewport = new FillViewport(eelbatCosmir.WIDTH, eelbatCosmir.HEIGHT, camera);
@@ -326,7 +326,7 @@ class PlayScreen implements Screen {
                 ButtonExit.setVisible(!btnPause);
                 //pauseLabel.setVisible(true);
                 mode_game = MODE_GAME.MULAI;
-
+                Assets.playmusic.play();
                 return btnPause;
             }
 
@@ -343,6 +343,7 @@ class PlayScreen implements Screen {
         Texture BtnReplay = eelbatCosmir.assets.getTexture(Assets.btnReplay);
         TextureRegionDrawable BtnImageReplay = new TextureRegionDrawable(new TextureRegion(BtnReplay));
         ButtonReplay = new ImageButton(BtnImageReplay);
+
         int buttonReplayWidth = BtnReplay.getWidth()-25;
         int buttonReplayHeight = BtnReplay.getHeight()-25;
         ButtonReplay.setSize(buttonReplayWidth,buttonReplayHeight);
@@ -351,6 +352,7 @@ class PlayScreen implements Screen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 ButtonReplay.getImage().setColor(Color.BLACK);
+                eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir, level, difficulty));
                 return true;
             }
 
@@ -399,6 +401,7 @@ class PlayScreen implements Screen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 ButtonExit.getImage().setColor(Color.BLACK);
+                eelbatCosmir.setScreen(new MainMenu(eelbatCosmir));
                 return true;
             }
 
@@ -434,6 +437,7 @@ class PlayScreen implements Screen {
                 Gdx.graphics.setContinuousRendering(true);
                 //Gdx.graphics.requestRendering();
                 //Gdx.app.getApplicationListener().dispose();
+                Assets.playmusic.stop();
                 return btnPause;
             }
 
@@ -459,8 +463,14 @@ class PlayScreen implements Screen {
         TextureRegionDrawable BtnImageSkill = new TextureRegionDrawable(new TextureRegion(BtnSkill));
 
         ButtonSkill = new ImageButton(BtnImageSkill);
-        ButtonSkill.setSize(BtnSkill.getWidth(),BtnSkill.getHeight());
-        ButtonSkill.setPosition(widthScreen*0.75F, heightScreen*0.05F);
+        if(Gdx.app.getType() == Application.ApplicationType.Android){
+            ButtonSkill.setSize(BtnSkill.getWidth()+50,BtnSkill.getHeight()+50);
+            ButtonSkill.setPosition(widthScreen*0.75F, heightScreen*0.05F);
+        } else {
+            ButtonSkill.setSize(BtnSkill.getWidth(),BtnSkill.getHeight());
+            ButtonSkill.setPosition(widthScreen*0.75F, heightScreen*0.05F);
+        }
+
         ButtonSkill.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -500,7 +510,12 @@ class PlayScreen implements Screen {
             }
         });
 
-        sonarButtonAndroid.setPosition(widthScreen*0.83F, heightScreen*0.15F);
+        if(Gdx.app.getType() == Application.ApplicationType.Android){
+            sonarButtonAndroid.setPosition(widthScreen*0.87F, heightScreen*0.15F);
+        } else {
+            sonarButtonAndroid.setPosition(widthScreen*0.83F, heightScreen*0.15F);
+        }
+
         ButtonStage.addActor(sonarButtonAndroid);
         Gdx.input.setInputProcessor(ButtonStage);
 

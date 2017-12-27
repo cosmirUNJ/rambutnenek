@@ -123,7 +123,7 @@ class MainMenu implements Screen {
         TextureRegionDrawable BtnImageSound = new TextureRegionDrawable(new TextureRegion(BtnSoundActive));
         ButtonSoundActive = new ImageButton(BtnImageSound);
         ButtonSoundActive.setSize(BtnSoundActive.getWidth()-100,BtnSoundActive.getHeight()-100);
-        ButtonSoundActive.setPosition(widthScreen-((BtnSoundActive.getWidth())/2), heightScreen-((BtnSoundActive.getHeight())/2));
+        ButtonSoundActive.setPosition(widthScreen-((BtnSoundActive.getWidth())/2), heightScreen-(BtnSoundActive.getHeight()/2));
         //(widthScreen/2)-(buttonAlasWidth/2), (heightScreen/2)-(buttonAlasHeight/2)
         ButtonSoundActive.addListener(new InputListener(){
             @Override
@@ -155,7 +155,7 @@ class MainMenu implements Screen {
         TextureRegionDrawable BtnImageEasy = new TextureRegionDrawable(new TextureRegion(BtnEasy));
         ButtonEasy = new ImageButton(BtnImageEasy);
         ButtonEasy.setSize(BtnEasy.getWidth(),BtnEasy.getHeight());
-        ButtonEasy.setPosition(widthScreen/2-(486/2), 20);
+        ButtonEasy.setPosition(widthScreen/2-(486/2), 30);
         ButtonEasy.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -180,7 +180,7 @@ class MainMenu implements Screen {
         TextureRegionDrawable BtnImageMedium = new TextureRegionDrawable(new TextureRegion(BtnMedium));
         ButtonMedium = new ImageButton(BtnImageMedium);
         ButtonMedium.setSize(BtnMedium.getWidth(),BtnMedium.getHeight());
-        ButtonMedium.setPosition(widthScreen/2-(162/2), 20);
+        ButtonMedium.setPosition(widthScreen/2-(162/2), 30);
         ButtonMedium.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
@@ -205,7 +205,7 @@ class MainMenu implements Screen {
         TextureRegionDrawable BtnImageHard = new TextureRegionDrawable(new TextureRegion(BtnHard));
         ButtonHard = new ImageButton(BtnImageHard);
         ButtonHard.setSize(BtnHard.getWidth(),BtnHard.getHeight());
-        ButtonHard.setPosition(widthScreen/2+(162/2), 20);
+        ButtonHard.setPosition(widthScreen/2+(162/2), 30);
         ButtonHard.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {

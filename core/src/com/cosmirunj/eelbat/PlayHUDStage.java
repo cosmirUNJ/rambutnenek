@@ -61,7 +61,7 @@ class PlayHUDStage extends Stage {
         timeLabelStyle = new Label.LabelStyle();
         timeLabelStyle.font = eelbatCosmir.assets.getBitmapFont(Assets.bitmapFontMedium);
         timeLabel = new Label("", timeLabelStyle);
-        timeLabel.setPosition(widthScreen*0.05F, heightScreen*0.95F);
+        timeLabel.setPosition(widthScreen*0.05F, heightScreen*0.9F);
         addActor(timeLabel);
 
         lastSeconds = 5;
@@ -72,13 +72,13 @@ class PlayHUDStage extends Stage {
         scoreLabelStyle.font = eelbatCosmir.assets.getBitmapFont(Assets.bitmapFontMedium);
         scoreLabel = new Label("Score: ", scoreLabelStyle);
         scoreLabel.setText("Score : "+String.format("%d", score));
-        scoreLabel.setPosition(widthScreen*0.75F, heightScreen*0.91F);
+        scoreLabel.setPosition(widthScreen*0.75F, heightScreen*0.86F);
 
         addActor(scoreLabel);
 
         bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar1));
         bar.setSize(bar.getWidth(),bar.getHeight());
-        bar.setPosition((widthScreen/2)-(bar.getWidth()/2), heightScreen-(bar.getHeight())-25);
+        bar.setPosition((widthScreen/2)-(bar.getWidth()/2), heightScreen-(2*bar.getHeight()));
         addActor(bar);
 
         sonarButtonActive = true;
