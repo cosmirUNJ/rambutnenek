@@ -21,11 +21,15 @@ public class Enemy extends Actor {
     private float currentAngle;
     private Texture enemyFish, shadowEnemy;
     private final int SHADOW_OFFSET = 150;
-    private int difficulty;
     private int level;
     //private boolean fixed;
     KEJARGAK kejargak;
     private Assets assets;
+    private int difficulty;
+    private int NYAWA;
+    private final int NYAWA1 = 1;
+    private final int NYAWA2 = 2;
+    private final int NYAWA3 = 3;
     //float eelbatPositionX, eelbatPositionY;
     //float eelbatPositionRadius;
     //double fixAngle;
@@ -42,17 +46,21 @@ public class Enemy extends Actor {
 
     boolean punyaRute;
     public Enemy(Assets assets, float x, float y, int difficulty, int level){
+        this.difficulty = difficulty;
         //this.fixed = fixed;
         //eelbatPositionX = 0;
         //eelbatPositionY = 0;
         //SPEED_ENEMY = 0;
         //getViewport().getCamera().position;
         if (difficulty == 1){
-            SPEED_ENEMY = 100;
+            SPEED_ENEMY = 100;//100
+            this.NYAWA = 3;//NYAWA1;
         }else if (difficulty == 2){
-            SPEED_ENEMY = 250;
+            SPEED_ENEMY = 250;//250
+            this.NYAWA = NYAWA2;
         }else if (difficulty == 3){
-            SPEED_ENEMY = 400;
+            SPEED_ENEMY = 400;//400
+            this.NYAWA = NYAWA3;
         }
 
 
@@ -178,6 +186,12 @@ public class Enemy extends Actor {
     }
     public float getEnemyPositionY(){
         return y;
+    }
+    public void setNyawaEnemy(int NYAWA){
+        this.NYAWA = NYAWA;
+    }
+    public int getNyawaEnemy(){
+        return NYAWA;
     }
     //public int getSpeedEnemy() { return SPEED_ENEMY; }
 

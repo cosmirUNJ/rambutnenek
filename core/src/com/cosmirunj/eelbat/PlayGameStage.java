@@ -81,6 +81,7 @@ class PlayGameStage extends Stage {
     private boolean abilityUsed;
     private boolean isCoolDown;
     private boolean doDamage;
+    private int randomNumberAbility;
 
     FORM form;
 
@@ -89,6 +90,7 @@ class PlayGameStage extends Stage {
         this.playHUDStage = playHUDStage;
         this.eelbatCosmir = eelbatCosmir;
 
+        
         this.level = level;
         this.difficulty = difficulty;
 
@@ -465,6 +467,7 @@ class PlayGameStage extends Stage {
 //        return canSend;
         if(!isCoolDown){
             Assets.waveOut.play(1.0f);
+            setRandomAbility(eelbatCosmir.random.nextInt(100));
             //Ability ability = new Ability(this, cameraPosition.x, cameraPosition.y);
             //addActor(ability);
             abilityUsed = true;
@@ -539,8 +542,23 @@ class PlayGameStage extends Stage {
                 float x = enemy.getEnemyPositionX();
                 float y = enemy.getEnemyPositionY();
                 if(Math.pow(x - cameraPosition.x, 2) + Math.pow(y - cameraPosition.y, 2) <= Math.pow(COLLECT_RANGE, 2)) {
-                    enemyHit = enemy;
-                    k = i;
+                    //dapetin nyawa enemy
+                    int NYAWA_ENEMY = enemy.getNyawaEnemy();
+                    int random1 = getRandomAbility();
+
+                    //cek nyawanya tinggal 0 atau gak?
+                    //kalo nol, set enemyhit buat di remove;
+                    //kalo bukan, nyawa -  1
+                    switch (NYAWA_ENEMY){
+                        case 0:
+                            enemyHit = enemy;
+                            k = i;
+                            break;
+                        default:
+                            enemy.setNyawaEnemy(NYAWA_ENEMY-1);
+                            break;
+                    }
+
                     break;
                 }
             }
@@ -655,6 +673,13 @@ class PlayGameStage extends Stage {
         buff = new Fruits(eelbatCosmir.assets, a, b, c, d);
         mapBuff.add(buff);
         addActor(buff);
+    }
+
+    public void setRandomAbility(int randomNumberAbility){
+        this.randomNumberAbility = randomNumberAbility;
+    }
+    public int getRandomAbility(){
+        return randomNumberAbility;
     }
 
     enum DIRECTION{RIGHT, LEFT, UP, DOWN, RIGHT_UP, RIGHT_DOWN, LEFT_UP, LEFT_DOWN, NONE}
