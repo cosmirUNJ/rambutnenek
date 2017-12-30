@@ -1,5 +1,6 @@
 package com.cosmirunj.eelbat;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -17,10 +18,11 @@ public class Aksesoris extends Actor {
     private final float TARGET_Y;
     private float x,y;
     private float currentAngle;
-    private Texture enemyJelly, shadowEnemy;
+    private Texture enemyJelly, enemyJellyAngry, shadowEnemy;
     private final int SHADOW_OFFSET = 150;
     private int level;
     private Assets assets;
+    private boolean isAngry;
     //private boolean fixed;
 
     public Aksesoris(Assets assets, float x, float y, int level){
@@ -32,6 +34,7 @@ public class Aksesoris extends Actor {
         this.y = y + (EelbatCosmir.random.nextInt(2*CLOSE_RADIUS)-CLOSE_RADIUS);
         this.level = level;
 
+        isAngry = false;
 
         checkLevel();
         shadowEnemy = assets.getTexture(Assets.shadowEnemy);
@@ -41,9 +44,11 @@ public class Aksesoris extends Actor {
         switch (level){
             case 1:
                 enemyJelly = assets.getTexture(Assets.enemyJelly);
+                enemyJellyAngry = assets.getTexture(Assets.activeJelly);
                 break;
             case 2:
-                enemyJelly = assets.getTexture(Assets.activeJelly);
+                enemyJelly = assets.getTexture(Assets.enemyJelly);
+                enemyJellyAngry = assets.getTexture(Assets.activeJelly);
                 break;
             case 3:
                 enemyJelly = assets.getTexture(Assets.manyherringfish);
@@ -57,7 +62,7 @@ public class Aksesoris extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha){
         batch.draw(shadowEnemy, x-shadowEnemy.getWidth()/2,y-SHADOW_OFFSET);
-        batch.draw(enemyJelly,x-enemyJelly.getWidth()/2,y-enemyJelly.getHeight()/2);
+        batch.draw(getTextureAksesoris(),x-enemyJelly.getWidth()/2,y-enemyJelly.getHeight()/2);
     }
 
     @Override
@@ -82,10 +87,27 @@ public class Aksesoris extends Actor {
 
     }
 
-    public float getPositionX(){
+    public float getAksesorisPositionX(){
         return  x;
     }
-    public float floatgetPositionY(){
+    public float getAksesorisPositionY(){
         return y;
     }
+
+    public boolean getSateAksesorisIsAngry(){
+        return isAngry;
+    }
+    public void setSateAksesoris(boolean isAngry){
+        this.isAngry = isAngry;
+    }
+    public Texture getTextureAksesoris(){
+        if (getSateAksesorisIsAngry() == false) {
+            return enemyJelly;
+        } else if (getSateAksesorisIsAngry() == true) {
+            return enemyJellyAngry;
+        } else {
+            return enemyJelly;
+        }
+    }
+
 }

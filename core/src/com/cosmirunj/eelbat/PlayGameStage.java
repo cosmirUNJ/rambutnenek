@@ -65,6 +65,7 @@ class PlayGameStage extends Stage {
     private float abilityDuration;
     private float damageDuration;
     private float coolDown;
+    private float checkAksesorisStateDuration;
 
     private float score;
     private final int TOTAL_SCORE = 200;
@@ -83,6 +84,7 @@ class PlayGameStage extends Stage {
     private boolean doDamage;
     private int randomNumberAbility;
 
+    Aksesoris aksesoris;
     FORM form;
 
     public PlayGameStage(Viewport gameViewport, EelbatCosmir eelbatCosmir, PlayHUDStage playHUDStage, float touchpadXnya, float touchpadYnya, Touchpad touchpad, int level, int difficulty) {
@@ -109,6 +111,7 @@ class PlayGameStage extends Stage {
             coolDown = 7;
         }
 
+        checkAksesorisStateDuration = 5;
         shapeRenderer = new ShapeRenderer();
 
         this.touchpadXnya = touchpadXnya;
@@ -331,6 +334,12 @@ class PlayGameStage extends Stage {
             }
         }
 
+        if (checkAksesorisStateDuration < 0){
+            boolean isAngry = aksesoris.getSateAksesorisIsAngry();
+            aksesoris.setSateAksesoris(!isAngry);
+            checkAksesorisStateDuration = 5;
+        }
+
         if(damageDuration < 0){
             doDamage = false;
             damageDuration = 1;
@@ -506,6 +515,7 @@ class PlayGameStage extends Stage {
             damage.setVisible(true);
             damage.setPosition(x - damage.getWidth()/2, y - damage.getHeight()/2);
         }
+        checkAksesorisStateDuration -= delta;
         super.act(delta);
     }
 
@@ -621,8 +631,8 @@ class PlayGameStage extends Stage {
 
             if(level == 2){
                 for(Aksesoris aksesoris : freeAksesorises) {
-                    float x = aksesoris.getPositionX();
-                    float y = aksesoris.floatgetPositionY();
+                    float x = aksesoris.getAksesorisPositionX();
+                    float y = aksesoris.getAksesorisPositionY();
                     if(Math.pow(x - cameraPosition.x, 2) + Math.pow(y - cameraPosition.y, 2) <= Math.pow(COLLECT_RANGE, 2)) {
                         aksesorisHit = aksesoris;
                         break;
