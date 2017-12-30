@@ -186,31 +186,25 @@ class PlayScreen implements Screen {
             //tambahan
             //batch.begin();
             gameStage.act(delta);
-
-
-
-            playHUD.act(delta);
-
-
-
-            //tambahan juga
-            //batch.end();
-            stage.act(delta);
-
-            ButtonStage.act(Gdx.graphics.getDeltaTime());
-
-            playHUD.update(delta);
         }
         gameViewport.apply();
         gameStage.draw();
 
+
+        playHUD.act(delta);
         hudViewport.apply();
         playHUD.draw();
 
+
+        //tambahan juga
+        //batch.end();
+        stage.act(delta);
         stage.draw();
 
-
+        ButtonStage.act(Gdx.graphics.getDeltaTime());
         ButtonStage.draw();
+        playHUD.update(delta);
+
 //        if(!isPaused){
 //            Gdx.graphics.requestRendering();
 //        }
