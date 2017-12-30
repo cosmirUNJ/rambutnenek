@@ -84,6 +84,7 @@ class PlayGameStage extends Stage {
     private boolean doDamage;
     private int randomNumberAbility;
 
+    private boolean isAngry;
     Aksesoris aksesoris;
     FORM form;
 
@@ -334,9 +335,14 @@ class PlayGameStage extends Stage {
             }
         }
 
+        //cek waktu durasinya
+        //tiap lima detik, stiap aksesoris, dirubah jadi angry
+        checkAksesorisStateDuration -= delta;
         if (checkAksesorisStateDuration < 0){
-            boolean isAngry = aksesoris.getSateAksesorisIsAngry();
-            aksesoris.setSateAksesoris(!isAngry);
+            for (Aksesoris aksesoris:freeAksesorises){
+                isAngry = aksesoris.getSateAksesorisIsAngry();
+                aksesoris.setSateAksesoris(!isAngry);
+            }
             checkAksesorisStateDuration = 5;
         }
 
@@ -515,7 +521,6 @@ class PlayGameStage extends Stage {
             damage.setVisible(true);
             damage.setPosition(x - damage.getWidth()/2, y - damage.getHeight()/2);
         }
-        checkAksesorisStateDuration -= delta;
         super.act(delta);
     }
 
