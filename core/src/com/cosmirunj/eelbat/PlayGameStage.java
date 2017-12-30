@@ -3,7 +3,6 @@ package com.cosmirunj.eelbat;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
@@ -31,7 +30,8 @@ class PlayGameStage extends Stage {
 
     private ArrayList<Fruits> targets, mapBuff;
     private Map<Integer, Set<Enemy>> fixedEnemies;
-    private Set<Aksesoris> freeEnemies;
+    private Set<Aksesoris> freeAksesorises;
+    private Set<Enemy> freeEnemy;
     private HashSet<Integer> targetsFound;
     private ArrayList<Fruits> collectedTargets, collectedBuffs;
 
@@ -142,11 +142,11 @@ class PlayGameStage extends Stage {
         targets = new ArrayList<Fruits>();
         targetsFound = new HashSet<Integer>();
         fixedEnemies = new HashMap<Integer, Set<Enemy>>();
-        freeEnemies = new HashSet<Aksesoris>();
+        freeAksesorises = new HashSet<Aksesoris>();
         for(int i = 0; i < remainingmf; i++) {
             float x = EelbatCosmir.random.nextInt(2*MAX_RADIUS_X) - MAX_RADIUS_X;
             float y = EelbatCosmir.random.nextInt(2*MAX_RADIUS_Y) - MAX_RADIUS_Y;
-            int mf = EelbatCosmir.random.nextInt(2);;
+            int mf = EelbatCosmir.random.nextInt(2);
             Fruits fruit = new Fruits(eelbatCosmir.assets, x, y, i, mf);
             targets.add(fruit);
             addActor(fruit);
@@ -162,12 +162,20 @@ class PlayGameStage extends Stage {
             }
             fixedEnemies.put(i, enemyGroup);
         }
+        freeEnemy = new HashSet<Enemy>();
+        for(int i = 0; i < remainingmf; i++) {
+            float x = EelbatCosmir.random.nextInt(2*MAX_RADIUS_X) - MAX_RADIUS_X;
+            float y = EelbatCosmir.random.nextInt(2*MAX_RADIUS_Y) - MAX_RADIUS_Y;
+            Enemy enemy = new Enemy(eelbatCosmir.assets, x, y, difficulty, level);
+            freeEnemy.add(enemy);
+            addActor(enemy);
+        }
 
         for(int i = 0; i < 50; i++) {
             float x = EelbatCosmir.random.nextInt(2 * MAX_RADIUS_X) - MAX_RADIUS_X;
             float y = EelbatCosmir.random.nextInt(2 * MAX_RADIUS_Y) - MAX_RADIUS_Y;
             Aksesoris aksesoris = new Aksesoris(eelbatCosmir.assets, x, y, level);
-            freeEnemies.add(aksesoris);
+            freeAksesorises.add(aksesoris);
             addActor(aksesoris);
         }
 
@@ -558,7 +566,6 @@ class PlayGameStage extends Stage {
                             enemy.setNyawaEnemy(NYAWA_ENEMY-1);
                             break;
                     }
-
                     break;
                 }
             }
@@ -577,8 +584,43 @@ class PlayGameStage extends Stage {
             }
             //damage();
         }else{
+            for(Enemy enemy : freeEnemy){
+                float x = enemy.getEnemyPositionX();
+                float y = enemy.getEnemyPositionY();
+                if(Math.pow(x - cameraPosition.x, 2) + Math.pow(y - cameraPosition.y, 2) <= Math.pow(COLLECT_RANGE, 2)) {
+                    //dapetin nyawa enemy
+                    int NYAWA_ENEMY = enemy.getNyawaEnemy();
+                    int random1 = getRandomAbility();
+
+                    //cek nyawanya tinggal 0 atau gak?
+                    //kalo nol, set enemyhit buat di remove;
+                    //kalo bukan, nyawa -  1
+                    switch (NYAWA_ENEMY){
+                        case 0:
+                            enemyHit = enemy;
+                            break;
+                        default:
+                            enemy.setNyawaEnemy(NYAWA_ENEMY-1);
+                            break;
+                    }
+                    break;
+                }
+            }
+            if (enemyHit != null) {
+                if(playHUDStage.getLives() > 0) {
+                    Assets.hit.play();
+                }
+                freeEnemy.remove(enemyHit);
+                enemyHit.remove();
+                if(!abilityUsed){
+                    time -= 30;
+                    playHUDStage.gotHit();
+                    doDamage = true;
+                }
+            }
+
             if(level == 2){
-                for(Aksesoris aksesoris : freeEnemies) {
+                for(Aksesoris aksesoris : freeAksesorises) {
                     float x = aksesoris.getPositionX();
                     float y = aksesoris.floatgetPositionY();
                     if(Math.pow(x - cameraPosition.x, 2) + Math.pow(y - cameraPosition.y, 2) <= Math.pow(COLLECT_RANGE, 2)) {
@@ -590,7 +632,7 @@ class PlayGameStage extends Stage {
                     if(playHUDStage.getLives() > 0) {
                         Assets.hit.play();
                     }
-                    freeEnemies.remove(aksesorisHit);
+                    freeAksesorises.remove(aksesorisHit);
                     aksesorisHit.remove();
                     if(!abilityUsed){
                         time -= 30;
