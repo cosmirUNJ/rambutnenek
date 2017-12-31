@@ -76,7 +76,6 @@ class PlayScreen implements Screen {
 
     private Stage ButtonStage;
     boolean btnPause;
-    private MODE_GAME mode_game;
     public int enemySpeed;
     int aksesorisSpeed;
     //boolean btnResume;
@@ -105,7 +104,6 @@ class PlayScreen implements Screen {
         isPaused = false;
 
         ButtonStage=new Stage();
-        mode_game = MODE_GAME.MULAI;
 
         btnPause = true;
 
@@ -184,20 +182,11 @@ class PlayScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        //tambahan
-        //batch.begin();
-        switch (mode_game){
-            case MULAI:
-
-                break;
-            case PAUSEE:
-
-                break;
-            default:
-                break;
+        if(!isPaused) {
+            //tambahan
+            //batch.begin();
+            gameStage.act(delta);
         }
-
-        gameStage.act(delta);
         gameViewport.apply();
         gameStage.draw();
 
@@ -214,12 +203,11 @@ class PlayScreen implements Screen {
 
         ButtonStage.act(Gdx.graphics.getDeltaTime());
         ButtonStage.draw();
-
         playHUD.update(delta);
 
-        if(!isPaused){
-            Gdx.graphics.requestRendering();
-        }
+//        if(!isPaused){
+//            Gdx.graphics.requestRendering();
+//        }
     }
 
     public void setSpeedPause() {
@@ -325,8 +313,8 @@ class PlayScreen implements Screen {
                 ButtonSetting.setVisible(!btnPause);
                 ButtonExit.setVisible(!btnPause);
                 //pauseLabel.setVisible(true);
-                mode_game = MODE_GAME.MULAI;
-                Assets.playmusic.play();
+
+                isPaused = false;
                 return btnPause;
             }
 
@@ -433,11 +421,11 @@ class PlayScreen implements Screen {
                 ButtonSetting.setVisible(!btnPause);
                 ButtonExit.setVisible(!btnPause);
                 //pauseLabel.setVisible(true);
-                mode_game = MODE_GAME.PAUSEE;
                 Gdx.graphics.setContinuousRendering(true);
                 //Gdx.graphics.requestRendering();
                 //Gdx.app.getApplicationListener().dispose();
                 Assets.playmusic.stop();
+                isPaused = true;
                 return btnPause;
             }
 
@@ -528,6 +516,4 @@ class PlayScreen implements Screen {
         }
         sonarButtonActive = true;
     }
-
-    public enum MODE_GAME{MULAI, PAUSEE}
 }
