@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.Application;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -245,11 +246,33 @@ class PlayGameStage extends Stage {
                 break;
         }
 
+        if(Gdx.app.getType() == Application.ApplicationType.Desktop) {
+            if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.UP)) {
+                direction = DIRECTION.RIGHT_UP;
+            } else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+                direction = DIRECTION.RIGHT_DOWN;
+            } else if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.UP)) {
+                direction = DIRECTION.LEFT_UP;
+            } else if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+                direction = DIRECTION.LEFT_DOWN;
+            } else if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+                direction = DIRECTION.RIGHT;
+            } else if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+                direction = DIRECTION.LEFT;
+            } else if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
+                direction = DIRECTION.UP;
+            } else if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+                direction = DIRECTION.DOWN;
+            } else {
+                direction = DIRECTION.NONE;
+            }
+        }
+
         if(Gdx.input.isKeyJustPressed(Input.Keys.W)) {
             sendMainWave();
         }
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.E)) {
             useAbility();
         }
 
@@ -552,6 +575,7 @@ class PlayGameStage extends Stage {
             }
             fixedEnemies.get(k).remove(enemyHit);
             enemyHit.remove();
+            playHUDStage.updateScore(500);
             if(!abilityUsed){
                 time -= 30;
                 playHUDStage.gotHit();
@@ -574,6 +598,7 @@ class PlayGameStage extends Stage {
                     }
                     freeEnemies.remove(aksesorisHit);
                     aksesorisHit.remove();
+                    playHUDStage.updateScore(500);
                     if(!abilityUsed){
                         time -= 30;
                         playHUDStage.gotHit();
