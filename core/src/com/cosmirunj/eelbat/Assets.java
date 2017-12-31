@@ -68,6 +68,7 @@ public class Assets {
     static Sound hit;
     static Sound fail;
     static Sound success;
+    static Sound eelbatskill;
 
     int jumlahTextureBawah = 10;
     int jumlahTextureAtas = 20;
@@ -188,6 +189,7 @@ public class Assets {
         hit = Gdx.audio.newSound(Gdx.files.internal("sfx/die1.wav"));
         fail = Gdx.audio.newSound(Gdx.files.internal("sfx/gameover.wav"));
         success = Gdx.audio.newSound(Gdx.files.internal("sfx/ending_game.wav"));
+        eelbatskill = Gdx.audio.newSound(Gdx.files.internal("sfx/eelbatskill.wav"));
 
         //home
         btnHome = new AssetDescriptor<Texture>("buttons/home-btn.png", Texture.class, textureParameter);

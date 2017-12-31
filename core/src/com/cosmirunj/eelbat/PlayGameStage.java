@@ -515,7 +515,7 @@ class PlayGameStage extends Stage {
 //        }
 //        return canSend;
         if(!isCoolDown){
-            Assets.waveOut.play(1.0f);
+            Assets.eelbatskill.play(1.0f);
             setRandomAbility(eelbatCosmir.random.nextInt(100));
             //Ability ability = new Ability(this, cameraPosition.x, cameraPosition.y);
             //addActor(ability);
