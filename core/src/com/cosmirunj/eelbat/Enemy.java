@@ -32,13 +32,14 @@ public class Enemy extends Actor {
     private final int NYAWA3 = 3;
     //float eelbatPositionX, eelbatPositionY;
     //float eelbatPositionRadius;
-    //double fixAngle;
+    private float fixAngle;
 
-    Vector2 awal = new Vector2();
-    Vector2 akhir = new Vector2();
+    Vector2 awal = new Vector2(); //posisi enemynya
+    Vector2 akhir = new Vector2(); //posisi eelbat
     Vector2 velocity = new Vector2();
     Vector2 movemnt = new Vector2();
     Vector2 arah = new Vector2();
+    Vector2 temp = new Vector2();
 
 //    Vector2[] titikRute;
 //    int JUMLAH_TITIK_RUTE = 4;
@@ -94,6 +95,7 @@ public class Enemy extends Actor {
         this.assets = assets;
 
         checkLevel();
+        fixAngle = 0;
     }
 
 
@@ -112,8 +114,16 @@ public class Enemy extends Actor {
     }
     @Override
     public void draw(Batch batch, float parentAlpha){
-            batch.draw(shadowEnemy, x-shadowEnemy.getWidth()/2,y-SHADOW_OFFSET);
-            batch.draw(enemyFish,x-enemyFish.getWidth()/2,y-enemyFish.getHeight()/2);
+        batch.draw(shadowEnemy, x-shadowEnemy.getWidth()/2,y-SHADOW_OFFSET);
+        //batch.draw(enemyFish,x-enemyFish.getWidth()/2,y-enemyFish.getHeight()/2);
+        batch.draw(enemyFish,x-enemyFish.getWidth()/2,y-enemyFish.getHeight()/2,
+                enemyFish.getWidth()/2, enemyFish.getHeight()/2,
+                enemyFish.getWidth(), enemyFish.getHeight(),
+                1f,1f,getAngleXkeY(),
+                0,0,
+                enemyFish.getWidth(), enemyFish.getHeight(),
+                true,false
+                );
     }
 
     @Override
@@ -179,6 +189,19 @@ public class Enemy extends Actor {
         }
         x = mulai.x;
         y = mulai.y;
+        setAngleXkeY(mulai,finis);
+    }
+    private void setAngleXkeY(Vector2 mulai, Vector2 finis){
+        fixAngle = temp.set(finis).sub(mulai).angle();
+        Gdx.app.log("angle", String.valueOf(fixAngle));
+    }
+    private float getAngleXkeY(){
+        switch (kejargak){
+            case KEJAR:
+                return fixAngle;
+            default:
+                return 0;
+        }
     }
 
     public float getEnemyPositionX(){
