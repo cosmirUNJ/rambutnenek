@@ -194,7 +194,7 @@ public class Enemy extends Actor {
     }
     private void setAngleXkeY(Vector2 mulai, Vector2 finis){
         fixAngle = temp.set(finis).sub(mulai).angle();
-        Gdx.app.log("angle", String.valueOf(fixAngle));
+        //Gdx.app.log("angle", String.valueOf(fixAngle));
         if (fixAngle > 90 && fixAngle <270)
             isFlipedY = true;
         else
