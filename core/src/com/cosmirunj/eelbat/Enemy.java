@@ -33,6 +33,7 @@ public class Enemy extends Actor {
     //float eelbatPositionX, eelbatPositionY;
     //float eelbatPositionRadius;
     private float fixAngle;
+    private boolean isFlipedY;
 
     Vector2 awal = new Vector2(); //posisi enemynya
     Vector2 akhir = new Vector2(); //posisi eelbat
@@ -45,7 +46,6 @@ public class Enemy extends Actor {
 //    int JUMLAH_TITIK_RUTE = 4;
 //    int nextX, nextY;
 
-    boolean punyaRute;
     public Enemy(Assets assets, float x, float y, int difficulty, int level){
         this.difficulty = difficulty;
         //this.fixed = fixed;
@@ -122,7 +122,7 @@ public class Enemy extends Actor {
                 1f,1f,getAngleXkeY(),
                 0,0,
                 enemyFish.getWidth(), enemyFish.getHeight(),
-                true,false
+                true,isFlipedY
                 );
     }
 
@@ -160,6 +160,7 @@ public class Enemy extends Actor {
                 x += delta*Math.cos(currentAngle/180*Math.PI)*SPEED_ENEMY;
                 y += delta*Math.sin(currentAngle/180*Math.PI)*SPEED_ENEMY;
 
+                isFlipedY = false;
                 break;
         }
     }
@@ -194,6 +195,11 @@ public class Enemy extends Actor {
     private void setAngleXkeY(Vector2 mulai, Vector2 finis){
         fixAngle = temp.set(finis).sub(mulai).angle();
         Gdx.app.log("angle", String.valueOf(fixAngle));
+        if (fixAngle > 90 && fixAngle <270)
+            isFlipedY = true;
+        else
+            isFlipedY = false;
+        //if(fixAngle)
     }
     private float getAngleXkeY(){
         switch (kejargak){
