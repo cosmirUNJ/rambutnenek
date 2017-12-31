@@ -79,7 +79,6 @@ class PlayScreen implements Screen {
     public int enemySpeed;
     int aksesorisSpeed;
     //boolean btnResume;
-    public boolean isPaused;
 
     ShapeRenderer shapeRenderer;
     boolean drawDebug;
@@ -101,7 +100,6 @@ class PlayScreen implements Screen {
         this.eelbatCosmir = eelbatCosmir;
         this.level = level;
         this.difficulty = difficulty;
-        isPaused = false;
 
         ButtonStage=new Stage();
 
@@ -182,7 +180,7 @@ class PlayScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if(!isPaused) {
+        if(btnPause) {
             //tambahan
             //batch.begin();
             gameStage.act(delta);
@@ -314,7 +312,6 @@ class PlayScreen implements Screen {
                 ButtonExit.setVisible(!btnPause);
                 //pauseLabel.setVisible(true);
 
-                isPaused = false;
                 return btnPause;
             }
 
@@ -425,7 +422,6 @@ class PlayScreen implements Screen {
                 //Gdx.graphics.requestRendering();
                 //Gdx.app.getApplicationListener().dispose();
                 Assets.playmusic.stop();
-                isPaused = true;
                 return btnPause;
             }
 
