@@ -38,7 +38,7 @@ class PlayGameStage extends Stage {
     static final int TOTAL_MF1 = 1;
     static final int TOTAL_MF2 = 0;
     static final int TOTAL_MF3 = 0;
-    static final int TOTAL_MF = 3;
+    static final int TOTAL_MF = 1;
     private final int MAX_RADIUS_X = 5*EelbatCosmir.WIDTH;
     private final int MAX_RADIUS_Y = 5*EelbatCosmir.HEIGHT;
 
@@ -337,13 +337,16 @@ class PlayGameStage extends Stage {
 
         //cek waktu durasinya
         //tiap lima detik, stiap aksesoris, dirubah jadi angry
-        checkAksesorisStateDuration -= delta;
-        if (checkAksesorisStateDuration < 0){
-            for (Aksesoris aksesoris:freeAksesorises){
-                isAngry = aksesoris.getSateAksesorisIsAngry();
-                aksesoris.setSateAksesoris(!isAngry);
+        //kalo lvl 2
+        if (level == 2){
+            checkAksesorisStateDuration -= delta;
+            if (checkAksesorisStateDuration < 0){
+                for (Aksesoris aksesoris:freeAksesorises){
+                    isAngry = aksesoris.getSateAksesorisIsAngry();
+                    aksesoris.setSateAksesoris(!isAngry);
+                }
+                checkAksesorisStateDuration = 5;
             }
-            checkAksesorisStateDuration = 5;
         }
 
         if(damageDuration < 0){
@@ -639,7 +642,9 @@ class PlayGameStage extends Stage {
                     float x = aksesoris.getAksesorisPositionX();
                     float y = aksesoris.getAksesorisPositionY();
                     if(Math.pow(x - cameraPosition.x, 2) + Math.pow(y - cameraPosition.y, 2) <= Math.pow(COLLECT_RANGE, 2)) {
-                        aksesorisHit = aksesoris;
+                        if (aksesoris.getSateAksesorisIsAngry()){
+                            aksesorisHit = aksesoris;
+                        }
                         break;
                     }
                 }
