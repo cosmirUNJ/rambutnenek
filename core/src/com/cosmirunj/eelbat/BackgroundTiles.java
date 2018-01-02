@@ -383,8 +383,11 @@ public class BackgroundTiles extends Actor {
                 randomnya = EelbatCosmir.random.nextInt(Assets.textureAtas.length);
                 return eelbatCosmir.assets.getTexture(Assets.textureAtas[randomnya]);
             case 2:
-                randomnya = EelbatCosmir.random.nextInt(Assets.textureAtas.length);
+                randomnya = EelbatCosmir.random.nextInt(Assets.textureAtas2.length);
                 return eelbatCosmir.assets.getTexture(Assets.textureAtas2[randomnya]);
+            case 3:
+                randomnya = EelbatCosmir.random.nextInt(Assets.textureAtas3.length);
+                return eelbatCosmir.assets.getTexture(Assets.textureAtas3[randomnya]);
             default:
                 randomnya = EelbatCosmir.random.nextInt(Assets.textureAtas.length);
                 return eelbatCosmir.assets.getTexture(Assets.textureAtas[randomnya]);

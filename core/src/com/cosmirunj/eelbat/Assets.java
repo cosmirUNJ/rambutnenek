@@ -48,8 +48,8 @@ public class Assets {
     static AssetDescriptor<Texture> bar1, bar2, bar3, bar4, bar5, ability, damage;
     static AssetDescriptor<Texture> btnHome, btnAlas, btnResume, btnReplay, btnSetting, btnExit;
 
-    static AssetDescriptor<Texture> enemyJelly,enemyFish,shadowEnemy,manyherringfish, enemySeaHorse, activeJelly;
-
+    static AssetDescriptor<Texture> enemyJelly,enemyFish,shadowEnemy,manyherringfish, enemySeaHorse, activeJelly, moorishIdol;
+    static AssetDescriptor<Texture>[] whirlpool;
 
     static AssetDescriptor<Texture> btnPlay, btnEasy, btnMedium, btnHard, btnSoundActive, btnSoundMute, btnReplayPlayScreen, btnHelp;
     static AssetDescriptor<Texture> btnSkill, btnSonar, btnSkillActive, btnSonarActive, btnSonarCooldown;
@@ -66,6 +66,10 @@ public class Assets {
     //level2
     static AssetDescriptor<Texture>[] textureAtas2;
     static AssetDescriptor<Texture>[] textureBawah2;
+
+    //level3
+    static AssetDescriptor<Texture>[] textureAtas3;
+    static AssetDescriptor<Texture>[] enemyEagle;
 
     static AssetDescriptor<Texture> mapTest;
 
@@ -117,10 +121,17 @@ public class Assets {
         fruit5lv3 = new AssetDescriptor<Texture>("buff/strawberrylvl3.png", Texture.class, textureParameter);
         fruit6lv3 = new AssetDescriptor<Texture>("buff/watermelonlvl3.png", Texture.class, textureParameter);
         manyherringfish = new AssetDescriptor<Texture>("enemigo/manyherringfish.png", Texture.class, textureParameter);
+        moorishIdol = new AssetDescriptor<Texture>("enemigo/moorishidol.png", Texture.class, textureParameter);
 
         enemySeaHorse = new AssetDescriptor<Texture>("enemigo/seahorse.png", Texture.class, textureParameter);
 
         activeJelly = new AssetDescriptor<Texture>("enemigo/jellyfishactive.png", Texture.class, textureParameter);
+
+        whirlpool = new AssetDescriptor[4];
+        for (int i=0;i<4;i++){
+            String namatexturenya = String.format("enemigo/whirlpool/%d.png",(i+1));
+            whirlpool[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class, textureParameter);
+        }
 
         smallHole = new AssetDescriptor<Texture>("small-hole.png", Texture.class, textureParameter);
         bigHole = new AssetDescriptor<Texture>("big-hole.png", Texture.class, textureParameter);
@@ -171,10 +182,23 @@ public class Assets {
             textureBawah2[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
         }
 
+
         hiu = new AssetDescriptor[jumlahFrameHiu];
-        for (int i=0;i<5;i++){
-            String namatexturenya = String.format("enemigo/sharksprite-0-%d.png",(i));
-            hiu[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
+        for (int i=0;i<5;i++) {
+            String namatexturenya = String.format("enemigo/sharksprite-0-%d.png", (i));
+            hiu[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class, textureParameter);
+        }
+        //level3
+        textureAtas3 = new AssetDescriptor[jumlahTextureAtas];
+        for (int i=0;i<jumlahTextureAtas;i++){
+            String namatexturenya = String.format("tilesAtas/level3/%d.png",(i+1));//karena angkanya dimulai dari 1 bukan 0, jd i+1
+            textureAtas3[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
+        }
+        enemyEagle = new AssetDescriptor[8];
+        for (int i=0;i<8;i++){
+            String namatexturenya = String.format("enemigo/eagle/%d.png",(i+1));//karena angkanya dimulai dari 1 bukan 0, jd i+1
+            enemyEagle[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
+
         }
 
         //font
@@ -270,6 +294,7 @@ public class Assets {
         manager.load(smallHole);
         manager.load(bigHole);
         manager.load(manyherringfish);
+        manager.load(moorishIdol);
 
         manager.load(enemySeaHorse);
 
@@ -294,6 +319,14 @@ public class Assets {
             manager.load(textureAtas2[i]);
         }
 
+        //level3
+        for (int i=0;i<jumlahTextureAtas;i++){
+            manager.load(textureAtas3[i]);
+        }
+
+        for (int i=0;i<8;i++){
+            manager.load(enemyEagle[i]);
+        }
 
         //rumput dan gelembung
         for (int i=0;i<jumlahGelembung;i++){
@@ -310,6 +343,10 @@ public class Assets {
             manager.load(hiu[i]);
         }
 
+        //whirlpool
+        for (int i=0;i<4;i++){
+            manager.load(whirlpool[i]);
+        }
         manager.load(mapTest);
 
         //load bar
