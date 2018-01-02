@@ -36,6 +36,7 @@ import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.cosmirunj.eelbat.AI.EnemySteeringActor;
 
+import static com.cosmirunj.eelbat.Assets.btnSkill;
 import static com.cosmirunj.eelbat.Assets.btnSkillActive;
 
 /**
@@ -68,11 +69,11 @@ class PlayScreen implements Screen {
     private Label.LabelStyle pauseLabelStyle;
     private ImageButton ButtonHome, ButtonAlas, ButtonResume, ButtonReplay, ButtonSetting, ButtonExit;
     private ImageButton ButtonSkill, ButtonSonar;
-    private TextureRegionDrawable sonarIdle, sonarActive, sonarCooldown;
+    private TextureRegionDrawable sonarIdle, sonarActive, sonarCooldown, skillIdle, skillActive;
 
     private Button.ButtonStyle buttonStyle;
-    private Button sonarButtonAndroid;
-    private boolean sonarButtonActive;
+    private Button sonarButtonAndroid, skillButtonAndroid;
+    private boolean sonarButtonActive, skillButtonActive;
 
     private Stage ButtonStage;
     boolean btnPause;
@@ -443,32 +444,29 @@ class PlayScreen implements Screen {
         float widthScreen = Gdx.graphics.getWidth();
         float heightScreen = Gdx.graphics.getHeight();
 
-        Texture BtnSkill = eelbatCosmir.assets.getTexture(Assets.btnSkill);
-        TextureRegionDrawable BtnImageSkill = new TextureRegionDrawable(new TextureRegion(BtnSkill));
+        skillIdle = new TextureRegionDrawable(new TextureRegion(eelbatCosmir.assets.getTexture(Assets.btnSkill)));
+        skillActive = new TextureRegionDrawable(new TextureRegion(eelbatCosmir.assets.getTexture(Assets.btnSkillActive)));
 
-        ButtonSkill = new ImageButton(BtnImageSkill);
-        if(Gdx.app.getType() == Application.ApplicationType.Android){
-            ButtonSkill.setSize(BtnSkill.getWidth()+50,BtnSkill.getHeight()+50);
-            ButtonSkill.setPosition(widthScreen*0.75F, heightScreen*0.05F);
-        } else {
-            ButtonSkill.setSize(BtnSkill.getWidth(),BtnSkill.getHeight());
-            ButtonSkill.setPosition(widthScreen*0.75F, heightScreen*0.05F);
-        }
+        buttonStyle = new Button.ButtonStyle();
+        buttonStyle.up = skillIdle;
+        buttonStyle.down = skillActive;
+        skillButtonAndroid = new Button(buttonStyle);
+        skillButtonActive = true;
 
-        ButtonSkill.addListener(new InputListener(){
+        skillButtonAndroid.addListener(new ChangeListener() {
             @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    useAbility();
-                return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                super.touchUp(event, x, y, pointer, button);
+            public void changed(ChangeEvent event, Actor actor) {
+                useAbility();
             }
         });
 
-        ButtonStage.addActor(ButtonSkill);
+        if(Gdx.app.getType() == Application.ApplicationType.Android){
+            skillButtonAndroid.setPosition(widthScreen*0.75F, heightScreen*0.05F);
+        } else {
+            skillButtonAndroid.setPosition(widthScreen*0.75F, heightScreen*0.05F);
+        }
+
+        ButtonStage.addActor(skillButtonAndroid);
         Gdx.input.setInputProcessor(ButtonStage);
 
     }

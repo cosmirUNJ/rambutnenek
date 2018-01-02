@@ -43,7 +43,7 @@ public class Assets {
     static AssetDescriptor<Texture> enemyJelly,enemyFish,shadowEnemy,manyherringfish, enemySeaHorse, activeJelly;
 
 
-    static AssetDescriptor<Texture> btnPlay, btnEasy, btnMedium, btnHard, btnSoundActive, btnSoundMute, btnReplayPlayScreen;
+    static AssetDescriptor<Texture> btnPlay, btnEasy, btnMedium, btnHard, btnSoundActive, btnSoundMute, btnReplayPlayScreen, btnHelp;
     static AssetDescriptor<Texture> btnSkill, btnSonar, btnSkillActive, btnSonarActive, btnSonarCooldown;
     static AssetDescriptor<Texture> smallHole, bigHole;
 
@@ -207,6 +207,7 @@ public class Assets {
         btnHard = new AssetDescriptor<Texture>("buttons/hard-btn.png", Texture.class, textureParameter);
         btnSoundActive = new AssetDescriptor<Texture>("buttons/musicon.png", Texture.class, textureParameter);
         btnSoundMute = new AssetDescriptor<Texture>("buttons/mute-btn.png", Texture.class, textureParameter);
+        btnHelp = new AssetDescriptor<Texture>("buttons/help-btn.png", Texture.class, textureParameter);
 
         //button Skill & Wave
         btnSkill = new AssetDescriptor<Texture>("buttons/skill-button.png", Texture.class, textureParameter);
@@ -300,6 +301,7 @@ public class Assets {
         manager.load(btnHard);
         manager.load(btnSoundActive);
         manager.load(btnSoundMute);
+        manager.load(btnHelp);
 
         manager.load(ability);
         manager.load(damage);

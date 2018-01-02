@@ -35,7 +35,7 @@ class MainMenu implements Screen {
 
     private Button.ButtonStyle buttonStyle;
     private TextureRegionDrawable playButton;
-    private ImageButton ButtonPlay, ButtonEasy, ButtonMedium, ButtonHard, ButtonSoundActive;
+    private ImageButton ButtonPlay, ButtonEasy, ButtonMedium, ButtonHard, ButtonSoundActive, ButtonHelp;
     private Stage ButtonStage;
     boolean btnPlay;
     boolean playMusic;
@@ -149,6 +149,29 @@ class MainMenu implements Screen {
         });
 
         ButtonStage.addActor(ButtonSoundActive);
+
+        //Button Help
+        Texture BtnHelp = eelbatCosmir.assets.getTexture(Assets.btnHelp);
+        TextureRegionDrawable BtnImageHelp = new TextureRegionDrawable(new TextureRegion(BtnHelp));
+        ButtonHelp = new ImageButton(BtnImageHelp);
+        ButtonHelp.setSize(BtnHelp.getWidth()-50,BtnHelp.getHeight()-50);
+        ButtonHelp.setPosition(10, 600);
+        ButtonHelp.addListener(new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                ButtonHelp.getImage().setColor(Color.BROWN);
+                Assets.mainmenumusic.stop();
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                ButtonSoundActive.getImage().setColor(Color.WHITE);
+                eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir, initial_level, easy));
+            }
+        });
+
+        ButtonStage.addActor(ButtonHelp);
 
         //Button Easy
         Texture BtnEasy = eelbatCosmir.assets.getTexture(Assets.btnEasy);
