@@ -47,12 +47,16 @@ public class Assets {
     static AssetDescriptor<Texture> btnSkill, btnSonar, btnSkillActive, btnSonarActive, btnSonarCooldown;
     static AssetDescriptor<Texture> smallHole, bigHole;
 
-
+    //level1
     static AssetDescriptor<Texture>[] textureBawah;
     static AssetDescriptor<Texture>[] textureAtas;
     static AssetDescriptor<Texture>[] gelembung;
     static AssetDescriptor<Texture>[] rumput;
     static AssetDescriptor<Texture>[] tilesGelombang;
+
+    //level2
+    static AssetDescriptor<Texture>[] textureAtas2;
+    static AssetDescriptor<Texture>[] textureBawah2;
 
     static AssetDescriptor<Texture> mapTest;
 
@@ -100,6 +104,7 @@ public class Assets {
         bigHole = new AssetDescriptor<Texture>("big-hole.png", Texture.class, textureParameter);
 
         //texture atas dan bawah ground nya
+        //level1
         textureAtas = new AssetDescriptor[jumlahTextureAtas];
         for (int i=0;i<20;i++){
             String namatexturenya = String.format("tilesAtas/%d.png",(i+1));//karena angkanya dimulai dari 1 bukan 0, jd i+1
@@ -131,6 +136,18 @@ public class Assets {
         }
         mapTest = new AssetDescriptor<Texture>("tilesBawah/maptes.png", Texture.class, textureParameter);
 
+        //level2
+        textureAtas2 = new AssetDescriptor[jumlahTextureAtas];
+        for (int i=0;i<jumlahTextureAtas;i++){
+            String namatexturenya = String.format("tilesAtas/level2/%d.png",(i+1));//karena angkanya dimulai dari 1 bukan 0, jd i+1
+            textureAtas2[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
+        }
+
+        textureBawah2 = new AssetDescriptor[jumlahTextureBawah];
+        for (int i=0;i<jumlahTextureBawah;i++){
+            String namatexturenya = String.format("tilesBawah/level2/tile0%d.png",(i));
+            textureBawah2[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
+        }
 
         //font
         BitmapFontLoader.BitmapFontParameter parameter = new BitmapFontLoader.BitmapFontParameter();
