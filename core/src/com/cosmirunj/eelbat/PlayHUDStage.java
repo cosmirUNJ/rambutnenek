@@ -41,7 +41,6 @@ class PlayHUDStage extends Stage {
     private float widthScreen = EelbatCosmir.WIDTH;
     private float heightScreen = EelbatCosmir.HEIGHT;
     private Image smallHole, bigHole;
-    private int smallHoleTime;
 
     public PlayHUDStage(PlayScreen playScreen, Viewport hudViewport, EelbatCosmir eelbatCosmir, int level, int difficulty) {
         super(hudViewport, eelbatCosmir.batch);
@@ -50,13 +49,16 @@ class PlayHUDStage extends Stage {
         this.level = level;
         this.difficulty = difficulty;
 
-        smallHole = new Image(eelbatCosmir.assets.getTexture(Assets.smallHole));
-        smallHole.setOrigin(smallHole.getWidth()/2, smallHole.getHeight()/2);
-        addActor(smallHole);
-        //smallHoleTime = 0;
+        if (level == 1){
+            smallHole = new Image(eelbatCosmir.assets.getTexture(Assets.smallHole));
+            smallHole.setOrigin(smallHole.getWidth()/2, smallHole.getHeight()/2);
+            addActor(smallHole);
+            //smallHoleTime = 0;
 
-        bigHole = new Image(eelbatCosmir.assets.getTexture(Assets.bigHole));
-        addActor(bigHole);
+            bigHole = new Image(eelbatCosmir.assets.getTexture(Assets.bigHole));
+            addActor(bigHole);
+        }
+
 
         timeLabelStyle = new Label.LabelStyle();
         timeLabelStyle.font = eelbatCosmir.assets.getBitmapFont(Assets.bitmapFontMedium);
