@@ -152,6 +152,9 @@ class PlayGameStage extends Stage {
             float x = EelbatCosmir.random.nextInt(2*MAX_RADIUS_X) - MAX_RADIUS_X;
             float y = EelbatCosmir.random.nextInt(2*MAX_RADIUS_Y) - MAX_RADIUS_Y;
             int mf = EelbatCosmir.random.nextInt(2);
+            if(level == 3){
+                mf = EelbatCosmir.random.nextInt(3);
+            }
             Fruits fruit = new Fruits(eelbatCosmir.assets, x, y, i, mf);
             targets.add(fruit);
             addActor(fruit);
@@ -187,7 +190,10 @@ class PlayGameStage extends Stage {
         float a = EelbatCosmir.random.nextInt(2*MAX_RADIUS_X) - MAX_RADIUS_X;
         float b = EelbatCosmir.random.nextInt(2*MAX_RADIUS_Y) - MAX_RADIUS_Y;
         int c = -1;
-        int d = 3 + EelbatCosmir.random.nextInt(5);
+        int d = 4 + EelbatCosmir.random.nextInt(5);
+        if(level == 3 ){
+            d = 10 + EelbatCosmir.random.nextInt(5);
+        }
         buff = new Fruits(eelbatCosmir.assets, a, b, c, d);
         mapBuff.add(buff);
         addActor(buff);
@@ -294,36 +300,36 @@ class PlayGameStage extends Stage {
         if(direction == DIRECTION.RIGHT_UP || direction == DIRECTION.RIGHT_DOWN) {
             //x += delta*GGJ2017.RUN_SPEED/sq;
             //x ++;
-            x += delta*800/sq;
+            x += delta*600/sq;
         } else if(direction == DIRECTION.RIGHT) {
-            x += delta*800;
+            x += delta*600;
             //x ++;
         } else if(direction == DIRECTION.LEFT_UP || direction == DIRECTION.LEFT_DOWN) {
             //x -= delta*GGJ2017.RUN_SPEED/sq;
             //x --;
-            x -= delta*800/sq;
+            x -= delta*600/sq;
         } else if(direction == DIRECTION.LEFT) {
             //x -= delta*GGJ2017.RUN_SPEED;
             //x --;
-            x -= delta*800;
+            x -= delta*600;
         }
 
         if(direction == DIRECTION.RIGHT_UP || direction == DIRECTION.LEFT_UP) {
             //y += delta*GGJ2017.RUN_SPEED/sq;
             //y ++;
-            y += delta*800/sq;
+            y += delta*600/sq;
         } else if(direction == DIRECTION.UP) {
             //y += delta*GGJ2017.RUN_SPEED;
             //y ++;
-            y += delta*800;
+            y += delta*600;
         } else if(direction == DIRECTION.RIGHT_DOWN || direction == DIRECTION.LEFT_DOWN) {
             //y -= delta*GGJ2017.RUN_SPEED/sq;
             //y --;
-            y -= delta*800/sq;
+            y -= delta*600/sq;
         } else if(direction == DIRECTION.DOWN) {
             //y -= delta*GGJ2017.RUN_SPEED;
             //y --;
-            y -= delta*800;
+            y -= delta*600;
         }
 
         cameraPosition.x = x;
