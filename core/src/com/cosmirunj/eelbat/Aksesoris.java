@@ -1,8 +1,9 @@
 package com.cosmirunj.eelbat;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**
@@ -18,11 +19,16 @@ public class Aksesoris extends Actor {
     private final float TARGET_Y;
     private float x,y;
     private float currentAngle;
-    private Texture enemyJelly, enemyJellyAngry, shadowEnemy;
+    private Texture enemyJelly, enemyJellyAngry, shadowEnemy,moorisIdol, manyherringfish;
     private final int SHADOW_OFFSET = 150;
     private int level;
     private Assets assets;
     private boolean isAngry;
+    private int typeAksesoris;
+    private Texture[] whirlpool;
+    private Animation whirpoolAnim;
+    private SpriteBatch batch;
+
     //private boolean fixed;
 
     public Aksesoris(Assets assets, float x, float y, int level){
@@ -36,6 +42,7 @@ public class Aksesoris extends Actor {
 
         isAngry = false;
 
+        batch = new SpriteBatch();
         checkLevel();
         shadowEnemy = assets.getTexture(Assets.shadowEnemy);
     }
@@ -44,14 +51,19 @@ public class Aksesoris extends Actor {
         switch (level){
             case 1:
                 enemyJelly = assets.getTexture(Assets.enemyJelly);
-                enemyJellyAngry = assets.getTexture(Assets.activeJelly);
+                //enemyJellyAngry = assets.getTexture(Assets.activeJelly);
                 break;
             case 2:
                 enemyJelly = assets.getTexture(Assets.enemyJelly);
                 enemyJellyAngry = assets.getTexture(Assets.activeJelly);
-                break;
-            case 3:
-                enemyJelly = assets.getTexture(Assets.manyherringfish);
+                moorisIdol = assets.getTexture(Assets.moorishIdol);
+                manyherringfish = assets.getTexture(Assets.manyherringfish);
+
+                whirlpool = new Texture[4];
+                for (int i=0;i<4;i++){
+                    whirlpool[i] = assets.getTexture(Assets.whirlpool[i]);
+                }
+                whirpoolAnim = new Animation(1f/4f, whirlpool);
                 break;
             default:
                 enemyJelly = assets.getTexture(Assets.manyherringfish);
@@ -61,8 +73,9 @@ public class Aksesoris extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha){
+
         batch.draw(shadowEnemy, x-shadowEnemy.getWidth()/2,y-SHADOW_OFFSET);
-        batch.draw(getTextureAksesoris(),x-enemyJelly.getWidth()/2,y-enemyJelly.getHeight()/2);
+        batch.draw(getTextureAksesoris(parentAlpha),x-enemyJelly.getWidth()/2,y-enemyJelly.getHeight()/2);
     }
 
     @Override
@@ -100,14 +113,35 @@ public class Aksesoris extends Actor {
     public void setSateAksesoris(boolean isAngry){
         this.isAngry = isAngry;
     }
-    public Texture getTextureAksesoris(){
-        if (getSateAksesorisIsAngry() == false) {
-            return enemyJelly;
-        } else if (getSateAksesorisIsAngry() == true) {
-            return enemyJellyAngry;
-        } else {
-            return enemyJelly;
+    public Texture getTextureAksesoris(float delta){
+        if (level == 2){
+            switch (getTypeAksesoris()){
+                case 1:
+                    if (getSateAksesorisIsAngry() == false) {
+                        return enemyJelly;
+                    } else if (getSateAksesorisIsAngry() == true) {
+                        return enemyJellyAngry;
+                    } else {
+                        return enemyJelly;
+                    }
+                case 2:
+                    return (Texture) whirpoolAnim.getKeyFrame(delta, true);
+                case 3:
+                    return manyherringfish;
+                default:
+                    return moorisIdol;
+            }
         }
+        return enemyJelly;
     }
+    public void setTypeAksesoris(int typeAksesoris){
+        this.typeAksesoris = typeAksesoris;
+    }
+    //urutanya enemyjely, tornado, hering, mory
+    public int getTypeAksesoris(){
+        return typeAksesoris;
+    }
+
+
 
 }

@@ -181,6 +181,9 @@ class PlayGameStage extends Stage {
             float y = EelbatCosmir.random.nextInt(2 * MAX_RADIUS_Y) - MAX_RADIUS_Y;
             Aksesoris aksesoris = new Aksesoris(eelbatCosmir.assets, x, y, level);
             freeAksesorises.add(aksesoris);
+            if (level ==2){
+                aksesoris.setTypeAksesoris(eelbatCosmir.random.nextInt(3));
+            }
             addActor(aksesoris);
         }
 
@@ -365,8 +368,11 @@ class PlayGameStage extends Stage {
             checkAksesorisStateDuration -= delta;
             if (checkAksesorisStateDuration < 0){
                 for (Aksesoris aksesoris:freeAksesorises){
-                    isAngry = aksesoris.getSateAksesorisIsAngry();
-                    aksesoris.setSateAksesoris(!isAngry);
+                    //cuma kalo lvl 2 dan typenya itu jelly
+                    if (aksesoris.getTypeAksesoris()==1){
+                        isAngry = aksesoris.getSateAksesorisIsAngry();
+                        aksesoris.setSateAksesoris(!isAngry);
+                    }
                 }
                 checkAksesorisStateDuration = 5;
             }
@@ -666,7 +672,7 @@ class PlayGameStage extends Stage {
                     float x = aksesoris.getAksesorisPositionX();
                     float y = aksesoris.getAksesorisPositionY();
                     if(Math.pow(x - cameraPosition.x, 2) + Math.pow(y - cameraPosition.y, 2) <= Math.pow(COLLECT_RANGE, 2)) {
-                        if (aksesoris.getSateAksesorisIsAngry()){
+                        if (aksesoris.getSateAksesorisIsAngry() || aksesoris.getTypeAksesoris() == 2){ //cuma kalo angry jelly atau tornado
                             aksesorisHit = aksesoris;
                         }
                         break;

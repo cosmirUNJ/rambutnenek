@@ -40,8 +40,8 @@ public class Assets {
     static AssetDescriptor<Texture> bar1, bar2, bar3, bar4, bar5, ability, damage;
     static AssetDescriptor<Texture> btnHome, btnAlas, btnResume, btnReplay, btnSetting, btnExit;
 
-    static AssetDescriptor<Texture> enemyJelly,enemyFish,shadowEnemy,manyherringfish, enemySeaHorse, activeJelly;
-
+    static AssetDescriptor<Texture> enemyJelly,enemyFish,shadowEnemy,manyherringfish, enemySeaHorse, activeJelly, moorishIdol;
+    static AssetDescriptor<Texture>[] whirlpool;
 
     static AssetDescriptor<Texture> btnPlay, btnEasy, btnMedium, btnHard, btnSoundActive, btnSoundMute, btnReplayPlayScreen;
     static AssetDescriptor<Texture> btnSkill, btnSonar, btnSkillActive, btnSonarActive, btnSonarCooldown;
@@ -103,10 +103,17 @@ public class Assets {
         fruit5 = new AssetDescriptor<Texture>("target/strawberry.png", Texture.class, textureParameter);
         fruit6 = new AssetDescriptor<Texture>("target/watermelon.png", Texture.class, textureParameter);
         manyherringfish = new AssetDescriptor<Texture>("enemigo/manyherringfish.png", Texture.class, textureParameter);
+        moorishIdol = new AssetDescriptor<Texture>("enemigo/moorishidol.png", Texture.class, textureParameter);
 
         enemySeaHorse = new AssetDescriptor<Texture>("enemigo/seahorse.png", Texture.class, textureParameter);
 
         activeJelly = new AssetDescriptor<Texture>("enemigo/jellyfishactive.png", Texture.class, textureParameter);
+
+        whirlpool = new AssetDescriptor[4];
+        for (int i=0;i<4;i++){
+            String namatexturenya = String.format("enemigo/whirlpool/%d.png",(i+1));
+            whirlpool[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class, textureParameter);
+        }
 
         smallHole = new AssetDescriptor<Texture>("small-hole.png", Texture.class, textureParameter);
         bigHole = new AssetDescriptor<Texture>("big-hole.png", Texture.class, textureParameter);
@@ -249,6 +256,7 @@ public class Assets {
         manager.load(smallHole);
         manager.load(bigHole);
         manager.load(manyherringfish);
+        manager.load(moorishIdol);
 
         manager.load(enemySeaHorse);
 
@@ -273,6 +281,11 @@ public class Assets {
             manager.load(textureAtas2[i]);
         }
 
+        //level3
+        for (int i=0;i<jumlahTextureAtas;i++){
+            manager.load(textureAtas3[i]);
+        }
+
 
         //rumput dan gelembung
         for (int i=0;i<jumlahGelembung;i++){
@@ -286,6 +299,10 @@ public class Assets {
             manager.load(tilesGelombang[i]);
         }
 
+        //whirlpool
+        for (int i=0;i<4;i++){
+            manager.load(whirlpool[i]);
+        }
         manager.load(mapTest);
 
         //load bar
