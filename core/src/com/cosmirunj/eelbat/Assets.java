@@ -23,6 +23,7 @@ public class Assets {
     static AssetDescriptor<Texture> mf1;
     static AssetDescriptor<Texture> mf2;
     static AssetDescriptor<Texture> mf3;
+    static AssetDescriptor<Texture> mf4;
 
     static AssetDescriptor<Texture> fruit1;
     static AssetDescriptor<Texture> fruit2;
@@ -30,6 +31,13 @@ public class Assets {
     static AssetDescriptor<Texture> fruit4;
     static AssetDescriptor<Texture> fruit5;
     static AssetDescriptor<Texture> fruit6;
+
+    static AssetDescriptor<Texture> fruit1lv3;
+    static AssetDescriptor<Texture> fruit2lv3;
+    static AssetDescriptor<Texture> fruit3lv3;
+    static AssetDescriptor<Texture> fruit4lv3;
+    static AssetDescriptor<Texture> fruit5lv3;
+    static AssetDescriptor<Texture> fruit6lv3;
 
     public static AssetDescriptor<Texture> shadow, eelbatpic;
 
@@ -53,6 +61,7 @@ public class Assets {
     static AssetDescriptor<Texture>[] gelembung;
     static AssetDescriptor<Texture>[] rumput;
     static AssetDescriptor<Texture>[] tilesGelombang;
+    static AssetDescriptor<Texture>[] hiu;
 
     //level2
     static AssetDescriptor<Texture>[] textureAtas2;
@@ -75,6 +84,7 @@ public class Assets {
     int jumlahGelembung = 4;
     int jumlahRumput = 3;
     int jumlahTilesGelombang = 3;
+    int jumlahFrameHiu = 5;
 
     public void load() {
         manager = new AssetManager();
@@ -93,12 +103,19 @@ public class Assets {
         mf1 = new AssetDescriptor<Texture>("target/mfapple.png", Texture.class, textureParameter);
         mf2 = new AssetDescriptor<Texture>("target/mforange.png", Texture.class, textureParameter);
         mf3 = new AssetDescriptor<Texture>("target/mfstrawberry.png", Texture.class, textureParameter);
+        mf4 = new AssetDescriptor<Texture>("target/mforangelvl3.png", Texture.class, textureParameter);
         fruit1 = new AssetDescriptor<Texture>("target/apple.png", Texture.class, textureParameter);
         fruit2 = new AssetDescriptor<Texture>("target/cherry.png", Texture.class, textureParameter);
         fruit3 = new AssetDescriptor<Texture>("target/mango.png", Texture.class, textureParameter);
         fruit4 = new AssetDescriptor<Texture>("target/orange.png", Texture.class, textureParameter);
         fruit5 = new AssetDescriptor<Texture>("target/strawberry.png", Texture.class, textureParameter);
         fruit6 = new AssetDescriptor<Texture>("target/watermelon.png", Texture.class, textureParameter);
+        fruit1lv3 = new AssetDescriptor<Texture>("buff/applelvl3.png", Texture.class, textureParameter);
+        fruit2lv3 = new AssetDescriptor<Texture>("buff/cherrylvl3.png", Texture.class, textureParameter);
+        fruit3lv3 = new AssetDescriptor<Texture>("buff/mangolvl3.png", Texture.class, textureParameter);
+        fruit4lv3 = new AssetDescriptor<Texture>("buff/orangelvl3.png", Texture.class, textureParameter);
+        fruit5lv3 = new AssetDescriptor<Texture>("buff/strawberrylvl3.png", Texture.class, textureParameter);
+        fruit6lv3 = new AssetDescriptor<Texture>("buff/watermelonlvl3.png", Texture.class, textureParameter);
         manyherringfish = new AssetDescriptor<Texture>("enemigo/manyherringfish.png", Texture.class, textureParameter);
 
         enemySeaHorse = new AssetDescriptor<Texture>("enemigo/seahorse.png", Texture.class, textureParameter);
@@ -152,6 +169,12 @@ public class Assets {
         for (int i=0;i<jumlahTextureBawah;i++){
             String namatexturenya = String.format("tilesBawah/level2/tile0%d.png",(i));
             textureBawah2[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
+        }
+
+        hiu = new AssetDescriptor[jumlahFrameHiu];
+        for (int i=0;i<5;i++){
+            String namatexturenya = String.format("enemigo/sharksprite-0-%d.png",(i));
+            hiu[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
         }
 
         //font
@@ -231,12 +254,19 @@ public class Assets {
         manager.load(mf1);
         manager.load(mf2);
         manager.load(mf3);
+        manager.load(mf4);
         manager.load(fruit1);
         manager.load(fruit2);
         manager.load(fruit3);
         manager.load(fruit4);
         manager.load(fruit5);
         manager.load(fruit6);
+        manager.load(fruit1lv3);
+        manager.load(fruit2lv3);
+        manager.load(fruit3lv3);
+        manager.load(fruit4lv3);
+        manager.load(fruit5lv3);
+        manager.load(fruit6lv3);
         manager.load(smallHole);
         manager.load(bigHole);
         manager.load(manyherringfish);
@@ -275,6 +305,9 @@ public class Assets {
 
         for (int i=0;i<jumlahTilesGelombang;i++){
             manager.load(tilesGelombang[i]);
+        }
+        for (int i=0;i<jumlahFrameHiu;i++){
+            manager.load(hiu[i]);
         }
 
         manager.load(mapTest);

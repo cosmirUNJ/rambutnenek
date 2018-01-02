@@ -47,7 +47,7 @@ public class CharacterEelBat extends Actor {
         karakterEelbat = new TextureRegion(imgEelbat);
         heroEelbat = karakterEelbat.split(300, 300);
 
-        imgWinged = new Texture("eelbat/wingedsprite.png");
+        imgWinged = new Texture("eelbat/wingedsprite2.png");
         karakterWinged = new TextureRegion(imgWinged);
         heroWinged = karakterWinged.split(300, 300);
 

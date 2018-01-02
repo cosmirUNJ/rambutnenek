@@ -2,7 +2,9 @@ package com.cosmirunj.eelbat;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -22,6 +24,11 @@ public class Enemy extends Actor {
     private Texture enemyFish, shadowEnemy;
     private final int SHADOW_OFFSET = 150;
     private int level;
+
+    private Texture[] shark;
+    private Animation animationShark;
+    private float elapsedTime;
+
     //private boolean fixed;
     KEJARGAK kejargak;
     private Assets assets;
@@ -94,6 +101,14 @@ public class Enemy extends Actor {
         this.level = level;
         this.assets = assets;
 
+        shark = new Texture[5];
+
+        for (int i=0;i<5;i++){
+            shark[i] = assets.getTexture(Assets.hiu[i]);
+        }
+
+        animationShark = new Animation(1f/8f,shark);
+
         checkLevel();
         fixAngle = 0;
     }
@@ -116,14 +131,26 @@ public class Enemy extends Actor {
     public void draw(Batch batch, float parentAlpha){
         batch.draw(shadowEnemy, x-shadowEnemy.getWidth()/2,y-SHADOW_OFFSET);
         //batch.draw(enemyFish,x-enemyFish.getWidth()/2,y-enemyFish.getHeight()/2);
-        batch.draw(enemyFish,x-enemyFish.getWidth()/2,y-enemyFish.getHeight()/2,
-                enemyFish.getWidth()/2, enemyFish.getHeight()/2,
-                enemyFish.getWidth(), enemyFish.getHeight(),
-                1f,1f,getAngleXkeY(),
-                0,0,
-                enemyFish.getWidth(), enemyFish.getHeight(),
-                true,isFlipedY
-                );
+        if(level == 2){
+            elapsedTime += Gdx.graphics.getDeltaTime();
+            batch.draw((Texture)animationShark.getKeyFrame(elapsedTime,true),x-150,y-150,
+                    150, 150,
+                    300, 300,
+                    1f,1f,getAngleXkeY(),
+                    0,0,
+                    300, 300,
+                    true,isFlipedY);
+        }else{
+            batch.draw(enemyFish,x-enemyFish.getWidth()/2,y-enemyFish.getHeight()/2,
+                    enemyFish.getWidth()/2, enemyFish.getHeight()/2,
+                    enemyFish.getWidth(), enemyFish.getHeight(),
+                    1f,1f,getAngleXkeY(),
+                    0,0,
+                    enemyFish.getWidth(), enemyFish.getHeight(),
+                    true,isFlipedY
+            );
+        }
+
     }
 
     @Override

@@ -30,17 +30,31 @@ public class Fruits extends Actor {
         }else if(mf == 2){
             idle = assets.getTexture(Assets.mf3);
         }else if(mf == 3){
-            idle = assets.getTexture(Assets.fruit1);
+            idle = assets.getTexture(Assets.mf4);
         }else if(mf == 4){
-            idle = assets.getTexture(Assets.fruit2);
+            idle = assets.getTexture(Assets.fruit1);
         }else if(mf == 5){
-            idle = assets.getTexture(Assets.fruit3);
+            idle = assets.getTexture(Assets.fruit2);
         }else if(mf == 6){
-            idle = assets.getTexture(Assets.fruit4);
+            idle = assets.getTexture(Assets.fruit3);
         }else if(mf == 7){
-            idle = assets.getTexture(Assets.fruit5);
+            idle = assets.getTexture(Assets.fruit4);
         }else if(mf == 8){
+            idle = assets.getTexture(Assets.fruit5);
+        }else if(mf == 9){
             idle = assets.getTexture(Assets.fruit6);
+        }else if(mf == 10){
+            idle = assets.getTexture(Assets.fruit1lv3);
+        }else if(mf == 11){
+            idle = assets.getTexture(Assets.fruit2lv3);
+        }else if(mf == 12){
+            idle = assets.getTexture(Assets.fruit3lv3);
+        }else if(mf == 13){
+            idle = assets.getTexture(Assets.fruit4lv3);
+        }else if(mf == 14){
+            idle = assets.getTexture(Assets.fruit5lv3);
+        }else if(mf == 15){
+            idle = assets.getTexture(Assets.fruit6lv3);
         }
 //        animate1 = assets.getTexture(Assets.targetAnim1);
 //        animate2 = assets.getTexture(Assets.targetAnim2);
