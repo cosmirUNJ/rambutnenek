@@ -21,38 +21,47 @@ public class Enemy extends Actor {
     private float currentAngle;
     private Texture enemyFish, shadowEnemy;
     private final int SHADOW_OFFSET = 150;
-    private int difficulty;
     private int level;
     //private boolean fixed;
     KEJARGAK kejargak;
     private Assets assets;
+    private int difficulty;
+    private int NYAWA;
+    private final int NYAWA1 = 1;
+    private final int NYAWA2 = 2;
+    private final int NYAWA3 = 3;
     //float eelbatPositionX, eelbatPositionY;
     //float eelbatPositionRadius;
-    //double fixAngle;
+    private float fixAngle;
+    private boolean isFlipedY;
 
-    Vector2 awal = new Vector2();
-    Vector2 akhir = new Vector2();
+    Vector2 awal = new Vector2(); //posisi enemynya
+    Vector2 akhir = new Vector2(); //posisi eelbat
     Vector2 velocity = new Vector2();
     Vector2 movemnt = new Vector2();
     Vector2 arah = new Vector2();
+    Vector2 temp = new Vector2();
 
 //    Vector2[] titikRute;
 //    int JUMLAH_TITIK_RUTE = 4;
 //    int nextX, nextY;
 
-    boolean punyaRute;
     public Enemy(Assets assets, float x, float y, int difficulty, int level){
+        this.difficulty = difficulty;
         //this.fixed = fixed;
         //eelbatPositionX = 0;
         //eelbatPositionY = 0;
         //SPEED_ENEMY = 0;
         //getViewport().getCamera().position;
         if (difficulty == 1){
-            SPEED_ENEMY = 100;
+            SPEED_ENEMY = 100;//100
+            this.NYAWA = 3;//NYAWA1;
         }else if (difficulty == 2){
-            SPEED_ENEMY = 250;
+            SPEED_ENEMY = 250;//250
+            this.NYAWA = NYAWA2;
         }else if (difficulty == 3){
-            SPEED_ENEMY = 400;
+            SPEED_ENEMY = 400;//400
+            this.NYAWA = NYAWA3;
         }
 
 
@@ -86,6 +95,7 @@ public class Enemy extends Actor {
         this.assets = assets;
 
         checkLevel();
+        fixAngle = 0;
     }
 
 
@@ -104,8 +114,16 @@ public class Enemy extends Actor {
     }
     @Override
     public void draw(Batch batch, float parentAlpha){
-            batch.draw(shadowEnemy, x-shadowEnemy.getWidth()/2,y-SHADOW_OFFSET);
-            batch.draw(enemyFish,x-enemyFish.getWidth()/2,y-enemyFish.getHeight()/2);
+        batch.draw(shadowEnemy, x-shadowEnemy.getWidth()/2,y-SHADOW_OFFSET);
+        //batch.draw(enemyFish,x-enemyFish.getWidth()/2,y-enemyFish.getHeight()/2);
+        batch.draw(enemyFish,x-enemyFish.getWidth()/2,y-enemyFish.getHeight()/2,
+                enemyFish.getWidth()/2, enemyFish.getHeight()/2,
+                enemyFish.getWidth(), enemyFish.getHeight(),
+                1f,1f,getAngleXkeY(),
+                0,0,
+                enemyFish.getWidth(), enemyFish.getHeight(),
+                true,isFlipedY
+                );
     }
 
     @Override
@@ -142,6 +160,7 @@ public class Enemy extends Actor {
                 x += delta*Math.cos(currentAngle/180*Math.PI)*SPEED_ENEMY;
                 y += delta*Math.sin(currentAngle/180*Math.PI)*SPEED_ENEMY;
 
+                isFlipedY = false;
                 break;
         }
     }
@@ -171,6 +190,24 @@ public class Enemy extends Actor {
         }
         x = mulai.x;
         y = mulai.y;
+        setAngleXkeY(mulai,finis);
+    }
+    private void setAngleXkeY(Vector2 mulai, Vector2 finis){
+        fixAngle = temp.set(finis).sub(mulai).angle();
+        //Gdx.app.log("angle", String.valueOf(fixAngle));
+        if (fixAngle > 90 && fixAngle <270)
+            isFlipedY = true;
+        else
+            isFlipedY = false;
+        //if(fixAngle)
+    }
+    private float getAngleXkeY(){
+        switch (kejargak){
+            case KEJAR:
+                return fixAngle;
+            default:
+                return 0;
+        }
     }
 
     public float getEnemyPositionX(){
@@ -178,6 +215,12 @@ public class Enemy extends Actor {
     }
     public float getEnemyPositionY(){
         return y;
+    }
+    public void setNyawaEnemy(int NYAWA){
+        this.NYAWA = NYAWA;
+    }
+    public int getNyawaEnemy(){
+        return NYAWA;
     }
     //public int getSpeedEnemy() { return SPEED_ENEMY; }
 
