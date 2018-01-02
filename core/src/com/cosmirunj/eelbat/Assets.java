@@ -60,6 +60,7 @@ public class Assets {
 
     //level3
     static AssetDescriptor<Texture>[] textureAtas3;
+    static AssetDescriptor<Texture>[] enemyEagle;
 
     static AssetDescriptor<Texture> mapTest;
 
@@ -169,6 +170,11 @@ public class Assets {
         for (int i=0;i<jumlahTextureAtas;i++){
             String namatexturenya = String.format("tilesAtas/level3/%d.png",(i+1));//karena angkanya dimulai dari 1 bukan 0, jd i+1
             textureAtas3[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
+        }
+        enemyEagle = new AssetDescriptor[8];
+        for (int i=0;i<8;i++){
+            String namatexturenya = String.format("enemigo/eagle/%d.png",(i+1));//karena angkanya dimulai dari 1 bukan 0, jd i+1
+            enemyEagle[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
         }
 
         //font
@@ -286,6 +292,9 @@ public class Assets {
             manager.load(textureAtas3[i]);
         }
 
+        for (int i=0;i<8;i++){
+            manager.load(enemyEagle[i]);
+        }
 
         //rumput dan gelembung
         for (int i=0;i<jumlahGelembung;i++){

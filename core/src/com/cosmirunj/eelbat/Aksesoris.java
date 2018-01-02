@@ -1,5 +1,6 @@
 package com.cosmirunj.eelbat;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -28,7 +29,7 @@ public class Aksesoris extends Actor {
     private Texture[] whirlpool;
     private Animation whirpoolAnim;
     private SpriteBatch batch;
-
+    private float elapsedTime;
     //private boolean fixed;
 
     public Aksesoris(Assets assets, float x, float y, int level){
@@ -73,9 +74,10 @@ public class Aksesoris extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha){
+        this.elapsedTime += Gdx.graphics.getDeltaTime();
 
         batch.draw(shadowEnemy, x-shadowEnemy.getWidth()/2,y-SHADOW_OFFSET);
-        batch.draw(getTextureAksesoris(parentAlpha),x-enemyJelly.getWidth()/2,y-enemyJelly.getHeight()/2);
+        batch.draw(getTextureAksesoris(elapsedTime),x-enemyJelly.getWidth()/2,y-enemyJelly.getHeight()/2);
     }
 
     @Override

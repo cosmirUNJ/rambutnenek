@@ -2,6 +2,7 @@ package com.cosmirunj.eelbat;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -42,6 +43,9 @@ public class Enemy extends Actor {
     Vector2 arah = new Vector2();
     Vector2 temp = new Vector2();
 
+    private Texture[] enemyEagle;
+    private Animation enemyEagleAnim;
+    private float elapsedTime;
 //    Vector2[] titikRute;
 //    int JUMLAH_TITIK_RUTE = 4;
 //    int nextX, nextY;
@@ -114,16 +118,28 @@ public class Enemy extends Actor {
     }
     @Override
     public void draw(Batch batch, float parentAlpha){
+        this.elapsedTime += Gdx.graphics.getDeltaTime();
         batch.draw(shadowEnemy, x-shadowEnemy.getWidth()/2,y-SHADOW_OFFSET);
         //batch.draw(enemyFish,x-enemyFish.getWidth()/2,y-enemyFish.getHeight()/2);
-        batch.draw(enemyFish,x-enemyFish.getWidth()/2,y-enemyFish.getHeight()/2,
-                enemyFish.getWidth()/2, enemyFish.getHeight()/2,
-                enemyFish.getWidth(), enemyFish.getHeight(),
-                1f,1f,getAngleXkeY(),
-                0,0,
-                enemyFish.getWidth(), enemyFish.getHeight(),
-                true,isFlipedY
-                );
+        if (level == 3){ //(Texture)animasiGeloembung.getKeyFrame(elapsedTime, true)
+            batch.draw((Texture) enemyEagleAnim.getKeyFrame(elapsedTime, true), x -300 / 2, y - 300 / 2,
+                    300 / 2, 300 / 2,
+                    300, 300,
+                    1f, 1f, getAngleXkeY(),
+                    0, 0,
+                    300, 300,
+                    false, isFlipedY
+            );
+        } else {
+            batch.draw(enemyFish, x - enemyFish.getWidth() / 2, y - enemyFish.getHeight() / 2,
+                    enemyFish.getWidth() / 2, enemyFish.getHeight() / 2,
+                    enemyFish.getWidth(), enemyFish.getHeight(),
+                    1f, 1f, getAngleXkeY(),
+                    0, 0,
+                    enemyFish.getWidth(), enemyFish.getHeight(),
+                    true, isFlipedY
+            );
+        }
     }
 
     @Override
@@ -173,8 +189,15 @@ public class Enemy extends Actor {
             case 2:
                 enemyFish = assets.getTexture(Assets.enemySeaHorse);
                 break;
+            case 3:
+                enemyEagle = new Texture[8];
+                for (int i=0;i<8;i++){
+                    enemyEagle[i] = assets.getTexture(Assets.enemyEagle[i]);
+                }
+                enemyEagleAnim = new Animation(1f/8f, enemyEagle);
+
             default:
-                enemyFish = assets.getTexture(Assets.manyherringfish);
+                enemyFish = assets.getTexture(Assets.enemyFish);
                 break;
         }
     }
