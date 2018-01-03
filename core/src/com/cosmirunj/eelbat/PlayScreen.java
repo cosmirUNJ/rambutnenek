@@ -116,8 +116,8 @@ class PlayScreen implements Screen {
         touchKnob = touchpadSkin.getDrawable("touchKnob");
 
         //ukuran knob
-        touchKnob.setMinHeight(25);
-        touchKnob.setMinWidth(25);
+        touchKnob.setMinHeight(50);
+        touchKnob.setMinWidth(50);
 
         touchpadStyle.background = touchBackground;
         touchpadStyle.knob = touchKnob;
@@ -125,7 +125,7 @@ class PlayScreen implements Screen {
 
         touchpad = new Touchpad(10, touchpadStyle);
         //bound, bound, width dan height background
-        touchpad.setBounds(15,15,75,75);
+        touchpad.setBounds(30,30,150,150);
         //lokasi
         touchpad.setPosition(widthScreen*0.05F, heightScreen*0.085F);
         batch = new SpriteBatch();
@@ -462,6 +462,7 @@ class PlayScreen implements Screen {
 
         if(Gdx.app.getType() == Application.ApplicationType.Android){
             skillButtonAndroid.setPosition(widthScreen*0.75F, heightScreen*0.05F);
+            skillButtonAndroid.setSize(skillButtonAndroid.getWidth()*1.5F, skillButtonAndroid.getHeight()*1.5F);
         } else {
             skillButtonAndroid.setPosition(widthScreen*0.75F, heightScreen*0.05F);
         }
@@ -494,6 +495,7 @@ class PlayScreen implements Screen {
 
         if(Gdx.app.getType() == Application.ApplicationType.Android){
             sonarButtonAndroid.setPosition(widthScreen*0.87F, heightScreen*0.15F);
+            sonarButtonAndroid.setSize(sonarButtonAndroid.getWidth()*1.5F, sonarButtonAndroid.getHeight()*1.5F);
         } else {
             sonarButtonAndroid.setPosition(widthScreen*0.83F, heightScreen*0.15F);
         }

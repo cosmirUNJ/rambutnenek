@@ -3,7 +3,7 @@ android {
         config {
             keyAlias 'rambutnenek'
             keyPassword 'rambutnenek'
-            storeFile file('G:/Android/rambutnenek/rambutnenek.jks')
+            storeFile file('C:/Users/User/Documents/GitHub/rambutnenek/rambutnenek.jks')
             storePassword 'rambutnenek'
         }
     }
