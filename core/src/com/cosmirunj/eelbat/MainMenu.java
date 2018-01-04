@@ -154,8 +154,8 @@ class MainMenu implements Screen {
         Texture BtnHelp = eelbatCosmir.assets.getTexture(Assets.btnHelp);
         TextureRegionDrawable BtnImageHelp = new TextureRegionDrawable(new TextureRegion(BtnHelp));
         ButtonHelp = new ImageButton(BtnImageHelp);
-        ButtonHelp.setSize(BtnHelp.getWidth()-50,BtnHelp.getHeight()-50);
-        ButtonHelp.setPosition(10, 600);
+        ButtonHelp.setSize(BtnHelp.getWidth()-100,BtnHelp.getHeight()-100);
+        ButtonHelp.setPosition(10, heightScreen-(BtnHelp.getHeight()/2));
         ButtonHelp.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
