@@ -2,6 +2,7 @@ package com.cosmirunj.eelbat;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ai.steer.behaviors.FollowPath;
 import com.badlogic.gdx.ai.steer.utils.paths.LinePath;
@@ -34,7 +35,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.cosmirunj.eelbat.AI.EnemySteeringActor;
 
 import static com.cosmirunj.eelbat.Assets.btnSkill;
 import static com.cosmirunj.eelbat.Assets.btnSkillActive;
@@ -84,14 +84,6 @@ class PlayScreen implements Screen {
     ShapeRenderer shapeRenderer;
     boolean drawDebug;
 
-    EnemySteeringActor character;
-
-    Array<Vector2> wayPoints;
-    LinePath<Vector2> linePath;
-    FollowPath<Vector2, LinePath.LinePathParam> followPathSB;
-
-    final boolean openPath = false;
-    Slider pathOffset;
 
     public PlayScreen(EelbatCosmir eelbatCosmir, int level, int difficulty) {
 
@@ -152,6 +144,7 @@ class PlayScreen implements Screen {
 
         Gdx.input.setInputProcessor(stage);
 
+
         OrthographicCamera camera = new OrthographicCamera();
         viewport = new FillViewport(eelbatCosmir.WIDTH, eelbatCosmir.HEIGHT, camera);
         stage2 = new PlayScreenStage(viewport, eelbatCosmir);
@@ -181,7 +174,7 @@ class PlayScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if(btnPause) {
+        if (btnPause) {
             //tambahan
             //batch.begin();
             gameStage.act(delta);
@@ -207,25 +200,37 @@ class PlayScreen implements Screen {
 //        if(!isPaused){
 //            Gdx.graphics.requestRendering();
 //        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.BACK)) {
+            setPauseapaTidak(!getPauseapaTidak());
+        }
     }
 
-    public void setSpeedPause() {
-        enemySpeed = 0;
-        aksesorisSpeed = 0;
-    }
+//    //@Override
+//    public boolean keyDown(int keycode) {
+//        if(keycode == Input.Keys.BACK){
+//            // Respond to the back button click here
+//            return true;
+//        }
+//        return false;
+//    }
 
-    public void setSpeedMulai() {
-        enemySpeed = 100;
-        aksesorisSpeed = 100;
-    }
-    public void getSpeedPause(){
-        enemySpeed = 0;
-        aksesorisSpeed = 0;
-    }
-    public void getSpeedMulai(){
-        enemySpeed = 100;
-        aksesorisSpeed = 100;
-    }
+//    public void setSpeedPause() {
+//        enemySpeed = 0;
+//        aksesorisSpeed = 0;
+//    }
+//
+//    public void setSpeedMulai() {
+//        enemySpeed = 100;
+//        aksesorisSpeed = 100;
+//    }
+//    public void getSpeedPause(){
+//        enemySpeed = 0;
+//        aksesorisSpeed = 0;
+//    }
+//    public void getSpeedMulai(){
+//        enemySpeed = 100;
+//        aksesorisSpeed = 100;
+//    }
 
     @Override
     public void resize(int width, int height) {
@@ -401,41 +406,42 @@ class PlayScreen implements Screen {
         ButtonExit.setVisible(false);
 
         //Button Home
-        Texture BtnHome = eelbatCosmir.assets.getTexture(Assets.btnReplayPlayScreen);
-        TextureRegionDrawable BtnImageHome = new TextureRegionDrawable(new TextureRegion(BtnHome));
-        ButtonHome = new ImageButton(BtnImageHome);
-        ButtonHome.setSize(BtnHome.getWidth()-100,BtnHome.getHeight()-100);
-        ButtonHome.setPosition(widthScreen-80, 25);
-        ButtonHome.addListener(new InputListener(){
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if(!btnPause){
-                    ButtonHome.getImage().setColor(Color.BROWN);
-                }
-                btnPause=!btnPause;
-                ButtonAlas.setVisible(!btnPause);
-                ButtonResume.setVisible(!btnPause);
-                ButtonReplay.setVisible(!btnPause);
-                ButtonSetting.setVisible(!btnPause);
-                ButtonExit.setVisible(!btnPause);
-                //pauseLabel.setVisible(true);
-                Gdx.graphics.setContinuousRendering(true);
-                //Gdx.graphics.requestRendering();
-                //Gdx.app.getApplicationListener().dispose();
-                Assets.playmusic.stop();
-                return btnPause;
-            }
+//        Texture BtnHome = eelbatCosmir.assets.getTexture(Assets.btnReplayPlayScreen);
+//        TextureRegionDrawable BtnImageHome = new TextureRegionDrawable(new TextureRegion(BtnHome));
+//        ButtonHome = new ImageButton(BtnImageHome);
+//        ButtonHome.setSize(BtnHome.getWidth()-100,BtnHome.getHeight()-100);
+//        ButtonHome.setPosition(widthScreen-80, 25);
+//        ButtonHome.addListener(new InputListener(){
+//            @Override
+//            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+//                if(!btnPause){
+//                    ButtonHome.getImage().setColor(Color.BROWN);
+//                }
+//                btnPause=!btnPause;
+//                ButtonAlas.setVisible(!btnPause);
+//                ButtonResume.setVisible(!btnPause);
+//                ButtonReplay.setVisible(!btnPause);
+//                ButtonSetting.setVisible(!btnPause);
+//                ButtonExit.setVisible(!btnPause);
+//                //pauseLabel.setVisible(true);
+//                Gdx.graphics.setContinuousRendering(true);
+//                //Gdx.graphics.requestRendering();
+//                //Gdx.app.getApplicationListener().dispose();
+//                Assets.playmusic.stop();
+//                return btnPause;
+//            }
+//
+//            @Override
+//            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+//                ButtonHome.getImage().setColor(Color.WHITE);
+//                super.touchUp(event, x, y, pointer, button);
+//            }
+//        });
 
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                ButtonHome.getImage().setColor(Color.WHITE);
-                super.touchUp(event, x, y, pointer, button);
-            }
-        });
 
-
-        ButtonStage.addActor(ButtonHome);
+        //ButtonStage.addActor(ButtonHome);
         Gdx.input.setInputProcessor(ButtonStage);
+        Gdx.input.setCatchBackKey(true);
 
     }
 
@@ -511,5 +517,22 @@ class PlayScreen implements Screen {
             buttonStyle.down = sonarActive;
         }
         sonarButtonActive = true;
+    }
+
+    public boolean getPauseapaTidak(){
+        return btnPause;
+    }
+
+    public void setPauseapaTidak(boolean btnPause){
+        this.btnPause = btnPause;
+        Gdx.app.log("kejarTag", "escape");
+        //btnPause = !btnPause;
+        ButtonAlas.setVisible(!btnPause);
+        ButtonResume.setVisible(!btnPause);
+        ButtonReplay.setVisible(!btnPause);
+        ButtonSetting.setVisible(!btnPause);
+        ButtonExit.setVisible(!btnPause);
+        Assets.playmusic.stop();
+
     }
 }
