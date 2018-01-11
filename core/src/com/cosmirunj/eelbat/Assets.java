@@ -71,7 +71,10 @@ public class Assets {
     static AssetDescriptor<Texture>[] textureAtas3;
     static AssetDescriptor<Texture>[] enemyEagle;
 
-    static AssetDescriptor<Texture> mapTest;
+    //win or lose screen
+    static AssetDescriptor<Texture> winScreen1,winScreen2, winScreen3 ;
+    static AssetDescriptor<Texture> loseScreen1, loseScreen2, loseScreen3;
+    //static AssetDescriptor<Texture> mapTest;
 
     static Music mainmenumusic;
     static Music playmusic;
@@ -167,7 +170,7 @@ public class Assets {
             String namatexturenya = String.format("tilesGelombang/watereffect%d.png",(i+1));
             tilesGelombang[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
         }
-        mapTest = new AssetDescriptor<Texture>("tilesBawah/maptes.png", Texture.class, textureParameter);
+        //mapTest = new AssetDescriptor<Texture>("tilesBawah/maptes.png", Texture.class, textureParameter);
 
         //level2
         textureAtas2 = new AssetDescriptor[jumlahTextureAtas];
@@ -200,6 +203,13 @@ public class Assets {
             enemyEagle[i] = new AssetDescriptor<Texture>(namatexturenya, Texture.class,textureParameter);
 
         }
+
+        winScreen1 = new AssetDescriptor<Texture>("winlose/win1.png", Texture.class, textureParameter);
+        winScreen2 = new AssetDescriptor<Texture>("winlose/win2.png", Texture.class, textureParameter);
+        winScreen3 = new AssetDescriptor<Texture>("winlose/win3.png", Texture.class, textureParameter);
+        loseScreen1 = new AssetDescriptor<Texture>("winlose/lose1.png", Texture.class, textureParameter);
+        loseScreen2 = new AssetDescriptor<Texture>("winlose/lose2.png", Texture.class, textureParameter);
+        loseScreen3 = new AssetDescriptor<Texture>("winlose/lose3.png", Texture.class, textureParameter);
 
         //font
         BitmapFontLoader.BitmapFontParameter parameter = new BitmapFontLoader.BitmapFontParameter();
@@ -347,7 +357,7 @@ public class Assets {
         for (int i=0;i<4;i++){
             manager.load(whirlpool[i]);
         }
-        manager.load(mapTest);
+        //manager.load(mapTest);
 
         //load bar
         manager.load(bar1);
@@ -388,6 +398,13 @@ public class Assets {
 
         manager.load(levelComplete);
         manager.load(gameOver);
+
+        manager.load(winScreen1);
+        manager.load(winScreen2);
+        manager.load(winScreen3);
+        manager.load(loseScreen1);
+        manager.load(loseScreen2);
+        manager.load(loseScreen3);
 
 
     }

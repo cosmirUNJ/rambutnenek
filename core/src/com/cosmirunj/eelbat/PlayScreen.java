@@ -200,7 +200,7 @@ class PlayScreen implements Screen {
 //        if(!isPaused){
 //            Gdx.graphics.requestRendering();
 //        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.BACK)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.BACK) || Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             setPauseapaTidak(!getPauseapaTidak());
         }
     }

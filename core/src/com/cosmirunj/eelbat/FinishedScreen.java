@@ -98,42 +98,59 @@ public class FinishedScreen implements Screen {
     private class GameOverStage extends Stage {
         public GameOverStage(Viewport viewport, final EelbatCosmir eelbatCosmir, boolean completed, int level, int difficulty) {
             super(viewport, eelbatCosmir.batch);
-            Texture backgroundTexture = eelbatCosmir.assets.getTexture(completed ? Assets.levelComplete : Assets.gameOver);
+            Texture backgroundTexture;
+            if (completed){
+                if (level == 1)
+                    backgroundTexture = eelbatCosmir.assets.getTexture(Assets.winScreen1);
+                else if(level ==2)
+                    backgroundTexture = eelbatCosmir.assets.getTexture(Assets.winScreen2);
+                else
+                    backgroundTexture = eelbatCosmir.assets.getTexture(Assets.winScreen3);
+            } else {
+                if (level == 1)
+                    backgroundTexture = eelbatCosmir.assets.getTexture(Assets.loseScreen1);
+                else if(level ==2)
+                    backgroundTexture = eelbatCosmir.assets.getTexture(Assets.loseScreen2);
+                else
+                    backgroundTexture = eelbatCosmir.assets.getTexture(Assets.loseScreen3);
+            }
+            //Texture backgroundTexture = eelbatCosmir.assets.getTexture(completed ? Assets.levelComplete : Assets.gameOver);
             addActor(new Image(backgroundTexture));
-            Label.LabelStyle labelStyle = new Label.LabelStyle();
-            labelStyle.font = eelbatCosmir.assets.getBitmapFont(Assets.bitmapFontLarge);
-            if(completed){
-                if(level == 3){
-                    message = String.format("Congrats, You Win the Game!");
-                }else{
-                    message = String.format("Level %d complete!",(level));
-                }
-            }else{
-                message = String.format("Game Over :(");
-            }
-            //String message = completed ? "Level n complete!" : "Game level Over :(";
-            Label label = new Label(message, labelStyle);
-            label.setPosition(
-                    300,
-                    (EelbatCosmir.HEIGHT - label.getPrefHeight())/2);
-            addActor(label);
-            Label.LabelStyle labelStyle2 = new Label.LabelStyle();
-            labelStyle2.font = eelbatCosmir.assets.getBitmapFont(Assets.bitmapFontSmall);
-            if(completed){
-                if(level == 3){
-                    message2 = String.format("Tap to go to main menu!");
-                }else{
-                    message2 = String.format("Tap to go to level %d!",(level+1));
-                }
-            }else{
-                message2 = String.format("Tap to try again");
-            }
-            //String message2 = completed ? "Tap to next level!" : "Tap to play again";
-            Label label2 = new Label(message2, labelStyle2);
-            label2.setPosition(
-                    1500,
-                    (EelbatCosmir.HEIGHT - label.getPrefHeight())/5);
-            addActor(label2);
+
+//            Label.LabelStyle labelStyle = new Label.LabelStyle();
+//            labelStyle.font = eelbatCosmir.assets.getBitmapFont(Assets.bitmapFontLarge);
+//            if(completed){
+//                if(level == 3){
+//                    message = String.format("Congrats, You Win the Game!");
+//                }else{
+//                    message = String.format("Level %d complete!",(level));
+//                }
+//            }else{
+//                message = String.format("Game Over :(");
+//            }
+//            //String message = completed ? "Level n complete!" : "Game level Over :(";
+//            Label label = new Label(message, labelStyle);
+//            label.setPosition(
+//                    300,
+//                    (EelbatCosmir.HEIGHT - label.getPrefHeight())/2);
+//            addActor(label);
+//            Label.LabelStyle labelStyle2 = new Label.LabelStyle();
+//            labelStyle2.font = eelbatCosmir.assets.getBitmapFont(Assets.bitmapFontSmall);
+//            if(completed){
+//                if(level == 3){
+//                    message2 = String.format("Tap to go to main menu!");
+//                }else{
+//                    message2 = String.format("Tap to go to level %d!",(level+1));
+//                }
+//            }else{
+//                message2 = String.format("Tap to try again");
+//            }
+//            //String message2 = completed ? "Tap to next level!" : "Tap to play again";
+//            Label label2 = new Label(message2, labelStyle2);
+//            label2.setPosition(
+//                    1500,
+//                    (EelbatCosmir.HEIGHT - label.getPrefHeight())/5);
+//            addActor(label2);
         }
     }
 }
