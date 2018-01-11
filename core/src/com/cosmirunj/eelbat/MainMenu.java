@@ -35,7 +35,7 @@ class MainMenu implements Screen {
 
     private Button.ButtonStyle buttonStyle;
     private TextureRegionDrawable playButton;
-    private ImageButton ButtonPlay, ButtonEasy, ButtonMedium, ButtonHard, ButtonSoundActive, ButtonHelp;
+    private ImageButton ButtonPlay, ButtonEasy, ButtonMedium, ButtonHard, ButtonSoundActive, ButtonHelp, ButtonInstructionActive;
     private Stage ButtonStage;
     boolean btnPlay;
     boolean playMusic;
@@ -149,6 +149,30 @@ class MainMenu implements Screen {
         });
 
         ButtonStage.addActor(ButtonSoundActive);
+
+        //Button How To Play
+        Texture BtnInstructionActive = eelbatCosmir.assets.getTexture(Assets.btnInstruction);
+        TextureRegionDrawable BtnImageInstruction = new TextureRegionDrawable(new TextureRegion(BtnInstructionActive));
+        ButtonInstructionActive = new ImageButton(BtnImageInstruction);
+        ButtonInstructionActive.setSize(BtnInstructionActive.getWidth()-100,BtnInstructionActive.getHeight()-100);
+        ButtonInstructionActive.setPosition(widthScreen-((BtnInstructionActive.getWidth())), heightScreen-(BtnInstructionActive.getHeight()/2));
+        //(widthScreen/2)-(buttonAlasWidth/2), (heightScreen/2)-(buttonAlasHeight/2)
+        ButtonInstructionActive.addListener(new InputListener(){
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                ButtonInstructionActive.getImage().setColor(Color.BROWN);
+                return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                ButtonInstructionActive.getImage().setColor(Color.WHITE);
+                super.touchUp(event, x, y, pointer, button);
+                eelbatCosmir.setScreen(new HowToScreen(eelbatCosmir));
+            }
+        });
+
+        ButtonStage.addActor(ButtonInstructionActive);
 
         //Button Help
         Texture BtnHelp = eelbatCosmir.assets.getTexture(Assets.btnHelp);
