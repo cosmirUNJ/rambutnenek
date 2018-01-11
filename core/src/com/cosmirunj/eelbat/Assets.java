@@ -42,7 +42,7 @@ public class Assets {
     public static AssetDescriptor<Texture> shadow, eelbatpic;
 
     static AssetDescriptor<Texture> menu;
-    static AssetDescriptor<Texture> levelComplete, gameOver;
+    static AssetDescriptor<Texture> levelComplete, gameOver, instruction;
 
     static AssetDescriptor<BitmapFont> bitmapFontSmall, bitmapFontMedium, bitmapFontLarge;
     static AssetDescriptor<Texture> bar1, bar2, bar3, bar4, bar5, ability, damage;
@@ -51,7 +51,7 @@ public class Assets {
     static AssetDescriptor<Texture> enemyJelly,enemyFish,shadowEnemy,manyherringfish, enemySeaHorse, activeJelly;
 
 
-    static AssetDescriptor<Texture> btnPlay, btnEasy, btnMedium, btnHard, btnSoundActive, btnSoundMute, btnReplayPlayScreen;
+    static AssetDescriptor<Texture> btnPlay, btnEasy, btnMedium, btnHard, btnSoundActive, btnSoundMute, btnReplayPlayScreen, btnInstruction;
     static AssetDescriptor<Texture> btnSkill, btnSonar, btnSkillActive, btnSonarActive, btnSonarCooldown;
     static AssetDescriptor<Texture> smallHole, bigHole;
 
@@ -204,6 +204,7 @@ public class Assets {
 
         levelComplete = new AssetDescriptor<Texture>("level-complete.png", Texture.class, textureParameter);
         gameOver = new AssetDescriptor<Texture>("gameover.png", Texture.class, textureParameter);
+        instruction = new AssetDescriptor<Texture>("howtoplay.png", Texture.class, textureParameter);
 
         waveOut = Gdx.audio.newSound(Gdx.files.internal("sfx/ultrasonic.wav"));
         pick = Gdx.audio.newSound(Gdx.files.internal("sfx/eatbuahajaib.wav"));
@@ -228,6 +229,7 @@ public class Assets {
         btnHard = new AssetDescriptor<Texture>("buttons/hard-btn.png", Texture.class, textureParameter);
         btnSoundActive = new AssetDescriptor<Texture>("buttons/musicon.png", Texture.class, textureParameter);
         btnSoundMute = new AssetDescriptor<Texture>("buttons/mute-btn.png", Texture.class, textureParameter);
+        btnInstruction = new AssetDescriptor<Texture>("buttons/howtoplay-button.png", Texture.class, textureParameter);
 
         //button Skill & Wave
         btnSkill = new AssetDescriptor<Texture>("buttons/skill-button.png", Texture.class, textureParameter);
@@ -331,6 +333,7 @@ public class Assets {
         manager.load(btnHard);
         manager.load(btnSoundActive);
         manager.load(btnSoundMute);
+        manager.load(btnInstruction);
 
         manager.load(ability);
         manager.load(damage);
@@ -347,6 +350,7 @@ public class Assets {
 
         manager.load(levelComplete);
         manager.load(gameOver);
+        manager.load(instruction);
 
 
     }
