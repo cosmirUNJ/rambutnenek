@@ -26,7 +26,7 @@ android {
         exclude 'META-INF/robovm/ios/robovm.xml'
     }
     defaultConfig {
-        applicationId "com.cosmirunj.eelbat"
+        applicationId 'com.cosmirunj.eelbatcosmir'
         minSdkVersion 9
         targetSdkVersion 26
         versionCode 1
@@ -38,6 +38,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
+    }
+    productFlavors {
     }
 }
 // called every time gradle gets executed, takes the native dependencies of

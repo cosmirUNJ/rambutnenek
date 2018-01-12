@@ -39,7 +39,7 @@ class PlayGameStage extends Stage {
     static final int TOTAL_MF1 = 1;
     static final int TOTAL_MF2 = 0;
     static final int TOTAL_MF3 = 0;
-    static final int TOTAL_MF = 1;
+    static final int TOTAL_MF = 3;
     private final int MAX_RADIUS_X = 5* com.cosmirunj.eelbatcosmir.EelbatCosmir.WIDTH;
     private final int MAX_RADIUS_Y = 5* com.cosmirunj.eelbatcosmir.EelbatCosmir.HEIGHT;
 
