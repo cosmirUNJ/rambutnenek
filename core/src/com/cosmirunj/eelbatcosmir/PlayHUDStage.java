@@ -1,17 +1,9 @@
-package com.cosmirunj.eelbat;
+package com.cosmirunj.eelbatcosmir;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 /**
@@ -19,7 +11,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
  */
 
 class PlayHUDStage extends Stage {
-    private EelbatCosmir eelbatCosmir;
+    private com.cosmirunj.eelbatcosmir.EelbatCosmir eelbatCosmir;
     private PlayScreen playScreen;
     private int level;
     private int difficulty;
@@ -38,11 +30,11 @@ class PlayHUDStage extends Stage {
     private Image bar;
     private int lives;
 
-    private float widthScreen = EelbatCosmir.WIDTH;
-    private float heightScreen = EelbatCosmir.HEIGHT;
+    private float widthScreen = com.cosmirunj.eelbatcosmir.EelbatCosmir.WIDTH;
+    private float heightScreen = com.cosmirunj.eelbatcosmir.EelbatCosmir.HEIGHT;
     private Image smallHole, bigHole;
 
-    public PlayHUDStage(PlayScreen playScreen, Viewport hudViewport, EelbatCosmir eelbatCosmir, int level, int difficulty) {
+    public PlayHUDStage(PlayScreen playScreen, Viewport hudViewport, com.cosmirunj.eelbatcosmir.EelbatCosmir eelbatCosmir, int level, int difficulty) {
         super(hudViewport, eelbatCosmir.batch);
         this.playScreen = playScreen;
         this.eelbatCosmir = eelbatCosmir;
@@ -50,18 +42,18 @@ class PlayHUDStage extends Stage {
         this.difficulty = difficulty;
 
         if (level == 1){
-            smallHole = new Image(eelbatCosmir.assets.getTexture(Assets.smallHole));
+            smallHole = new Image(eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.smallHole));
             smallHole.setOrigin(smallHole.getWidth()/2, smallHole.getHeight()/2);
             addActor(smallHole);
             //smallHoleTime = 0;
 
-            bigHole = new Image(eelbatCosmir.assets.getTexture(Assets.bigHole));
+            bigHole = new Image(eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.bigHole));
             addActor(bigHole);
         }
 
 
         timeLabelStyle = new Label.LabelStyle();
-        timeLabelStyle.font = eelbatCosmir.assets.getBitmapFont(Assets.bitmapFontMedium);
+        timeLabelStyle.font = eelbatCosmir.assets.getBitmapFont(com.cosmirunj.eelbatcosmir.Assets.bitmapFontMedium);
         timeLabel = new Label("", timeLabelStyle);
         timeLabel.setPosition(widthScreen*0.05F, heightScreen*0.9F);
         addActor(timeLabel);
@@ -71,14 +63,14 @@ class PlayHUDStage extends Stage {
         score = 0;
 
         scoreLabelStyle = new Label.LabelStyle();
-        scoreLabelStyle.font = eelbatCosmir.assets.getBitmapFont(Assets.bitmapFontMedium);
+        scoreLabelStyle.font = eelbatCosmir.assets.getBitmapFont(com.cosmirunj.eelbatcosmir.Assets.bitmapFontMedium);
         scoreLabel = new Label("Score: ", scoreLabelStyle);
         scoreLabel.setText("Score : "+String.format("%d", score));
         scoreLabel.setPosition(widthScreen*0.75F, heightScreen*0.86F);
 
         addActor(scoreLabel);
 
-        bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar1));
+        bar = new Image(eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.bar1));
         bar.setSize(bar.getWidth(),bar.getHeight());
         bar.setPosition((widthScreen/2)-(bar.getWidth()/2), heightScreen-(2*bar.getHeight()));
         addActor(bar);
@@ -152,13 +144,13 @@ class PlayHUDStage extends Stage {
         }
         bar.remove();
         if(lives == 3) {
-            bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar2));
+            bar = new Image(eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.bar2));
         } else if(lives == 2) {
-            bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar3));
+            bar = new Image(eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.bar3));
         } else if(lives == 1) {
-            bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar4));
+            bar = new Image(eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.bar4));
         } else if(lives == 4) {
-            bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar1));
+            bar = new Image(eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.bar1));
         }
         bar.setPosition(900, 1460);
         addActor(bar);
@@ -168,18 +160,18 @@ class PlayHUDStage extends Stage {
 
     void gotHit() {
         if(lives == 0) {
-            eelbatCosmir.setScreen(new FinishedScreen(eelbatCosmir, false, level, difficulty));
+            eelbatCosmir.setScreen(new com.cosmirunj.eelbatcosmir.FinishedScreen(eelbatCosmir, false, level, difficulty));
         }
         lives--;
         bar.remove();
         if(lives == 3) {
-            bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar2));
+            bar = new Image(eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.bar2));
         } else if(lives == 2) {
-            bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar3));
+            bar = new Image(eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.bar3));
         } else if(lives == 1) {
-            bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar4));
+            bar = new Image(eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.bar4));
         } else if(lives == 0) {
-            bar = new Image(eelbatCosmir.assets.getTexture(Assets.bar5));
+            bar = new Image(eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.bar5));
         }
         bar.setPosition(900, 1460);
         addActor(bar);

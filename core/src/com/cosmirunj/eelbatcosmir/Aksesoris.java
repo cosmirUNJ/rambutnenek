@@ -1,4 +1,4 @@
-package com.cosmirunj.eelbat;
+package com.cosmirunj.eelbatcosmir;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -37,8 +37,8 @@ public class Aksesoris extends Actor {
         TARGET_X = x;
         TARGET_Y = y;
         this.assets = assets;
-        this.x = x + (EelbatCosmir.random.nextInt(2*CLOSE_RADIUS)-CLOSE_RADIUS);
-        this.y = y + (EelbatCosmir.random.nextInt(2*CLOSE_RADIUS)-CLOSE_RADIUS);
+        this.x = x + (com.cosmirunj.eelbatcosmir.EelbatCosmir.random.nextInt(2*CLOSE_RADIUS)-CLOSE_RADIUS);
+        this.y = y + (com.cosmirunj.eelbatcosmir.EelbatCosmir.random.nextInt(2*CLOSE_RADIUS)-CLOSE_RADIUS);
         this.level = level;
 
         isAngry = false;
@@ -83,12 +83,12 @@ public class Aksesoris extends Actor {
     @Override
     public void act(float delta){
         if(Math.pow(x - TARGET_X, 2) + Math.pow(y - TARGET_Y, 2) <= Math.pow(CLOSE_RADIUS, 2)) {
-            currentAngle += delta*(EelbatCosmir.random.nextFloat()*2*MAX_ANGLE_CHANGE - MAX_ANGLE_CHANGE);
+            currentAngle += delta*(com.cosmirunj.eelbatcosmir.EelbatCosmir.random.nextFloat()*2*MAX_ANGLE_CHANGE - MAX_ANGLE_CHANGE);
         } else {
             if((x - TARGET_X)*Math.sin(currentAngle/180*Math.PI) - (y - TARGET_Y)*Math.cos(currentAngle/180*Math.PI) >= 0) {
-                currentAngle += delta*EelbatCosmir.random.nextFloat()*MAX_ANGLE_CHANGE;
+                currentAngle += delta* com.cosmirunj.eelbatcosmir.EelbatCosmir.random.nextFloat()*MAX_ANGLE_CHANGE;
             } else {
-                currentAngle -= delta*EelbatCosmir.random.nextFloat()*MAX_ANGLE_CHANGE;
+                currentAngle -= delta* com.cosmirunj.eelbatcosmir.EelbatCosmir.random.nextFloat()*MAX_ANGLE_CHANGE;
             }
         }
         while(currentAngle > 360) {

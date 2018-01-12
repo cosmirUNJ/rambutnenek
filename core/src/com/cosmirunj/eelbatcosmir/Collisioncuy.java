@@ -1,4 +1,4 @@
-package com.cosmirunj.eelbat;
+package com.cosmirunj.eelbatcosmir;
 
 /**
  * Created by Inovatif on 10/25/2017.

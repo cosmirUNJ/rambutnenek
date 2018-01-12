@@ -1,4 +1,4 @@
-package com.cosmirunj.eelbat;
+package com.cosmirunj.eelbatcosmir;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -29,25 +29,25 @@ class PlayGameStage extends Stage {
     //private EnemyList enemyList;
 
 
-    private ArrayList<Fruits> targets, mapBuff;
+    private ArrayList<com.cosmirunj.eelbatcosmir.Fruits> targets, mapBuff;
     private Map<Integer, Set<Enemy>> fixedEnemies;
-    private Set<Aksesoris> freeAksesorises;
+    private Set<com.cosmirunj.eelbatcosmir.Aksesoris> freeAksesorises;
     private Set<Enemy> freeEnemy;
     private HashSet<Integer> targetsFound;
-    private ArrayList<Fruits> collectedTargets, collectedBuffs;
+    private ArrayList<com.cosmirunj.eelbatcosmir.Fruits> collectedTargets, collectedBuffs;
 
     static final int TOTAL_MF1 = 1;
     static final int TOTAL_MF2 = 0;
     static final int TOTAL_MF3 = 0;
     static final int TOTAL_MF = 1;
-    private final int MAX_RADIUS_X = 5*EelbatCosmir.WIDTH;
-    private final int MAX_RADIUS_Y = 5*EelbatCosmir.HEIGHT;
+    private final int MAX_RADIUS_X = 5* com.cosmirunj.eelbatcosmir.EelbatCosmir.WIDTH;
+    private final int MAX_RADIUS_Y = 5* com.cosmirunj.eelbatcosmir.EelbatCosmir.HEIGHT;
 
 
     private PlayHUDStage playHUDStage;
-    private EelbatCosmir eelbatCosmir;
+    private com.cosmirunj.eelbatcosmir.EelbatCosmir eelbatCosmir;
     ShapeRenderer shapeRenderer;
-    private Sonar mainWave;
+    private com.cosmirunj.eelbatcosmir.Sonar mainWave;
     private float touchpadXnya;
     private float touchpadYnya;
     private Touchpad touchpad;
@@ -71,9 +71,9 @@ class PlayGameStage extends Stage {
     private float score;
     private final int TOTAL_SCORE = 200;
 
-    private CharacterEelBat characterEelBat;
+    private com.cosmirunj.eelbatcosmir.CharacterEelBat characterEelBat;
 
-    private Fruits buff;
+    private com.cosmirunj.eelbatcosmir.Fruits buff;
     private boolean buffPicked;
     private int buffPickedCount;
 
@@ -86,10 +86,10 @@ class PlayGameStage extends Stage {
     private int randomNumberAbility;
 
     private boolean isAngry;
-    Aksesoris aksesoris;
+    com.cosmirunj.eelbatcosmir.Aksesoris aksesoris;
     FORM form;
 
-    public PlayGameStage(Viewport gameViewport, EelbatCosmir eelbatCosmir, PlayHUDStage playHUDStage, float touchpadXnya, float touchpadYnya, Touchpad touchpad, int level, int difficulty) {
+    public PlayGameStage(Viewport gameViewport, com.cosmirunj.eelbatcosmir.EelbatCosmir eelbatCosmir, PlayHUDStage playHUDStage, float touchpadXnya, float touchpadYnya, Touchpad touchpad, int level, int difficulty) {
         super(gameViewport, eelbatCosmir.batch);
         this.playHUDStage = playHUDStage;
         this.eelbatCosmir = eelbatCosmir;
@@ -133,36 +133,36 @@ class PlayGameStage extends Stage {
             form = FORM.WINGED_EELBAT;
         }
 
-        characterEelBat = new CharacterEelBat(eelbatCosmir);
+        characterEelBat = new com.cosmirunj.eelbatcosmir.CharacterEelBat(eelbatCosmir);
         //characterEelBat.updatePosition(x,y,DIRECTION.NONE);
         characterEelBat.updatePosition(x,y,DIRECTION.NONE, form);
         addActor(characterEelBat);
 
-        collectedTargets = new ArrayList<Fruits>();
-        collectedBuffs = new ArrayList<Fruits>();
+        collectedTargets = new ArrayList<com.cosmirunj.eelbatcosmir.Fruits>();
+        collectedBuffs = new ArrayList<com.cosmirunj.eelbatcosmir.Fruits>();
 
         //enemyList = new EnemyList(eelbatCosmir);
         //enemyList.addEnemies();
-        mapBuff = new ArrayList<Fruits>();
-        targets = new ArrayList<Fruits>();
+        mapBuff = new ArrayList<com.cosmirunj.eelbatcosmir.Fruits>();
+        targets = new ArrayList<com.cosmirunj.eelbatcosmir.Fruits>();
         targetsFound = new HashSet<Integer>();
         fixedEnemies = new HashMap<Integer, Set<Enemy>>();
-        freeAksesorises = new HashSet<Aksesoris>();
+        freeAksesorises = new HashSet<com.cosmirunj.eelbatcosmir.Aksesoris>();
         for(int i = 0; i < remainingmf; i++) {
-            float x = EelbatCosmir.random.nextInt(2*MAX_RADIUS_X) - MAX_RADIUS_X;
-            float y = EelbatCosmir.random.nextInt(2*MAX_RADIUS_Y) - MAX_RADIUS_Y;
-            int mf = EelbatCosmir.random.nextInt(2);
+            float x = com.cosmirunj.eelbatcosmir.EelbatCosmir.random.nextInt(2*MAX_RADIUS_X) - MAX_RADIUS_X;
+            float y = com.cosmirunj.eelbatcosmir.EelbatCosmir.random.nextInt(2*MAX_RADIUS_Y) - MAX_RADIUS_Y;
+            int mf = com.cosmirunj.eelbatcosmir.EelbatCosmir.random.nextInt(2);
             if(level == 3){
-                mf = EelbatCosmir.random.nextInt(3);
+                mf = com.cosmirunj.eelbatcosmir.EelbatCosmir.random.nextInt(3);
             }
-            Fruits fruit = new Fruits(eelbatCosmir.assets, x, y, i, mf);
+            com.cosmirunj.eelbatcosmir.Fruits fruit = new com.cosmirunj.eelbatcosmir.Fruits(eelbatCosmir.assets, x, y, i, mf);
             targets.add(fruit);
             addActor(fruit);
             //TargetActor target = new TargetActor(ggj2017.assets, x, y, i);
             //targets.add(target);
             //addActor(target);
             Set<Enemy> enemyGroup = new HashSet<Enemy>();
-            int k = 7 + EelbatCosmir.random.nextInt(8);
+            int k = 7 + com.cosmirunj.eelbatcosmir.EelbatCosmir.random.nextInt(8);
             for(int j = 0; j < k; j++) {
                 Enemy enemy = new Enemy(eelbatCosmir.assets, x, y, difficulty, level);
                 enemyGroup.add(enemy);
@@ -172,8 +172,8 @@ class PlayGameStage extends Stage {
         }
         freeEnemy = new HashSet<Enemy>();
         for(int i = 0; i < remainingmf; i++) {
-            float x = EelbatCosmir.random.nextInt(2*MAX_RADIUS_X) - MAX_RADIUS_X;
-            float y = EelbatCosmir.random.nextInt(2*MAX_RADIUS_Y) - MAX_RADIUS_Y;
+            float x = com.cosmirunj.eelbatcosmir.EelbatCosmir.random.nextInt(2*MAX_RADIUS_X) - MAX_RADIUS_X;
+            float y = com.cosmirunj.eelbatcosmir.EelbatCosmir.random.nextInt(2*MAX_RADIUS_Y) - MAX_RADIUS_Y;
             Enemy enemy = new Enemy(eelbatCosmir.assets, x, y, difficulty, level);
             freeEnemy.add(enemy);
             addActor(enemy);
@@ -186,9 +186,9 @@ class PlayGameStage extends Stage {
             max = 50;
         }
         for(int i = 0; i < max; i++) {
-            float x = EelbatCosmir.random.nextInt(2 * MAX_RADIUS_X) - MAX_RADIUS_X;
-            float y = EelbatCosmir.random.nextInt(2 * MAX_RADIUS_Y) - MAX_RADIUS_Y;
-            Aksesoris aksesoris = new Aksesoris(eelbatCosmir.assets, x, y, level);
+            float x = com.cosmirunj.eelbatcosmir.EelbatCosmir.random.nextInt(2 * MAX_RADIUS_X) - MAX_RADIUS_X;
+            float y = com.cosmirunj.eelbatcosmir.EelbatCosmir.random.nextInt(2 * MAX_RADIUS_Y) - MAX_RADIUS_Y;
+            com.cosmirunj.eelbatcosmir.Aksesoris aksesoris = new com.cosmirunj.eelbatcosmir.Aksesoris(eelbatCosmir.assets, x, y, level);
             freeAksesorises.add(aksesoris);
             if (level ==2){
                 aksesoris.setTypeAksesoris(eelbatCosmir.random.nextInt(3));
@@ -196,14 +196,14 @@ class PlayGameStage extends Stage {
             addActor(aksesoris);
         }
 
-        float a = EelbatCosmir.random.nextInt(2*MAX_RADIUS_X) - MAX_RADIUS_X;
-        float b = EelbatCosmir.random.nextInt(2*MAX_RADIUS_Y) - MAX_RADIUS_Y;
+        float a = com.cosmirunj.eelbatcosmir.EelbatCosmir.random.nextInt(2*MAX_RADIUS_X) - MAX_RADIUS_X;
+        float b = com.cosmirunj.eelbatcosmir.EelbatCosmir.random.nextInt(2*MAX_RADIUS_Y) - MAX_RADIUS_Y;
         int c = -1;
-        int d = 4 + EelbatCosmir.random.nextInt(5);
+        int d = 4 + com.cosmirunj.eelbatcosmir.EelbatCosmir.random.nextInt(5);
         if(level == 3 ){
-            d = 10 + EelbatCosmir.random.nextInt(5);
+            d = 10 + com.cosmirunj.eelbatcosmir.EelbatCosmir.random.nextInt(5);
         }
-        buff = new Fruits(eelbatCosmir.assets, a, b, c, d);
+        buff = new com.cosmirunj.eelbatcosmir.Fruits(eelbatCosmir.assets, a, b, c, d);
         mapBuff.add(buff);
         addActor(buff);
 
@@ -213,11 +213,11 @@ class PlayGameStage extends Stage {
         doDamage = false;
         buffPickedCount = 0;
 
-        ability = new Image(eelbatCosmir.assets.getTexture(Assets.ability));
+        ability = new Image(eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.ability));
         ability.setVisible(false);
         addActor(ability);
 
-        damage = new Image(eelbatCosmir.assets.getTexture(Assets.damage));
+        damage = new Image(eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.damage));
         damage.setVisible(false);
         addActor(damage);
 
@@ -379,7 +379,7 @@ class PlayGameStage extends Stage {
         if (level == 2){
             checkAksesorisStateDuration -= delta;
             if (checkAksesorisStateDuration < 0){
-                for (Aksesoris aksesoris:freeAksesorises){
+                for (com.cosmirunj.eelbatcosmir.Aksesoris aksesoris:freeAksesorises){
                     //cuma kalo lvl 2 dan typenya itu jelly
                     if (aksesoris.getTypeAksesoris()==1){
                         isAngry = aksesoris.getSateAksesorisIsAngry();
@@ -513,8 +513,8 @@ class PlayGameStage extends Stage {
     public boolean sendMainWave(){
         boolean canSend = mainWave == null;
         if(canSend) {
-            Assets.waveOut.play(1.0f);
-            mainWave = new Sonar(this, cameraPosition.x, cameraPosition.y, true);
+            com.cosmirunj.eelbatcosmir.Assets.waveOut.play(1.0f);
+            mainWave = new com.cosmirunj.eelbatcosmir.Sonar(this, cameraPosition.x, cameraPosition.y, true);
             addActor(mainWave);
             //playHUDStage.showSonarImage();
         }
@@ -533,7 +533,7 @@ class PlayGameStage extends Stage {
 //        }
 //        return canSend;
         if(!isCoolDown){
-            Assets.eelbatskill.play(1.0f);
+            com.cosmirunj.eelbatcosmir.Assets.eelbatskill.play(1.0f);
             setRandomAbility(eelbatCosmir.random.nextInt(100));
             //Ability ability = new Ability(this, cameraPosition.x, cameraPosition.y);
             //addActor(ability);
@@ -570,7 +570,7 @@ class PlayGameStage extends Stage {
 
     private void checkCollisions() {
         //COLLISION BUAH AJAIB
-        for(Fruits fruit : targets) {
+        for(com.cosmirunj.eelbatcosmir.Fruits fruit : targets) {
             float x = fruit.getPositionX();
             float y = fruit.getPositionY();
             if(Math.pow(x - cameraPosition.x, 2) + Math.pow(y - cameraPosition.y, 2) <= Math.pow(COLLECT_RANGE, 2)) {
@@ -579,8 +579,8 @@ class PlayGameStage extends Stage {
         }
 
         if(collectedTargets.size() > 0) {
-            for(Fruits fruit : collectedTargets) {
-                Assets.pick.play();
+            for(com.cosmirunj.eelbatcosmir.Fruits fruit : collectedTargets) {
+                com.cosmirunj.eelbatcosmir.Assets.pick.play();
                 fruit.deactivate();
                 targets.remove(fruit);
             }
@@ -600,7 +600,7 @@ class PlayGameStage extends Stage {
         //COLLISION MUSUH
         int k = -1;
         Enemy enemyHit = null;
-        Aksesoris aksesorisHit = null;
+        com.cosmirunj.eelbatcosmir.Aksesoris aksesorisHit = null;
         for(int i : fixedEnemies.keySet()) {
             if(enemyHit != null) {
                 break;
@@ -632,7 +632,7 @@ class PlayGameStage extends Stage {
 
         if(enemyHit != null) {
             if(playHUDStage.getLives() > 0) {
-                Assets.hit.play();
+                com.cosmirunj.eelbatcosmir.Assets.hit.play();
             }
             fixedEnemies.get(k).remove(enemyHit);
             enemyHit.remove();
@@ -668,7 +668,7 @@ class PlayGameStage extends Stage {
             }
             if (enemyHit != null) {
                 if(playHUDStage.getLives() > 0) {
-                    Assets.hit.play();
+                    com.cosmirunj.eelbatcosmir.Assets.hit.play();
                 }
                 freeEnemy.remove(enemyHit);
                 enemyHit.remove();
@@ -680,7 +680,7 @@ class PlayGameStage extends Stage {
             }
 
             if(level == 2){
-                for(Aksesoris aksesoris : freeAksesorises) {
+                for(com.cosmirunj.eelbatcosmir.Aksesoris aksesoris : freeAksesorises) {
                     float x = aksesoris.getAksesorisPositionX();
                     float y = aksesoris.getAksesorisPositionY();
                     if(Math.pow(x - cameraPosition.x, 2) + Math.pow(y - cameraPosition.y, 2) <= Math.pow(COLLECT_RANGE, 2)) {
@@ -692,7 +692,7 @@ class PlayGameStage extends Stage {
                 }
                 if(aksesorisHit != null) {
                     if(playHUDStage.getLives() > 0) {
-                        Assets.hit.play();
+                        com.cosmirunj.eelbatcosmir.Assets.hit.play();
                     }
                     freeAksesorises.remove(aksesorisHit);
                     aksesorisHit.remove();
@@ -707,7 +707,7 @@ class PlayGameStage extends Stage {
         }
 
         //COLLISION BUAH LAUT
-        for(Fruits buff : mapBuff) {
+        for(com.cosmirunj.eelbatcosmir.Fruits buff : mapBuff) {
             float x = buff.getPositionX();
             float y = buff.getPositionY();
             if(Math.pow(x - cameraPosition.x, 2) + Math.pow(y - cameraPosition.y, 2) <= Math.pow(COLLECT_RANGE, 2)) {
@@ -716,8 +716,8 @@ class PlayGameStage extends Stage {
         }
 
         if(collectedBuffs.size() > 0) {
-            for(Fruits buff : collectedBuffs) {
-                Assets.pick2.play();
+            for(com.cosmirunj.eelbatcosmir.Fruits buff : collectedBuffs) {
+                com.cosmirunj.eelbatcosmir.Assets.pick2.play();
                 buff.deactivate();
                 mapBuff.remove(buff);
             }
@@ -733,14 +733,14 @@ class PlayGameStage extends Stage {
     }
 
     void checkHitsWithOtherObjects(float centerX, float centerY, float radiusX, float radiusY) {
-        for(Fruits fruit : targets) {
+        for(com.cosmirunj.eelbatcosmir.Fruits fruit : targets) {
             if(!targetsFound.contains(fruit.getId())) {
                 float x = fruit.getPositionX();
                 float y = fruit.getPositionY();
                 if(Math.pow((x - centerX)/radiusX, 2) + Math.pow((y - centerY)/radiusY, 2) <= 1) {
                     targetsFound.add(fruit.getId());
                     //Assets.waveIn.play();
-                    addActor(new Sonar(this, x, y, false));
+                    addActor(new com.cosmirunj.eelbatcosmir.Sonar(this, x, y, false));
                 }
             }
         }
@@ -752,15 +752,15 @@ class PlayGameStage extends Stage {
         }
     }
 
-    void checkHitsWithMainCharacter(Sonar sonar, float centerX, float centerY, float radiusX, float radiusY) {
-        float x1 = cameraPosition.x - EelbatCosmir.WIDTH;
-        float y1 = cameraPosition.y - EelbatCosmir.HEIGHT;
-        float x2 = cameraPosition.x - EelbatCosmir.WIDTH;
-        float y2 = cameraPosition.y + EelbatCosmir.HEIGHT;
-        float x3 = cameraPosition.x + EelbatCosmir.WIDTH;
-        float y3 = cameraPosition.y - EelbatCosmir.HEIGHT;
-        float x4 = cameraPosition.x + EelbatCosmir.WIDTH;
-        float y4 = cameraPosition.y + EelbatCosmir.HEIGHT;
+    void checkHitsWithMainCharacter(com.cosmirunj.eelbatcosmir.Sonar sonar, float centerX, float centerY, float radiusX, float radiusY) {
+        float x1 = cameraPosition.x - com.cosmirunj.eelbatcosmir.EelbatCosmir.WIDTH;
+        float y1 = cameraPosition.y - com.cosmirunj.eelbatcosmir.EelbatCosmir.HEIGHT;
+        float x2 = cameraPosition.x - com.cosmirunj.eelbatcosmir.EelbatCosmir.WIDTH;
+        float y2 = cameraPosition.y + com.cosmirunj.eelbatcosmir.EelbatCosmir.HEIGHT;
+        float x3 = cameraPosition.x + com.cosmirunj.eelbatcosmir.EelbatCosmir.WIDTH;
+        float y3 = cameraPosition.y - com.cosmirunj.eelbatcosmir.EelbatCosmir.HEIGHT;
+        float x4 = cameraPosition.x + com.cosmirunj.eelbatcosmir.EelbatCosmir.WIDTH;
+        float y4 = cameraPosition.y + com.cosmirunj.eelbatcosmir.EelbatCosmir.HEIGHT;
         if(Math.pow((x1 - centerX)/radiusX, 2) + Math.pow((y1 - centerY)/radiusY, 2) <= 1 &&
                 Math.pow((x2 - centerX)/radiusX, 2) + Math.pow((y2 - centerY)/radiusY, 2) <= 1 &&
                 Math.pow((x3 - centerX)/radiusX, 2) + Math.pow((y3 - centerY)/radiusY, 2) <= 1 &&
@@ -771,11 +771,11 @@ class PlayGameStage extends Stage {
     }
 
     private void respawningBuff() {
-        float a = EelbatCosmir.random.nextInt(2*MAX_RADIUS_X) - MAX_RADIUS_X;
-        float b = EelbatCosmir.random.nextInt(2*MAX_RADIUS_Y) - MAX_RADIUS_Y;
+        float a = com.cosmirunj.eelbatcosmir.EelbatCosmir.random.nextInt(2*MAX_RADIUS_X) - MAX_RADIUS_X;
+        float b = com.cosmirunj.eelbatcosmir.EelbatCosmir.random.nextInt(2*MAX_RADIUS_Y) - MAX_RADIUS_Y;
         int c = -1;
-        int d = 3 + EelbatCosmir.random.nextInt(5);
-        buff = new Fruits(eelbatCosmir.assets, a, b, c, d);
+        int d = 3 + com.cosmirunj.eelbatcosmir.EelbatCosmir.random.nextInt(5);
+        buff = new com.cosmirunj.eelbatcosmir.Fruits(eelbatCosmir.assets, a, b, c, d);
         mapBuff.add(buff);
         addActor(buff);
     }

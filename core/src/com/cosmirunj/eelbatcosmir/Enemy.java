@@ -1,12 +1,10 @@
-package com.cosmirunj.eelbat;
+package com.cosmirunj.eelbatcosmir;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
 /**
@@ -30,7 +28,7 @@ public class Enemy extends Actor {
 
     //private boolean fixed;
     KEJARGAK kejargak;
-    private Assets assets;
+    private com.cosmirunj.eelbatcosmir.Assets assets;
     private int difficulty;
     private int NYAWA;
     private final int NYAWA1 = 1;
@@ -55,7 +53,7 @@ public class Enemy extends Actor {
 //    int JUMLAH_TITIK_RUTE = 4;
 //    int nextX, nextY;
 
-    public Enemy(Assets assets, float x, float y, int difficulty, int level){
+    public Enemy(com.cosmirunj.eelbatcosmir.Assets assets, float x, float y, int difficulty, int level){
         this.difficulty = difficulty;
         //this.fixed = fixed;
         //eelbatPositionX = 0;
@@ -97,7 +95,7 @@ public class Enemy extends Actor {
 //        }
 
         //enemyFish = assets.getTexture(Assets.enemyFish);
-        shadowEnemy = assets.getTexture(Assets.shadowEnemy);
+        shadowEnemy = assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.shadowEnemy);
 
         kejargak = KEJARGAK.GAK;
         this.level = level;
@@ -106,7 +104,7 @@ public class Enemy extends Actor {
         shark = new Texture[5];
 
         for (int i=0;i<5;i++){
-            shark[i] = assets.getTexture(Assets.hiu[i]);
+            shark[i] = assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.hiu[i]);
         }
 
         animationShark = new Animation(1f/8f,shark);
@@ -185,9 +183,9 @@ public class Enemy extends Actor {
                     currentAngle += delta*(EelbatCosmir.random.nextFloat()*2*MAX_ANGLE_CHANGE - MAX_ANGLE_CHANGE);
                 } else {
                     if((x - TARGET_X)*Math.sin(currentAngle/180*Math.PI) - (y - TARGET_Y)*Math.cos(currentAngle/180*Math.PI) >= 0) {
-                        currentAngle += delta*EelbatCosmir.random.nextFloat()*MAX_ANGLE_CHANGE;
+                        currentAngle += delta* EelbatCosmir.random.nextFloat()*MAX_ANGLE_CHANGE;
                     } else {
-                        currentAngle -= delta*EelbatCosmir.random.nextFloat()*MAX_ANGLE_CHANGE;
+                        currentAngle -= delta* EelbatCosmir.random.nextFloat()*MAX_ANGLE_CHANGE;
                     }
                 }
                 while(currentAngle > 360) {
@@ -207,20 +205,20 @@ public class Enemy extends Actor {
     private void checkLevel() {
         switch (level){
             case 1:
-                enemyFish = assets.getTexture(Assets.enemyFish);
+                enemyFish = assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.enemyFish);
                 break;
             case 2:
-                enemyFish = assets.getTexture(Assets.enemySeaHorse);
+                enemyFish = assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.enemySeaHorse);
                 break;
             case 3:
                 enemyEagle = new Texture[8];
                 for (int i=0;i<8;i++){
-                    enemyEagle[i] = assets.getTexture(Assets.enemyEagle[i]);
+                    enemyEagle[i] = assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.enemyEagle[i]);
                 }
                 enemyEagleAnim = new Animation(1f/8f, enemyEagle);
 
             default:
-                enemyFish = assets.getTexture(Assets.enemyFish);
+                enemyFish = assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.enemyFish);
                 break;
         }
     }

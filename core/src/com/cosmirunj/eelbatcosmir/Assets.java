@@ -1,4 +1,4 @@
-package com.cosmirunj.eelbat;
+package com.cosmirunj.eelbatcosmir;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;

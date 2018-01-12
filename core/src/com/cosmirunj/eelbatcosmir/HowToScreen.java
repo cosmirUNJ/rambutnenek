@@ -1,4 +1,4 @@
-package com.cosmirunj.eelbat;
+package com.cosmirunj.eelbatcosmir;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -16,12 +16,12 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class HowToScreen implements Screen {
     private HowToPlay stage;
     private Viewport viewport;
-    private EelbatCosmir eelbatCosmir;
+    private com.cosmirunj.eelbatcosmir.EelbatCosmir eelbatCosmir;
 
-    public HowToScreen(EelbatCosmir eelbatCosmir) {
+    public HowToScreen(com.cosmirunj.eelbatcosmir.EelbatCosmir eelbatCosmir) {
         this.eelbatCosmir = eelbatCosmir;
         OrthographicCamera camera = new OrthographicCamera();
-        viewport = new FillViewport(EelbatCosmir.WIDTH, EelbatCosmir.HEIGHT, camera);
+        viewport = new FillViewport(com.cosmirunj.eelbatcosmir.EelbatCosmir.WIDTH, com.cosmirunj.eelbatcosmir.EelbatCosmir.HEIGHT, camera);
         stage = new HowToPlay(viewport, eelbatCosmir);
         Gdx.input.setInputProcessor(stage);
     }
@@ -68,9 +68,9 @@ public class HowToScreen implements Screen {
     }
 
     private class HowToPlay extends Stage {
-        public HowToPlay(Viewport viewport, final EelbatCosmir eelbatCosmir) {
+        public HowToPlay(Viewport viewport, final com.cosmirunj.eelbatcosmir.EelbatCosmir eelbatCosmir) {
             super(viewport, eelbatCosmir.batch);
-            Texture backgroundTexture = eelbatCosmir.assets.getTexture(Assets.instruction);
+            Texture backgroundTexture = eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.instruction);
             addActor(new Image(backgroundTexture));
 //            Label.LabelStyle labelStyle = new Label.LabelStyle();
 //            labelStyle.font = eelbatCosmir.assets.getBitmapFont(Assets.bitmapFontLarge);

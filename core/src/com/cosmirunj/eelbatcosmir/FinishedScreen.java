@@ -1,4 +1,4 @@
-package com.cosmirunj.eelbat;
+package com.cosmirunj.eelbatcosmir;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -18,28 +17,28 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 public class FinishedScreen implements Screen {
     private GameOverStage stage;
     private Viewport viewport;
-    private EelbatCosmir eelbatCosmir;
+    private com.cosmirunj.eelbatcosmir.EelbatCosmir eelbatCosmir;
     private int level;
     private int difficulty;
     boolean completed;
     String message;
     String message2;
 
-    public FinishedScreen(EelbatCosmir eelbatCosmir, boolean completed, int level, int difficulty) {
-        Assets.playmusic.stop();
+    public FinishedScreen(com.cosmirunj.eelbatcosmir.EelbatCosmir eelbatCosmir, boolean completed, int level, int difficulty) {
+        com.cosmirunj.eelbatcosmir.Assets.playmusic.stop();
         //Assets.steps.stop();
         this.eelbatCosmir = eelbatCosmir;
         this.level = level;
         this.difficulty = difficulty;
         this.completed = completed;
         OrthographicCamera camera = new OrthographicCamera();
-        viewport = new FillViewport(EelbatCosmir.WIDTH, EelbatCosmir.HEIGHT, camera);
+        viewport = new FillViewport(com.cosmirunj.eelbatcosmir.EelbatCosmir.WIDTH, com.cosmirunj.eelbatcosmir.EelbatCosmir.HEIGHT, camera);
         stage = new GameOverStage(viewport, eelbatCosmir, completed, level, difficulty);
         if(!completed){
-            Assets.fail.play();
+            com.cosmirunj.eelbatcosmir.Assets.fail.play();
         }
         else{
-            Assets.success.play();
+            com.cosmirunj.eelbatcosmir.Assets.success.play();
         }
         Gdx.input.setInputProcessor(stage);
     }
@@ -57,15 +56,15 @@ public class FinishedScreen implements Screen {
         stage.draw();
         if(Gdx.input.justTouched()) {
             if(completed){
-                Assets.success.stop();
+                com.cosmirunj.eelbatcosmir.Assets.success.stop();
                 if(level == 3){
                     eelbatCosmir.setScreen(new MainMenu(eelbatCosmir));
                 }else{
-                    eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir, (level+1), difficulty));
+                    eelbatCosmir.setScreen(new com.cosmirunj.eelbatcosmir.PlayScreen(eelbatCosmir, (level+1), difficulty));
                 }
             }else{
-                Assets.fail.stop();
-                eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir, level, difficulty));
+                com.cosmirunj.eelbatcosmir.Assets.fail.stop();
+                eelbatCosmir.setScreen(new com.cosmirunj.eelbatcosmir.PlayScreen(eelbatCosmir, level, difficulty));
             }
         }
     }
@@ -96,23 +95,23 @@ public class FinishedScreen implements Screen {
     }
 
     private class GameOverStage extends Stage {
-        public GameOverStage(Viewport viewport, final EelbatCosmir eelbatCosmir, boolean completed, int level, int difficulty) {
+        public GameOverStage(Viewport viewport, final com.cosmirunj.eelbatcosmir.EelbatCosmir eelbatCosmir, boolean completed, int level, int difficulty) {
             super(viewport, eelbatCosmir.batch);
             Texture backgroundTexture;
             if (completed){
                 if (level == 1)
-                    backgroundTexture = eelbatCosmir.assets.getTexture(Assets.winScreen1);
+                    backgroundTexture = eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.winScreen1);
                 else if(level ==2)
-                    backgroundTexture = eelbatCosmir.assets.getTexture(Assets.winScreen2);
+                    backgroundTexture = eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.winScreen2);
                 else
-                    backgroundTexture = eelbatCosmir.assets.getTexture(Assets.winScreen3);
+                    backgroundTexture = eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.winScreen3);
             } else {
                 if (level == 1)
-                    backgroundTexture = eelbatCosmir.assets.getTexture(Assets.loseScreen1);
+                    backgroundTexture = eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.loseScreen1);
                 else if(level ==2)
-                    backgroundTexture = eelbatCosmir.assets.getTexture(Assets.loseScreen2);
+                    backgroundTexture = eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.loseScreen2);
                 else
-                    backgroundTexture = eelbatCosmir.assets.getTexture(Assets.loseScreen3);
+                    backgroundTexture = eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.loseScreen3);
             }
             //Texture backgroundTexture = eelbatCosmir.assets.getTexture(completed ? Assets.levelComplete : Assets.gameOver);
             addActor(new Image(backgroundTexture));

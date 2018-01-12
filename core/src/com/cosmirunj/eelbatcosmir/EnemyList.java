@@ -1,8 +1,7 @@
-package com.cosmirunj.eelbat;
+package com.cosmirunj.eelbatcosmir;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -19,10 +18,10 @@ public class EnemyList extends Stage{
 
     static final int TOTAL_TARGETS = 5;
 
-    private final int MAX_RADIUS_X = 5*EelbatCosmir.WIDTH;
-    private final int MAX_RADIUS_Y = 5*EelbatCosmir.HEIGHT;
+    private final int MAX_RADIUS_X = 5* com.cosmirunj.eelbatcosmir.EelbatCosmir.WIDTH;
+    private final int MAX_RADIUS_Y = 5* com.cosmirunj.eelbatcosmir.EelbatCosmir.HEIGHT;
 
-    private EelbatCosmir eelbatCosmir;
+    private com.cosmirunj.eelbatcosmir.EelbatCosmir eelbatCosmir;
 
 //    public EnemyList(EelbatCosmir eelbatCosmir) {
 //        this.eelbatCosmir = eelbatCosmir;

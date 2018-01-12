@@ -1,12 +1,10 @@
-package com.cosmirunj.eelbat;
+package com.cosmirunj.eelbatcosmir;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.Animation;
 
@@ -34,7 +32,7 @@ public class CharacterEelBat extends Actor {
     private float elapsedTime;
 
     public CharacterEelBat(EelbatCosmir eelbatCosmir) {
-        shadow = eelbatCosmir.assets.getTexture(Assets.shadow);
+        shadow = eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.shadow);
         //eelbatchar = eelbatCosmir.assets.getTexture(Assets.eelbatpic);
         //eelbatchar = new Texture("eelbat/eelsprite.png");
         //karakter = new TextureRegion(eelbatchar);

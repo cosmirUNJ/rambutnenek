@@ -1,4 +1,4 @@
-package com.cosmirunj.eelbat;
+package com.cosmirunj.eelbatcosmir;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -13,8 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -43,8 +41,8 @@ class MainMenu implements Screen {
     public MainMenu(EelbatCosmir eelbatCosmir) {
         this.eelbatCosmir = eelbatCosmir;
 
-        Assets.mainmenumusic.setLooping(true);
-        Assets.mainmenumusic.play();
+        com.cosmirunj.eelbatcosmir.Assets.mainmenumusic.setLooping(true);
+        com.cosmirunj.eelbatcosmir.Assets.mainmenumusic.play();
 
         OrthographicCamera camera = new OrthographicCamera();
         viewport = new FillViewport(eelbatCosmir.WIDTH, eelbatCosmir.HEIGHT, camera);
@@ -105,7 +103,7 @@ class MainMenu implements Screen {
     private class MainMenuStage extends Stage {
         public MainMenuStage(Viewport viewport, EelbatCosmir eelbatCosmir) {
             super(viewport, eelbatCosmir.batch);
-            addActor(new Image(eelbatCosmir.assets.getTexture(Assets.menu)));
+            addActor(new Image(eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.menu)));
 //            Label.LabelStyle labelStyleSmall = new Label.LabelStyle();
 //            labelStyleSmall.font = eelbatCosmir.assets.getBitmapFont(Assets.bitmapFontSmall);
 //            Label labelSmall = new Label("Tap to Play",labelStyleSmall);
@@ -119,7 +117,7 @@ class MainMenu implements Screen {
         float heightScreen = Gdx.graphics.getHeight();
 
         //Button Sound
-        Texture BtnSoundActive = eelbatCosmir.assets.getTexture(Assets.btnSoundActive);
+        Texture BtnSoundActive = eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.btnSoundActive);
         TextureRegionDrawable BtnImageSound = new TextureRegionDrawable(new TextureRegion(BtnSoundActive));
         ButtonSoundActive = new ImageButton(BtnImageSound);
         ButtonSoundActive.setSize(BtnSoundActive.getWidth()-100,BtnSoundActive.getHeight()-100);
@@ -132,9 +130,9 @@ class MainMenu implements Screen {
                 playMusic = !playMusic;
 
                 if (playMusic){
-                    Assets.mainmenumusic.play();
+                    com.cosmirunj.eelbatcosmir.Assets.mainmenumusic.play();
                 } else {
-                    Assets.mainmenumusic.stop();
+                    com.cosmirunj.eelbatcosmir.Assets.mainmenumusic.stop();
                 }
                 //btnPlay ? Assets.mainmenumusic.stop() :  Assets.mainmenumusic.play() ;
                 //Assets.mainmenumusic.stop();
@@ -151,7 +149,7 @@ class MainMenu implements Screen {
         ButtonStage.addActor(ButtonSoundActive);
 
         //Button How To Play
-        Texture BtnInstructionActive = eelbatCosmir.assets.getTexture(Assets.btnInstruction);
+        Texture BtnInstructionActive = eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.btnInstruction);
         TextureRegionDrawable BtnImageInstruction = new TextureRegionDrawable(new TextureRegion(BtnInstructionActive));
         ButtonInstructionActive = new ImageButton(BtnImageInstruction);
         ButtonInstructionActive.setSize(BtnInstructionActive.getWidth()-100,BtnInstructionActive.getHeight()-100);
@@ -175,7 +173,7 @@ class MainMenu implements Screen {
         ButtonStage.addActor(ButtonInstructionActive);
 
         //Button Help
-        Texture BtnHelp = eelbatCosmir.assets.getTexture(Assets.btnHelp);
+        Texture BtnHelp = eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.btnHelp);
         TextureRegionDrawable BtnImageHelp = new TextureRegionDrawable(new TextureRegion(BtnHelp));
         ButtonHelp = new ImageButton(BtnImageHelp);
         ButtonHelp.setSize(BtnHelp.getWidth()-100,BtnHelp.getHeight()-100);
@@ -184,21 +182,21 @@ class MainMenu implements Screen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 ButtonHelp.getImage().setColor(Color.BROWN);
-                Assets.mainmenumusic.stop();
+                com.cosmirunj.eelbatcosmir.Assets.mainmenumusic.stop();
                 return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 ButtonSoundActive.getImage().setColor(Color.WHITE);
-                eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir, initial_level, easy));
+                eelbatCosmir.setScreen(new com.cosmirunj.eelbatcosmir.PlayScreen(eelbatCosmir, initial_level, easy));
             }
         });
 
         ButtonStage.addActor(ButtonHelp);
 
         //Button Easy
-        Texture BtnEasy = eelbatCosmir.assets.getTexture(Assets.btnEasy);
+        Texture BtnEasy = eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.btnEasy);
         TextureRegionDrawable BtnImageEasy = new TextureRegionDrawable(new TextureRegion(BtnEasy));
         ButtonEasy = new ImageButton(BtnImageEasy);
         ButtonEasy.setSize(BtnEasy.getWidth(),BtnEasy.getHeight());
@@ -207,7 +205,7 @@ class MainMenu implements Screen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 ButtonEasy.getImage().setColor(Color.BLACK);
-                Assets.mainmenumusic.stop();
+                com.cosmirunj.eelbatcosmir.Assets.mainmenumusic.stop();
                 return true;
             }
 
@@ -215,7 +213,7 @@ class MainMenu implements Screen {
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 ButtonEasy.getImage().setColor(Color.WHITE);
                 super.touchUp(event, x, y, pointer, button);
-                eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir, initial_level, easy));
+                eelbatCosmir.setScreen(new com.cosmirunj.eelbatcosmir.PlayScreen(eelbatCosmir, initial_level, easy));
             }
         });
 
@@ -223,7 +221,7 @@ class MainMenu implements Screen {
         ButtonEasy.setVisible(false);
 
         //Button Medium
-        Texture BtnMedium = eelbatCosmir.assets.getTexture(Assets.btnMedium);
+        Texture BtnMedium = eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.btnMedium);
         TextureRegionDrawable BtnImageMedium = new TextureRegionDrawable(new TextureRegion(BtnMedium));
         ButtonMedium = new ImageButton(BtnImageMedium);
         ButtonMedium.setSize(BtnMedium.getWidth(),BtnMedium.getHeight());
@@ -232,7 +230,7 @@ class MainMenu implements Screen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 ButtonMedium.getImage().setColor(Color.BLACK);
-                Assets.mainmenumusic.stop();
+                com.cosmirunj.eelbatcosmir.Assets.mainmenumusic.stop();
                 return true;
             }
 
@@ -240,7 +238,7 @@ class MainMenu implements Screen {
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 ButtonMedium.getImage().setColor(Color.WHITE);
                 super.touchUp(event, x, y, pointer, button);
-                eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir, initial_level, medium));
+                eelbatCosmir.setScreen(new com.cosmirunj.eelbatcosmir.PlayScreen(eelbatCosmir, initial_level, medium));
             }
         });
 
@@ -248,7 +246,7 @@ class MainMenu implements Screen {
         ButtonMedium.setVisible(false);
 
         //Button Hard
-        Texture BtnHard = eelbatCosmir.assets.getTexture(Assets.btnHard);
+        Texture BtnHard = eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.btnHard);
         TextureRegionDrawable BtnImageHard = new TextureRegionDrawable(new TextureRegion(BtnHard));
         ButtonHard = new ImageButton(BtnImageHard);
         ButtonHard.setSize(BtnHard.getWidth(),BtnHard.getHeight());
@@ -257,7 +255,7 @@ class MainMenu implements Screen {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 ButtonHard.getImage().setColor(Color.BLACK);
-                Assets.mainmenumusic.stop();
+                com.cosmirunj.eelbatcosmir.Assets.mainmenumusic.stop();
                 return true;
             }
 
@@ -265,7 +263,7 @@ class MainMenu implements Screen {
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 ButtonHard.getImage().setColor(Color.WHITE);
                 super.touchUp(event, x, y, pointer, button);
-                eelbatCosmir.setScreen(new PlayScreen(eelbatCosmir, initial_level, hard));
+                eelbatCosmir.setScreen(new com.cosmirunj.eelbatcosmir.PlayScreen(eelbatCosmir, initial_level, hard));
             }
         });
 
@@ -273,7 +271,7 @@ class MainMenu implements Screen {
         ButtonHard.setVisible(false);
 
         //Button Play
-        Texture Btn = eelbatCosmir.assets.getTexture(Assets.btnPlay);
+        Texture Btn = eelbatCosmir.assets.getTexture(com.cosmirunj.eelbatcosmir.Assets.btnPlay);
         TextureRegionDrawable BtnImage = new TextureRegionDrawable(new TextureRegion(Btn));
         ButtonPlay = new ImageButton(BtnImage);
         ButtonPlay.setSize(Btn.getWidth(),Btn.getHeight());
